@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 export function InputPanel() {
   const handleInputChange
  = (event) => {
@@ -6,7 +6,7 @@ export function InputPanel() {
   event.target.style.height = (event.target.scrollHeight) + "px";
 }
 
-const [heightDiv, setHeightDiv] = useState(60);
+
   return (
     <div className=" bg-white w-[100%] h-[60px]">
       <div className="flex flex-row w-[60%] h-[100%] m-auto justify-center ">
@@ -16,7 +16,8 @@ const [heightDiv, setHeightDiv] = useState(60);
         </div>
 
         <div className="w-[500px]">
-          <textarea onChange={handleInputChange} className="w-[100%] h-[30px]  mt-3 text-xl rounded-lg outline-none pl-2 resize-none" MaxLength="200"  contenteditable="true" placeholder="Message..."/>
+          <textarea onChange={handleInputChange} className="w-[100%] h-[30px]  mt-3 text-xl rounded-lg outline-none pl-2 resize-none"
+           MaxLength="200"  contenteditable="true" placeholder="Message..."/>
         </div>
 
         <div className="ml-2 mt-1">
