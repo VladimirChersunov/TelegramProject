@@ -2,6 +2,7 @@ import { InputPanel } from "./InputPanel";
 import { MessageIn } from "./MessageIn";
 import { MessageOut } from "./MessageOut";
 import { useState } from "react";
+import { DropDownMenu } from "../LeftColumn/DropDownMenu";
 
 
 export function MainChat() {
@@ -34,7 +35,7 @@ export function MainChat() {
             }}
           />
          
-        
+ 
 
           {/* {
             message.map(message => 
