@@ -2,11 +2,11 @@ import { InputPanel } from "./InputPanel";
 import { MessageIn } from "./MessageIn";
 import { MessageOut } from "./MessageOut";
 import { useState } from "react";
-import { DropDownMenu } from "../LeftColumn/DropDownMenu";
+
 
 
 export function MainChat() {
-  const [message, setMessage] = useState();
+ 
  
   return (
     <div className="flex flex-col h-[100%]">

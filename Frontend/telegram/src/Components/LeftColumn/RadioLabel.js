@@ -1,4 +1,3 @@
-import { useState } from "react";
 import art from "./../../Assets/art.jpg";
 import live from "./../../Assets/live.jpg";
 import arduino from "./../../Assets/arduino.jpg";
@@ -23,7 +22,12 @@ export function RadioLabel({ chat }) {
   return (
     <label
       for={chat.id}
-      className="flex  flex-row cursor-pointer select-none rounded-xl border p-2 border-black  peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
+      onContextMenu={(e)=>{
+        e.preventDefault();
+        console.log("Right Click");
+      }}
+    
+      className="flex  flex-row cursor-pointer select-none rounded-xl border p-2 border-black  peer-checked:bg-blue-400 peer-checked:font-bold peer-checked:text-white"
     >
       <div>
         {chat.chatImage ? (
