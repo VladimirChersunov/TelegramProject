@@ -26,6 +26,10 @@ export function RadioLabel({ chat }) {
         e.preventDefault();
         console.log("Right Click");
       }}
+
+      onClick={()=>{
+       
+      }}
     
       className="flex  flex-row cursor-pointer select-none rounded-xl border p-2 border-black  peer-checked:bg-blue-400 peer-checked:font-bold peer-checked:text-white"
     >

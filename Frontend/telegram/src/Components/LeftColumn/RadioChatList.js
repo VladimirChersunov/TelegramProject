@@ -1,52 +1,21 @@
 import { RadioElement } from "./RadioElement";
-import { useState } from "react";
+import { useState} from "react";
+import { ChatCreateButton } from "./ChatCreateButton";
 
-export function RadioChatList() {
-  const [chats] = useState([
-    {
-      id: 1,
-      chatImage: true,
-      chatName: "Club_arduino",
-      shortMessage:
-        "Видеодомофон для дома или квартиры. Система защиты и контроля доступа с видеомониторингом и фиксацией ",
-      publishTime: "00:25",
-      muteStatus: true,
-    },
-    {
-      id: 2,
-      chatImage: true,
-      chatName: "Харьков LIVE",
-      shortMessage:
-        "Yasno: Цей тиждень, за прогнозами, буде холодним, тому навантаження на енергосистему збільшиться. ",
-      publishTime: "00:34",
-      muteStatus: false,
-    },
-    {
-      id: 3,
-      chatImage: false,
-      chatName: "Команда 'Telegram'",
-      shortMessage: "Було б чудово, дякую!",
-      publishTime: "22:53",
-      muteStatus: false,
-    },
-    {
-      id: 4,
-      chatImage: true,
-      chatName: "Art Bondar",
-      shortMessage:
-        "Артём, или дай возможность тебя добавить в группу, или создай сам и добавь нас с Виталиком",
-      publishTime: "19:44",
-      muteStatus: true,
-    },
-  ]);
-
+export function RadioChatList({chats}) {
+  const [open, setOpen] = useState(false); 
   return (
-    <div className="flex min-h-screen w-full items-top justify-center">
-      <div className="w-[100%]" x-data="app">
+    <div className="flex min-h-screen w-full flex-col items-top justify-center">
+      <div className="w-[100%] h-[85%]" x-data="app">
         {chats.map((chat) => (
-          <RadioElement chat={chat} key={chat.id} />
+          <RadioElement  chat={chat} key={chat.id} />
         ))}
       </div>
+      <div className="h-[15%] w-[100%] bg-opacity-0 ">
+        {/* <button className="w-[50px] h-[50px] rounded-full bg-blue-300
+         ml-[80%] hover:bg-blue-500 hover:border hover:border-black">&#128394;</button> */}
+         <ChatCreateButton/>
+        </div>
     </div>
   );
 }

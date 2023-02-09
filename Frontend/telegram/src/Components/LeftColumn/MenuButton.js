@@ -1,41 +1,60 @@
-import { useState} from "react";
+import { useState, useEffect, useRef } from "react";
 import Switch from "./Switch";
 
 export function MenuButton() {
-  const [open, setOpen] = useState(false); 
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+  }, []);
+
+  const [open, setOpen] = useState(false);
+  const refLeftMenu = useRef(null);
+
+  const handleClickOutside = (e) => {
+   
+    if(!refLeftMenu.current.contains(e.target)){
+      console.log("click out")
+      setOpen(false);
+      document.removeEventListener("click", handleClickOutside, true);
+    }else{
+      
+      console.log("click in");
+    }
+
+  }
+
   return (
     <div className="p-1 pt-3">
-      <div className="inline-block  relative">
+      <div  ref={refLeftMenu} className="inline-block  relative">
         <div
           onClick={() => {
             setOpen(!open);
-                     
           }}
           className="m-auto text-4xl w-[40px] h-[40px] hover:cursor-pointer
-           rounded-full pb-[5px] hover:bg-slate-200 hover:shadow-xl items-center text-center">
+           rounded-full pb-[5px] hover:bg-slate-200 hover:shadow-xl items-center text-center"
+        >
           &#8801;
         </div>
-        
 
         <ul
-         id="leftMenu"
-          class={`absolute ${
+          id="leftMenu"         
+         
+          className={`absolute ${
             open ? "block" : "hidden"
           }   mt-1 group-hover:block shadow-2xl bg-white border border-slate-400 rounded-lg  w-[200px] `}
         >
-          <li class="hover:bg-gray-200 hover:cursor-pointer">
+          <li className="hover:bg-gray-200 hover:cursor-pointer">
             <div className="h-8 p-1 flex flex-row">
               &#9960;
               <p className="font-bold ml-2">Saved Messsages</p>
             </div>
           </li>
-          <li class="hover:bg-gray-200 hover:cursor-pointer">
+          <li className="hover:bg-gray-200 hover:cursor-pointer">
             <div className="h-8 p-1 flex flex-row">
               &#128100;
               <p className="font-bold ml-2">Contacts</p>
             </div>
           </li>
-          <li class="hover:bg-gray-200 hover:cursor-pointer">
+          <li className="hover:bg-gray-200 hover:cursor-pointer">
             <div className="h-8 p-1 flex flex-row">
               &#9881;
               <p className="font-bold ml-2">Setting</p>
@@ -45,7 +64,7 @@ export function MenuButton() {
             <div className="h-8 p-1 flex flex-row">
               &#127769;
               <p className="font-bold ml-2 mr-4">Night Mode</p>
-              <Switch/>            
+              <Switch />
             </div>
           </li>
           <li class="hover:bg-gray-200 hover:cursor-pointer">
