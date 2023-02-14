@@ -1,17 +1,26 @@
 import { InputPanel } from "./InputPanel";
 import { MessageIn } from "./MessageIn";
 import { MessageOut } from "./MessageOut";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
-export function MainChat() {
- 
+
+export function MainChat(props) {
+  const [type, setType] = useState(false);
+
+  useEffect(() => {
+    if (props.chat.type === "chat") {
+      setType(true);
+    } else {
+      setType(false);
+    }
+  }, [props.chat.type]);
  
   return (
     <div className="flex flex-col h-[100%]">
       <div className={`h-[80%] mt-2 bg-skin-fill`}>
-        <div className="w-[100%] h-[100%] flex flex-col ml-auto mr-auto overflow-auto overflow-x-hidden">
+        <div className="w-[70%] h-[100%] flex flex-col ml-auto mr-auto overflow-auto overflow-x-hidden">
         
           <MessageIn
             message={{
@@ -44,7 +53,7 @@ export function MainChat() {
           } */}
         </div>
       </div>
-      <InputPanel />
+     {type && <InputPanel />}
     </div>
   );
 }

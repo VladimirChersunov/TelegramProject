@@ -1,10 +1,15 @@
 import { RadioLabel } from "./RadioLabel";
 
-export function RadioElement({ chat }) {
+export function RadioElement(props) {
   return (
     <div className=" w-[97%] m-auto mt-1 hover:bg-slate-100 ">
-      <input type="radio" name="option" id={chat.id} className="peer hidden" />
-      <RadioLabel chat={chat} />
+      <input
+        type="radio"
+        name="option"
+        id={props.chat.id}
+        className="peer hidden"
+      />
+      <RadioLabel chat={props.chat} currentChat={props.currentChat} />
     </div>
   );
 }

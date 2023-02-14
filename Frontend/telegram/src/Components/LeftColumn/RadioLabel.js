@@ -2,9 +2,8 @@ import art from "./../../Assets/art.jpg";
 import live from "./../../Assets/live.jpg";
 import arduino from "./../../Assets/arduino.jpg";
 
-export function RadioLabel({ chat }) {
+export function RadioLabel({ chat, currentChat }) {
   let image;
-
   switch (chat.id) {
     case 1:
       image = arduino;
@@ -22,15 +21,13 @@ export function RadioLabel({ chat }) {
   return (
     <label
       for={chat.id}
-      onContextMenu={(e)=>{
+      onContextMenu={(e) => {
         e.preventDefault();
         console.log("Right Click");
       }}
-
-      onClick={()=>{
-       
+      onClick={() => {
+        currentChat(chat);
       }}
-    
       className="flex  flex-row cursor-pointer select-none rounded-xl border p-2 border-black  peer-checked:bg-blue-400 peer-checked:font-bold peer-checked:text-white"
     >
       <div>
@@ -64,7 +61,7 @@ export function RadioLabel({ chat }) {
         </div>
 
         <div>
-          <p className="">{chat.shortMessage.substring(0, 30)}</p>
+          <p className="">{chat.shortMessage.substring(0, 25)}</p>
         </div>
       </div>
     </label>
