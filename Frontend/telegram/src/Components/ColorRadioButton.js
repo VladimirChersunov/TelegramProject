@@ -60,10 +60,28 @@ export function ColorRAdioButton(props) {
           checked={color === "theme-blue"}
         />
         <label
-          class="form-check-label inline-block text-blue-600 opacity-50"
+          class="form-check-label inline-block text-blue-600 opacity-50 mr-5"
           for="inlineRadio30"
         >
          Blue
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300
+           bg-white checked:bg-black checked:border-blue-600 focus:outline-none transition duration-200
+            mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2"
+          type="radio"
+          name="inlineRadioOptions"
+          id="inlineRadio3"
+          value=""
+          checked={color === ""}
+        />
+        <label
+          class="form-check-label inline-block text-black opacity-50"
+          for="inlineRadio30"
+        >
+        Reset
         </label>
       </div>
     </div>
