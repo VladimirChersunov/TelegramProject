@@ -4,13 +4,55 @@
 
 @layer base{
     :root{
-        --color-text-base: #000000;
+        --color-text-base: #0C0221;
         --color-text-muted: #aaaaaa;
-        --color-text-inverted: #ffffff;
-        --color-fill: #ffffff;
-        --color-button-accent: #000000;
-        --color-button-accent-hover: #eef2ff;
+        --color-text-inverted: #C6BDFF;
+        
+
+        --color-fill: #C6BDFF;
+
+        --color-button-accent: #0C0221;
+        --color-button-accent-hover: #584CA3;
         --color-button-muted: #555555;
-        --color-border-base:#000000;
+
+        --color-border-base: #0C0221;
+    }
+
+    .theme-swiss {
+        --color-text-base: #FFFFFF;
+        --color-text-muted: #FECACA;
+        --color-text-inverted: #DC2626;
+        --color-fill:#B91C1C;
+        --color-button-accent: #FFFFFF;
+        --color-button-accent-hover: #FEF2F2;
+        --color-button-muted: #EF4444;
+        --color-border-base: #0C0221;
+      }
+
+      .theme-neon {
+        --color-text-base: #111802;
+        --color-text-muted: #2F4306;
+        --color-text-inverted: #EBFACC;
+        --color-fill: #B3FF17;
+        --color-button-accent: #243403;
+        --color-button-accent-hover: #374F05;
+        --color-button-muted: #D4FF7A;
+      }
+
+      .theme-blue {
+        --color-text-base: #FFFFFF;
+        --color-text-muted: #C7D2FE;
+        --color-text-inverted: #4F46E5;
+        --color-fill: #4338CA;
+        --color-button-accent: #FFFFFF;
+        --color-button-accent-hover: #EEF2FF;
+        --color-button-muted: #6366F1;
+      }
+
+    .dark{
+        @apply bg-gray-800 text-zinc-50;
+    }
+    .light {
+
     }
 }

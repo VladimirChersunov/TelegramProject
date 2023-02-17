@@ -1,10 +1,11 @@
 import { MenuButton } from "./MenuButton";
 import { SerchInput } from "./SerchInput";
 
-export function LeftHeader() {
+export function LeftHeader(props) {
   return (
     <div className="h-[60px] flex flex-row max-w-full">
-      <MenuButton />
+      <MenuButton darkMode={props.darkMode} toggleDarkMode={props.toggleDarkMode} />
+    
       <SerchInput />
     </div>
   );

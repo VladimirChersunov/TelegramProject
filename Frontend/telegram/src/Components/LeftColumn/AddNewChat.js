@@ -9,7 +9,7 @@ export function AddNewChat() {
 
   return (
     <div
-      className={`h-screen w-1/4 flex flex-col border-r border-skin-border-base border-solid min-w-[200px] items-center`}
+      className={`h-screen w-1/4 flex flex-col border-r  border-solid min-w-[200px] items-center`}
     >
       <div className="flex flex-row items-end  m-2 ">
         <button

@@ -18,7 +18,7 @@ export function RightMenuButton() {
 
   const handleClickOutsideRightMenu = (e) => {
     if (!refRightMenu?.current?.contains(e.target)) {
-      setOpen((open) => false);
+      setOpen(false);
     }
   };
 

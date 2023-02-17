@@ -1,11 +1,12 @@
 export function MessageIn(props) {
   return (
-    <div className="w-[100%] flex justify-start ml-10">
+    <div className="w-[100%] flex justify-start ml-10 dark:text-[#0C0221] ">
       <div className="w-[600px] flex flex-row mt-2">
         <div className="flex flex-col justify-end align-bottom">
           <div className="bg-blue-200 w-[50px] h-[40px] relative">
-            <div className="bg-white absolute w-[50px] h-[50px] bottom-0 right-0 rounded-br-[100px] mt-3">
-              <div className="rounded-full absolute   h-[40px] w-[40px] bg-purple-500 flex flex-row justify-center text-white text-2xl pt-1">
+            <div className="absolute  w-[50px] h-[50px] bg-skin-fill dark:bg-[#0C0221]  bottom-0 right-0 rounded-br-[100px] mt-3">
+              <div className="rounded-full absolute   h-[40px] w-[40px] bg-purple-500  flex flex-row
+               justify-center  text-2xl pt-1   border">
                 <p>{props.message.authorImage}</p>
               </div>
             </div>

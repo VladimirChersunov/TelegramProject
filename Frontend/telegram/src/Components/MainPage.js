@@ -9,8 +9,7 @@ import { RightColumn } from "./RightColumn/RightColumn";
 
 export const currentUser = "Admin";
 
-export function MainPage() {
-  
+export function MainPage(props) {
   const messages = [
     {
       id: 1,
@@ -151,6 +150,7 @@ export function MainPage() {
   const [mainRiht, setMainRight] = useState(false);
   const [currChat, setCurrentChat] = useState({});
   const [centrVisible, setCentrVisible] = useState(false);
+  const [theme, setTheme] = useState("");
 
   useEffect(() => {
     if (currChat.id) {
@@ -163,6 +163,10 @@ export function MainPage() {
   const addNewMessage = () => {
     setAddMessage(true);
     setMainLeft(false);
+  };
+
+  const changeThemes = (props) => {
+    setTheme((prevTheme) => props);
   };
 
   const addNewGroup = () => {
@@ -184,13 +188,23 @@ export function MainPage() {
   };
 
   return (
-    <div className="flex flex-row min-h-screen border-skin-border-base text-skin-base bg-skin-fill overflow-hidden">
+    <div
+      className={`${theme} dark:bg-[#0C0221] flex flex-row min-h-screen dark:text-[#C6BDFF] dark:border-[#C6BDFF]
+      text-skin-base border-[#0C0221] bg-skin-fill overflow-hidden`}
+    >
       {addChannel && <AddMembers contacts={contacts} chatType={chatType} />}
       {addMessage && <AddNewMessage />}
       {addGroup && <AddNewChat />}
-      {mainLeft && <LeftColumn chats={chats} currentChat={currentChat} />}
+      {mainLeft && (
+        <LeftColumn
+          chats={chats}
+          currentChat={currentChat}
+          darkMode={props.darkMode}
+          toggleDarkMode={props.toggleDarkMode}
+        />
+      )}
       {centrVisible && (
-        <CentrColumn chat={currChat} toggleRightColumn={toggleRightColumn} />
+        <CentrColumn chat={currChat} toggleRightColumn={toggleRightColumn} changeThemes={changeThemes}/>
       )}
       {mainRiht && (
         <RightColumn toggleRightColumn={toggleRightColumn} chat={currChat} />

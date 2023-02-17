@@ -45,7 +45,7 @@ export function RightColumn(props) {
           onClick={() => {
             props.toggleRightColumn(false);
           }}
-          className=" hover:bg-slate-300 rounded-full p-auto h-[40px] w-[40px]"
+          className=" hover:bg-indigo-900 rounded-full p-auto h-[40px] w-[40px]"
         >
           &#10006;
         </button>
@@ -53,7 +53,7 @@ export function RightColumn(props) {
           {props.chat.chatName}
         </label>
         {type && (
-          <button className=" hover:bg-slate-300 rounded-full p-auto  h-[40px] w-[40px]">
+          <button className=" hover:bg-indigo-900 rounded-full p-auto  h-[40px] w-[40px]">
             &#128394;
           </button>
         )}
@@ -62,7 +62,7 @@ export function RightColumn(props) {
         {image ? (
           <img src={image} alt="logo" className=" mr-2 h-[50%] w-[100%] " />
         ) : (
-          <div className=" mr-2 h-[50%] w-[100%] bg-purple-600 text-white text-[250px]">
+          <div className=" mr-2 h-[50%] w-[100%] bg-purple-600  text-[250px]">
             <p className="pl-[35%]">T</p>
           </div>
         )}

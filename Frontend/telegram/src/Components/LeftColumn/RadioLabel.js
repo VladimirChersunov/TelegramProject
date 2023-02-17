@@ -25,10 +25,12 @@ export function RadioLabel({ chat, currentChat }) {
         e.preventDefault();
         console.log("Right Click");
       }}
+      
       onClick={() => {
         currentChat(chat);
       }}
-      className="flex  flex-row cursor-pointer select-none rounded-xl border p-2 border-black  peer-checked:bg-blue-400 peer-checked:font-bold peer-checked:text-white"
+      className="flex hover:bg-indigo-800  flex-row cursor-pointer select-none rounded-xl border p-2
+          peer-checked:bg-indigo-900"
     >
       <div>
         {chat.chatImage ? (
@@ -38,7 +40,7 @@ export function RadioLabel({ chat, currentChat }) {
             className="rounded-full mr-2 h-[50px] w-[50px]"
           />
         ) : (
-          <div className="rounded-full mt-[5px] ml-1 mr-2 h-[50px] w-[50px] bg-purple-500 flex flex-row justify-center text-white text-3xl pt-1">
+          <div className="rounded-full mt-[5px] ml-1 mr-2 h-[50px] w-[50px] bg-purple-500 flex flex-row justify-center border  text-3xl pt-1">
             <p>T</p>
           </div>
         )}

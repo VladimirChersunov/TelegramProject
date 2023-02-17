@@ -19,9 +19,9 @@ export function InputPanel() {
   };
 
   return (
-    <div className=" bg-white w-[100%] h-[60px]">
+    <div className="w-[100%]  h-[60px]">
       <div className="flex flex-row w-[60%] h-[100%] m-auto justify-center ">
-        <div className="flex flex-row max-h-fit w-[600px] items-stretch rounded-lg border border-black ">
+        <div className="flex flex-row max-h-fit w-[600px] items-stretch rounded-lg border  ">
           <div className="w-[50px]">
             <button className="text-4xl">&#9786;</button>
           </div>
@@ -30,7 +30,7 @@ export function InputPanel() {
             <textarea
               onChange={handleInputChange}
               value={messageText}
-              className="w-[100%] h-[30px]  mt-3 text-xl rounded-lg outline-none pl-2 resize-none"
+              className="w-[100%] h-[30px]  mt-3 text-xl rounded-lg outline-none pl-2 resize-none bg-skin-fill dark:bg-[#0C0221]"
               MaxLength="200"
               contenteditable="true"
               placeholder="Message..."

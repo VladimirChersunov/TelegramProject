@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { LeftMenu } from "./LeftMenu";
 
-export function MenuButton() {
+export function MenuButton(props) {
   const refLeftMenu = useRef(null);
 
   const [open, setOpen] = useState(false);
@@ -29,12 +29,12 @@ export function MenuButton() {
             setOpen((visible) => !visible);
           }}
           className="m-auto text-4xl w-[40px] h-[40px] hover:cursor-pointer
-           rounded-full pb-[5px] hover:bg-slate-200 hover:shadow-xl items-center text-center"
+           rounded-full mb-1 hover:bg-indigo-900 hover:shadow-xl items-center text-center"
         >
           &#8801;
         </div>
 
-        {open && <LeftMenu />}
+        {open && <LeftMenu darkMode={props.darkMode} toggleDarkMode={props.toggleDarkMode}/>}
       </div>
     </div>
   );

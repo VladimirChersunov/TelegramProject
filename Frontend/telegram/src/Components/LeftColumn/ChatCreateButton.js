@@ -17,7 +17,7 @@ export function ChatCreateButton() {
 
   const handleClickOutsideCreateNenu = (e) => {
     if (!refCreateMenu?.current?.contains(e.target)) {
-      setOpen((open) => false);
+      setOpen( false);
     }
   };
 
@@ -27,10 +27,10 @@ export function ChatCreateButton() {
 
   return (
     <div ref={refCreateMenu} className="p-1 pt-3 ml-[80%]">
-      <div className="inline-block  relative">
+      <div className="inline-block  relative ">
         <div
           onClick={toggleVisibleMenu}
-          className="m-auto bg-blue-300 text-2xl w-[50px] h-[50px] hover:cursor-pointer pt-2
+          className="m-auto bg-skin-button-accent text-2xl w-[50px] h-[50px] hover:cursor-pointer pt-2
              rounded-full  hover:bg-blue-600 hover:shadow-xl hover:border hover:border-black items-center text-center"
         >
           {open && <p> &#10006;</p>}
