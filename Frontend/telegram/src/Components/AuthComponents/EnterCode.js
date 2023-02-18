@@ -1,45 +1,52 @@
 import { useNavigate } from "react-router-dom";
+import logo from "./../../Assets/Logo.svg";
 
 export function EnterCode() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-skin-fill w-[100%] h-screen flex justify-center content-center items-center">
+    <div className="bg-[#0C0221] w-[100%] h-screen flex justify-center content-center items-center">
       <div className="w-[384px]  h-[331px] flex flex-col text-center">
-        <label className="text-skin-base text-lg w-[100%]">
+      <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
+        <label className="text-[#C6BDFF] text-lg w-[100%]">
           Код для подтверждения був надісланий вам на поштову скриньку
         </label>
 
-        <div className="flex flex-row mt-10 justify-around ">
+        <div className="flex flex-row mt-5 justify-around ">
           <input
           maxLength='1'
-            className="w-10 text-center text-5xl bg-skin-fill text-skin-base border-b-[1px] caret-transparent
-             outline-none border-b-[#C6BDFF]"
-            placeholder="0"
+            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF]  caret-transparent border-b-[1px]
+            border-b-[#C6BDFF] placeholder:text-skin-muted 
+             outline-none "
+            placeholder=""
           />
            <input
             maxLength='1'
-            className="w-10 text-center text-5xl bg-skin-fill text-skin-base border-b-[1px] caret-transparent
-             outline-none border-b-[#C6BDFF]"
-            placeholder="1"
+            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF] border-b-[1px] caret-transparent
+            border-b-[#C6BDFF] placeholder:text-skin-muted 
+             outline-none "
+            placeholder=""
           />
            <input
             maxLength='1'
-            className="w-10 text-center text-5xl bg-skin-fill text-skin-base border-b-[1px] caret-transparent
-             outline-none border-b-[#C6BDFF]"
-            placeholder="2"
+            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF] border-b-[1px] caret-transparent
+            border-b-[#C6BDFF] placeholder:text-skin-muted 
+             outline-none "
+            placeholder=""
           />
            <input
             maxLength='1'
-            className="w-10 text-center text-5xl bg-skin-fill text-skin-base border-b-[1px] caret-transparent
-             outline-none border-b-[#C6BDFF]"
-            placeholder="3"
+            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF] border-b-[1px] caret-transparent
+            border-b-[#C6BDFF] placeholder:text-skin-muted 
+             outline-none "
+            placeholder=""
           />
            <input
             maxLength='1'
-            className="w-10 text-center text-5xl bg-skin-fill text-skin-base border-b-[1px] caret-transparent
-             outline-none border-b-[#C6BDFF]"
-            placeholder="4"
+            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF] border-b-[1px] caret-transparent
+            border-b-[#C6BDFF] placeholder:text-skin-muted 
+             outline-none "
+            placeholder=""
           />
         </div>
 
@@ -48,7 +55,8 @@ export function EnterCode() {
             navigate("/main");
           }}
           className="text-[#0C0221] rounded-3xl w-[200px]
-         hover:cursor-pointer hover:bg-white h-[40px] bg-skin-button-accent mx-auto mt-14"
+         hover:cursor-pointer hover:bg-skin-button-accent-hover h-[40px]  bg-[#C6BDFF]
+          mx-auto mt-14"
         >
           Продовжити
         </button>

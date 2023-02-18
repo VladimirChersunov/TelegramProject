@@ -187,6 +187,7 @@ export function MainPage(props) {
     setMainRight(state);
   };
 
+  
   return (
     <div
       className={`${theme} dark:bg-[#0C0221] flex flex-row min-h-screen dark:text-[#C6BDFF] dark:border-[#C6BDFF]

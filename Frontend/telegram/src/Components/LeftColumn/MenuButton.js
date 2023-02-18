@@ -22,19 +22,24 @@ export function MenuButton(props) {
   };
 
   return (
-    <div ref={refLeftMenu} className="p-1 pt-3">
-      <div className="inline-block  relative">
-        <div
+    <div ref={refLeftMenu} className="p-1 mt-2">
+      <div className="relative">
+        <button
           onClick={() => {
             setOpen((visible) => !visible);
           }}
-          className="m-auto text-4xl w-[40px] h-[40px] hover:cursor-pointer
-           rounded-full mb-1 hover:bg-indigo-900 hover:shadow-xl items-center text-center"
+          className=" text-4xl w-[45px] h-[45px] 
+           rounded-full pb-2 hover:bg-skin-button-accent-hover  flex items-center justify-center"
         >
           &#8801;
-        </div>
+        </button>
 
-        {open && <LeftMenu darkMode={props.darkMode} toggleDarkMode={props.toggleDarkMode}/>}
+        {open && (
+          <LeftMenu
+            darkMode={props.darkMode}
+            toggleDarkMode={props.toggleDarkMode}
+          />
+        )}
       </div>
     </div>
   );

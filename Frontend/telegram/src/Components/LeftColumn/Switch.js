@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export function Switch(props) {
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   const toggleClass = " transform translate-x-5";
   return (
     <>

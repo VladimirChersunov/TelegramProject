@@ -30,7 +30,8 @@ export function InputPanel() {
             <textarea
               onChange={handleInputChange}
               value={messageText}
-              className="w-[100%] h-[30px]  mt-3 text-xl rounded-lg outline-none pl-2 resize-none bg-skin-fill dark:bg-[#0C0221]"
+              className="w-[100%] h-[30px]  mt-3 text-xl rounded-lg outline-none pl-2 resize-none
+               bg-skin-fill dark:bg-[#0C0221]"
               MaxLength="200"
               contenteditable="true"
               placeholder="Message..."

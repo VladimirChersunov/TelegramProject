@@ -1,4 +1,4 @@
-import { AuthPage } from "./Components/AuthComponents/AuthPage";
+import { StartPage } from "./Components/AuthComponents/StartPage";
 import { MainPage } from "./Components/MainPage";
 import { Routes, Route } from "react-router-dom";
 import { SignIn } from "./Components/AuthComponents/SignIn";
@@ -19,7 +19,7 @@ function App() {
     <div className={`h-full w-full ${darkMode ? "dark" : ""}  `}>
       <Routes>
         <Route path="/main" element={<MainPage darkMode={darkMode}  toggleDarkMode={toggleDarkMode} />} />
-        <Route path="/" element={<AuthPage />} />
+        <Route path="/" element={<StartPage />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/entercode" element={<EnterCode />} />

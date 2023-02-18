@@ -4,7 +4,7 @@ export function LeftMenu(props) {
   return (
     <ul
       className={`absolute block mt-1 group-hover:block shadow-2xl bg-skin-fill dark:bg-[#0C0221]
-       border   rounded-lg  w-[200px] `}
+       border border-skin-border-base   rounded-lg  w-[200px] `}
     >
       <li className="hover:bg-indigo-900 hover:cursor-pointer">
         <div className="h-8 p-1 flex flex-row">
