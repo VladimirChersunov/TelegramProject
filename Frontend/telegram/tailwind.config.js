@@ -24,6 +24,12 @@ module.exports = {
           "border-base": "var(--color-border-base)",
         },
       },
+      stroke:{
+        skin:{
+          "stroke-base":"var( --color-stroke-base)",
+          "stroke-inverted":"var( --color-stroke-inverted)"
+        },
+      },
     },
   },
   plugins: [],

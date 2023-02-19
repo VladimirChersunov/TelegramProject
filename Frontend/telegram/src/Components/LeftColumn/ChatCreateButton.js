@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { CreateMenu } from "./CreateMenu";
-
+import {PenIcon} from "./../Icons/PenIcon"
+import { CloseIcon } from "../Icons/CloseIcon";
 export function ChatCreateButton() {
   const [open, setOpen] = useState(false);
   const refCreateMenu = useRef(null);
@@ -27,14 +28,14 @@ export function ChatCreateButton() {
 
   return (
     <div ref={refCreateMenu} className="p-1 pt-3 ml-[80%]">
-      <div className="inline-block  relative ">
+      <div className="inline-block  relative select-none">
         <div
           onClick={toggleVisibleMenu}
-          className="m-auto bg-skin-button-accent text-2xl w-[50px] h-[50px] hover:cursor-pointer pt-2
-             rounded-full  hover:bg-blue-600 hover:shadow-xl hover:border hover:border-black items-center text-center"
+          className="m-auto bg-skin-button-accent dark:bg-[#C6BDFF]   w-[50px] h-[50px] hover:cursor-pointer pt-2
+             rounded-full hover:bg-skin-button-accent-hover hover:shadow-xl  items-center"
         >
-          {open && <p> &#10006;</p>}
-          {!open && <p> &#128394;</p>}
+          {open && <CloseIcon/>}
+          {!open && <PenIcon stroke={"stroke-skin-stroke-inverted"} height={50} width={50}/>}
         </div>
 
         {open && <CreateMenu />}

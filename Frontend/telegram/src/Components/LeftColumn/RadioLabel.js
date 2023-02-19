@@ -1,6 +1,9 @@
 import art from "./../../Assets/art.jpg";
 import live from "./../../Assets/live.jpg";
 import arduino from "./../../Assets/arduino.jpg";
+import { useState, useRef, useEffect } from "react";
+import { ContextMenu } from "./RightContextOnChat";
+
 
 export function RadioLabel({ chat, currentChat }) {
   let image;
@@ -17,22 +20,67 @@ export function RadioLabel({ chat, currentChat }) {
     default:
       break;
   }
+  const contextRef = useRef()
+  const [showContextMenu, setShowContextMenu] = useState(false);
+  const [contextMenuX, setContextMenuX] = useState(0);
+  const [contextMenuY, setContextMenuY] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+    setShowContextMenu(true);
+    setContextMenuX(event.pageX);
+    setContextMenuY(event.pageY);
+  }
+
+  const handleOptionSelect = (event) => {
+    setSelectedOption(event.target.value);
+    setShowContextMenu(false);
+  };
+
+ 
+
+  const handleChatClick = (event) => {
+    setShowContextMenu(false);
+    currentChat(chat);
+  };
+
+  useEffect(() => {
+    console.log("add");
+    document.addEventListener('contextmenu', handleClickOutside,true);
+    document.addEventListener("click", handleClickOutside, true);
+   
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener('contextmenu', handleClickOutside,true);
+      console.log("del");
+    };
+  }, []);
+
+  const handleClickOutside = (e) => {
+    if (!contextRef?.current?.contains(e.target)) {
+      setShowContextMenu(false);      
+    }
+  };
 
   return (
     <label
+      ref={contextRef}
       for={chat.id}
-      onContextMenu={(e) => {
-        e.preventDefault();
-        console.log("Right Click");
-      }}
-      
-      onClick={() => {
-        currentChat(chat);
-      }}
+      onContextMenu={handleContextMenu}
+      onChange={handleOptionSelect}
+      onClick={handleChatClick}
       className="flex hover:bg-skin-button-accent-hover  flex-row cursor-pointer select-none rounded-xl
        border p-2 peer-checked:bg-skin-button-accent-hover
           peer-checked:bg-indigo-900 border-skin-border-base dark:border-[#C6BDFF]"
     >
+     {showContextMenu && (
+            <ContextMenu x={contextMenuX} y={contextMenuY}>
+              <div onClick={() => alert(`Copy `)}>Copy</div>
+              <div onClick={() => alert(`Paste `)}>Paste</div>
+            </ContextMenu>
+          )}
+     
       <div>
         {chat.chatImage ? (
           <img

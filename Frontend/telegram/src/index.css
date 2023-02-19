@@ -2,57 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-    :root{
-        --color-text-base: #0C0221;
-        --color-text-muted: #947bb0;
-        --color-text-inverted: #C6BDFF;
-        
+@layer base {
+  :root {
+    --color-text-base: #0c0221;
+    --color-text-muted: #947bb0;
+    --color-text-inverted: #c6bdff;
 
-        --color-fill: #C6BDFF;
+    --color-stroke-base: #0c0221;
+    --color-stroke-inverted: #c6bdff;
 
-        --color-button-accent: #0C0221;
-        --color-button-accent-hover: #584CA3;
-        --color-button-muted: #555555;
+    --color-fill: #c6bdff;
 
-        --color-border-base: #0C0221;
-    }
+    --color-button-accent: #0c0221;
+    --color-button-accent-hover: #584ca3;
+    --color-button-muted: #555555;
 
-    .theme-swiss {
-        --color-text-base: #FFFFFF;
-        --color-text-muted: #FECACA;
-        --color-text-inverted: #DC2626;
-        --color-fill:#B91C1C;
-        --color-button-accent: #FFFFFF;
-        --color-button-accent-hover: #FEF2F2;
-        --color-button-muted: #EF4444;
-        --color-border-base: #0C0221;
-      }
+    --color-border-base: #0c0221;
+  }
 
-      .theme-neon {
-        --color-text-base: #111802;
-        --color-text-muted: #2F4306;
-        --color-text-inverted: #EBFACC;
-        --color-fill: #B3FF17;
-        --color-button-accent: #243403;
-        --color-button-accent-hover: #374F05;
-        --color-button-muted: #D4FF7A;
-      }
+  .theme-swiss {
+    --color-text-base: #ffffff;
+    --color-text-muted: #fecaca;
+    --color-text-inverted: #dc2626;
+    --color-fill: #b91c1c;
+    --color-button-accent: #ffffff;
+    --color-button-accent-hover: #fef2f2;
+    --color-button-muted: #ef4444;
+    --color-border-base: #0c0221;
+  }
 
-      .theme-blue {
-        --color-text-base: #FFFFFF;
-        --color-text-muted: #C7D2FE;
-        --color-text-inverted: #4F46E5;
-        --color-fill: #4338CA;
-        --color-button-accent: #FFFFFF;
-        --color-button-accent-hover: #EEF2FF;
-        --color-button-muted: #6366F1;
-      }
+  .theme-neon {
+    --color-text-base: #111802;
+    --color-text-muted: #2f4306;
+    --color-text-inverted: #ebfacc;
+    --color-fill: #b3ff17;
+    --color-button-accent: #243403;
+    --color-button-accent-hover: #374f05;
+    --color-button-muted: #d4ff7a;
+  }
 
-    .dark{
-        
-    }
-    .light {
+  .theme-blue {
+    --color-text-base: #ffffff;
+    --color-text-muted: #c7d2fe;
+    --color-text-inverted: #4f46e5;
+    --color-fill: #4338ca;
+    --color-button-accent: #ffffff;
+    --color-button-accent-hover: #eef2ff;
+    --color-button-muted: #6366f1;
+  }
 
-    }
+  .dark {
+  }
+  .light {
+  }
 }
