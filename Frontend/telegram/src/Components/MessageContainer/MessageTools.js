@@ -1,4 +1,4 @@
-import { RightMenuButton } from "../RightColumn/RightMenuButton";
+import { RightMenuButton } from "../InfoContainer/RightMenuButton";
 
 export function CentralTools() {
   return (

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import Switch from "../LeftColumn/Switch";
+import Switch from "../SideBar/Switch";
 import art from "./../../Assets/art.jpg";
 import live from "./../../Assets/live.jpg";
 import arduino from "./../../Assets/arduino.jpg";
 
-export function RightColumn(props) {
+export function InfoContainer(props) {
   
   const [type, setType] = useState(false);
  

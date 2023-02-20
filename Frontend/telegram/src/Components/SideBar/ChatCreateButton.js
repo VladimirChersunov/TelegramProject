@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { CreateMenu } from "./CreateMenu";
-import {PenIcon} from "./../Icons/PenIcon"
+import {PenIcon} from "../Icons/PenIcon"
 import { CloseIcon } from "../Icons/CloseIcon";
 export function ChatCreateButton() {
   const [open, setOpen] = useState(false);

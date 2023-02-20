@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { CentrColumn } from "./CentralColumn/CentrColumn";
-import { ClearCentr } from "./CentralColumn/ClearCentr";
-import { AddMembers } from "./LeftColumn/AddMembers";
-import { AddNewChat } from "./LeftColumn/AddNewChat";
-import { AddNewMessage } from "./LeftColumn/AddNewMessage";
-import { LeftColumn } from "./LeftColumn/LeftColumnMain";
-import { RightColumn } from "./RightColumn/RightColumn";
+import { MessageContainer } from "./MessageContainer/MessageContainer";
+import { ClearContainer } from "./MessageContainer/ClearContainer";
+import { AddMembers } from "./SideBar/AddMembers";
+import { AddNewChat } from "./SideBar/AddNewChat";
+import { AddNewMessage } from "./SideBar/AddNewMessage";
+import { LeftColumn } from "./SideBar/CollumnContainer";
+import { InfoContainer, RightColumn } from "./InfoContainer/InfoContainer";
 
 export const currentUser = "Admin";
 
@@ -205,12 +205,12 @@ export function MainPage(props) {
         />
       )}
       {centrVisible && (
-        <CentrColumn chat={currChat} toggleRightColumn={toggleRightColumn} changeThemes={changeThemes}/>
+        <MessageContainer chat={currChat} toggleRightColumn={toggleRightColumn} changeThemes={changeThemes}/>
       )}
       {mainRiht && (
-        <RightColumn toggleRightColumn={toggleRightColumn} chat={currChat} />
+        <InfoContainer toggleRightColumn={toggleRightColumn} chat={currChat} />
       )}
-      {!centrVisible && <ClearCentr />}
+      {!centrVisible && <ClearContainer/>}
     </div>
   );
 }

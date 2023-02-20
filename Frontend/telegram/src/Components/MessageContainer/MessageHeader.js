@@ -1,8 +1,8 @@
-import { CentralTools } from "./CentralTools";
+import { CentralTools } from "./MessageTools";
 import { InfoBlock } from "./InfoBlock";
 import { PinnedMessage } from "./PinnedMessage";
 
-export function CentralHeader(props) {
+export function MessageHeader(props) {
   return (
     <div className="h-[60px] flex flex-row max-w-full border-b-skin-border-base border text-2xl justify-between">
       <InfoBlock
