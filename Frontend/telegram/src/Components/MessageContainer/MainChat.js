@@ -1,63 +1,38 @@
 import { InputPanel } from "./InputPanel";
-import { MessageIn } from "./MessageIn";
-import { MessageOut } from "./MessageOut";
+
+import { Message } from "./Message";
 import { useEffect, useState } from "react";
 import { ColorRAdioButton } from "../ColorRadioButton";
 
-
-
-
-
 export function MainChat(props) {
   const [type, setType] = useState(false);
+  const [currChat, setCurrChat] = useState(props.chat);
+  const [windwHeight, setWindwHeight] = useState("100%");
 
   useEffect(() => {
     if (props.chat.type === "chat") {
       setType(true);
+      setWindwHeight((prevHeight) => "80%");
     } else {
       setType(false);
+      setWindwHeight((prevHeight) => "100%");
     }
   }, [props.chat.type]);
- 
+
+  
+
   return (
     <div className="flex flex-col h-[100%]">
-      <div className={`h-[80%] mt-2 `}>
-        <div className="w-[70%] h-[100%] flex flex-col ml-auto mr-auto overflow-auto overflow-x-hidden">
-        
-          <MessageIn
-            message={{
-              id: 1,
-              author: "Obi-Wan Kenobi",
-              authorImage: "T",
-              sendTime: "00:00",
-              data: 'text',
-              sendStatus: "Delivered",
-            }}
-          />
-         
-          <MessageOut
-            message={{
-              id: 2,
-              author: "Anakin",
-              authorImage: "T",
-              sendTime: "00:00",
-              data: 'text',
-              sendStatus: "Seen at 12:46",
-            }}
-          />
-         
- <ColorRAdioButton changeThemes={props.changeThemes}/>
-
-          {/* {
-            message.map(message => 
-              <MessageIn message={{id:1, author: 'Obi-Wan Kenobi', authorImage:'T', sendTime:'00:00', data:'text', sendStatus:'Delivered'}}  />             
-              )
-          } */}
-        </div>
+      <div
+        className={`h-[${windwHeight}] mt-2 flex flex-col overflow-x-hidden`}
+      >
+        {props.chat.messages.map((message) => (
+          <Message message={message} key={message.id} />
+        ))}
+        <ColorRAdioButton changeThemes={props.changeThemes} />
       </div>
-      {/* <div className="absolute bottom-5"><EmojiPicker/></div> */}
-      
-     {type && <InputPanel darkMode={props.darkMode}/>}
+
+      {type && <InputPanel darkMode={props.darkMode} />}
     </div>
   );
 }
