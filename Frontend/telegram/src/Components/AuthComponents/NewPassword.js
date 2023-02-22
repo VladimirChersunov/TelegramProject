@@ -8,12 +8,12 @@ export function NewPassword() {
       <div className="w-[384px]  h-[331px] flex flex-col ">
         <input
           placeholder="Username or email"
-          className="bg-skin-fill border-b-white
+          className="bg-skin-fill border-b-[#C6BDFF]
         border-b-[1px] outline-none text-skin-base pl-2"
         />
         <input
           placeholder="Password"
-          className="bg-skin-fill border-b-white
+          className="bg-skin-fill border-b-[#C6BDFF]
         border-b-[1px] outline-none text-skin-base pl-2 mt-10"
         />
 <div className="flex justify-between">
@@ -31,7 +31,7 @@ export function NewPassword() {
             navigate("/main");
           }}
           className="text-[#0C0221] rounded-3xl w-[200px]
-         hover:cursor-pointer hover:bg-white h-[40px] bg-skin-button-accent mx-auto mt-14"
+         hover:cursor-pointer hover:bg-skin-button-accent-hover h-[40px] bg-skin-button-accent mx-auto mt-14"
         >
           Продовжити
         </button>

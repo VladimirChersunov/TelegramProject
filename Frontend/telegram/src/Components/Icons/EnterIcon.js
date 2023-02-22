@@ -1,7 +1,7 @@
 export function EnterIcon() {
   return (
     <svg
-      className="w-5 h-5 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none"
+      className="w-9 h-9 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none"
       viewBox="0 0 48 48"
       xmlns="http://www.w3.org/2000/svg"
     >

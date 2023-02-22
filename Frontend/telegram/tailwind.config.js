@@ -8,20 +8,24 @@ module.exports = {
           base: "var(--color-text-base)",
           muted: "var(--color-text-muted)",
           inverted: "var(--color-text-inverted)",
+          error: "var(--color-text-error)"
         },
       },
       backgroundColor: {
         skin: {
           fill: "var(--color-fill)",
+          "fill-inverted": "var(--color-fill-inverted)",
           "button-accent": "var( --color-button-accent)",
           "button-accent-hover": "var(--color-button-accent-hover)",
           "button-muted": "var(--color-button-muted)",
+          "button-inverted-hover": "var(--color-button-inverted-hover)",
           
         },
       },
       borderColor: {
         skin: {
           "border-base": "var(--color-border-base)",
+          "border-inverted": "var(--color-border-inverted)",
         },
       },
       stroke:{
@@ -29,6 +33,9 @@ module.exports = {
           "stroke-base":"var( --color-stroke-base)",
           "stroke-inverted":"var( --color-stroke-inverted)"
         },
+      },
+      fontFamily: {
+        'montserrat': ['Montserrat', 'sans-serif'],
       },
     },
   },

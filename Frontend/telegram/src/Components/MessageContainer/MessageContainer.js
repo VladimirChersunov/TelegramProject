@@ -7,7 +7,7 @@ export function MessageContainer(props) {
   return (
     <div className="w-3/4 max-h-screen min-w-[600px]">
       <MessageHeader chat={props.chat} toggleRightColumn={props.toggleRightColumn}/>
-      <MainChat chat={props.chat} changeThemes={props.changeThemes}/>      
+      <MainChat chat={props.chat} changeThemes={props.changeThemes} darkMode={props.darkMode}/>      
     </div>
   );
 }

@@ -5,14 +5,7 @@ export function VolumeMuteIcon() {
       viewBox="0 0 48 48"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect
-        opacity="0.01"
-        x="30"
-        y="18"
-        width="13"
-        height="13"
-        fill="#1F0850"
-      />
+      <rect opacity="0.01" x="30" y="18" width="13" height="13" />
       <mask
         id="icon-39cf179e6a0e536"
         maskUnits="userSpaceOnUse"
@@ -20,7 +13,7 @@ export function VolumeMuteIcon() {
         y="18"
         width="13"
         height="13"
-        style="mask-type: alpha"
+        style={{ maskType: "alpha" }}
       >
         <rect x="30" y="18" width="13" height="13" fill="#1F0850" />
       </mask>

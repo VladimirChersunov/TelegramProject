@@ -187,7 +187,6 @@ export function MainPage(props) {
     setMainRight(state);
   };
 
-  
   return (
     <div
       className={`${theme} dark:bg-[#0C0221] flex flex-row min-h-screen dark:text-[#C6BDFF] dark:border-[#C6BDFF]
@@ -205,12 +204,18 @@ export function MainPage(props) {
         />
       )}
       {centrVisible && (
-        <MessageContainer chat={currChat} toggleRightColumn={toggleRightColumn} changeThemes={changeThemes}/>
+
+        <MessageContainer
+          chat={currChat}
+          toggleRightColumn={toggleRightColumn}
+          changeThemes={changeThemes}
+          darkMode={props.darkMode}
+        />
       )}
       {mainRiht && (
         <InfoContainer toggleRightColumn={toggleRightColumn} chat={currChat} />
       )}
-      {!centrVisible && <ClearContainer/>}
+      {!centrVisible && <ClearContainer />}
     </div>
   );
 }

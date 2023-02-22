@@ -1,35 +1,54 @@
-import { SearchIcon } from "./SerchIcon";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+import { CloseIcon } from "../Icons/CloseIcon";
+import { SearchIcon } from "../Icons/SearchIcon";
 
 export function SerchInput() {
   const [valExist, setValExist] = useState(false);
   const [value, setValue] = useState("");
 
+  useEffect(()=>{
+if(value.length>0){
+  setValExist(true)
+}
+else{
+  setValExist(false)
+}
+
+  },[value] )
+
   return (
     <div className="w-full pr-2 mt-3">
-      <div className=" flex flex-row  border border-skin-border-base dark:border-[#C6BDFF]  rounded-3xl pr-1">
-        <SearchIcon />
+      <div className=" flex flex-row items-center border border-skin-border-base dark:border-skin-border-inverted  rounded-3xl px-2 ">
+        
+        <SearchIcon/>
+              
         <input
-          className="h-[40px] w-[85%]  text-xl rounded-xl outline-none bg-skin-fill dark:bg-[#0C0221] "
-          placeholder="Search..."
+          className="h-[40px] w-[90%]  text-xl rounded-xl outline-none bg-skin-fill dark:bg-skin-fill-inverted ml-2"
           type="text"
+          maxlength="20"
+          placeholder="Search..."
+         
           value={value}
           onChange={(e) => {
             setValExist(true);
             setValue(e.target.value);
           }}
         />
+        <div className="w-10">
         {valExist && (
           <button
             onClick={() => {
               setValue("");
-              setValExist(false);
+              
             }}
-            className="mt-[1px] mb-[1px] h-[40px] w-[40px] rounded-full "
+            className=" h-[35px] w-[35px] rounded-full hover:bg-skin-button-accent-hover flex items-center justify-center "
           >
-            &#10006;
+           <CloseIcon/>
           </button>
         )}
+        </div>
+       
       </div>
     </div>
   );

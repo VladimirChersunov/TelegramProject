@@ -12,7 +12,7 @@ function App() {
 
   const toggleDarkMode = ()=> {
     setDarkMode(prevDarkMode => !prevDarkMode)
-    console.log(darkMode)
+  
 }
 
   return (

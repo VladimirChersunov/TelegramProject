@@ -1,7 +1,17 @@
-export function SerchIcon() {
+import { useState, useEffect } from "react";
+
+export function SearchIcon(props) {
+
+  const [style, setStyle] = useState("w-5 h-5 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none")
+ useEffect(()=>{
+  if(props.style){
+    setStyle((prevStyle) => props.style)
+  }
+ })
+
   return (
     <svg
-      className="w-5 h-5 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none"
+      className={`${style}`}
       viewBox="0 0 48 48"
       xmlns="http://www.w3.org/2000/svg"
     >

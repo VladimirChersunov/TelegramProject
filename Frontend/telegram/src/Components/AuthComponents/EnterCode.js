@@ -8,44 +8,49 @@ export function EnterCode() {
     <div className="bg-[#0C0221] w-[100%] h-screen flex justify-center content-center items-center">
       <div className="w-[384px]  h-[331px] flex flex-col text-center">
       <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
-        <label className="text-[#C6BDFF] text-lg w-[100%]">
+        <label className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
           Код для подтверждения був надісланий вам на поштову скриньку
         </label>
 
         <div className="flex flex-row mt-5 justify-around ">
           <input
           maxLength='1'
-            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF]  caret-transparent border-b-[1px]
-            border-b-[#C6BDFF] placeholder:text-skin-muted 
+            className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
+             caret-transparent border-b-[1px] pb-[10px]
+            placeholder:text-skin-muted border-skin-border-inverted
              outline-none "
             placeholder=""
           />
            <input
             maxLength='1'
-            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF] border-b-[1px] caret-transparent
-            border-b-[#C6BDFF] placeholder:text-skin-muted 
-             outline-none "
+            className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
+            caret-transparent border-b-[1px] pb-[10px]
+           placeholder:text-skin-muted border-skin-border-inverted
+            outline-none "
             placeholder=""
           />
            <input
             maxLength='1'
-            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF] border-b-[1px] caret-transparent
-            border-b-[#C6BDFF] placeholder:text-skin-muted 
-             outline-none "
+            className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
+            caret-transparent border-b-[1px] pb-[10px]
+           placeholder:text-skin-muted border-skin-border-inverted
+            outline-none "
             placeholder=""
           />
            <input
             maxLength='1'
-            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF] border-b-[1px] caret-transparent
-            border-b-[#C6BDFF] placeholder:text-skin-muted 
-             outline-none "
+            className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
+            caret-transparent border-b-[1px] pb-[10px]
+           placeholder:text-skin-muted border-skin-border-inverted
+            outline-none "
             placeholder=""
           />
            <input
             maxLength='1'
-            className="w-10 text-center text-5xl bg-[#0C0221] text-[#C6BDFF] border-b-[1px] caret-transparent
-            border-b-[#C6BDFF] placeholder:text-skin-muted 
-             outline-none "
+            className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
+            caret-transparent border-b-[1px] pb-[10px]
+           placeholder:text-skin-muted border-skin-border-inverted
+            outline-none "
             placeholder=""
           />
         </div>
@@ -54,9 +59,8 @@ export function EnterCode() {
           onClick={() => {
             navigate("/main");
           }}
-          className="text-[#0C0221] rounded-3xl w-[200px]
-         hover:cursor-pointer hover:bg-skin-button-accent-hover h-[40px]  bg-[#C6BDFF]
-          mx-auto mt-14"
+          className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
+          w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
           Продовжити
         </button>

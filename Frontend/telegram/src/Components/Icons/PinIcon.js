@@ -1,7 +1,7 @@
 export function PinIcon() {
   return (
     <svg
-      className="w-5 h-5 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none"
+      className="w-7 h-7 stroke-skin-stroke-base dark:stroke-skin-stroke-inverted fill-none"
       viewBox="0 0 48 48"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -15,7 +15,7 @@ export function PinIcon() {
       </g>
       <defs>
         <clipPath id="icon-6436d45eb4e0022c">
-          <rect width="48" height="48" fill="#1F0850" />
+          <rect width="48" height="48" />
         </clipPath>
       </defs>
     </svg>

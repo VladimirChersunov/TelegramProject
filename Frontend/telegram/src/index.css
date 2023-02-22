@@ -1,23 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
 
 @layer base {
   :root {
     --color-text-base: #0c0221;
-    --color-text-muted: #947bb0;
+    --color-text-muted: #383453;    
     --color-text-inverted: #c6bdff;
+    --color-text-error: #DC2626;
+
 
     --color-stroke-base: #0c0221;
     --color-stroke-inverted: #c6bdff;
 
     --color-fill: #c6bdff;
+    --color-fill-inverted: #0c0221;
 
     --color-button-accent: #0c0221;
     --color-button-accent-hover: #584ca3;
     --color-button-muted: #555555;
+    --color-button-inverted-hover: #7E5EFC;
 
     --color-border-base: #0c0221;
+    --color-border-inverted: #c6bdff;
   }
 
   .theme-swiss {

@@ -7,11 +7,10 @@ export function MenuButton(props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    document.removeEventListener("click", handleClickOutside, true);
-    console.log("del");
+    document.addEventListener("click", handleClickOutside, true);
+
     return () => {
-      console.log("add");
-      document.addEventListener("click", handleClickOutside, true);
+      document.removeEventListener("click", handleClickOutside, true);
     };
   }, [open]);
 

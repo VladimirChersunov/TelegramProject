@@ -3,6 +3,8 @@ import live from "./../../Assets/live.jpg";
 import arduino from "./../../Assets/arduino.jpg";
 import { useState, useRef, useEffect } from "react";
 import { ContextMenu } from "./RightContextOnChat";
+import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
+import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 
 
 export function RadioLabel({ chat, currentChat }) {
@@ -46,14 +48,14 @@ export function RadioLabel({ chat, currentChat }) {
   };
 
   useEffect(() => {
-    console.log("add");
+  
     document.addEventListener('contextmenu', handleClickOutside,true);
     document.addEventListener("click", handleClickOutside, true);
    
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
       document.removeEventListener('contextmenu', handleClickOutside,true);
-      console.log("del");
+     
     };
   }, []);
 
@@ -70,14 +72,18 @@ export function RadioLabel({ chat, currentChat }) {
       onContextMenu={handleContextMenu}
       onChange={handleOptionSelect}
       onClick={handleChatClick}
-      className="flex hover:bg-skin-button-accent-hover  flex-row cursor-pointer select-none rounded-xl
-       border p-2 peer-checked:bg-skin-button-accent-hover
-          peer-checked:bg-indigo-900 border-skin-border-base dark:border-[#C6BDFF]"
+      className="flex hover:bg-skin-button-accent-hover  flex-row cursor-pointer select-none 
+       border-b p-2 peer-checked:bg-skin-button-accent-hover peer-checked:bg-[#6a37d8]
+           border-skin-border-base dark:border-skin-border-inverted"
     >
      {showContextMenu && (
             <ContextMenu x={contextMenuX} y={contextMenuY}>
-              <div onClick={() => alert(`Copy `)}>Copy</div>
-              <div onClick={() => alert(`Paste `)}>Paste</div>
+              <div onClick={() => alert(`Copy `)}>Open in new tab</div>
+              <div onClick={() => alert(`Paste `)}>Mark as read</div>
+              <div onClick={() => alert(`Paste `)}>Mute</div>
+              <div onClick={() => alert(`Paste `)}>Unmute</div>
+              <div onClick={() => alert(`Paste `)}>Report</div>
+              <div onClick={() => alert(`Paste `)}>Delete and exit</div>
             </ContextMenu>
           )}
      
@@ -98,12 +104,12 @@ export function RadioLabel({ chat, currentChat }) {
 
       <div className="flex flex-col  w-[85%] mt-1 ">
         <div className="flex flex-row justify-between">
-          <div className="flex flex-row">
+          <div className="flex flex-row items-center">
             <p className="text-lg mr-2">{chat.chatName}</p>
             {chat.muteStatus ? (
-              <div className="mt-1">&#128263;</div>
+             <VolumeMuteIcon/>
             ) : (
-              <div className="mt-1">&#128264;</div>
+             <VolumeOnIcon/>
             )}
           </div>
 
@@ -112,8 +118,12 @@ export function RadioLabel({ chat, currentChat }) {
           </div>
         </div>
 
-        <div>
+        <div
+        className="flex flex-row justify-between">
           <p className="">{chat.shortMessage.substring(0, 25)}</p>
+          <label className="rounded-full text-center border border-skin-border-base
+           dark:border-skin-border-inverted
+          text-xs h-5 w-5">20</label>
         </div>
       </div>
     </label>

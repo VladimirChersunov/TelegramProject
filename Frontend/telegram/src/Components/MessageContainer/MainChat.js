@@ -7,6 +7,7 @@ import { ColorRAdioButton } from "../ColorRadioButton";
 
 
 
+
 export function MainChat(props) {
   const [type, setType] = useState(false);
 
@@ -54,7 +55,9 @@ export function MainChat(props) {
           } */}
         </div>
       </div>
-     {type && <InputPanel />}
+      {/* <div className="absolute bottom-5"><EmojiPicker/></div> */}
+      
+     {type && <InputPanel darkMode={props.darkMode}/>}
     </div>
   );
 }

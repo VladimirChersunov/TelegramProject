@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import Switch from "../SideBar/Switch";
+import {Switch} from "../SideBar/Switch";
 import art from "./../../Assets/art.jpg";
 import live from "./../../Assets/live.jpg";
 import arduino from "./../../Assets/arduino.jpg";
+import { CloseIcon } from "../Icons/CloseIcon";
+import { PenIcon } from "../Icons/PenIcon";
+import { InfoIcon } from "../Icons/InfoIcon";
+import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 
 export function InfoContainer(props) {
   
@@ -36,29 +40,32 @@ export function InfoContainer(props) {
   }, [props.chat.type]);
 
   return (
-    <div className={`w-[35%] block  border border-l-black`}>
+    <div className={`w-[35%] block `}>
       <div
         name="rightHeader"
-        className="h-[59px] w-[100%] flex flex-row justify-between border border-b-black px-2 items-center "
+        className="h-[59px] w-[100%] flex flex-row justify-between border-l border-skin-border-base
+         dark:border-skin-border-inverted px-2 items-center "
       >
         <button
           onClick={() => {
             props.toggleRightColumn(false);
           }}
-          className=" hover:bg-indigo-900 rounded-full p-auto h-[40px] w-[40px]"
+          className="rounded-full hover:bg-skin-button-accent-hover p-auto h-[40px]
+           w-[40px] flex justify-center items-center"
         >
-          &#10006;
+         <CloseIcon/>
         </button>
-        <label className="text-2xl font-bold text-center mx-auto">
+        <label className="text-2xl font-bold   mx-auto">
           {props.chat.chatName}
         </label>
         {type && (
-          <button className=" hover:bg-indigo-900 rounded-full p-auto  h-[40px] w-[40px]">
-            &#128394;
+          <button className=" hover:bg-skin-button-accent-hover rounded-full p-auto flex items-center
+           justify-center  h-[40px] w-[40px]">
+            <PenIcon/>
           </button>
         )}
       </div>
-      <div className="h-[100%]  ">
+      <div className="h-[100%]  border-l border-skin-border-base dark:border-skin-border-inverted">
         {image ? (
           <img src={image} alt="logo" className=" mr-2 h-[50%] w-[100%] " />
         ) : (
@@ -68,14 +75,17 @@ export function InfoContainer(props) {
         )}
 
         {props.chat.chatInfo && (
-          <div className="flex flex-row ">
-            <div className="text-3xl ml-5 mt-5">&#128712;</div>
-            <p className="ml-5 mt-6 font-bold">{props.chat.chatInfo}</p>
+          <div className="flex flex-row items-center justify-start pl-5 pt-5">
+            <InfoIcon/>
+            <p className="ml-5  font-bold">{props.chat.chatInfo}</p>
           </div>
         )}
-        <div className="flex flex-row h-[40px] w-[100%] px-2 items-center justify-between mt-2">
-          <button className="text-2xl ml-5 mt-5">&#128264;</button>
-          <label className="text-2xl text-left">Notifications</label>
+        <div className="flex flex-row h-[40px] w-[100%] pl-5  items-center justify-between mt-2 pr-5">
+          <VolumeOnIcon/>
+          <div className="flex flex-row w-[80%] ml-5">
+          <label className="text-lg">Notifications</label>
+          </div>
+         
           <Switch chat={props.chat} />
         </div>
       </div>

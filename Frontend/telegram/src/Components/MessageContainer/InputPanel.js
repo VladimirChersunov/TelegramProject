@@ -1,5 +1,11 @@
-import { useState } from "react";
-export function InputPanel() {
+import EmojiPicker, { Theme } from "emoji-picker-react";
+import { useState, useEffect } from "react";
+import { EnterIcon } from "../Icons/EnterIcon";
+import { LinkIcon } from "../Icons/LinkIcon";
+import { SmileIcon } from "../Icons/SmileIcon";
+
+export function InputPanel(props) {
+  
   const handleInputChange = (event) => {
     event.target.style.height = "auto";
     event.target.style.height = event.target.scrollHeight + "px";
@@ -8,45 +14,63 @@ export function InputPanel() {
 
   const [messageText, setMeassageText] = useState("");
   const [messages, setMessage] = useState([]);
-  
+  const [theme, setTheme] = useState("dark");
+  const[visiblEmojiPicker, setvisiblEmojiPicker] = useState(false)
+ 
+  useEffect(() => {
+    if (props.darkMode) {
+      setTheme((preevTheme) => "dark");
+    } else {
+      setTheme((preevTheme) => "light");
+    }
+  }, [props.darkMode]);
 
   const addNewMessage = (event) => {
     const newMessage = {
-     ...messageText, id:Date.now()
+      ...messageText,
+      id: Date.now(),
     };
-   
+
     setMeassageText("");
   };
 
+  useEffect(()=>{
+
+  })
+
+  const handleEmojiClick = () =>{
+     setvisiblEmojiPicker((prevVisible)=>!visiblEmojiPicker)
+  }
+
   return (
-    <div className="w-[100%]  h-[60px]">
-      <div className="flex flex-row w-[60%] h-[100%] m-auto justify-center ">
-        <div className="flex flex-row max-h-fit w-[600px] items-stretch rounded-lg border  ">
-          <div className="w-[50px]">
-            <button className="text-4xl">&#9786;</button>
-          </div>
+    <div className="w-[100%] relative   h-[60px] flex justify-center  ">
+      <div className="flex flex-row  w-[70%] items-stretch rounded-lg border border-skin-border-base dark:border-skin-border-inverted">
+        {visiblEmojiPicker && <div className="absolute bottom-[65px]">
+          <EmojiPicker theme={`${theme}`} />
+        </div>}
+        <button className="mx-3" onClick={handleEmojiClick}>
+          <SmileIcon />
+        </button>
 
-          <div className="w-[500px]">
-            <textarea
-              onChange={handleInputChange}
-              value={messageText}
-              className="w-[100%] h-[30px]  mt-3 text-xl rounded-lg outline-none pl-2 resize-none
-               bg-skin-fill dark:bg-[#0C0221]"
-              MaxLength="200"
-              contenteditable="true"
-              placeholder="Message..."
-            />
-          </div>
-
-          <div className="ml-2 mt-1">
-            <button className="text-4xl">&#128206;</button>
-          </div>
-          <div className="ml-3">
-            <button className="text-5xl" onClick={addNewMessage}>
-              &#11162;
-            </button>
-          </div>
+        <div className="w-[90%]">
+          <textarea
+            onChange={handleInputChange}
+            value={messageText}
+            className="w-[100%] h-[30px]  mt-3 text-xl rounded-lg outline-none pl-2 resize-none
+               bg-skin-fill dark:bg-skin-fill-inverted"
+            MaxLength="200"
+            contenteditable="true"
+            placeholder="Message..."
+          />
         </div>
+
+        <button className="">
+          <LinkIcon />
+        </button>
+
+        <button className="mr-1" onClick={addNewMessage}>
+          <EnterIcon />
+        </button>
       </div>
     </div>
   );

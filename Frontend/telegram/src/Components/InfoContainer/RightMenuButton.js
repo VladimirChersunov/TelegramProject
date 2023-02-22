@@ -2,17 +2,17 @@ import { useState, useEffect, useRef } from "react";
 
 import { RightMenu } from "./RightMenu";
 
-export function RightMenuButton() {
+export function RightMenuButton(props) {
   const [open, setOpen] = useState(false);
   const refRightMenu = useRef(null);
 
   //следим за изменением стейта open и добавляем или удаляем обработчик
   useEffect(() => {
-    document.removeEventListener("click", handleClickOutsideRightMenu, true);
-    console.log("del");
+    
+    document.addEventListener("click", handleClickOutsideRightMenu, true);
     return () => {
-      console.log("add");
-      document.addEventListener("click", handleClickOutsideRightMenu, true);
+      document.removeEventListener("click", handleClickOutsideRightMenu, true);
+      
     };
   }, [open]);
 
@@ -29,13 +29,13 @@ export function RightMenuButton() {
   return (
     <div
       ref={refRightMenu}
-      className="inline-block  relative hover:cursor-pointer my-auto"
+      className="inline-block  relative hover:cursor-pointer my-auto select-none"
     >
       <div onClick={toggleVisibleRightMenu} className="">
         &#x22EE;
       </div>
 
-      {open && <RightMenu />}
+      {open && <RightMenu chat={props.chat}/>}
     </div>
   );
 }

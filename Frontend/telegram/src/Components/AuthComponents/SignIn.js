@@ -5,26 +5,26 @@ export function SignIn() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-[100%] bg-[#0C0221] h-screen flex justify-center content-center items-center">
+    <div className="w-[100%] bg-skin-fill-inverted h-screen flex justify-center text-[16px] font-montserrat content-center items-center">
       <div className="w-[384px]  h-[400px] flex flex-col ">
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
         <input
           placeholder="Username or email"
-          className="bg-[#0C0221] placeholder:text-skin-muted border-b-[#C6BDFF]
-        border-b-[1px] outline-none text-[#C6BDFF] pl-2 pb-1"
+          className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted
+        border-b-[1px] outline-none text-skin-inverted pl-2 pb-[10px]"
         />
         <input
           placeholder="Password"
           type='password'
-          className="bg-[#0C0221] placeholder:text-skin-muted border-b-[#C6BDFF] 
-        border-b-[1px] outline-none text-[#C6BDFF] pl-2 mt-10 pb-1"
+          className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
+        border-b-[1px] outline-none text-skin-inverted mt-[49px] pl-2 pb-[10px]"
         />
         <div className="flex justify-between">
           <button
             onClick={() => {
               navigate("/entercode");
             }}
-            className="text-[#C6BDFF] mt-5 text-xs ml-2"
+            className="text-skin-inverted mt-5 text-xs ml-2"
           >
             Recovery password
           </button>
@@ -32,7 +32,7 @@ export function SignIn() {
             onClick={() => {
               navigate("/signup");
             }}
-            className="text-[#C6BDFF] mt-5 text-xs mr-2"
+            className="text-skin-inverted mt-5 text-xs mr-2"
           >
             Signup
           </button>
@@ -42,8 +42,8 @@ export function SignIn() {
           onClick={() => {
             navigate("/main");
           }}
-          className="rounded-3xl  w-[250px]
-         hover:cursor-pointer hover:bg-skin-button-accent-hover h-[50px] bg-[#C6BDFF] mx-auto mt-[40px]"
+          className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
+          w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
           Продовжити
         </button>

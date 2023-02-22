@@ -2,7 +2,7 @@ import { RadioLabel } from "./RadioLabel";
 
 export function RadioElement(props) {
   return (
-    <div className=" w-[97%] m-auto mt-1  ">
+    <div className=" w-[97%] m-auto   ">
       <input
         type="radio"
         name="option"
