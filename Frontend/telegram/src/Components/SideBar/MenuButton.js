@@ -28,7 +28,7 @@ export function MenuButton(props) {
             setOpen((visible) => !visible);
           }}
           className=" text-4xl w-[45px] h-[45px] 
-           rounded-full pb-2 hover:bg-skin-button-accent-hover  flex items-center justify-center"
+           rounded-full  hover:bg-skin-button-accent-hover  flex items-center justify-center"
         >
           &#8801;
         </button>
@@ -37,6 +37,8 @@ export function MenuButton(props) {
           <LeftMenu
             darkMode={props.darkMode}
             toggleDarkMode={props.toggleDarkMode}
+            visibleAbout={props.visibleAbout}
+            visibleBugReport={props.visibleBugReport}
           />
         )}
       </div>

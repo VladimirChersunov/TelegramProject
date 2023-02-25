@@ -4,7 +4,7 @@ export function NewPassword() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-skin-fill w-[100%] h-screen flex justify-center content-center items-center">
+    <div className="bg-skin-fill w-[100%] h-screen flex justify-center font-montserrat content-center items-center">
       <div className="w-[384px]  h-[331px] flex flex-col ">
         <input
           placeholder="Username or email"
@@ -30,7 +30,7 @@ export function NewPassword() {
           onClick={() => {
             navigate("/main");
           }}
-          className="text-[#0C0221] rounded-3xl w-[200px]
+          className="rounded-3xl text-skin-inverted w-[200px]
          hover:cursor-pointer hover:bg-skin-button-accent-hover h-[40px] bg-skin-button-accent mx-auto mt-14"
         >
           Продовжити

@@ -5,7 +5,7 @@ export function EnterCode() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[#0C0221] w-[100%] h-screen flex justify-center content-center items-center">
+    <div className="bg-[#0C0221] w-[100%] h-screen flex justify-center font-montserrat content-center items-center">
       <div className="w-[384px]  h-[331px] flex flex-col text-center">
       <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
         <label className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">

@@ -190,7 +190,7 @@ export function MainPage(props) {
   return (
     <div
       className={`${theme} dark:bg-[#0C0221] flex flex-row min-h-screen dark:text-[#C6BDFF] dark:border-[#C6BDFF]
-      text-skin-base border-[#0C0221] bg-skin-fill overflow-hidden`}
+      text-skin-base border-[#0C0221] bg-skin-fill overflow-hidden font-montserrat`}
     >
       {addChannel && <AddMembers contacts={contacts} chatType={chatType} />}
       {addMessage && <AddNewMessage />}

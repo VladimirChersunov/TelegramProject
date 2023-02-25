@@ -1,11 +1,13 @@
 import { RadioElement } from "./RadioElement";
 
 import { ChatCreateButton } from "./ChatCreateButton";
+import { SavedMessages } from "../MessageContainer/SavedMessages";
 
 export function RadioChatList(props) {
   return (
     <div className="flex min-h-screen w-full flex-col items-top justify-center">
       <div className="w-[100%] h-[80%]" x-data="app">
+     <SavedMessages/>
         {props.chats.map((chat) => (
           <RadioElement
             chat={chat}

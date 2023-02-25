@@ -35,11 +35,14 @@ export function LeftMenu(props) {
           toggleDarkMode={props.toggleDarkMode}
         />
       </li>
-      <li class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
+      <li class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
+      onClick={()=>{ props.visibleBugReport(true)}}>
         <BugIcon />
         <p className="font-bold ml-2">Report bug</p>
       </li>
-      <li class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
+      <li class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
+      onClick={()=>{props.visibleAbout(true)}}
+      >
         <InfoIcon />
         <p className="font-bold ml-2">About Us</p>
       </li>
