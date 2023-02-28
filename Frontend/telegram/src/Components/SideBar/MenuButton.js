@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { LeftMenu } from "./LeftMenu";
 
 export function MenuButton(props) {
+
+  
   const refLeftMenu = useRef(null);
 
   const [open, setOpen] = useState(false);
@@ -39,6 +41,8 @@ export function MenuButton(props) {
             toggleDarkMode={props.toggleDarkMode}
             visibleAbout={props.visibleAbout}
             visibleBugReport={props.visibleBugReport}
+            visibleSetting={props.visibleSetting}
+            visibleContact={props.visibleContact}
           />
         )}
       </div>

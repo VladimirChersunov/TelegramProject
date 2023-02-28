@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { ContextMenu } from "./RightContextOnChat";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
-
+import { SavedIcon } from "../Icons/SavedIcon";
 
 export function RadioLabel({ chat, currentChat }) {
   let image;
@@ -22,7 +22,9 @@ export function RadioLabel({ chat, currentChat }) {
     default:
       break;
   }
-  const contextRef = useRef()
+  const contextRef = useRef();
+  const [savedMessageState, setSavedMessageState] = useState(false);
+  const [chatMuteStatus, setChatMuteStatus] = useState(false);
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
@@ -33,14 +35,12 @@ export function RadioLabel({ chat, currentChat }) {
     setShowContextMenu(true);
     setContextMenuX(event.pageX);
     setContextMenuY(event.pageY);
-  }
+  };
 
   const handleOptionSelect = (event) => {
     setSelectedOption(event.target.value);
     setShowContextMenu(false);
   };
-
- 
 
   const handleChatClick = (event) => {
     setShowContextMenu(false);
@@ -48,20 +48,26 @@ export function RadioLabel({ chat, currentChat }) {
   };
 
   useEffect(() => {
-  
-    document.addEventListener('contextmenu', handleClickOutside,true);
+    if (chat.id === 0) {
+      setSavedMessageState(true);
+    } else {
+      setSavedMessageState(false);
+    }
+
+    setChatMuteStatus((prevStatus) => chat.muteStatus);
+
+    document.addEventListener("contextmenu", handleClickOutside, true);
     document.addEventListener("click", handleClickOutside, true);
-   
+
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
-      document.removeEventListener('contextmenu', handleClickOutside,true);
-     
+      document.removeEventListener("contextmenu", handleClickOutside, true);
     };
   }, []);
 
   const handleClickOutside = (e) => {
     if (!contextRef?.current?.contains(e.target)) {
-      setShowContextMenu(false);      
+      setShowContextMenu(false);
     }
   };
 
@@ -76,40 +82,31 @@ export function RadioLabel({ chat, currentChat }) {
        border-b p-2 peer-checked:bg-skin-button-accent-hover peer-checked:bg-[#6a37d8]
            border-skin-border-base dark:border-skin-border-inverted"
     >
-     {showContextMenu && (
-            <ContextMenu x={contextMenuX} y={contextMenuY}>
-              <div onClick={() => alert(`Copy `)}>Open in new tab</div>
-              <div onClick={() => alert(`Paste `)}>Mark as read</div>
-              <div onClick={() => alert(`Paste `)}>Mute</div>
-              <div onClick={() => alert(`Paste `)}>Unmute</div>
-              <div onClick={() => alert(`Paste `)}>Report</div>
-              <div onClick={() => alert(`Paste `)}>Delete and exit</div>
-            </ContextMenu>
-          )}
-     
+      {showContextMenu && <ContextMenu x={contextMenuX} y={contextMenuY} />}
+
       <div>
         {chat.chatImage ? (
           <img
             src={image}
             alt="logo"
-            className="rounded-full mr-2 h-[50px] w-[50px]"
+            className="rounded-full  h-[50px] w-[50px]"
           />
         ) : (
-          <div className="rounded-full mt-[5px] ml-1 mr-2 h-[50px] w-[50px] bg-purple-500 flex
-           flex-row justify-center border  text-3xl pt-1">
-            <p>T</p>
+          <div className="rounded-full   h-[50px] w-[50px] bg-purple-500 flex items-center justify-center          ">
+            {!savedMessageState && <p className="text-3xl">T</p>}
+            {savedMessageState && <SavedIcon />}
           </div>
         )}
       </div>
 
-      <div className="flex flex-col  w-[85%] mt-1 ">
+      <div className="flex flex-col ml-2  w-[85%] mt-1 ">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row items-center">
             <p className="text-lg mr-2">{chat.chatName}</p>
-            {chat.muteStatus ? (
-             <VolumeMuteIcon/>
-            ) : (
-             <VolumeOnIcon/>
+            {!savedMessageState && (
+              <div>
+                {chatMuteStatus ? <VolumeMuteIcon /> : <VolumeOnIcon />}
+              </div>
             )}
           </div>
 
@@ -118,12 +115,15 @@ export function RadioLabel({ chat, currentChat }) {
           </div>
         </div>
 
-        <div
-        className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between">
           <p className="">{chat.shortMessage.substring(0, 25)}</p>
-          <label className="rounded-full text-center border border-skin-border-base
+          <label
+            className="rounded-full text-center border border-skin-border-base
            dark:border-skin-border-inverted
-          text-xs h-5 w-5">20</label>
+          text-xs h-5 w-5"
+          >
+            20
+          </label>
         </div>
       </div>
     </label>

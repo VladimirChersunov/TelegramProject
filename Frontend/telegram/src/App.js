@@ -5,20 +5,26 @@ import { SignIn } from "./Components/AuthComponents/SignIn";
 import { SignUp } from "./Components/AuthComponents/SignUp";
 import { EnterCode } from "./Components/AuthComponents/EnterCode";
 import { useState } from "react";
+import { AddNewChat } from "./Components/SideBar/AddNewChat";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
 
-  const [darkMode, setDarkMode] = useState(true)
-
-  const toggleDarkMode = ()=> {
-    setDarkMode(prevDarkMode => !prevDarkMode)
-  
-}
+  const toggleDarkMode = () => {
+    setDarkMode((prevDarkMode) => !prevDarkMode);
+  };
 
   return (
     <div className={`h-full w-full ${darkMode ? "dark" : ""}  `}>
       <Routes>
-        <Route path="/main" element={<MainPage darkMode={darkMode}  toggleDarkMode={toggleDarkMode} />} />
+        <Route
+          path="/main"
+          element={
+            <MainPage darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          }
+        >
+          <Route path="chatList" element={<AddNewChat/>}/>
+        </Route>
         <Route path="/" element={<StartPage />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />

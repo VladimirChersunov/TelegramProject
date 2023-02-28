@@ -54,6 +54,20 @@ export function MainPage(props) {
 
   const [chats, setChats] = useState([
     {
+      id: 0,
+      chatImage: false,
+      chatName: "Saved Messages",
+      shortMessage:
+        "Видеодомофон для дома или квартиры. Система защиты и контроля доступа с видеомониторингом и фиксацией ",
+      publishTime: "00:25",
+      muteStatus: null,
+      type: null,
+      members: null,
+      messages: messages,
+      pinned: messages[2],
+      author: contact,
+      chatInfo: null},
+      {
       id: 1,
       chatImage: true,
       chatName: "Club_arduino",
@@ -153,7 +167,7 @@ export function MainPage(props) {
   const [theme, setTheme] = useState("");
 
   useEffect(() => {
-    if (currChat.id) {
+    if (currChat.id>=0) {
       setCentrVisible(true);
     } else {
       setCentrVisible(false);
@@ -181,6 +195,7 @@ export function MainPage(props) {
 
   const currentChat = (chat) => {
     setCurrentChat(chat);
+   
   };
 
   const toggleRightColumn = (state) => {

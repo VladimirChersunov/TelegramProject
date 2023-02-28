@@ -4,26 +4,25 @@ import { SettingIcon } from "../Icons/SettingIcon";
 import { MoonIcon } from "../Icons/MoonIcon";
 import { BugIcon } from "../Icons/BugIcon";
 import { InfoIcon } from "../Icons/InfoIcon";
-import {Switch} from "./Switch";
+import { Switch } from "./Switch";
 
 export function LeftMenu(props) {
-
-
-
   return (
     <ul
-      className={`absolute block mt-1 group-hover:block shadow-2xl bg-skin-fill dark:bg-[#0C0221]
-       border border-skin-border-base dark:border-[#C6BDFF]   rounded-lg  w-[200px] select-none`}
+      className={`absolute block mt-1 group-hover:block shadow-2xl bg-skin-fill dark:bg-skin-fill-inverted
+       border border-skin-border-base dark:border-skin-border-inverted rounded-lg  w-[200px] select-none`}
     >
       <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg h-8 p-1 flex flex-row items-center">
         <SavedIcon />
         <p className="font-bold ml-2">Saved Messsages</p>
       </li>
-      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
+      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1
+       flex flex-row items-center" onClick={()=>{props.visibleContact(true)}}>
         <PeopleIcon />
         <p className="font-bold ml-2">Contacts</p>
       </li>
-      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
+      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row
+       items-center" onClick={()=>{props.visibleSetting(true)}}>
         <SettingIcon />
         <p className="font-bold ml-2">Setting</p>
       </li>
@@ -35,23 +34,28 @@ export function LeftMenu(props) {
           toggleDarkMode={props.toggleDarkMode}
         />
       </li>
-      <li class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
-      onClick={()=>{ props.visibleBugReport(true)}}>
+      <li
+        class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
+        onClick={() => {
+          props.visibleBugReport(true);
+        }}
+      >
         <BugIcon />
         <p className="font-bold ml-2">Report bug</p>
       </li>
-      <li class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
-      onClick={()=>{props.visibleAbout(true)}}
+      <li
+        class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
+        onClick={() => {
+          props.visibleAbout(true);
+        }}
       >
         <InfoIcon />
         <p className="font-bold ml-2">About Us</p>
       </li>
       <li class="flex justify-center items-center">
-       
-          <p className="text-center w-[100%] ml-2 text-xs h-8 p-1   ">
-            Cryptic rev.2.0
-          </p>
-       
+        <p className="text-center w-[100%] ml-2 text-xs h-8 p-1   ">
+          Cryptic rev.2.0
+        </p>
       </li>
     </ul>
   );

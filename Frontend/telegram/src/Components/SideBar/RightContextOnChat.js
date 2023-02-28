@@ -1,10 +1,20 @@
+import { useState } from "react";
 import { Ahtung } from "../Icons/Ahtung";
 import { FlagIcon } from "../Icons/FlagIcon";
 import { RecicleIcon } from "../Icons/RecicleIcon";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 
+
 export function ContextMenu(props) {
+  const [myState, setMyState] = useState('initial state');
+
+const handleOpenNewTab = () =>{
+  console.log('new tab')
+  const stateParam = encodeURIComponent(JSON.stringify(myState));
+    window.open(`http://localhost:3000/main?state=${stateParam}`, '_blank');
+}
+
   return (
     <div
       className="w-[180px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
@@ -14,7 +24,7 @@ export function ContextMenu(props) {
     >
       <ul className="rounded-lg ">
         <li
-          onClick={props.onCopy}
+          onClick={handleOpenNewTab}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >

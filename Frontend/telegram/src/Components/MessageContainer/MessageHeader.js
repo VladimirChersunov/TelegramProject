@@ -3,6 +3,7 @@ import { InfoBlock } from "./InfoBlock";
 import { PinnedMessage } from "./PinnedMessage";
 
 export function MessageHeader(props) {
+  console.log(props.chat)
   return (
     <div className="h-[60px] flex flex-row max-w-full border-b border-b-skin-border-base dark:border-b-skin-border-inverted text-2xl justify-between">
       <InfoBlock
