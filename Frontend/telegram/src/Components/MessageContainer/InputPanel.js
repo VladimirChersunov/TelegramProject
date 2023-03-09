@@ -69,7 +69,7 @@ export function InputPanel(props) {
         </button>
 
         <button className="mr-1" onClick={addNewMessage}>
-          <EnterIcon />
+          <EnterIcon style="w-9 h-9 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none"/>
         </button>
       </div>
     </div>

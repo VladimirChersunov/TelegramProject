@@ -5,7 +5,9 @@ import { SignIn } from "./Components/AuthComponents/SignIn";
 import { SignUp } from "./Components/AuthComponents/SignUp";
 import { EnterCode } from "./Components/AuthComponents/EnterCode";
 import { useState } from "react";
-import { AddNewChat } from "./Components/SideBar/AddNewChat";
+
+
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -23,7 +25,7 @@ function App() {
             <MainPage darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           }
         >
-          <Route path="chatList" element={<AddNewChat/>}/>
+          
         </Route>
         <Route path="/" element={<StartPage />} />
         <Route path="/signin" element={<SignIn />} />

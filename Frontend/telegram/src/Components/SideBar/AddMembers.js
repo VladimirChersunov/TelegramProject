@@ -1,7 +1,12 @@
 import { ContactsCard } from "../ContactsCard";
 import { useState } from "react";
+import { BackArrowIcon } from "../Icons/BackArrowIcon";
+import { EnterIcon } from "../Icons/EnterIcon";
 
-export function AddMembers({ contacts }) {
+export function AddMembers(props) {
+  const handleClickBack = () => {
+    props.visibleAddmembers(false);
+  };
 
   const [checked, setChecked] = useState([]);
 
@@ -15,32 +20,42 @@ export function AddMembers({ contacts }) {
     }
     setChecked(updatedList);
   };
+console.log(props)
+  const handleNext = () => {
+    props.visibleAddNewChat(true);
+    props.chatTypeCallback("Channel");
+  };
 
   return (
-    <div
-      className={`h-screen w-1/4 flex flex-col border-r  border-solid min-w-[200px]`}
-    >
-      <div className="flex flex-row items-end  m-2 ">
+    <div className="flex flex-col justify-center">
+      <div className="flex flex-row items-center m-2 ">
         <button
-          onClick={() => {}}
-          className="ml-2 mr-4 text-3xl  hover:bg-slate-200 hover:border hover:border-black
-         rounded-full w-[40px] h-[40px]"
+          className="ml-4 mt-4 rounded-full hover:bg-skin-button-accent-hover h-[50px] w-[50px] flex
+         justify-center items-center"
+          onClick={handleClickBack}
         >
-          &#129092;
+          <BackArrowIcon />
         </button>
-        <div className="text-2xl mb-1">Add Members</div>
+        <div className="text-2xl mt-3 ml-2">Add Members</div>
       </div>
-      <div className="flex justify-center border-b-black border-t-white border h-10">
+
+      <div className="flex justify-center    h-10">
         <input
           placeholder="Who would you like to add?"
-          className="text-lg w-[80%] outline-none"
+          className="text-lg w-[80%] outline-none bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
+           border-b border-skin-border-base dark:border-skin-border-inverted"
         />
       </div>
       <div className="m-3  h-[100%]">
         <div className="w-[100%] h-[85%]">
-          {contacts.map((contact) => (
-            <div className="flex flex-row rounded-xl border border-black m-1">
-              <input value={contact} type="checkbox" onChange={handleCheck} className="mx-3 scale-150" />
+          {props.contacts.map((contact) => (
+            <div className="flex flex-row  border-b border-skin-border-base dark:border-skin-border-inverted  m-1">
+              <input
+                value={contact}
+                type="checkbox"
+                onChange={handleCheck}
+                className="mx-3 scale-150"
+              />
               <ContactsCard contact={contact} />
             </div>
           ))}
@@ -48,12 +63,13 @@ export function AddMembers({ contacts }) {
       </div>
 
       <div className="h-[15%] ">
-        <button onClick={()=>{
-
-        }} 
-        className="h-[50px] w-[50px] rounded-full bg-blue-300
-         hover:bg-blue-600 hover:border hover:border-black text-2xl ml-[85%]">&#129154;</button>
-      
+        <button
+          onClick={handleNext}
+          className="h-[50px] w-[50px]  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted
+         dark:bg-skin-fill hover:bg-skin-button-inverted-hover dark:hover:bg-skin-button-inverted-hover"
+        >
+          <EnterIcon style="w-9 h-9 stroke-skin-stroke-inverted dark:stroke-skin-stroke-base fill-none" />
+        </button>
       </div>
     </div>
   );

@@ -5,11 +5,38 @@ import { RecicleIcon } from "../Icons/RecicleIcon";
 import { FlagIcon } from "../Icons/FlagIcon";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { Ahtung } from "../Icons/Ahtung";
+import { SelectAll } from "../Icons/SelectAll";
 
-export function RightMenu(props) {
-  const [mute, setMute] = useState(props.chat.muteStatus);
+export function RightMenu({chat}) {
+  const [mute, setMute] = useState(chat.muteStatus);
+  const[chats, setChat] = useState(false)
+  const[group, setGroup] = useState(false)
+  const[channel, setChannel] = useState(false)
+  
+  useEffect(()=>{
+ 
+    if(chat.type==='chat'){
+      
+      setChat(true)
+      setGroup(false)
+      setChannel(false)
+    }
+    if(chat.type==='group'){
+      
+      setChat(false)
+      setGroup(true)
+      setChannel(false)
+    }
+    if(chat.type==='channel'){
+    
+      setChat(false)
+      setGroup(false)
+      setChannel(true)
+    }
+   
+    },[])
 
-  useEffect(() => {}, []);
+  
 
   return (
     <ul
@@ -38,7 +65,7 @@ export function RightMenu(props) {
         onClick={() => {}}
         className="hover:bg-skin-button-accent-hover hover:cursor-pointer pl-2 p-1 flex flex-row  items-center"
       >
-        <Ahtung/>
+       <SelectAll/>
         <p className="font-bold ml-2">Select message</p>
       </li>
       <li
@@ -50,30 +77,30 @@ export function RightMenu(props) {
       </li>
 
       <div className="w-[100%] flex justify-center">
-        <div className="w-[80%] h-[1px] bg-slate-500 mt-2 "></div>
+        <div className="w-[80%] h-[1px] bg-skin-fill mt-2 "></div>
       </div>
 
-      <li
-        onClick={() => {}}
+      {channel&&<li
+       
         className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
       >
-        <RecicleIcon style={'h-5 w-5 stroke-red-600    fill-none '}/>
+        <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none '}/>
         <p className="font-bold ml-2">Leave Channel</p>
-      </li>
-      <li
-        onClick={() => {}}
+      </li>}
+     {group&& <li
+       
         className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
       >
-        <RecicleIcon style={'h-5 w-5 stroke-red-600    fill-none '}/>
+        <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none '}/>
         <p className="font-bold ml-2">Delete and exit</p>
-      </li>
-      <li
+      </li>}
+     {chats&& <li
         onClick={() => {}}
         className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
       >
-        <RecicleIcon style={'h-5 w-5 stroke-red-600    fill-none '}/>
+        <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none '}/>
         <p className="font-bold ml-2">Delete</p>
-      </li>
+      </li>}
     </ul>
   );
 }

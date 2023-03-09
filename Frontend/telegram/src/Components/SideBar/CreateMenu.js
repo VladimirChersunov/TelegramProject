@@ -2,14 +2,34 @@ import { PeopleIcon } from "../Icons/PeopleIcon";
 import { PeoplesIcon } from "../Icons/PeoplesIcon";
 import { SpeakerIcon } from "../Icons/SpeakerIcon";
 
-export function CreateMenu() {
+export function CreateMenu(props) {
+
+
+const handleChannelCreate = () =>{
+  props.visibleAddmembers(true)
+  props.chatTypeCallback("Channel")
+}
+
+const handleGroupCreate = () =>{
+  props.visibleAddmembers(true)
+  props.chatTypeCallback("Group")
+}
+
+const handleMessageCreate = () =>{
+  props.visibleAddmembers(true)
+  props.chatTypeCallback("Privat")
+}
+
+
+
+
   return (
     <ul
       className={`absolute mt-[-150px] ml-[-150px] block  group-hover:block shadow-2xl
-        border border-slate-400 rounded-lg   w-[200px] select-none`}
+        border border-skin-border-base dark:border-skin-border-inverted rounded-lg   w-[200px] select-none`}
     >
       <li
-        onClick={() => {}}
+        onClick={handleChannelCreate}
         className="hover:bg-indigo-900 hover:cursor-pointer rounded-t-lg"
       >
         <div className="h-8 p-1 flex flex-row">
@@ -18,7 +38,7 @@ export function CreateMenu() {
         </div>
       </li>
       <li
-        onClick={() => {}}
+        onClick={handleGroupCreate}
         className="hover:bg-indigo-900 hover:cursor-pointer"
       >
         <div className="h-8 p-1 flex flex-row">
@@ -28,7 +48,7 @@ export function CreateMenu() {
       </li>
 
       <li
-        onClick={() => {}}
+        onClick={handleMessageCreate}
         className="hover:bg-indigo-900 hover:cursor-pointer rounded-b-lg"
       >
         <div className="h-8 p-1 flex flex-row">

@@ -64,7 +64,7 @@ export function About(props) {
       </div>
       <div className="w-full text-center mt-10 flex justify-center">
         <p className="w-[75%]">
-          Вітаємо в офіційному застосунку Cryptic Він швидкий та захищений
+        Welcome to the official Cryptic app It's fast and secure
         </p>
       </div>
     </div>

@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 export function RecicleIcon(props) {
   const [style, setStyle] = useState("h-5 w-5 stroke-skin-stroke-base   fill-none dark:stroke-skin-stroke-inverted")
  useEffect(()=>{
-  if(props.style){
-    setStyle((prevStyle) => props.style)
+  if(props.styles){
+    setStyle((prevStyle) => props.styles)
   }
  })
   return (

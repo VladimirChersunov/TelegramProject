@@ -1,6 +1,10 @@
 import { Ahtung } from "../Icons/Ahtung";
+import { Copy } from "../Icons/Copy";
 import { FlagIcon } from "../Icons/FlagIcon";
+import { Forward } from "../Icons/Forward";
 import { RecicleIcon } from "../Icons/RecicleIcon";
+import { Reply } from "../Icons/Reply";
+import { SelectAll } from "../Icons/SelectAll";
 
 
 export function MessageContextMenu(props) {
@@ -17,7 +21,7 @@ export function MessageContextMenu(props) {
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >
-         <Ahtung/>
+         <Reply/>
           <p className="font-bold ml-2">Reply</p>
         </li>
        
@@ -26,7 +30,7 @@ export function MessageContextMenu(props) {
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >
-          <Ahtung/>
+          <SelectAll/>
           <p className="font-bold ml-2"> Select</p>
         </li>
       
@@ -43,7 +47,7 @@ export function MessageContextMenu(props) {
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >
-         <Ahtung/>
+        <Forward/>
           <p className="font-bold ml-2"> Forward</p>
         </li>
         <li
@@ -51,7 +55,7 @@ export function MessageContextMenu(props) {
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >
-         <Ahtung/>
+        <Copy/>
           <p className="font-bold ml-2"> Copy text</p>
         </li>
         <li
@@ -59,7 +63,7 @@ export function MessageContextMenu(props) {
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row text-skin-error  items-center text-sm pt-2 pb-2 "
         >
-          <RecicleIcon style={'h-5 w-5 stroke-red-600    fill-none '}/>
+          <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none '}/>
           <p className="font-bold ml-2">   Delete</p>
         </li>
        

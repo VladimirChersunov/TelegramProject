@@ -3,11 +3,15 @@ import { InputPanel } from "./InputPanel";
 import { Message } from "./Message";
 import { useEffect, useState } from "react";
 import { ColorRAdioButton } from "../ColorRadioButton";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 export function MainChat(props) {
   const [type, setType] = useState(false);
   const [currChat, setCurrChat] = useState(props.chat);
   const [windwHeight, setWindwHeight] = useState("100%");
+
+  const notify = () => toast("Wow so easy!");
 
   useEffect(() => {
     if (props.chat.type === "chat") {
@@ -30,6 +34,8 @@ export function MainChat(props) {
           <Message message={message} key={message.id} />
         ))}
         <ColorRAdioButton changeThemes={props.changeThemes} />
+        <button onClick={notify} className="w-[200px] h-[100px] bg-green-500">Notify test</button>
+        <ToastContainer />
       </div>
 
       {type && <InputPanel darkMode={props.darkMode} />}

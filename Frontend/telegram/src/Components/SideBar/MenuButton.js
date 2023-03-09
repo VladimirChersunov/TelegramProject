@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Hamburger } from "../Icons/Hamburger";
 import { LeftMenu } from "./LeftMenu";
 
 export function MenuButton(props) {
@@ -32,7 +33,7 @@ export function MenuButton(props) {
           className=" text-4xl w-[45px] h-[45px] 
            rounded-full  hover:bg-skin-button-accent-hover  flex items-center justify-center"
         >
-          &#8801;
+         <Hamburger/>
         </button>
 
         {open && (

@@ -13,11 +13,17 @@ export function RadioChatList(props) {
             chat={chat}
             key={chat.id}
             currentChat={props.currentChat}
+            handleMuted={props.handleMuted}
           />
         ))}
       </div>
       <div className="h-[20%] w-[100%] bg-opacity-0 ">
-        <ChatCreateButton />
+        <ChatCreateButton 
+         visibleAddNewChat={props. visibleAddNewChat}
+         visibleAddMessage={props.visibleAddMessage}
+         chatTypeCallback={props.chatTypeCallback}
+         visibleAddmembers={props.visibleAddmembers}
+         />
       </div>
     </div>
   );

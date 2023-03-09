@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { MessageContainer } from "./MessageContainer/MessageContainer";
 import { ClearContainer } from "./MessageContainer/ClearContainer";
-import { AddMembers } from "./SideBar/AddMembers";
-import { AddNewChat } from "./SideBar/AddNewChat";
-import { AddNewMessage } from "./SideBar/AddNewMessage";
 import { LeftColumn } from "./SideBar/CollumnContainer";
-import { InfoContainer, RightColumn } from "./InfoContainer/InfoContainer";
+import { InfoContainer } from "./InfoContainer/InfoContainer";
+
 
 export const currentUser = "Admin";
 
 export function MainPage(props) {
+
   const messages = [
     {
       id: 1,
@@ -17,7 +16,7 @@ export function MainPage(props) {
       data: "Text",
       sendTime: "00:00",
       deilveryStatus: true,
-      seenTime: "12:36",
+      seenTime: null,
     },
     {
       id: 2,
@@ -25,7 +24,7 @@ export function MainPage(props) {
       data: "Text",
       sendTime: "00:00",
       deilveryStatus: true,
-      seenTime: "12:36",
+      seenTime: null,
     },
     {
       id: 3,
@@ -165,6 +164,7 @@ export function MainPage(props) {
   const [currChat, setCurrentChat] = useState({});
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState("");
+  const[muted, setMuted] = useState(false)
 
   useEffect(() => {
     if (currChat.id>=0) {
@@ -174,28 +174,27 @@ export function MainPage(props) {
     }
   }, [currChat]);
 
-  const addNewMessage = () => {
-    setAddMessage(true);
-    setMainLeft(false);
-  };
+  
+
+  const handleMuted = (props) =>{
+   
+      setChats(chats.map((chat,id)=>
+      id===props.chat.id ?
+      ({...chat, muteStatus: true}):
+      chat
+      )
+    )     
+  }
+
+  
 
   const changeThemes = (props) => {
     setTheme((prevTheme) => props);
   };
-
-  const addNewGroup = () => {
-    setMainLeft(false);
-    setAddGroup(true);
-  };
-
-  const addNewChannel = () => {
-    setAddChannel(true);
-    setMainLeft(false);
-  };
+  
 
   const currentChat = (chat) => {
-    setCurrentChat(chat);
-   
+    setCurrentChat(chat);   
   };
 
   const toggleRightColumn = (state) => {
@@ -204,20 +203,18 @@ export function MainPage(props) {
 
   return (
     <div
-      className={`${theme} dark:bg-[#0C0221] flex flex-row min-h-screen dark:text-[#C6BDFF] dark:border-[#C6BDFF]
-      text-skin-base border-[#0C0221] bg-skin-fill overflow-hidden font-montserrat`}
-    >
-      {addChannel && <AddMembers contacts={contacts} chatType={chatType} />}
-      {addMessage && <AddNewMessage />}
-      {addGroup && <AddNewChat />}
-      {mainLeft && (
+      className={`${theme} dark:bg-skin-fill-inverted flex flex-row min-h-screen dark:text-skin-inverted dark:border-skin-border-inverted
+      text-skin-base border-skin-border-base bg-skin-fill overflow-hidden font-montserrat`}
+    >    
         <LeftColumn
           chats={chats}
           currentChat={currentChat}
           darkMode={props.darkMode}
           toggleDarkMode={props.toggleDarkMode}
+          handleMuted={handleMuted}
+          contacts={contacts}
         />
-      )}
+     
       {centrVisible && (
 
         <MessageContainer
