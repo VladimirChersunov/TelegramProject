@@ -14,7 +14,7 @@ export function LeftHeader(props) {
         visibleContact={props.visibleContact}
       />
 
-      <SerchInput />
+      <SerchInput visibleSearchWindow={props.visibleSearchWindow}/>
     </div>
   );
 }

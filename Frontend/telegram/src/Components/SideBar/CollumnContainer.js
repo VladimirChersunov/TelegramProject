@@ -8,6 +8,7 @@ import { ContactWindow } from "./ContactWindow";
 import { AddMembers } from "./AddMembers";
 import { AddNewMessage } from "./AddNewMessage";
 import { AddNewChat } from "./AddNewChat";
+import { SearchWindow } from "./SearchWindow";
 
 export function LeftColumn(props) {
   const [aboutState, setAboutState] = useState(false);
@@ -18,6 +19,7 @@ export function LeftColumn(props) {
   const [addMembersState, setAddMembersState] = useState(false);
   const [addMessageState, setAddMessageState] = useState(false);
   const [addGroupState, setAddGroupState] = useState(false);
+  const [searchWindowState, setSearchWindowState] = useState(false);
   const[chatType, setChatType] = useState('')
 
   useEffect(() => {
@@ -65,6 +67,11 @@ export function LeftColumn(props) {
     setAddMembersState(!props);
   };
 
+  const visibleSearchWindow = (props) => {
+    setSearchWindowState(props);
+    setChatlistState(!props);
+  };
+
   return (
     <div
       className={`h-screen w-1/4 flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted   border-solid min-w-[300px]`}
@@ -91,6 +98,8 @@ export function LeftColumn(props) {
       {addMessageState && <AddNewMessage visibleAddMessage={visibleAddMessage}/>}
       {addGroupState && <AddNewChat visibleAddNewChat={visibleAddNewChat} chatType={chatType}/>}
 
+      {searchWindowState&& <SearchWindow visibleSearchWindow={visibleSearchWindow}/>}
+
       {chatlistState && (
         <div className="flex flex-col">
           <LeftHeader
@@ -100,6 +109,7 @@ export function LeftColumn(props) {
             visibleBugReport={visibleBugReport}
             visibleSetting={visibleSetting}
             visibleContact={visibleContact}
+            visibleSearchWindow={visibleSearchWindow}
           />
           <RadioChatList
             chats={props.chats}

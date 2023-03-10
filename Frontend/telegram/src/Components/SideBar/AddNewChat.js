@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
+import { EnterIcon } from "../Icons/EnterIcon";
+import CustomFileInput from "./CustomFileInput";
 
 export function AddNewChat(props) {
 
@@ -13,6 +15,10 @@ useEffect(() => {
     setChannel(true)
   }
 }, []);
+
+const handleNext = () =>{
+
+}
 
 const [group, setGroup] = useState(false)
 const [channel, setChannel] = useState(false)
@@ -48,22 +54,19 @@ const [channel, setChannel] = useState(false)
        
      
       </div>
-      <div className="  w-[100%]">
-        <input type="file" onChange={handleChange} />
-        <img
-          className="h-[100px] w-[100px] ml-[30%] mt-5 rounded-full"
-          src={file}
-          alt='logo'
-        />
-      </div>
+      
+
+      <CustomFileInput/>
       <input
-        className="m-5 text-xl border border-slate-400 px-2 rounded-md"
+        className="m-5 pl-2 text-xl bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
+        border-b border-skin-border-base dark:border-skin-border-inverted outline-none"
         placeholder={`${props.chatType} name`}
       />
 
      {channel&& <div className="flex flex-col">
       <input
-        className="m-5 text-xl border border-slate-400 px-2 rounded-md"
+        className="m-5 text-xl bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
+        border-b border-skin-border-base dark:border-skin-border-inverted outline-none pl-2"
         placeholder="Description (optional)"
       />
       <label className="text-xs opacity-70">
@@ -72,6 +75,17 @@ const [channel, setChannel] = useState(false)
       </div>}
       
       <label className="mt-5">Members</label>
+      </div>
+
+      <div className="h-[15%] ">
+        <button
+          onClick={handleNext}
+          className="h-[50px] w-[50px]  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted
+         dark:bg-skin-fill hover:bg-skin-button-inverted-hover dark:hover:bg-skin-button-inverted-hover"
+        >
+          <EnterIcon style="w-9 h-9 stroke-skin-stroke-inverted dark:stroke-skin-stroke-base fill-none" />
+        </button>
+        
       </div>
     </div>
      

@@ -111,7 +111,7 @@ export function RadioElement({chat, currentChat, handleMuted}) {
             className="rounded-full  h-[50px] w-[50px]"
           />
         ) : (
-          <div className="rounded-full   h-[50px] w-[50px] bg-purple-500 flex items-center justify-center          ">
+          <div className="rounded-full   h-[50px] w-[50px] bg-purple-500 flex items-center justify-center">
             {!savedMessageState && <p className="text-3xl">T</p>}
             {savedMessageState && <SavedIcon />}
           </div>

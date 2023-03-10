@@ -30,7 +30,7 @@ export function MenuButton(props) {
           onClick={() => {
             setOpen((visible) => !visible);
           }}
-          className=" text-4xl w-[45px] h-[45px] 
+          className="  w-[45px] h-[45px] 
            rounded-full  hover:bg-skin-button-accent-hover  flex items-center justify-center"
         >
          <Hamburger/>
