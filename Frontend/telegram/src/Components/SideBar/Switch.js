@@ -19,7 +19,7 @@ export function Switch(props) {
         {/* Switch */}
         <div
           className={
-            " md:w-4 md:h-4 h-2 w-2 rounded-full shadow-md transform duration-300 ease-in-out bg-slate-600 dark:bg-[#0C0221]" +
+            " h-4 w-4 rounded-full shadow-md transform duration-300 ease-in-out bg-slate-600 dark:bg-[#0C0221]" +
             (toggle ? toggleClass : null)
           }
         ></div>

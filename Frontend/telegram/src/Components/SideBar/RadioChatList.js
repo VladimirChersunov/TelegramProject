@@ -19,6 +19,7 @@ export function RadioChatList(props) {
       </div>
       <div className="h-[20%] w-[100%] bg-opacity-0 ">
         <ChatCreateButton 
+         visibleStartPrivate={props. visibleStartPrivate}
          visibleAddNewChat={props. visibleAddNewChat}
          visibleAddMessage={props.visibleAddMessage}
          chatTypeCallback={props.chatTypeCallback}

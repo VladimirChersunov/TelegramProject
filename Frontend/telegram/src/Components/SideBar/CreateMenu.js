@@ -16,7 +16,7 @@ const handleGroupCreate = () =>{
 }
 
 const handleMessageCreate = () =>{
-  props.visibleAddmembers(true)
+  props. visibleStartPrivate(true)
   props.chatTypeCallback("Privat")
 }
 

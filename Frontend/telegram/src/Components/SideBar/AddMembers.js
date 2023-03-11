@@ -1,5 +1,5 @@
 import { ContactsCard } from "../ContactsCard";
-import { useState, useEffect} from "react";
+import { useState } from "react";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { EnterIcon } from "../Icons/EnterIcon";
 
@@ -8,11 +8,10 @@ export function AddMembers(props) {
     props.visibleAddmembers(false);
   };
 
-  console.log(props.chatType)
 
   const [checked, setChecked] = useState([]);
-  const [privat, setPrivat] = useState([]);
- 
+  
+
   // Add/Remove checked item from list
   const handleCheck = (event, contact) => {
     if (event.target.checked) {
@@ -22,20 +21,14 @@ export function AddMembers(props) {
     }
   };
 
-  useEffect(()=>{
-if(props.chatType === 'Privat'){
-
-}
-else{
-
-}
-  }, [])
-
+ 
   const handleNext = () => {
-    props.visibleAddNewChat(true);   
-    props.handleCheckedContacts(checked)       
+    props.visibleAddNewChat(true);
+    props.handleCheckedContacts(checked);
   };
-
+  const handleClick = () => {
+    console.log('click')
+  };
   return (
     <div className="flex flex-col justify-center">
       <div className="flex flex-row items-center m-2 ">
@@ -59,8 +52,10 @@ else{
       <div className="m-3  h-[100%]">
         <div className="w-[100%] h-[85%]">
           {props.contacts.map((contact) => (
-            <div className="flex flex-row  border-b border-skin-border-base dark:border-skin-border-inverted  m-1">
-              <input
+            <div
+            onClick={handleClick}
+             className="flex flex-row  border-b border-skin-border-base dark:border-skin-border-inverted  m-1">
+             <input
                 value={contact}
                 type="checkbox"
                 onChange={(e) => handleCheck(e, contact)}
@@ -72,7 +67,7 @@ else{
         </div>
       </div>
 
-      <div className="h-[15%] ">
+     <div className="h-[15%] ">
         <button
           onClick={handleNext}
           className="h-[50px] w-[50px]  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted

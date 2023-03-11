@@ -9,6 +9,7 @@ import { AddMembers } from "./AddMembers";
 import { AddNewMessage } from "./AddNewMessage";
 import { AddNewChat } from "./AddNewChat";
 import { SearchWindow } from "./SearchWindow";
+import { StartPrivate } from "./StartPrivate";
 
 export function LeftColumn(props) {
   const [aboutState, setAboutState] = useState(false);
@@ -20,12 +21,11 @@ export function LeftColumn(props) {
   const [addMessageState, setAddMessageState] = useState(false);
   const [addGroupState, setAddGroupState] = useState(false);
   const [searchWindowState, setSearchWindowState] = useState(false);
-  const[chatType, setChatType] = useState('')
-  const [checkedContacts, setCheckedContacts] = useState([])
+  const [chatType, setChatType] = useState("");
+  const [checkedContacts, setCheckedContacts] = useState([]);
+  const [startPrivateState, setStartPrivateState] = useState(false);
 
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   const visibleAbout = (props) => {
     setAboutState(props);
@@ -36,8 +36,6 @@ export function LeftColumn(props) {
     setBugReport(props);
     setChatlistState(!props);
   };
-
-  
 
   const visibleSetting = (props) => {
     setSettingState(props);
@@ -55,7 +53,7 @@ export function LeftColumn(props) {
   };
 
   const chatTypeCallback = (props) => {
-    setChatType(props)
+    setChatType(props);
   };
 
   const visibleAddMessage = (props) => {
@@ -73,10 +71,15 @@ export function LeftColumn(props) {
     setChatlistState(!props);
   };
 
+  const visibleStartPrivate = (props) => {
+    setStartPrivateState(props);
+    setChatlistState(!props);
+  };
+
   const handleCheckedContacts = (props) => {
-    setCheckedContacts((prevChecked) => props)
-    console.log(props)
-  }
+    setCheckedContacts((prevChecked) => props);
+    console.log(props);
+  };
 
   return (
     <div
@@ -91,20 +94,37 @@ export function LeftColumn(props) {
           contacts={props.contacts}
         />
       )}
-      {addMembersState && (
-        <AddMembers 
-        contacts={props.contacts}
-         visibleAddmembers={visibleAddmembers}
-         chatType={chatType}
-         visibleAddMessage={visibleAddMessage}
-         visibleAddNewChat={visibleAddNewChat}
-         handleCheckedContacts={handleCheckedContacts}
-         />
-      )}
-      {addMessageState && <AddNewMessage visibleAddMessage={visibleAddMessage}/>}
-      {addGroupState && <AddNewChat visibleAddNewChat={visibleAddNewChat} chatType={chatType} checkedContacts={checkedContacts}/>}
 
-      {searchWindowState&& <SearchWindow visibleSearchWindow={visibleSearchWindow}/>}
+      {startPrivateState &&
+       <StartPrivate visibleStartPrivate={visibleStartPrivate}
+       contacts={props.contacts}      
+       chatType={chatType}
+       />}
+
+      {addMembersState && (
+        <AddMembers
+          contacts={props.contacts}
+          visibleAddmembers={visibleAddmembers}
+          chatType={chatType}
+          visibleAddMessage={visibleAddMessage}
+          visibleAddNewChat={visibleAddNewChat}
+          handleCheckedContacts={handleCheckedContacts}
+        />
+      )}
+      {addMessageState && (
+        <AddNewMessage visibleAddMessage={visibleAddMessage} />
+      )}
+      {addGroupState && (
+        <AddNewChat
+          visibleAddNewChat={visibleAddNewChat}
+          chatType={chatType}
+          checkedContacts={checkedContacts}
+        />
+      )}
+
+      {searchWindowState && (
+        <SearchWindow visibleSearchWindow={visibleSearchWindow} />
+      )}
 
       {chatlistState && (
         <div className="flex flex-col">
@@ -125,6 +145,7 @@ export function LeftColumn(props) {
             visibleAddMessage={visibleAddMessage}
             chatTypeCallback={chatTypeCallback}
             visibleAddmembers={visibleAddmembers}
+            visibleStartPrivate={ visibleStartPrivate}
           />
         </div>
       )}
