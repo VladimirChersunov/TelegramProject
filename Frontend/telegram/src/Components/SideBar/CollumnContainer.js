@@ -21,6 +21,7 @@ export function LeftColumn(props) {
   const [addGroupState, setAddGroupState] = useState(false);
   const [searchWindowState, setSearchWindowState] = useState(false);
   const[chatType, setChatType] = useState('')
+  const [checkedContacts, setCheckedContacts] = useState([])
 
   useEffect(() => {
 
@@ -72,6 +73,11 @@ export function LeftColumn(props) {
     setChatlistState(!props);
   };
 
+  const handleCheckedContacts = (props) => {
+    setCheckedContacts((prevChecked) => props)
+    console.log(props)
+  }
+
   return (
     <div
       className={`h-screen w-1/4 flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted   border-solid min-w-[300px]`}
@@ -92,11 +98,11 @@ export function LeftColumn(props) {
          chatType={chatType}
          visibleAddMessage={visibleAddMessage}
          visibleAddNewChat={visibleAddNewChat}
-        
+         handleCheckedContacts={handleCheckedContacts}
          />
       )}
       {addMessageState && <AddNewMessage visibleAddMessage={visibleAddMessage}/>}
-      {addGroupState && <AddNewChat visibleAddNewChat={visibleAddNewChat} chatType={chatType}/>}
+      {addGroupState && <AddNewChat visibleAddNewChat={visibleAddNewChat} chatType={chatType} checkedContacts={checkedContacts}/>}
 
       {searchWindowState&& <SearchWindow visibleSearchWindow={visibleSearchWindow}/>}
 

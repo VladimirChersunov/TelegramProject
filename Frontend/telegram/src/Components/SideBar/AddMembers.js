@@ -1,5 +1,5 @@
 import { ContactsCard } from "../ContactsCard";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { EnterIcon } from "../Icons/EnterIcon";
 
@@ -8,22 +8,32 @@ export function AddMembers(props) {
     props.visibleAddmembers(false);
   };
 
-  const [checked, setChecked] = useState([]);
+  console.log(props.chatType)
 
+  const [checked, setChecked] = useState([]);
+  const [privat, setPrivat] = useState([]);
+ 
   // Add/Remove checked item from list
-  const handleCheck = (event) => {
-    var updatedList = [...checked];
+  const handleCheck = (event, contact) => {
     if (event.target.checked) {
-      updatedList = [...checked, event.target.value];
+      setChecked([...checked, contact]);
     } else {
-      updatedList.splice(checked.indexOf(event.target.value), 1);
+      setChecked(checked.filter((c) => c !== contact));
     }
-    setChecked(updatedList);
   };
-console.log(props)
+
+  useEffect(()=>{
+if(props.chatType === 'Privat'){
+
+}
+else{
+
+}
+  }, [])
+
   const handleNext = () => {
-    props.visibleAddNewChat(true);
-    props.chatTypeCallback("Channel");
+    props.visibleAddNewChat(true);   
+    props.handleCheckedContacts(checked)       
   };
 
   return (
@@ -53,7 +63,7 @@ console.log(props)
               <input
                 value={contact}
                 type="checkbox"
-                onChange={handleCheck}
+                onChange={(e) => handleCheck(e, contact)}
                 className="mx-3 scale-150"
               />
               <ContactsCard contact={contact} />
