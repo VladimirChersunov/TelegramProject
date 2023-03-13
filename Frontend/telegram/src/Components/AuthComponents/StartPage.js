@@ -10,7 +10,10 @@ export function StartPage() {
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
         <div className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
-          Вітаємо в офіційному застосунку Cryptic Він швидкий та захищений
+        Welcome to the official Cryptic app
+        </div>
+        <div className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
+       It's fast and secure
         </div>
         <button
           onClick={() => {
@@ -19,7 +22,7 @@ export function StartPage() {
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
            w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
-          Почати спілкування
+          Start chatting
         </button>
       </div>
     </div>

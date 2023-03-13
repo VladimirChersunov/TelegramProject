@@ -59,7 +59,7 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="flex justify-center flex-col select-none">
      
-     {/* <div className="relative">
+     <div className="relative">
           <input
             type="text"
             placeholder="Username or email"
@@ -88,9 +88,9 @@ function LoginForm() {
         >
           {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
         </div>
-         </div> */}
+         </div>
         {! isPasswordValid&& <p className="text-red-600 text-xs mt-1">Incorrect input</p>}
-        {/* <div className="flex justify-between">
+        <div className="flex justify-between">
           <button
             onClick={() => {
               navigate("/entercode");
@@ -107,7 +107,7 @@ function LoginForm() {
           >
             Signup
           </button>
-        </div> */}
+        </div>
 
          {error&&<p>{error}</p>}
         <button
@@ -116,7 +116,7 @@ function LoginForm() {
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
-          Продовжити
+          Next
         </button>
 
     

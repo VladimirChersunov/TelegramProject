@@ -1,4 +1,4 @@
-import EmojiPicker, { Theme } from "emoji-picker-react";
+import Picker, { Theme } from "emoji-picker-react";
 import { useState, useEffect } from "react";
 import { EnterIcon } from "../Icons/EnterIcon";
 import { LinkIcon } from "../Icons/LinkIcon";
@@ -46,7 +46,7 @@ export function InputPanel(props) {
     <div className="w-[100%] relative   h-[60px] flex justify-center  ">
       <div className="flex flex-row  w-[70%] items-stretch rounded-lg border border-skin-border-base dark:border-skin-border-inverted">
         {visiblEmojiPicker && <div className="absolute bottom-[65px]">
-          <EmojiPicker theme={`${theme}`} />
+          <Picker pickerStyle={{ backgroundColor: 'bg-skin-fill' }} />
         </div>}
         <button className="mx-3" onClick={handleEmojiClick}>
           <SmileIcon />

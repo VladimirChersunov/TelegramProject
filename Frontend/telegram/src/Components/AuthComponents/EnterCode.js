@@ -9,7 +9,7 @@ export function EnterCode() {
       <div className="w-[384px]  h-[331px] flex flex-col text-center">
       <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
         <label className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
-          Код для подтверждения був надісланий вам на поштову скриньку
+        A verification code has been sent to your mailbox
         </label>
 
         <div className="flex flex-row mt-5 justify-around ">
@@ -62,7 +62,7 @@ export function EnterCode() {
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
-          Продовжити
+          Next
         </button>
       </div>
     </div>

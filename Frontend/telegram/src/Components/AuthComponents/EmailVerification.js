@@ -26,14 +26,14 @@ function EmailVerification() {
 
   return (
     <div>
-      <h2>Введите ваш email:</h2>
+      <h2>Enter your email:</h2>
       <input
         type="text"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       {!isEmailSent && (
-        <button onClick={sendCode}>Отправить код подтверждения</button>
+        <button onClick={sendCode}>Send verification code</button>
       )}
       {isEmailSent && (
         <div>
