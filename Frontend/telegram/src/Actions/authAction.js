@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 
-const API_URL = "https://localhost:7195/api/Auth/";
+
 
 
 
