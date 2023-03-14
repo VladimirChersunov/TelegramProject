@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { login } from "../../Actions/authServiceG";
+import { login } from "../../Actions/authService";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 
 
 function LoginForm() {
+
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isUsernameOrEmailValid, setIsUsernameOrEmailValid] = useState(true);
@@ -27,14 +28,14 @@ function LoginForm() {
     }
 
     // Проверяем правильность введенного пароля
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/;
-    if (!passwordRegex.test(password)) {
-      setIsPasswordValid(false);
-      return;
-    } else {
-      setIsPasswordValid(true);
-    }
-
+    // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/;
+    // if (!passwordRegex.test(password)) {
+    //   setIsPasswordValid(false);
+    //   return;
+    // } else {
+    //   setIsPasswordValid(true);
+    // }
+    setIsPasswordValid(true);
     // Отправляем данные на сервер
     try {
         const data = await login(username, password);
@@ -43,7 +44,7 @@ function LoginForm() {
         setError(error.message);
       }
     console.log("Данные отправлены: ", usernameOrEmail, password);
-    navigate("/main");
+   
   };
 
   const handleShowPasswordClick = () => {
@@ -109,10 +110,10 @@ function LoginForm() {
           </button>
         </div>
 
-         {error&&<p>{error}</p>}
+         {error&&<p className="m-0 text-skin-error mt-2 text-center text-xs">{error}</p>}
         <button
          type="submit"    
-         onClick={()=>{  navigate("/main");}}     
+         onClick={ handleSubmit}     
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >

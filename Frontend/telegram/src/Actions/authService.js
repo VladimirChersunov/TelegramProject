@@ -1,38 +1,24 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://localhost:8080/api/auth/";
+const authService = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+});
 
-
-export const register = ({username, email, password}) => {
-    return axios.post(API_URL + "signup", {
-      username,
-      email,
-      password,
-    });
-  };
-
-  export const login = ({username, password}) => {
-    return axios
-      .post(API_URL + "signin", {
-        username,
-        password,
-      })
-      .then((response) => {
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
-  
-        return response.data;
-      });
+export const login = async (username, password) => {
+    try {
+      const response = await authService.post('/login', { username, password });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
   };
   
-  export const logout = () => {
-    localStorage.removeItem("user");
+  export const register = async (username, email, password) => {
+    try {
+      const response = await authService.post('/register', { username, email, password });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
   };
   
-  export const getCurrentUser = () => {
-    const userStr = localStorage.getItem("user");
-    if (userStr) return JSON.parse(userStr);
-  
-    return null;
-  };
