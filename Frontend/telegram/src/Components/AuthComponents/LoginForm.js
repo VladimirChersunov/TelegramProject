@@ -9,8 +9,7 @@ function LoginForm() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isUsernameOrEmailValid, setIsUsernameOrEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [username, setUsername] = useState('');
+  const [isPasswordValid, setIsPasswordValid] = useState(true);  
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -37,10 +36,14 @@ function LoginForm() {
     // }
     setIsPasswordValid(true);
     // Отправляем данные на сервер
-    console.log('+')
+    
     try {
-        const data = await login(username, password);
-       
+        const data = await login(usernameOrEmail, usernameOrEmail, password);
+        setError(null);
+       console.log(data.user.id)
+       if(data.user.id){
+        navigate("/main");
+       }
       } catch (error) {
         setError(error.message);
       }
