@@ -4,9 +4,9 @@ const authService = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL, 
 });
 
-export const login = async (username, email, password) => {
+export const login = async (login, password) => {
     try {
-      const response = await authService.post('Users/login', {  username, email, password });
+      const response = await authService.post('Users/login', {  login, password });
      
       return response.data;
     } catch (error) {
@@ -19,6 +19,27 @@ export const login = async (username, email, password) => {
       const response = await authService.post('Users/register', { username, email, password });
       return response.data;
     } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  };
+
+  export const emailCheck = async (email) => {
+    try {
+      const response = await authService.post('Email/sendcode', { email });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  };
+
+  export const emailUnique = async (email, username) => {
+    try {
+     
+      const response = await authService.post('Email/unique', { email, username });
+     
+      return response.data;
+    } catch (error) {
+      
       throw new Error(error.response.data.message);
     }
   };

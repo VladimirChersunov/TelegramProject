@@ -11,10 +11,22 @@ import { useState } from "react";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
 
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
+
+  const signUpData = ({username, email, password, code}) =>{
+   
+    setUsername(username)
+    setPassword(password)
+    setEmail(email)
+    setCode(code)
+  }
 
   return (
     <div className={`h-full w-full ${darkMode ? "dark" : ""}  `}>
@@ -29,8 +41,8 @@ function App() {
         </Route>
         <Route path="/" element={<StartPage />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/entercode" element={<EnterCode />} />
+        <Route path="/signup" element={<SignUp signUpData={signUpData}/>} />
+        <Route path="/entercode" element={<EnterCode email={email} password={password} username={username} code={code}/>} />
       </Routes>
     </div>
   );

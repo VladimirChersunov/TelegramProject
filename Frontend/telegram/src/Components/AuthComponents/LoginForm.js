@@ -38,7 +38,7 @@ function LoginForm() {
     // Отправляем данные на сервер
     
     try {
-        const data = await login(usernameOrEmail, usernameOrEmail, password);
+        const data = await login(usernameOrEmail, password);
         setError(null);
        console.log(data.user.id)
        if(data.user.id){
@@ -72,7 +72,7 @@ function LoginForm() {
             onChange={(e) => setUsernameOrEmail(e.target.value)}
             className={`border-b  ${
               isUsernameOrEmailValid ? "border-skin-border-inverted text-skin-inverted" : "border-red-600 text-red-600"
-            } bg-skin-fill-inverted pl-2 pb-[10px] autofill:bg-skin-fill-inverted autofill:bg-yellow-200   w-full focus:outline-none text-[16px] placeholder:text-skin-muted `}
+            } bg-skin-fill-inverted pl-2 pb-[10px]  w-full focus:outline-none text-[16px] placeholder:text-skin-muted `}
             required
           />    
          {!isUsernameOrEmailValid && <p className="text-red-600 text-xs mt-1">Incorrect input</p> }

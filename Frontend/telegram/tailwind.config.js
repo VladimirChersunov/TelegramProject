@@ -39,6 +39,16 @@ module.exports = {
       },
     },
   },
-  plugins: [],
-  darkMode:"class"
+  plugins: [
+     require("tailwindcss-autofill"),
+    ],
+  darkMode:"class",
+  variants: {
+    extend: {
+      // Enable `autofill` variant for plugins you want
+      borderColor: ["autofill"],
+      shadowFill: ["autofill"],
+      textFill: ["autofill"],
+    },
+  },
 }
