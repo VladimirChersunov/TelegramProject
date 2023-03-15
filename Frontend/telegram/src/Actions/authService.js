@@ -43,4 +43,18 @@ export const login = async (login, password) => {
       throw new Error(error.response.data.message);
     }
   };
+
+  export const setNewPassword = async (email, newPassword) => {
+    try {
+     
+      const response = await authService.patch('Users/setpassword', { email, newPassword });
+     
+      return response.data;
+    } catch (error) {
+      
+      throw new Error(error.response.data.message);
+    }
+  };
+
+
   

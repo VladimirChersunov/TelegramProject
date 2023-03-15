@@ -5,9 +5,8 @@ import { SignIn } from "./Components/AuthComponents/SignIn";
 import { SignUp } from "./Components/AuthComponents/SignUp";
 import { EnterCode } from "./Components/AuthComponents/EnterCode";
 import { useState } from "react";
-
-
-
+import { EnterEmail } from "./Components/AuthComponents/EnterEmail";
+import { SetNewPassword } from "./Components/AuthComponents/SetNewPassword";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -20,13 +19,20 @@ function App() {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
 
-  const signUpData = ({username, email, password, code}) =>{
-   
-    setUsername(username)
-    setPassword(password)
-    setEmail(email)
-    setCode(code)
-  }
+  const signUpData = ({ username, email, password, code }) => {
+    setUsername(username);
+    setPassword(password);
+    setEmail(email);
+    setCode(code);
+  };
+
+  const recoveryData = (props) => {
+    setEmail((prevEmail)=>props.email);
+    setCode((prevCode)=>props.code);
+
+    setUsername("");
+    setPassword("");
+  };
 
   return (
     <div className={`h-full w-full ${darkMode ? "dark" : ""}  `}>
@@ -36,13 +42,29 @@ function App() {
           element={
             <MainPage darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           }
-        >
-          
-        </Route>
+        ></Route>
         <Route path="/" element={<StartPage />} />
+        <Route
+          path="/setnewpassword"
+          element={<SetNewPassword email={email} />}
+        />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp signUpData={signUpData}/>} />
-        <Route path="/entercode" element={<EnterCode email={email} password={password} username={username} code={code}/>} />
+        <Route
+          path="/recovery"
+          element={<EnterEmail recoveryData={recoveryData} />}
+        />
+        <Route path="/signup" element={<SignUp signUpData={signUpData} />} />
+        <Route
+          path="/entercode"
+          element={
+            <EnterCode
+              email={email}
+              password={password}
+              username={username}
+              code={code}
+            />
+          }
+        />
       </Routes>
     </div>
   );

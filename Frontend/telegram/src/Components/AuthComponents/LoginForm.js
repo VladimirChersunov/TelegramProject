@@ -38,6 +38,7 @@ function LoginForm() {
     // Отправляем данные на сервер
     
     try {
+     
         const data = await login(usernameOrEmail, password);
         setError(null);
        console.log(data.user.id)
@@ -62,13 +63,14 @@ function LoginForm() {
   }, [isPasswordValid]);
 
   return (
-    <form onSubmit={handleSubmit} className="flex justify-center flex-col select-none">
+    <form onSubmit={handleSubmit} autocomplete="off" className="flex justify-center flex-col select-none">
      
      <div className="relative">
           <input
             type="text"
             placeholder="Username or email"
             value={usernameOrEmail}
+            autocomplete="off"
             onChange={(e) => setUsernameOrEmail(e.target.value)}
             className={`border-b  ${
               isUsernameOrEmailValid ? "border-skin-border-inverted text-skin-inverted" : "border-red-600 text-red-600"
@@ -81,6 +83,7 @@ function LoginForm() {
           placeholder="Password"
           type={showPassword ? "text" : "password"}
             value={password}
+            autocomplete="off"
             onChange={(e) => setPassword(e.target.value)}
             className={`border-b ${
               isPasswordValid ? "border-skin-border-inverted text-skin-inverted"  : "border-red-600 text-red-600"
@@ -95,35 +98,39 @@ function LoginForm() {
         </div>
          </div>
         {! isPasswordValid&& <p className="text-red-600 text-xs mt-1">Incorrect input</p>}
-        <div className="flex justify-between">
+        {error&&<p className="m-0 text-skin-error mt-2 text-center text-xs">{error}</p>}
+        <div className="flex items-center justify-center">
           <button
             onClick={() => {
-              navigate("/entercode");
+              navigate("/recovery");
             }}
-            className="text-skin-inverted mt-5 text-xs ml-2"
+            className="text-skin-inverted mt-5 text-[16px ml-2 border-b  border-skin-border-inverted"
           >
-            Recovery password
+            Forgot your password?
           </button>
-          <button
-            onClick={() => {
-              navigate("/signup");
-            }}
-            className="text-skin-inverted mt-5 text-xs mr-2"
-          >
-            Signup
-          </button>
+         
         </div>
 
-         {error&&<p className="m-0 text-skin-error mt-2 text-center text-xs">{error}</p>}
+       
         <button
          type="submit"    
          onClick={ handleSubmit}     
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
-          Next
+          Entrance
         </button>
 
+        <button
+         type="submit"    
+         onClick={() => {
+          navigate("/signup");
+        }}   
+          className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-inverted text-[17px] font-medium
+          w-[250px] h-[50px] leading-[26px] bg-skin-fill-inverted mx-auto mt-14 tracking-normal border border-skin-border-inverted"
+        >
+         Signup
+        </button>
     
     </form>
   );

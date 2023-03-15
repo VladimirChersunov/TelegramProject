@@ -55,16 +55,14 @@ export function SignUp(props) {
     // }
 
     try {
-      
       const data = await emailUnique(username, email);
-     
+
       setError(null);
-      console.log(data.unique);
+
       if (data.unique) {
-         
-         const code = await emailCheck(email);
-         console.log(code.code);
-         props.signUpData({username, email, password, code});
+        const code = await emailCheck(email);
+
+        props.signUpData({ username, email, password, code });
         navigate("/entercode");
       }
     } catch (error) {
