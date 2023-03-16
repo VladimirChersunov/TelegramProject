@@ -49,10 +49,12 @@ export function SetNewPassword({ email }) {
     // }
 
     try {
-        console.log(email)
-        console.log(password)
-      const data = setNewPassword(email, password);
-      console.log(data)
+        
+      const data = await setNewPassword(email, password);
+     console.log(data.result)
+     if(data.result==='success'){
+        navigate('/signin')
+     }
       setError(null);
     } catch (error) {
       setError(error.message);

@@ -20,18 +20,19 @@ function App() {
   };
 
   const signUpData = ({ username, email, password, code }) => {
-    setUsername(username);
-    setPassword(password);
-    setEmail(email);
-    setCode(code);
+    setUsername((prevUsername)=>username);
+    setPassword((prevPassword)=>password);
+    setEmail((prevEmail)=>email);
+    console.log(code)
+    setCode((prevCode)=>code.code);
   };
 
   const recoveryData = (props) => {
     setEmail((prevEmail)=>props.email);
+    console.log(props.code)
     setCode((prevCode)=>props.code);
-
-    setUsername("");
-    setPassword("");
+    setUsername((prevUsername)=>"");
+    setPassword((prevPassword)=>"");
   };
 
   return (

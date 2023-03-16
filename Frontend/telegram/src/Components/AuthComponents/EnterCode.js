@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { emailCheck, register } from "../../Actions/authService";
 
 export function EnterCode(props) {
@@ -16,23 +16,42 @@ export function EnterCode(props) {
   const [code, setCode] = useState("");
   const [error, setError] = useState(null);
 
+  const firstInputRef = useRef(null);
+  const secondInputRef = useRef(null);
+  const thirdInputRef = useRef(null);
+  const fourthInputRef = useRef(null);
+  const fifthInputRef = useRef(null);
+
   useEffect(() => {
     setUsername(props.username);
     setPassword(props.password);
     setEmail(props.email);
   }, [props]);
 
+  const handleInput = (event, nextInputRef) => {
+    const input = event.target;
+    if (input.value.length >= input.maxLength) {
+      if (nextInputRef && nextInputRef.current) {
+        nextInputRef.current.focus();
+      }
+    }
+  }
+
   useEffect(() => {
     setCode((prevCode) => one + two + three + four + five);
-  }, []);
+  }, [five]);
 
   const handleRegister = async () => {
+   
     console.log(props);
+
     console.log(props.code);
+
     console.log(code);
     if (props.code === code) {
-      console.log("+");
+      
       console.log(username);
+      console.log("+");
       if (username.length > 4) {
         try {
           const data = await register(username, email, password);
@@ -60,10 +79,13 @@ export function EnterCode(props) {
 
         <div className="flex flex-row mt-5 justify-around ">
           <input
+          ref={firstInputRef}
             maxLength="1"
             onChange={(e) => {
-              setOne(e.target.value);
+              setOne((prevValue)=>e.target.value);
+             
             }}
+            onInput={(event) => handleInput(event, secondInputRef)}
             className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
              caret-transparent border-b-[1px] pb-[10px]
             placeholder:text-skin-muted border-skin-border-inverted
@@ -71,10 +93,13 @@ export function EnterCode(props) {
             placeholder=""
           />
           <input
+          ref={secondInputRef}
             maxLength="1"
             onChange={(e) => {
-              setTwo(e.target.value);
+              setTwo((prevValue)=>e.target.value);
+              
             }}
+            onInput={(event) => handleInput(event, thirdInputRef)}
             className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
             caret-transparent border-b-[1px] pb-[10px]
            placeholder:text-skin-muted border-skin-border-inverted
@@ -82,10 +107,13 @@ export function EnterCode(props) {
             placeholder=""
           />
           <input
+          ref={thirdInputRef}
             maxLength="1"
             onChange={(e) => {
-              setThree(e.target.value);
+              setThree((prevValue)=>e.target.value);
+             
             }}
+            onInput={(event) => handleInput(event, fourthInputRef)}
             className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
             caret-transparent border-b-[1px] pb-[10px]
            placeholder:text-skin-muted border-skin-border-inverted
@@ -93,10 +121,13 @@ export function EnterCode(props) {
             placeholder=""
           />
           <input
+          ref={fourthInputRef}
             maxLength="1"
             onChange={(e) => {
-              setFour(e.target.value);
+              setFour((prevValue)=>e.target.value);
+              
             }}
+            onInput={(event) => handleInput(event, fifthInputRef)}
             className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
             caret-transparent border-b-[1px] pb-[10px]
            placeholder:text-skin-muted border-skin-border-inverted
@@ -104,10 +135,13 @@ export function EnterCode(props) {
             placeholder=""
           />
           <input
+          ref={fifthInputRef}
             maxLength="1"
             onChange={(e) => {
-              setFive(e.target.value);
+              setFive((prevValue)=>e.target.value);
+             
             }}
+            onInput={(event) => handleInput(event, null)}
             className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
             caret-transparent border-b-[1px] pb-[10px]
            placeholder:text-skin-muted border-skin-border-inverted

@@ -55,8 +55,10 @@ export function SignUp(props) {
     // }
 
     try {
-      const data = await emailUnique(username, email);
-
+      console.log(email);
+      console.log(username);
+      const data = await emailUnique(email,username);
+      console.log(data.unique);
       setError(null);
 
       if (data.unique) {
@@ -64,6 +66,9 @@ export function SignUp(props) {
 
         props.signUpData({ username, email, password, code });
         navigate("/entercode");
+      }
+      else{
+        setError("Email or username already exists");
       }
     } catch (error) {
       setError(error.message);
@@ -83,7 +88,7 @@ export function SignUp(props) {
           value={email}
           maxlength="20"
           onChange={(e) => {
-            setEmail(e.target.value);
+            setEmail((prevValue)=>e.target.value);
           }}
           required
           className={`bg-skin-fill-inverted text-[16px] placeholder:${emailPlaceholderColor} border-skin-border-inverted 
@@ -100,7 +105,7 @@ export function SignUp(props) {
         <input
           placeholder="Username"
           onChange={(e) => {
-            setUsername(e.target.value);
+            setUsername((prevValue)=>e.target.value);
           }}
           maxlength="20"
           className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
@@ -118,7 +123,7 @@ export function SignUp(props) {
           placeholder="Password"
           type="password"
           onChange={(e) => {
-            setPassword(e.target.value);
+            setPassword((prevValue)=>e.target.value);
           }}
           maxlength="20"
           className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
@@ -136,7 +141,7 @@ export function SignUp(props) {
           placeholder="Confirm password"
           type="password"
           onChange={(e) => {
-            setConfirmPassword(e.target.value);
+            setConfirmPassword((prevValue)=>e.target.value);
           }}
           maxlength="20"
           className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
