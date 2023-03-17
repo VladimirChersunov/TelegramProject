@@ -26,6 +26,7 @@ module.exports = {
         skin: {
           "border-base": "var(--color-border-base)",
           "border-inverted": "var(--color-border-inverted)",
+          "border-error": "var(--color-border-error)",
         },
       },
       stroke:{

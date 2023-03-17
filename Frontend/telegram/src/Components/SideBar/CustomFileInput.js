@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+import { AddPicture } from '../Icons/AddPicture';
 
 
 function CustomFileInput() {
@@ -39,14 +40,14 @@ function CustomFileInput() {
         <label htmlFor="file-input" className="block h-[100px] w-[100px]  px-4 py-2  rounded-full cursor-pointer bg-skin-fill
          dark:bg-skin-fill-inverted ">
           <div className="flex items-center justify-center text-5xl">
-          &#x1F4F7;       
+         <AddPicture/>      
           </div>
           <input id="file-input" type="file" onChange={handleFileInputChange} className="sr-only" />
         </label>
       )}
-       <div className="relative">
+       {/* <div className="relative">
         <img src={cropData} alt="Cropped" />
-      </div>
+      </div> */}
     </div>
   );
 }

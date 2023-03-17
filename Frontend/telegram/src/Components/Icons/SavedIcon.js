@@ -7,15 +7,15 @@ export function SavedIcon() {
     >
       <path
         d="M34 10V4H8V38L14 35"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14 44V10H40V44L27 37.7273L14 44Z"
         fill="none"
-        stroke-width="4"
-        stroke-linejoin="round"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
     </svg>
   );

@@ -24,6 +24,7 @@
 
     --color-border-base: #0c0221;
     --color-border-inverted: #c6bdff;
+    --color-border-error: #DC2626;
   }
 
   .theme-swiss {

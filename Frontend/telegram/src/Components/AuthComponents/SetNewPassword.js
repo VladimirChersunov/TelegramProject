@@ -1,12 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
 import { useState, useEffect } from "react";
-import {
-  emailCheck,
-  emailUnique,
-  register,
-  setNewPassword,
-} from "../../Actions/authService";
+import { setNewPassword } from "../../Actions/authService";
 
 export function SetNewPassword({ email }) {
   const navigate = useNavigate();
@@ -18,46 +13,58 @@ export function SetNewPassword({ email }) {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setPasswordError("");
+    setConfirmPasswordError("");
+    setError(null);
+  }, [password, confirmPassword]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     setPasswordError("");
+    setConfirmPasswordError("");
+    setError(null);
 
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/;
+    const passwordRegex = /^.{6,20}$/;
 
-    // if (password !== confirmPassword) {
-    //   setConfirmPasswordError(true);
-    // }
-    //  else {
-    //   if (!emailRegex.test(email)) {
-    //     alert("Некорректный email");
-    //     return;
-    //   }
-
-    //   if (!passwordRegex.test(password)) {
-    //     alert(
-    //       "Password must contain at least 6 characters, including numbers and letters"
-    //     );
-    //     return;
-    //   }
-    //   // отправляем данные на сервер
-    //   setConfirmPasswordError(false);
-
-    // }
-
-    try {
-        
+    const setPass = async (email, password) => {
+      setIsLoading(true); 
       const data = await setNewPassword(email, password);
-     console.log(data.result)
-     if(data.result==='success'){
-        navigate('/signin')
-     }
-      setError(null);
-    } catch (error) {
-      setError(error.message);
+      try {
+        if (data.result === "success") {
+          setError(null);
+          navigate("/signin");
+        } else {
+          setError((prev) => "Unexpected error");
+        }
+      } catch (error) {
+        setError((prev) => error.message || "Server error");
+      }
+      finally {
+        setIsLoading(false); // установить состояние isLoading в значение false
+      }
+    };
+
+    if (password !== confirmPassword) {
+      setConfirmPasswordError(true);
+    } else {
+      if (!passwordRegex.test(password)) {
+        setPasswordError("Password must be between 6 and 20 characters");
+        return;
+      }
+      setPasswordError("");
+      setConfirmPasswordError(false);
+
+      if (email) {
+        setPass(email, password);
+      } else if (localStorage.getItem("email")) {
+        setPass(localStorage.getItem("email"), password);
+      } else {
+        navigate("/signin");
+      }
     }
   };
   return (
@@ -70,16 +77,17 @@ export function SetNewPassword({ email }) {
             placeholder="Password"
             type="password"
             onChange={(e) => {
-              setPassword(e.target.value);
+              setPassword((prev) => e.target.value);
             }}
-            maxlength="20"
-            className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
-          border-b-[1px] outline-none text-skin-inverted mt-[29px] pl-2 pb-[10px]"
+            maxLength="20"
+            className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted
+            ${passwordError ? ' border-skin-border-error text-skin-error' : 'border-skin-border-inverted text-skin-inverted' }  
+          border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px]`}
           />
           <div className="h-[20px]">
             {passwordError && (
               <label className="text-skin-error text-[12px] pt-1 pl-1">
-                Password error
+                {passwordError}
               </label>
             )}
           </div>
@@ -88,16 +96,18 @@ export function SetNewPassword({ email }) {
             placeholder="Confirm password"
             type="password"
             onChange={(e) => {
-              setConfirmPassword(e.target.value);
+              setConfirmPassword((prev) => e.target.value);
             }}
-            maxlength="20"
-            className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
-          border-b-[1px] outline-none text-skin-inverted mt-[29px] pl-2 pb-[10px]"
+            maxLength="20"
+            className={`${confirmPasswordError ? '  border-skin-border-error text-skin-error' : 'border-skin-border-inverted text-skin-inverted'} 
+            
+            text-[16px] placeholder:text-skin-muted bg-skin-fill-inverted
+          border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px]`}
           />
           <div className="h-[20px]">
             {confirmPasswordError && (
               <label className="text-skin-error text-[12px] pt-1 pl-1">
-                Password error
+                Password mismatch
               </label>
             )}
           </div>
@@ -109,12 +119,13 @@ export function SetNewPassword({ email }) {
           )}
 
           <button
+           disabled={isLoading}
             onSubmit={handleSubmit}
             onClick={handleSubmit}
             className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-[36px] tracking-normal"
           >
-            Next
+             {isLoading ? "Loading..." : "Next"}
           </button>
         </div>
       </div>

@@ -1,35 +1,43 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
 import { useState } from "react";
-import { emailCheck, emailUnique } from "../../Actions/authService";
+import { emailCheck } from "../../Actions/authService";
 
 export function EnterEmail({ recoveryData }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [error, setError] = useState(null);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [error, setError] = useState("");
+
+  const validateEmail = (input) => {
+    // Email validation regex pattern
+    const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    return emailPattern.test(input);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    //Проверяем правильность введенного username или email
-    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$|^[a-zA-Z0-9]{6,20}$/;
-    if (!emailRegex.test(email)) {
-      setIsEmailValid(false);
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
       return;
-    } else {
-      setIsEmailValid(true);
     }
 
     try {
+      setButtonDisabled((prev) => true);
       const data = await emailCheck(email);
-
-      setError(null);
-
       recoveryData(data);
       navigate("/entercode");
     } catch (error) {
-      setError(error.message);
+      setButtonDisabled((prev) => false);
+      setError("Something went wrong. Please try again later.");
+    }
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    if (event.target.value === "") {
+      setError("");
     }
   };
 
@@ -46,22 +54,32 @@ export function EnterEmail({ recoveryData }) {
           type="text"
           placeholder="email"
           value={email}
-          autocomplete="off"
-          onChange={(e) => setEmail(e.target.value)}
-          className={`border-b  ${
-            isEmailValid
-              ? "border-skin-border-inverted text-skin-inverted"
-              : "border-red-600 text-red-600"
-          } bg-skin-fill-inverted pl-2 pb-[10px]  w-full focus:outline-none text-[16px] placeholder:text-skin-muted `}
+          autoComplete="off"
+          onChange={handleEmailChange}
+          className={`border-b 
+             border-skin-border-inverted 
+             text-skin-inverted  
+             bg-skin-fill-inverted 
+             pl-2 
+             pb-[10px]  
+             w-full 
+             focus:outline-none 
+             text-[16px] 
+             placeholder:text-skin-muted 
+             ${error && 'border-skin-border-error text-skin-error'}
+          `}
           required
         />
+
         {error && (
-          <p className="m-0 text-skin-error mt-2 text-center text-xs">
+          <label className="text-skin-error text-sm mt-2">
             {error}
-          </p>
+          </label>
         )}
+
         <button
           onClick={handleSubmit}
+          disabled={buttonDisabled}
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
            w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >

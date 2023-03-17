@@ -86,7 +86,7 @@ export function SignUp(props) {
           placeholder={`${emailPlaceholder}`}
           type="email"
           value={email}
-          maxlength="20"
+          maxLength="20"
           onChange={(e) => {
             setEmail((prevValue)=>e.target.value);
           }}
@@ -107,7 +107,7 @@ export function SignUp(props) {
           onChange={(e) => {
             setUsername((prevValue)=>e.target.value);
           }}
-          maxlength="20"
+          maxLength="20"
           className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
           border-b-[1px] outline-none text-skin-inverted mt-[29px] pl-2 pb-[10px] "
         />
@@ -125,7 +125,7 @@ export function SignUp(props) {
           onChange={(e) => {
             setPassword((prevValue)=>e.target.value);
           }}
-          maxlength="20"
+          maxLength="20"
           className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
           border-b-[1px] outline-none text-skin-inverted mt-[29px] pl-2 pb-[10px]"
         />
@@ -143,7 +143,7 @@ export function SignUp(props) {
           onChange={(e) => {
             setConfirmPassword((prevValue)=>e.target.value);
           }}
-          maxlength="20"
+          maxLength="20"
           className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
           border-b-[1px] outline-none text-skin-inverted mt-[29px] pl-2 pb-[10px]"
         />

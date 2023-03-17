@@ -26,7 +26,7 @@ export function SerchInput(props) {
         <input
           className="h-[40px] w-[90%]  text-xl rounded-xl outline-none bg-skin-fill dark:bg-skin-fill-inverted ml-2"
           type="text"
-          maxlength="20"
+          maxLength="20"
           placeholder="Search..."
           value={value}
           onClick={handleSerchWindow}

@@ -1,47 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { login } from "../../Actions/authService";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
+import { PreviewClose } from "../Icons/PreviewClose";
+import { PreviewOpen } from "../Icons/PreviewOpen";
+
 
 
 function LoginForm() {
 
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isUsernameOrEmailValid, setIsUsernameOrEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);  
+  const [password, setPassword] = useState(""); 
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    // Проверяем правильность введенного username или email
-    const usernameOrEmailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$|^[a-zA-Z0-9]{6,20}$/;
-    if (!usernameOrEmailRegex.test(usernameOrEmail)) {
-      setIsUsernameOrEmailValid(false);
-      return;
-    } else {
-      setIsUsernameOrEmailValid(true);
-    }
-
-    // Проверяем правильность введенного пароля
-    // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/;
-    // if (!passwordRegex.test(password)) {
-    //   setIsPasswordValid(false);
-    //   return;
-    // } else {
-    //   setIsPasswordValid(true);
-    // }
-    setIsPasswordValid(true);
-    // Отправляем данные на сервер
+    event.preventDefault();   
     
     try {
      
         const data = await login(usernameOrEmail, password);
         setError(null);
-       console.log(data.user.id)
+       
        if(data.user.id){
         navigate("/main");
        }
@@ -56,48 +36,47 @@ function LoginForm() {
     setShowPassword(!showPassword);
   };
 
-  useEffect(() => {
-  if(!isPasswordValid){
-    setPassword("")
+  const handleUsernameInput = (e) =>{
+    setUsernameOrEmail((prevValue)=>e.target.value)
+   
   }
-  }, [isPasswordValid]);
+
+ 
 
   return (
-    <form onSubmit={handleSubmit} autocomplete="off" className="flex justify-center flex-col select-none">
+    <form onSubmit={handleSubmit} autoComplete="off" className="flex justify-center flex-col select-none">
      
      <div className="relative">
           <input
             type="text"
             placeholder="Username or email"
             value={usernameOrEmail}
-            autocomplete="off"
-            onChange={(e) => setUsernameOrEmail(e.target.value)}
-            className={`border-b  ${
-              isUsernameOrEmailValid ? "border-skin-border-inverted text-skin-inverted" : "border-red-600 text-red-600"
-            } bg-skin-fill-inverted pl-2 pb-[10px]  w-full focus:outline-none text-[16px] placeholder:text-skin-muted `}
+            autoComplete="off"
+            onChange={handleUsernameInput }
+            className={`border-b  border-skin-border-inverted text-skin-inverted
+             bg-skin-fill-inverted pl-2 pb-[10px]  w-full focus:outline-none text-[16px] placeholder:text-skin-muted `}
             required
           />    
-         {!isUsernameOrEmailValid && <p className="text-red-600 text-xs mt-1">Incorrect input</p> }
+        
        
           <input
           placeholder="Password"
           type={showPassword ? "text" : "password"}
             value={password}
-            autocomplete="off"
-            onChange={(e) => setPassword(e.target.value)}
-            className={`border-b ${
-              isPasswordValid ? "border-skin-border-inverted text-skin-inverted"  : "border-red-600 text-red-600"
-            }  text-[16px] bg-skin-fill-inverted placeholder:text-skin-muted w-full outline-none  mt-[49px] pl-2 pb-[10px]`}
+            autoComplete="off"
+            onChange={(e) => setPassword((prevValue)=>e.target.value)}
+            className={`border-b border-skin-border-inverted text-skin-inverted text-[16px]
+             bg-skin-fill-inverted placeholder:text-skin-muted w-full outline-none  mt-[49px] pl-2 pb-[10px]`}
             required
           />
              <div
-          className="absolute top-[95px] right-[0px] cursor-pointer bg-white h-5 w-5"
+          className={`absolute top-[80px] right-[5px] cursor-pointer`}
           onClick={() => setShowPassword(!showPassword)}
         >
-          {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+          {showPassword ? <PreviewClose/> : <PreviewOpen/>}
         </div>
          </div>
-        {! isPasswordValid&& <p className="text-red-600 text-xs mt-1">Incorrect input</p>}
+       
         {error&&<p className="m-0 text-skin-error mt-2 text-center text-xs">{error}</p>}
         <div className="flex items-center justify-center">
           <button
