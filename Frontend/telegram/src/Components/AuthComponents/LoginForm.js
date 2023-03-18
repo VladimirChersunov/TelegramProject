@@ -36,7 +36,7 @@ function LoginForm() {
   };
 
   const handleShowPasswordClick = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((prev)=>!showPassword);
   };
 
   const handleUsernameInput = (e) =>{
@@ -74,7 +74,7 @@ function LoginForm() {
           />
              <div
           className={`absolute top-[80px] right-[5px] cursor-pointer`}
-          onClick={() => setShowPassword((prev)=>!showPassword)}
+          onClick={handleShowPasswordClick}
         >
           {showPassword ? <PreviewClose/> : <PreviewOpen/>}
         </div>

@@ -7,7 +7,7 @@ const authService = axios.create({
 export const login = async (login, password) => {
   try {
     const response = await authService.post("Users/login", { login, password });
-
+    localStorage.setItem("token", response.data.token);
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -21,6 +21,7 @@ export const register = async (username, email, password) => {
       email,
       password,
     });
+    localStorage.setItem("token", response.data.token);
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -61,3 +62,22 @@ export const setNewPassword = async (email, newPassword) => {
     throw new Error(error.response.data.message);
   }
 };
+
+export const getAuthenticatedUser = async () => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await authService.get("Users/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log("error");
+    throw new Error(error.response.data.message);
+  }
+};
+
+
