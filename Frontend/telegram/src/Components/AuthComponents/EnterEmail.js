@@ -55,6 +55,7 @@ export function EnterEmail({ recoveryData }) {
           placeholder="email"
           value={email}
           autoComplete="off"
+          
           onChange={handleEmailChange}
           className={`border-b 
              border-skin-border-inverted 

@@ -13,12 +13,13 @@ function LoginForm() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();   
     
     try {
-     
+      setIsLoading(true); 
         const data = await login(usernameOrEmail, password);
         setError(null);
        
@@ -28,7 +29,9 @@ function LoginForm() {
       } catch (error) {
         setError(error.message);
       }
-    console.log("Данные отправлены: ", usernameOrEmail, password);
+      finally {
+        setIsLoading(false); // установить состояние isLoading в значение false
+      }
    
   };
 
@@ -71,7 +74,7 @@ function LoginForm() {
           />
              <div
           className={`absolute top-[80px] right-[5px] cursor-pointer`}
-          onClick={() => setShowPassword(!showPassword)}
+          onClick={() => setShowPassword((prev)=>!showPassword)}
         >
           {showPassword ? <PreviewClose/> : <PreviewOpen/>}
         </div>
@@ -83,7 +86,7 @@ function LoginForm() {
             onClick={() => {
               navigate("/recovery");
             }}
-            className="text-skin-inverted mt-5 text-[16px ml-2 border-b  border-skin-border-inverted"
+            className="text-skin-inverted mt-5 text-[16px ml-2 border-b hover:text-slate-200 border-skin-border-inverted"
           >
             Forgot your password?
           </button>
@@ -92,12 +95,13 @@ function LoginForm() {
 
        
         <button
+        disabled={isLoading}
          type="submit"    
          onClick={ handleSubmit}     
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
-          Entrance
+         {isLoading ? "Loading..." : "Next"}
         </button>
 
         <button

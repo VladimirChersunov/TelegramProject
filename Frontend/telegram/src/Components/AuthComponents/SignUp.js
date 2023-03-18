@@ -6,21 +6,17 @@ import { emailCheck, emailUnique, register } from "../../Actions/authService";
 export function SignUp(props) {
   const navigate = useNavigate();
 
-  const [emailPlaceholder, setEmailPlaceholder] = useState("Email");
-  const [emailPlaceholderColor, setEmailPlaceholderColor] =
-    useState("text-skin-muted");
+  
   const [email, setEmail] = useState("");
-  const [emailValid, setEmailValid] = useState(true);
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordValid, setPasswordValid] = useState(true);
+  const [confirmPassword, setConfirmPassword] = useState("");  
   const [emailError, setEmailError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {}, []);
 
@@ -28,53 +24,60 @@ export function SignUp(props) {
     event.preventDefault();
 
     setEmailError("");
+    setUsernameError("");
     setPasswordError("");
     setConfirmPasswordError("");
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/;
-    const usernameRegex = /^[a-zA-Z0-9]{3,20}$/;
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    const passwordRegex = /^.{6,20}$/;
+    const usernameRegex = /^.{3,20}$/;
 
-    // if (password !== confirmPassword) {
-    //   setConfirmPasswordError(true);
-    // }
-    //  else {
-    //   if (!emailRegex.test(email)) {
-    //     alert("Некорректный email");
-    //     return;
-    //   }
+    if (password !== confirmPassword) {
+      setConfirmPasswordError("Password mismatch");
+    } else {
+      
 
-    //   if (!passwordRegex.test(password)) {
-    //     alert(
-    //       "Password must contain at least 6 characters, including numbers and letters"
-    //     );
-    //     return;
-    //   }
-    //   // отправляем данные на сервер
-    //   setConfirmPasswordError(false);
-
-    // }
-
-    try {
-      console.log(email);
-      console.log(username);
-      const data = await emailUnique(email,username);
-      console.log(data.unique);
-      setError(null);
-
-      if (data.unique) {
-        const code = await emailCheck(email);
-
-        props.signUpData({ username, email, password, code });
-        navigate("/entercode");
+      if (!emailRegex.test(email)) {
+        setEmailError("Please enter a valid email address.");
+        return;
       }
-      else{
-        setError("Email or username already exists");
+
+      if (!usernameRegex.test(username)) {
+        setUsernameError("Username must be between 3 and 20 characters");
+        return;
       }
-    } catch (error) {
-      setError(error.message);
+
+      if (!passwordRegex.test(password)) {
+        setPasswordError("Password must be between 6 and 20 characters");
+        return;
+      }
+      // отправляем данные на сервер
+      setConfirmPasswordError("");
+      setPasswordError("");
+      setEmailError("");
+      setUsernameError("");
+      try {
+        setIsLoading(true); 
+        console.log(email);
+        console.log(username);
+        const data = await emailUnique(email, username);
+        console.log(data.unique);
+        setError(null);
+
+        if (data.unique) {
+          const code = await emailCheck(email);
+
+          props.signUpData({ username, email, password, code });
+          navigate("/entercode");
+        } else {
+          setError("Email or username already exists");
+        }
+      } catch (error) {
+        setError(error.message);
+      }
+      finally {
+        setIsLoading(false); // установить состояние isLoading в значение false
+      }
     }
-
-    console.log("Данные отправлены: ", username, email, password);
   };
 
   return (
@@ -83,21 +86,23 @@ export function SignUp(props) {
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
         <input
-          placeholder={`${emailPlaceholder}`}
+          placeholder="Email"
           type="email"
           value={email}
           maxLength="20"
           onChange={(e) => {
-            setEmail((prevValue)=>e.target.value);
+            setEmail((prevValue) => e.target.value);
           }}
           required
-          className={`bg-skin-fill-inverted text-[16px] placeholder:${emailPlaceholderColor} border-skin-border-inverted 
-          border-b-[1px] outline-none text-skin-inverted mt-[10px] pl-2 pb-[10px]`}
+          className={`bg-skin-fill-inverted text-[16px]  placeholder:text-skin-muted
+          border-b outline-none
+          ${emailError ? 'text-skin-error border-skin-border-error' : 'text-skin-inverted border-skin-border-inverted' } 
+           mt-[10px] pl-2 pb-[10px]`}
         />
         <div className="h-[20px]">
           {emailError && (
             <label className="text-skin-error text-[12px] pt-1 pl-1">
-              Email error
+              {emailError}
             </label>
           )}
         </div>
@@ -105,16 +110,18 @@ export function SignUp(props) {
         <input
           placeholder="Username"
           onChange={(e) => {
-            setUsername((prevValue)=>e.target.value);
+            setUsername((prevValue) => e.target.value);
           }}
+          required
           maxLength="20"
-          className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
-          border-b-[1px] outline-none text-skin-inverted mt-[29px] pl-2 pb-[10px] "
+          className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted  
+          ${usernameError ? 'text-skin-error border-skin-border-error' : 'text-skin-inverted border-skin-border-inverted' }
+          border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px] `}
         />
         <div className="h-[20px]">
           {usernameError && (
             <label className="text-skin-error text-[12px] pt-1 pl-1">
-              Username error
+              {usernameError}
             </label>
           )}
         </div>
@@ -123,16 +130,18 @@ export function SignUp(props) {
           placeholder="Password"
           type="password"
           onChange={(e) => {
-            setPassword((prevValue)=>e.target.value);
+            setPassword((prevValue) => e.target.value);
           }}
+          required
           maxLength="20"
-          className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
-          border-b-[1px] outline-none text-skin-inverted mt-[29px] pl-2 pb-[10px]"
+          className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted 
+          ${passwordError ? 'text-skin-error border-skin-border-error' : 'text-skin-inverted border-skin-border-inverted' }
+          border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px]`}
         />
         <div className="h-[20px]">
           {passwordError && (
             <label className="text-skin-error text-[12px] pt-1 pl-1">
-              Password error
+              {passwordError}
             </label>
           )}
         </div>
@@ -141,16 +150,18 @@ export function SignUp(props) {
           placeholder="Confirm password"
           type="password"
           onChange={(e) => {
-            setConfirmPassword((prevValue)=>e.target.value);
+            setConfirmPassword((prevValue) => e.target.value);
           }}
+          required
           maxLength="20"
-          className="bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted border-skin-border-inverted 
-          border-b-[1px] outline-none text-skin-inverted mt-[29px] pl-2 pb-[10px]"
+          className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted  
+          ${confirmPasswordError ? 'text-skin-error border-skin-border-error' : 'text-skin-inverted border-skin-border-inverted' }
+          border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px]`}
         />
         <div className="h-[20px]">
           {confirmPasswordError && (
             <label className="text-skin-error text-[12px] pt-1 pl-1">
-              Password error
+              {confirmPasswordError}
             </label>
           )}
         </div>
@@ -162,12 +173,13 @@ export function SignUp(props) {
         )}
 
         <button
+        disabled={isLoading}
           onSubmit={handleSubmit}
           onClick={handleSubmit}
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-[36px] tracking-normal"
         >
-          Next
+           {isLoading ? "Loading..." : "Next"}
         </button>
       </div>
     </div>

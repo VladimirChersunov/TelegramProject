@@ -49,14 +49,14 @@ export function SetNewPassword({ email }) {
     };
 
     if (password !== confirmPassword) {
-      setConfirmPasswordError(true);
+      setConfirmPasswordError(" Password mismatch");
     } else {
       if (!passwordRegex.test(password)) {
         setPasswordError("Password must be between 6 and 20 characters");
         return;
       }
       setPasswordError("");
-      setConfirmPasswordError(false);
+      setConfirmPasswordError("");
 
       if (email) {
         setPass(email, password);
@@ -79,6 +79,7 @@ export function SetNewPassword({ email }) {
             onChange={(e) => {
               setPassword((prev) => e.target.value);
             }}
+            required
             maxLength="20"
             className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted
             ${passwordError ? ' border-skin-border-error text-skin-error' : 'border-skin-border-inverted text-skin-inverted' }  
@@ -99,6 +100,7 @@ export function SetNewPassword({ email }) {
               setConfirmPassword((prev) => e.target.value);
             }}
             maxLength="20"
+            required
             className={`${confirmPasswordError ? '  border-skin-border-error text-skin-error' : 'border-skin-border-inverted text-skin-inverted'} 
             
             text-[16px] placeholder:text-skin-muted bg-skin-fill-inverted
@@ -107,7 +109,7 @@ export function SetNewPassword({ email }) {
           <div className="h-[20px]">
             {confirmPasswordError && (
               <label className="text-skin-error text-[12px] pt-1 pl-1">
-                Password mismatch
+               {confirmPasswordError}
               </label>
             )}
           </div>

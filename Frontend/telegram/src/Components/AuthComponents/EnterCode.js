@@ -159,6 +159,7 @@ export function EnterCode(props) {
             onChange={(e) => {
               setOne((prevValue) => e.target.value);
             }}
+            required
             onInput={(event) => handleInput(event, secondInputRef)}
             className="w-10 text-center text-5xl bg-skin-fill-inverted text-skin-inverted 
              caret-transparent border-b-[1px] pb-[10px]
@@ -169,6 +170,7 @@ export function EnterCode(props) {
           <input
             ref={secondInputRef}
             maxLength="1"
+            required
             onChange={(e) => {
               setTwo((prevValue) => e.target.value);
             }}
@@ -182,6 +184,7 @@ export function EnterCode(props) {
           <input
             ref={thirdInputRef}
             maxLength="1"
+            required
             onChange={(e) => {
               setThree((prevValue) => e.target.value);
             }}
@@ -195,6 +198,7 @@ export function EnterCode(props) {
           <input
             ref={fourthInputRef}
             maxLength="1"
+            required
             onChange={(e) => {
               setFour((prevValue) => e.target.value);
             }}
@@ -208,6 +212,7 @@ export function EnterCode(props) {
           <input
             ref={fifthInputRef}
             maxLength="1"
+            required
             onChange={(e) => {
               setFive((prevValue) => e.target.value);
             }}
