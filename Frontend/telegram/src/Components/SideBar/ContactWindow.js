@@ -21,11 +21,11 @@ export function ContactWindow(props){
           
           <div className="w-full text-center mt-10 flex justify-center">
           <div className="w-[100%] h-[85%]">
-          {props.contacts.map((contact) => (
+          {props.contacts.map((contact, key) => (
             <div className="flex flex-row  border-b border-skin-border-base dark:border-skin-border-inverted  m-1 ">
              
               
-              <ContactsCard contact={contact} />
+              <ContactsCard  key={contact.id} contact={contact} />
             </div>
           ))}
         </div>

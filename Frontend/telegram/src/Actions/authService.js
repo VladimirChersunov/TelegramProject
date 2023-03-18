@@ -7,7 +7,8 @@ const authService = axios.create({
 export const login = async (login, password) => {
   try {
     const response = await authService.post("Users/login", { login, password });
-    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("token", response.data.jwtToken);
+    console.log(response.data.jwtToken)
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -21,9 +22,10 @@ export const register = async (username, email, password) => {
       email,
       password,
     });
-    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("token", response.data.jwtToken);
     return response.data;
   } catch (error) {
+    console.log("error");
     throw new Error(error.response.data.message);
   }
 };
@@ -33,6 +35,7 @@ export const emailCheck = async (email) => {
     const response = await authService.post("Email/sendcode", { email });
     return response.data;
   } catch (error) {
+    console.log("error");
     throw new Error(error.response.data.message);
   }
 };
@@ -46,6 +49,7 @@ export const emailUnique = async (email, username) => {
 
     return response.data;
   } catch (error) {
+    console.log("error");
     throw new Error(error.response.data.message);
   }
 };
@@ -73,6 +77,17 @@ export const getAuthenticatedUser = async () => {
       },
     });
 
+    return response.data;
+  } catch (error) {
+    console.log("error");
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const tokenCheck = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await authService.post("Email/validatetoken", { token });   
     return response.data;
   } catch (error) {
     console.log("error");

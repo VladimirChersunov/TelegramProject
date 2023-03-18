@@ -59,7 +59,8 @@ export function InputPanel(props) {
             className="w-[100%] h-[30px]  mt-3 text-xl rounded-lg outline-none pl-2 resize-none
                bg-skin-fill dark:bg-skin-fill-inverted"
             maxLength="200"
-            contenteditable="true"
+            contentEditable="true"
+            suppressContentEditableWarning={true}
             placeholder="Message..."
           />
         </div>

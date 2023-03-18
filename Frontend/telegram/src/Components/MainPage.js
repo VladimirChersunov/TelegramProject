@@ -3,11 +3,28 @@ import { MessageContainer } from "./MessageContainer/MessageContainer";
 import { ClearContainer } from "./MessageContainer/ClearContainer";
 import { LeftColumn } from "./SideBar/CollumnContainer";
 import { InfoContainer } from "./InfoContainer/InfoContainer";
+import { useNavigate } from "react-router-dom";
+
 
 
 export const currentUser = "Admin";
 
 export function MainPage(props) {
+
+  const navigate = useNavigate();
+  
+  
+  
+
+  useEffect(() => {
+   
+   
+    const handleBackButton = (event) => {
+      navigate("/main");
+    };
+    window.addEventListener("popstate", handleBackButton);
+    console.log(props);
+  }, []);
 
   const messages = [
     {
@@ -65,8 +82,9 @@ export function MainPage(props) {
       messages: messages,
       pinned: messages[2],
       author: contact,
-      chatInfo: null},
-      {
+      chatInfo: null,
+    },
+    {
       id: 1,
       chatImage: true,
       chatName: "Club_arduino",
@@ -164,37 +182,30 @@ export function MainPage(props) {
   const [currChat, setCurrentChat] = useState({});
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState("");
-  const[muted, setMuted] = useState(false)
+  const [muted, setMuted] = useState(false);
 
   useEffect(() => {
-    if (currChat.id>=0) {
+    if (currChat.id >= 0) {
       setCentrVisible(true);
     } else {
       setCentrVisible(false);
     }
   }, [currChat]);
 
-  
-
-  const handleMuted = (props) =>{
-   
-      setChats(chats.map((chat,id)=>
-      id===props.chat.id ?
-      ({...chat, muteStatus: true}):
-      chat
+  const handleMuted = (props) => {
+    setChats(
+      chats.map((chat, id) =>
+        id === props.chat.id ? { ...chat, muteStatus: true } : chat
       )
-    )     
-  }
-
-  
+    );
+  };
 
   const changeThemes = (props) => {
     setTheme((prevTheme) => props);
   };
-  
 
   const currentChat = (chat) => {
-    setCurrentChat(chat);   
+    setCurrentChat(chat);
   };
 
   const toggleRightColumn = (state) => {
@@ -205,18 +216,17 @@ export function MainPage(props) {
     <div
       className={`${theme} dark:bg-skin-fill-inverted flex flex-row min-h-screen dark:text-skin-inverted dark:border-skin-border-inverted
       text-skin-base border-skin-border-base bg-skin-fill overflow-hidden font-montserrat`}
-    >    
-        <LeftColumn
-          chats={chats}
-          currentChat={currentChat}
-          darkMode={props.darkMode}
-          toggleDarkMode={props.toggleDarkMode}
-          handleMuted={handleMuted}
-          contacts={contacts}
-        />
-     
-      {centrVisible && (
+    >
+      <LeftColumn
+        chats={chats}
+        currentChat={currentChat}
+        darkMode={props.darkMode}
+        toggleDarkMode={props.toggleDarkMode}
+        handleMuted={handleMuted}
+        contacts={contacts}
+      />
 
+      {centrVisible && (
         <MessageContainer
           chat={currChat}
           toggleRightColumn={toggleRightColumn}

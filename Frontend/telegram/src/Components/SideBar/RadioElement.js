@@ -93,7 +93,7 @@ export function RadioElement({chat, currentChat, handleMuted}) {
     />
      <label
       ref={contextRef}
-      for={chat.id}
+      htmlFor={chat.id}
       onContextMenu={handleContextMenu}
       onChange={handleOptionSelect}
       onClick={handleChatClick}

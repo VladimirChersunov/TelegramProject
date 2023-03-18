@@ -26,7 +26,7 @@ export function LeftMenu(props) {
         <SettingIcon />
         <p className="font-bold ml-2">Setting</p>
       </li>
-      <li class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
+      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
         <MoonIcon />
         <p className="font-bold ml-2 mr-4">Night Mode</p>
         <Switch
@@ -35,7 +35,7 @@ export function LeftMenu(props) {
         />
       </li>
       <li
-        class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
+        className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
         onClick={() => {
           props.visibleBugReport(true);
         }}
@@ -44,7 +44,7 @@ export function LeftMenu(props) {
         <p className="font-bold ml-2">Report bug</p>
       </li>
       <li
-        class="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
+        className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
         onClick={() => {
           props.visibleAbout(true);
         }}
@@ -52,7 +52,7 @@ export function LeftMenu(props) {
         <InfoIcon />
         <p className="font-bold ml-2">About Us</p>
       </li>
-      <li class="flex justify-center items-center">
+      <li className="flex justify-center items-center">
         <p className="text-center w-[100%] ml-2 text-xs h-8 p-1   ">
           Cryptic rev.2.0
         </p>

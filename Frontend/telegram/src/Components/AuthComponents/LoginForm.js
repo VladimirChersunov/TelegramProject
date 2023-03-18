@@ -24,13 +24,14 @@ function LoginForm() {
         setError(null);
        
        if(data.user.id){
+        
         navigate("/main");
        }
       } catch (error) {
         setError(error.message);
       }
       finally {
-        setIsLoading(false); // установить состояние isLoading в значение false
+        setIsLoading(false); 
       }
    
   };

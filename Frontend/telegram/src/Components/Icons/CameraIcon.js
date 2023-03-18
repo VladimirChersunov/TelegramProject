@@ -15,8 +15,8 @@ export function CameraIcon() {
         strokeLinejoin="round"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M44 14L36 20.75V27.25L44 34V14Z"
         strokeWidth="4"
         strokeLinecap="round"

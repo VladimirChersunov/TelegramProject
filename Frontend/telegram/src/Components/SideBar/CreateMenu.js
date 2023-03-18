@@ -25,12 +25,12 @@ const handleMessageCreate = () =>{
 
   return (
     <ul
-      className={`absolute mt-[-150px] ml-[-150px] block  group-hover:block shadow-2xl
-        border border-skin-border-base dark:border-skin-border-inverted rounded-lg   w-[200px] select-none`}
+      className={`absolute mt-[-150px] ml-[-150px] block  group-hover:block shadow-2xl z-50
+        border border-skin-border-base dark:border-skin-border-inverted rounded-lg w-[200px] select-none`}
     >
       <li
         onClick={handleChannelCreate}
-        className="hover:bg-indigo-900 hover:cursor-pointer rounded-t-lg"
+        className="hover:bg-indigo-900 hover:cursor-pointer rounded-t-lg "
       >
         <div className="h-8 p-1 flex flex-row">
           <SpeakerIcon />

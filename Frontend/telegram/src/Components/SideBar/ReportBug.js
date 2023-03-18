@@ -23,14 +23,7 @@ export function ReportBug(props) {
         </div>
         <div className="flex-auto p-4 overflow-auto">
           <form className="flex flex-col items-center">
-            <div className="mb-4">
-              <label
-                htmlFor="to"
-                className="block text-skin-base dark:text-skin-inverted font-medium mb-2"
-              >
-                To: kb674ua@gmail.com
-              </label>
-            </div>
+          
             <div className="mb-4">
               <label
                 htmlFor="subject"
@@ -42,6 +35,7 @@ export function ReportBug(props) {
                 type="text"
                 id="subject"
                 maxLength="20"
+               
                 name="subject"
                 className="w-full border-b border-skin-border-base dark:border-skin-border-inverted
               text-skin-base p-2 bg-skin-fill dark:bg-skin-fill-inverted outline-none dark:text-skin-inverted"
@@ -59,10 +53,11 @@ export function ReportBug(props) {
                 id="message"
                 name="message"
                 maxLength="120"
-                className="w-full text-skin-base border-skin-border-base border rounded-md
+                className="w-full text-skin-base border-skin-border-base border rounded-md resize-none
              dark:border-skin-border-inverted  p-2 bg-skin-fill dark:bg-skin-fill-inverted outline-none dark:text-skin-inverted"
                 rows="6"
                 required
+                
               ></textarea>
             </div>
             <button

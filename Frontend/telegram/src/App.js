@@ -14,6 +14,8 @@ function App() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
+  const [userData, setUserData] = useState({});
+  const[token, setToken] = useState(localStorage.getItem('token'))
 
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
@@ -28,11 +30,14 @@ function App() {
   };
 
   const recoveryData = (props) => {
-    setEmail((prevEmail)=>props.email);
-    console.log(props.code)
+    setEmail((prevEmail)=>props.email);    
     setCode((prevCode)=>props.code);
     setUsername((prevUsername)=>"");
     setPassword((prevPassword)=>"");
+  };
+
+  const mainUserData = (props) => {
+    setUserData((prev)=>props)
   };
 
   return (
@@ -40,11 +45,12 @@ function App() {
       <Routes>
         <Route
           path="/main"
-          element={
-            <MainPage darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          element={token ?
+            <MainPage darkMode={darkMode} toggleDarkMode={toggleDarkMode} userData={userData}/>
+            : <SignIn />
           }
         ></Route>
-        <Route path="/" element={<StartPage />} />
+        <Route path="/" element={ <StartPage /> } />
         <Route
           path="/setnewpassword"
           element={<SetNewPassword email={email} />}
@@ -54,7 +60,7 @@ function App() {
           path="/recovery"
           element={<EnterEmail recoveryData={recoveryData} />}
         />
-        <Route path="/signup" element={<SignUp signUpData={signUpData} />} />
+        <Route path="/signup" element={<SignUp signUpData={signUpData} mainUserData={mainUserData}/>} />
         <Route
           path="/entercode"
           element={
@@ -63,9 +69,11 @@ function App() {
               password={password}
               username={username}
               code={code}
+              mainUserData={mainUserData}
             />
           }
         />
+       
       </Routes>
     </div>
   );
