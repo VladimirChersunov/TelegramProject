@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
 import { useState } from "react";
-import { emailCheck } from "../../Actions/authService";
+import { emailCheck } from "../../Services/authService";
 
 export function EnterEmail({ recoveryData }) {
   const navigate = useNavigate();

@@ -4,27 +4,36 @@ import { ClearContainer } from "./MessageContainer/ClearContainer";
 import { LeftColumn } from "./SideBar/CollumnContainer";
 import { InfoContainer } from "./InfoContainer/InfoContainer";
 import { useNavigate } from "react-router-dom";
-
-
-
-export const currentUser = "Admin";
+import { updateInfo } from "../Services/userServices";
 
 export function MainPage(props) {
-
   const navigate = useNavigate();
-  
-  
-  
+  const [currentUser, setCurrentUser] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-   
-   
     const handleBackButton = (event) => {
       navigate("/main");
     };
+    setCurrentUser((prev)=>getCurrentUser()); 
     window.addEventListener("popstate", handleBackButton);
-    console.log(props);
   }, []);
+
+  const getCurrentUser = async() => {
+    try {
+      setIsLoading(true);
+      const data = await updateInfo()
+      console.log(data)
+     return data
+    } catch {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+ 
 
   const messages = [
     {
@@ -173,16 +182,10 @@ export function MainPage(props) {
     },
   ]);
 
-  const chatType = null;
-  const [addChannel, setAddChannel] = useState(false);
-  const [addGroup, setAddGroup] = useState(false);
-  const [addMessage, setAddMessage] = useState(false);
-  const [mainLeft, setMainLeft] = useState(true);
   const [mainRiht, setMainRight] = useState(false);
   const [currChat, setCurrentChat] = useState({});
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState("");
-  const [muted, setMuted] = useState(false);
 
   useEffect(() => {
     if (currChat.id >= 0) {
@@ -218,6 +221,7 @@ export function MainPage(props) {
       text-skin-base border-skin-border-base bg-skin-fill overflow-hidden font-montserrat`}
     >
       <LeftColumn
+      currentUser={currentUser}
         chats={chats}
         currentChat={currentChat}
         darkMode={props.darkMode}

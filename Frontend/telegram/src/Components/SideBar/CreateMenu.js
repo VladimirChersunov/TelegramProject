@@ -25,7 +25,7 @@ const handleMessageCreate = () =>{
 
   return (
     <ul
-      className={`absolute mt-[-150px] ml-[-150px] block  group-hover:block shadow-2xl z-50
+      className={`absolute mt-[-150px] ml-[-150px] bg-skin-fill dark:bg-skin-fill-inverted block  group-hover:block shadow-2xl z-50
         border border-skin-border-base dark:border-skin-border-inverted rounded-lg w-[200px] select-none`}
     >
       <li

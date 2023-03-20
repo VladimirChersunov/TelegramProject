@@ -99,7 +99,7 @@ export function RadioElement({chat, currentChat, handleMuted}) {
       onClick={handleChatClick}
       className="flex hover:bg-skin-button-accent-hover  flex-row cursor-pointer select-none 
        border-b p-2 peer-checked:bg-skin-button-accent-hover peer-checked:bg-[#6a37d8]
-           border-skin-border-base dark:border-skin-border-inverted"
+           border-skin-border-base dark:border-skin-border-inverted "
     >
       {showContextMenu && <ContextMenu x={contextMenuX} y={contextMenuY} chat={chat} handleMuted={handleMuted}/>}
 

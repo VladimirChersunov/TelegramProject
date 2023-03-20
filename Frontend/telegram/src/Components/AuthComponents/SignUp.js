@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
 import { useState, useEffect } from "react";
-import { emailCheck, emailUnique, register } from "../../Actions/authService";
+import { emailCheck, emailUnique} from "../../Services/authService";
 
 export function SignUp(props) {
   const navigate = useNavigate();

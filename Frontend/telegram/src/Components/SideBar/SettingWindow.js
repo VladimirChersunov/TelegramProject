@@ -1,9 +1,42 @@
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import art from "./../../Assets/art.jpg";
 import { useNavigate } from "react-router-dom";
+import { Ahtung } from "../Icons/Ahtung";
+import { PenIcon } from "../Icons/PenIcon";
+import { PeopleIcon } from "../Icons/PeopleIcon";
+import { useState, useEffect } from "react";
+import { updateInfo } from "../../Services/userServices";
+
 
 export function SettingWindow(props) {
 const navigate = useNavigate()
+const [currentUser, setCurrentUser] = useState({});
+const [isLoading, setIsLoading] = useState(false);
+const [error, setError] = useState(null);
+
+useEffect(() => {
+ const data = async () => {
+    try {
+      setIsLoading(true);
+      const user = await updateInfo()
+      setCurrentUser((prev)=>user); 
+     
+    } catch {
+      setError(error);
+    } finally {
+      
+      setIsLoading(false);
+    }
+  };
+ 
+ 
+ console.log(currentUser)
+}, []);
+
+
+
+
+
 
   const handleClickBack = () => {
     props.visibleSetting(false);
@@ -13,6 +46,9 @@ const navigate = useNavigate()
     localStorage.clear();
     navigate('/signin')
   }
+
+ 
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-row items-center">
@@ -29,22 +65,30 @@ const navigate = useNavigate()
 
       <div className="w-full text-center  flex flex-col items-start mt-5">
         <img src={art} alt="logo" className="h-[300px] w-full select-none" />
-        <div className="mt-5 text-lg ml-5">
-          <label>Email</label>
+        <div className="mt-5 text-xl ml-5 flex flex-row items-center border-b w-[90%] pb-2 border-skin-border-base dark:border-skin-border-inverted">
+        <Ahtung/>
+          <label className="ml-10">{}</label>
         </div>
-        <div className="mt-1 text-lg ml-5">
-          <label>Username</label>
+        <div className="mt-5 text-xl ml-5 flex flex-row items-center border-b w-[90%] pb-2 border-skin-border-base dark:border-skin-border-inverted">
+          <PeopleIcon/>
+          <label className="ml-10">Username</label>
         </div>
-        <div className="mt-1 text-lg ml-5 cursor-pointer select-none">
-          <p>Premium</p>
+        <div className="mt-5 text-xl ml-5 flex flex-row items-center border-b w-[90%] pb-2 border-skin-border-base
+         cursor-pointer select-none dark:border-skin-border-inverted">
+        <Ahtung/>
+          <p className="ml-10">Premium</p>
         </div>
-        <div className="mt-1 text-lg ml-5 cursor-pointer select-none">
-          <p>Edit profile</p>
+        <div className="mt-5 text-xl ml-5 flex flex-row items-center border-b w-[90%] pb-2 border-skin-border-base
+         dark:border-skin-border-inverted cursor-pointer select-none">
+          <PenIcon/>
+          <p className="ml-10">Edit profile</p>
         </div>
         <div 
         onClick={handleLogout}
-        className="mt-1 text-lg ml-5 cursor-pointer select-none">
-          <p>Logout</p>
+        className="mt-5 text-xl ml-5 flex flex-row items-center border-b w-[90%] pb-2 border-skin-border-base
+         dark:border-skin-border-inverted cursor-pointer select-none">
+          <Ahtung/>
+          <p className="ml-10">Logout</p>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
 import { useEffect, useState, useRef, useCallback } from "react";
-import { emailCheck, register } from "../../Actions/authService";
+import { emailCheck, register } from "../../Services/authService";
 
 export function EnterCode(props) {
   const navigate = useNavigate();
@@ -26,9 +26,6 @@ export function EnterCode(props) {
   const thirdInputRef = useRef(null);
   const fourthInputRef = useRef(null);
   const fifthInputRef = useRef(null);
-
-
-  
 
   useEffect(() => {
     if (props.username) {
@@ -55,7 +52,7 @@ export function EnterCode(props) {
     } else {
       setEmail((prev) => localStorage.getItem("email"));
     }
-  }, []);
+  }, [props.code, props.email, props.password, props.username]);
 
   const decrementTime = useCallback(() => {
     setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
@@ -83,57 +80,49 @@ export function EnterCode(props) {
   };
 
   useEffect(() => {
-    
-  }, []);
-
-  useEffect(() => {
     setCode((prevCode) => one + two + three + four + five);
-  }, [five]);
+  }, [one, two, three, four, five]);
 
   const handlerResend = async () => {
     setError((prev) => null);
     setButtonDisabled((prev) => true);
     setTimeLeft((prev) => 10);
     console.log(email);
-    const data = await emailCheck(email);    
+    const data = await emailCheck(email);
     setInCode((prev) => data.code);
     localStorage.setItem("code", data.code);
-    console.log(data.code)
-    
+    console.log(data.code);
   };
 
   const handleRegister = async () => {
     if (code) {
-      console.log(inCode)
-      console.log(code)
+      console.log(inCode);
+      console.log(code);
       if (inCode === code) {
-        
-        if(username){
+        if (username) {
           if (username.length > 4) {
             try {
               const data = await register(username, email, password);
               setError((prev) => null);
               console.log(data.user.id);
               if (data.user.id) {
-                localStorage.removeItem('email');
-                localStorage.removeItem('username');
-                localStorage.removeItem('password');
-                localStorage.removeItem('code');
+                localStorage.removeItem("email");
+                localStorage.removeItem("username");
+                localStorage.removeItem("password");
+                localStorage.removeItem("code");
                 navigate("/main");
               }
             } catch (error) {
               setError((prev) => error.message);
             }
-          
+          }
+        } else {
+          setError((prev) => null);
+          localStorage.removeItem("username");
+          localStorage.removeItem("password");
+          localStorage.removeItem("code");
+          navigate("/setnewpassword");
         }
-      } else {
-        setError((prev) => null);         
-        localStorage.removeItem('username');
-        localStorage.removeItem('password');
-        localStorage.removeItem('code');
-        navigate("/setnewpassword");
-      }
-       
       } else {
         setError("Code does not match, please try again");
       }

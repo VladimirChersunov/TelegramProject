@@ -54,7 +54,7 @@ export function LeftMenu(props) {
       </li>
       <li className="flex justify-center items-center">
         <p className="text-center w-[100%] ml-2 text-xs h-8 p-1   ">
-          Cryptic rev.2.0
+          Cryptic rev.3.0
         </p>
       </li>
     </ul>

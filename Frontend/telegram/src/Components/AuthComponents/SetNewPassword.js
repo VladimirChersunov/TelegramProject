@@ -1,16 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
 import { useState, useEffect } from "react";
-import { setNewPassword } from "../../Actions/authService";
+import { setNewPassword } from "../../Services/authService";
 
 export function SetNewPassword({ email }) {
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordValid, setPasswordValid] = useState(true);
-
-  const [passwordError, setPasswordError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

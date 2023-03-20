@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { register } from "../../Actions/authServiceG";
+import { register } from "../../Actions/axiosCreateG";
 
 function RegistrationForm() {
   const [username, setUsername] = useState("");
@@ -49,7 +49,7 @@ function RegistrationForm() {
       }
       try {
         // Отправляем данные на сервер
-        const response = await authService.register(username, email, password);
+        const response = await axiosCreate.register(username, email, password);
         setIsRegistrationSuccess(true);
         console.log("Данные отправлены: ", response.data);
       } catch (error) {

@@ -31,8 +31,8 @@ export function SerchInput(props) {
           value={value}
           onClick={handleSerchWindow}
           onChange={(e) => {
-            setValExist(true);
-            setValue(e.target.value);
+            setValExist((prev)=>true);
+            setValue((prev)=>e.target.value);
           }}
         />
         <div className="w-10">

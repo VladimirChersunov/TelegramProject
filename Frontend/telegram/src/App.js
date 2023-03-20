@@ -21,6 +21,11 @@ function App() {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
 
+  const setJwtToken = (props) => {
+    console.log(props)
+    setToken((prev)=>props)
+  }
+
   const signUpData = ({ username, email, password, code }) => {
     setUsername((prevUsername)=>username);
     setPassword((prevPassword)=>password);
@@ -55,7 +60,7 @@ function App() {
           path="/setnewpassword"
           element={<SetNewPassword email={email} />}
         />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn setJwtToken={setJwtToken}/>} />
         <Route
           path="/recovery"
           element={<EnterEmail recoveryData={recoveryData} />}

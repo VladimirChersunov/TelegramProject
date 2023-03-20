@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { login } from "../../Actions/authService";
+import { useState} from "react";
+import { login } from "../../Services/authService";
 import { useNavigate } from "react-router-dom";
 import { PreviewClose } from "../Icons/PreviewClose";
 import { PreviewOpen } from "../Icons/PreviewOpen";
 
 
 
-function LoginForm() {
+function LoginForm(props) {
 
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState(""); 
@@ -24,7 +24,7 @@ function LoginForm() {
         setError(null);
        
        if(data.user.id){
-        
+        props.setJwtToken(localStorage.getItem('token'))
         navigate("/main");
        }
       } catch (error) {

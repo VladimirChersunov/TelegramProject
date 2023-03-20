@@ -1,7 +1,7 @@
 import { About } from "./About";
 import { LeftHeader } from "./LeftHeader";
 import { RadioChatList } from "./RadioChatList";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { ReportBug } from "./ReportBug";
 import { SettingWindow } from "./SettingWindow";
 import { ContactWindow } from "./ContactWindow";
@@ -12,6 +12,7 @@ import { SearchWindow } from "./SearchWindow";
 import { StartPrivate } from "./StartPrivate";
 
 export function LeftColumn(props) {
+
   const [aboutState, setAboutState] = useState(false);
   const [chatlistState, setChatlistState] = useState(true);
   const [bugReportState, setBugReport] = useState(false);
@@ -25,7 +26,7 @@ export function LeftColumn(props) {
   const [checkedContacts, setCheckedContacts] = useState([]);
   const [startPrivateState, setStartPrivateState] = useState(false);
 
-  useEffect(() => {}, []);
+  
 
   const visibleAbout = (props) => {
     setAboutState(props);
@@ -34,7 +35,9 @@ export function LeftColumn(props) {
 
   const visibleBugReport = (props) => {
     setBugReport(props);
+    
     setChatlistState(!props);
+    
   };
 
   const visibleSetting = (props) => {
@@ -87,7 +90,7 @@ export function LeftColumn(props) {
     >
       {aboutState && <About visibleAbout={visibleAbout} />}
       {bugReportState && <ReportBug visibleBugReport={visibleBugReport} />}
-      {settingState && <SettingWindow visibleSetting={visibleSetting} />}
+      {settingState && <SettingWindow visibleSetting={visibleSetting} currentUser={props.currentUser}/>}
       {contactState && (
         <ContactWindow
           visibleContact={visibleContact}

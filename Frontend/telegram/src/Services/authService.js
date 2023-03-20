@@ -1,14 +1,11 @@
-import axios from "axios";
-
-const authService = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
-});
+import axiosCreate from "./axiosCreate";
 
 export const login = async (login, password) => {
   try {
-    const response = await authService.post("Users/login", { login, password });
+    const response = await axiosCreate.post("Users/login", { login, password });
     localStorage.setItem("token", response.data.jwtToken);
-    console.log(response.data.jwtToken)
+    localStorage.setItem("username", response.data.user.userName);
+
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -17,7 +14,7 @@ export const login = async (login, password) => {
 
 export const register = async (username, email, password) => {
   try {
-    const response = await authService.post("Users/register", {
+    const response = await axiosCreate.post("Users/register", {
       username,
       email,
       password,
@@ -32,7 +29,7 @@ export const register = async (username, email, password) => {
 
 export const emailCheck = async (email) => {
   try {
-    const response = await authService.post("Email/sendcode", { email });
+    const response = await axiosCreate.post("Email/sendcode", { email });
     return response.data;
   } catch (error) {
     console.log("error");
@@ -42,7 +39,7 @@ export const emailCheck = async (email) => {
 
 export const emailUnique = async (email, username) => {
   try {
-    const response = await authService.post("Email/unique", {
+    const response = await axiosCreate.post("Email/unique", {
       email,
       username,
     });
@@ -56,10 +53,11 @@ export const emailUnique = async (email, username) => {
 
 export const setNewPassword = async (email, newPassword) => {
   try {
-    
-    const response = await authService.patch("Users/setpassword", { email, newPassword })
-     
-   
+    const response = await axiosCreate.patch("Users/setpassword", {
+      email,
+      newPassword,
+    });
+
     return response.data;
   } catch (error) {
     console.log("error");
@@ -71,7 +69,7 @@ export const getAuthenticatedUser = async () => {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await authService.get("Users/me", {
+    const response = await axiosCreate.get("Users/me", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -87,12 +85,10 @@ export const getAuthenticatedUser = async () => {
 export const tokenCheck = async () => {
   try {
     const token = localStorage.getItem("token");
-    const response = await authService.post("Email/validatetoken", { token });   
+    const response = await axiosCreate.post("Email/validatetoken", { token });
     return response.data;
   } catch (error) {
     console.log("error");
     throw new Error(error.response.data.message);
   }
 };
-
-

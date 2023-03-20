@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { tokenCheck } from "./authService";
+import { tokenCheck } from "./axiosCreate";
 import { useEffect } from "react";
 
 export const useLogout = async() => {
