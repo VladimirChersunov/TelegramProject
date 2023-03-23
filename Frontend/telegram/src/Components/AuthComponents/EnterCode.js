@@ -96,21 +96,16 @@ export function EnterCode(props) {
 
   const handleRegister = async () => {
     if (code) {
-      console.log(inCode);
-      console.log(code);
       if (inCode === code) {
         if (username) {
           if (username.length > 4) {
             try {
               const data = await register(username, email, password);
               setError((prev) => null);
-              console.log(data.user.id);
+
               if (data.user.id) {
-                localStorage.removeItem("email");
-                localStorage.removeItem("username");
-                localStorage.removeItem("password");
                 localStorage.removeItem("code");
-                navigate("/main");
+                navigate("/signin");
               }
             } catch (error) {
               setError((prev) => error.message);
@@ -118,9 +113,7 @@ export function EnterCode(props) {
           }
         } else {
           setError((prev) => null);
-          localStorage.removeItem("username");
-          localStorage.removeItem("password");
-          localStorage.removeItem("code");
+
           navigate("/setnewpassword");
         }
       } else {

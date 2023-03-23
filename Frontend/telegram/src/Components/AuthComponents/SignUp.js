@@ -1,16 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
 import { useState, useEffect } from "react";
-import { emailCheck, emailUnique} from "../../Services/authService";
+import { emailCheck, emailUnique } from "../../Services/authService";
 
 export function SignUp(props) {
   const navigate = useNavigate();
 
-  
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");  
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -34,8 +33,6 @@ export function SignUp(props) {
     if (password !== confirmPassword) {
       setConfirmPasswordError("Password mismatch");
     } else {
-      
-
       if (!emailRegex.test(email)) {
         setEmailError("Please enter a valid email address.");
         return;
@@ -56,11 +53,10 @@ export function SignUp(props) {
       setEmailError("");
       setUsernameError("");
       try {
-        setIsLoading(true); 
-        console.log(email);
-        console.log(username);
+        setIsLoading(true);
+
         const data = await emailUnique(email, username);
-        console.log(data.unique);
+
         setError(null);
 
         if (data.unique) {
@@ -73,8 +69,7 @@ export function SignUp(props) {
         }
       } catch (error) {
         setError(error.message);
-      }
-      finally {
+      } finally {
         setIsLoading(false); // установить состояние isLoading в значение false
       }
     }
@@ -96,7 +91,11 @@ export function SignUp(props) {
           required
           className={`bg-skin-fill-inverted text-[16px]  placeholder:text-skin-muted
           border-b outline-none
-          ${emailError ? 'text-skin-error border-skin-border-error' : 'text-skin-inverted border-skin-border-inverted' } 
+          ${
+            emailError
+              ? "text-skin-error border-skin-border-error"
+              : "text-skin-inverted border-skin-border-inverted"
+          } 
            mt-[10px] pl-2 pb-[10px]`}
         />
         <div className="h-[20px]">
@@ -115,7 +114,11 @@ export function SignUp(props) {
           required
           maxLength="20"
           className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted  
-          ${usernameError ? 'text-skin-error border-skin-border-error' : 'text-skin-inverted border-skin-border-inverted' }
+          ${
+            usernameError
+              ? "text-skin-error border-skin-border-error"
+              : "text-skin-inverted border-skin-border-inverted"
+          }
           border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px] `}
         />
         <div className="h-[20px]">
@@ -135,7 +138,11 @@ export function SignUp(props) {
           required
           maxLength="20"
           className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted 
-          ${passwordError ? 'text-skin-error border-skin-border-error' : 'text-skin-inverted border-skin-border-inverted' }
+          ${
+            passwordError
+              ? "text-skin-error border-skin-border-error"
+              : "text-skin-inverted border-skin-border-inverted"
+          }
           border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px]`}
         />
         <div className="h-[20px]">
@@ -155,7 +162,11 @@ export function SignUp(props) {
           required
           maxLength="20"
           className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted  
-          ${confirmPasswordError ? 'text-skin-error border-skin-border-error' : 'text-skin-inverted border-skin-border-inverted' }
+          ${
+            confirmPasswordError
+              ? "text-skin-error border-skin-border-error"
+              : "text-skin-inverted border-skin-border-inverted"
+          }
           border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px]`}
         />
         <div className="h-[20px]">
@@ -173,13 +184,13 @@ export function SignUp(props) {
         )}
 
         <button
-        disabled={isLoading}
+          disabled={isLoading}
           onSubmit={handleSubmit}
           onClick={handleSubmit}
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-[36px] tracking-normal"
         >
-           {isLoading ? "Loading..." : "Next"}
+          {isLoading ? "Loading..." : "Next"}
         </button>
       </div>
     </div>

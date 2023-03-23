@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { MessageContainer } from "./MessageContainer/MessageContainer";
 import { ClearContainer } from "./MessageContainer/ClearContainer";
-import { LeftColumn } from "./SideBar/CollumnContainer";
+import { CollumnContainer } from "./SideBar/CollumnContainer";
 import { InfoContainer } from "./InfoContainer/InfoContainer";
 import { useNavigate } from "react-router-dom";
 import { updateInfo } from "../Services/userServices";
@@ -16,24 +16,31 @@ export function MainPage(props) {
     const handleBackButton = (event) => {
       navigate("/main");
     };
-    setCurrentUser((prev)=>getCurrentUser()); 
     window.addEventListener("popstate", handleBackButton);
+    const getData = async () => {
+      try {
+        setIsLoading(true);
+        const startTime = performance.now();
+        const data = await updateInfo();
+        const endTime = performance.now();
+        setCurrentUser(data.user);
+        const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
+        //console.log(`Response time: ${responseTime}ms`);
+      } catch {
+        console.log("error");
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    // Получать данные с сервера каждые 3 секунды
+    const intervalId = setInterval(() => {
+      getData();
+    }, 3000);
+
+    // Очищать интервал при размонтировании компонента
+    return () => clearInterval(intervalId);
   }, []);
-
-  const getCurrentUser = async() => {
-    try {
-      setIsLoading(true);
-      const data = await updateInfo()
-      console.log(data)
-     return data
-    } catch {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
- 
 
   const messages = [
     {
@@ -220,8 +227,8 @@ export function MainPage(props) {
       className={`${theme} dark:bg-skin-fill-inverted flex flex-row min-h-screen dark:text-skin-inverted dark:border-skin-border-inverted
       text-skin-base border-skin-border-base bg-skin-fill overflow-hidden font-montserrat`}
     >
-      <LeftColumn
-      currentUser={currentUser}
+      <CollumnContainer
+        currentUser={currentUser}
         chats={chats}
         currentChat={currentChat}
         darkMode={props.darkMode}

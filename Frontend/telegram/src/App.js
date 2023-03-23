@@ -15,34 +15,33 @@ function App() {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [userData, setUserData] = useState({});
-  const[token, setToken] = useState(localStorage.getItem('token'))
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
 
   const setJwtToken = (props) => {
-    console.log(props)
-    setToken((prev)=>props)
-  }
+    console.log(props);
+    setToken((prev) => props);
+  };
 
   const signUpData = ({ username, email, password, code }) => {
-    setUsername((prevUsername)=>username);
-    setPassword((prevPassword)=>password);
-    setEmail((prevEmail)=>email);
-    console.log(code)
-    setCode((prevCode)=>code.code);
+    setUsername((prevUsername) => username);
+    setPassword((prevPassword) => password);
+    setEmail((prevEmail) => email);
+    setCode((prevCode) => code.code);
   };
 
   const recoveryData = (props) => {
-    setEmail((prevEmail)=>props.email);    
-    setCode((prevCode)=>props.code);
-    setUsername((prevUsername)=>"");
-    setPassword((prevPassword)=>"");
+    setEmail((prevEmail) => props.email);
+    setCode((prevCode) => props.code);
+    setUsername((prevUsername) => "");
+    setPassword((prevPassword) => "");
   };
 
   const mainUserData = (props) => {
-    setUserData((prev)=>props)
+    setUserData((prev) => props);
   };
 
   return (
@@ -50,22 +49,34 @@ function App() {
       <Routes>
         <Route
           path="/main"
-          element={token ?
-            <MainPage darkMode={darkMode} toggleDarkMode={toggleDarkMode} userData={userData}/>
-            : <SignIn />
+          element={
+            token ? (
+              <MainPage
+                darkMode={darkMode}
+                toggleDarkMode={toggleDarkMode}
+                userData={userData}
+              />
+            ) : (
+              <SignIn />
+            )
           }
         ></Route>
-        <Route path="/" element={ <StartPage /> } />
+        <Route path="/" element={<StartPage />} />
         <Route
           path="/setnewpassword"
           element={<SetNewPassword email={email} />}
         />
-        <Route path="/signin" element={<SignIn setJwtToken={setJwtToken}/>} />
+        <Route path="/signin" element={<SignIn setJwtToken={setJwtToken} />} />
         <Route
           path="/recovery"
           element={<EnterEmail recoveryData={recoveryData} />}
         />
-        <Route path="/signup" element={<SignUp signUpData={signUpData} mainUserData={mainUserData}/>} />
+        <Route
+          path="/signup"
+          element={
+            <SignUp signUpData={signUpData} mainUserData={mainUserData} />
+          }
+        />
         <Route
           path="/entercode"
           element={
@@ -78,7 +89,6 @@ function App() {
             />
           }
         />
-       
       </Routes>
     </div>
   );

@@ -3,7 +3,7 @@ import axiosCreate from "./axiosCreate";
 export const updateInfo = async () => {
   const login = localStorage.getItem("username");
   const token = localStorage.getItem("token");
-  if(login && token){
+  if (login && token) {
     try {
       const response = await axiosCreate.post("Users/updateinfo", {
         token,
@@ -14,9 +14,7 @@ export const updateInfo = async () => {
       console.log("error");
       throw new Error(error.response.data.message);
     }
+  } else {
+    console.log("missing data");
   }
-  else{
-    console.log("missing data")
-  }
-
 };

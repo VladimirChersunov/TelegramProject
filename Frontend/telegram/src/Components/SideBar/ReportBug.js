@@ -1,10 +1,8 @@
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
-import {useState } from "react";
+import { useState } from "react";
 import { bugReport } from "../../Services/bugReportService";
 
 export function ReportBug(props) {
-  
-
   const handleClickBack = () => {
     props.visibleBugReport(false);
   };
@@ -20,9 +18,9 @@ export function ReportBug(props) {
 
   const handleSend = async (event) => {
     event.preventDefault();
-    setSubjectError('')
-    setMessageError('')
-    setError('')
+    setSubjectError("");
+    setMessageError("");
+    setError("");
     if (!subjectRegex.test(subject)) {
       setSubjectError("Subject must be between 6 and 20 characters");
       return;
@@ -37,12 +35,11 @@ export function ReportBug(props) {
       const data = await bugReport(username, subject, message);
       console.log(data);
       setError(null);
-      
     } catch (error) {
       setError(error.message);
     } finally {
       setIsLoading(false);
-      handleClickBack()
+      handleClickBack();
     }
   };
 
@@ -88,7 +85,6 @@ export function ReportBug(props) {
                 {subjectError}
               </label>
             )}
-
 
             <div className="mb-4">
               <label

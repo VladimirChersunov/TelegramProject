@@ -1,7 +1,7 @@
 import { About } from "./About";
 import { LeftHeader } from "./LeftHeader";
 import { RadioChatList } from "./RadioChatList";
-import { useState} from "react";
+import { useState } from "react";
 import { ReportBug } from "./ReportBug";
 import { SettingWindow } from "./SettingWindow";
 import { ContactWindow } from "./ContactWindow";
@@ -11,8 +11,7 @@ import { AddNewChat } from "./AddNewChat";
 import { SearchWindow } from "./SearchWindow";
 import { StartPrivate } from "./StartPrivate";
 
-export function LeftColumn(props) {
-
+export function CollumnContainer(props) {
   const [aboutState, setAboutState] = useState(false);
   const [chatlistState, setChatlistState] = useState(true);
   const [bugReportState, setBugReport] = useState(false);
@@ -26,8 +25,6 @@ export function LeftColumn(props) {
   const [checkedContacts, setCheckedContacts] = useState([]);
   const [startPrivateState, setStartPrivateState] = useState(false);
 
-  
-
   const visibleAbout = (props) => {
     setAboutState(props);
     setChatlistState(!props);
@@ -35,9 +32,8 @@ export function LeftColumn(props) {
 
   const visibleBugReport = (props) => {
     setBugReport(props);
-    
+
     setChatlistState(!props);
-    
   };
 
   const visibleSetting = (props) => {
@@ -84,13 +80,20 @@ export function LeftColumn(props) {
     console.log(props);
   };
 
+  //console.log(props.currentUser.chats)
+
   return (
     <div
       className={`h-screen w-1/4 flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted   border-solid min-w-[300px]`}
     >
       {aboutState && <About visibleAbout={visibleAbout} />}
       {bugReportState && <ReportBug visibleBugReport={visibleBugReport} />}
-      {settingState && <SettingWindow visibleSetting={visibleSetting} currentUser={props.currentUser}/>}
+      {settingState && (
+        <SettingWindow
+          visibleSetting={visibleSetting}
+          currentUser={props.currentUser}
+        />
+      )}
       {contactState && (
         <ContactWindow
           visibleContact={visibleContact}
@@ -98,11 +101,13 @@ export function LeftColumn(props) {
         />
       )}
 
-      {startPrivateState &&
-       <StartPrivate visibleStartPrivate={visibleStartPrivate}
-       contacts={props.contacts}      
-       chatType={chatType}
-       />}
+      {startPrivateState && (
+        <StartPrivate
+          visibleStartPrivate={visibleStartPrivate}
+          contacts={props.contacts}
+          chatType={chatType}
+        />
+      )}
 
       {addMembersState && (
         <AddMembers
@@ -148,7 +153,7 @@ export function LeftColumn(props) {
             visibleAddMessage={visibleAddMessage}
             chatTypeCallback={chatTypeCallback}
             visibleAddmembers={visibleAddmembers}
-            visibleStartPrivate={ visibleStartPrivate}
+            visibleStartPrivate={visibleStartPrivate}
           />
         </div>
       )}

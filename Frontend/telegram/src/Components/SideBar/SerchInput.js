@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { SearchIcon } from "../Icons/SearchIcon";
 
-export function SerchInput(props) {
+export function SerchInput({visibleSearchWindow, searchInputData}) {
   const [valExist, setValExist] = useState(false);
   const [value, setValue] = useState("");
+  
 
   useEffect(() => {
     if (value.length > 0) {
@@ -12,10 +13,12 @@ export function SerchInput(props) {
     } else {
       setValExist(false);
     }
+
+   searchInputData(value)
   }, [value]);
 
   const handleSerchWindow = () => {
-    props.visibleSearchWindow(true);
+    visibleSearchWindow(true);
   };
 
   return (
@@ -31,8 +34,8 @@ export function SerchInput(props) {
           value={value}
           onClick={handleSerchWindow}
           onChange={(e) => {
-            setValExist((prev)=>true);
-            setValue((prev)=>e.target.value);
+            setValExist((prev) => true);
+            setValue((prev) => e.target.value);
           }}
         />
         <div className="w-10">

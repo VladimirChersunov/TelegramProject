@@ -1,5 +1,5 @@
 import { MenuButton } from "./MenuButton";
-import { SerchInput } from "./SerchInput";
+import { SerchInputInActive } from "./SearchInputInActive";
 
 export function LeftHeader(props) {
  
@@ -13,8 +13,8 @@ export function LeftHeader(props) {
         visibleSetting={props.visibleSetting}
         visibleContact={props.visibleContact}
       />
-
-      <SerchInput visibleSearchWindow={props.visibleSearchWindow}/>
+<SerchInputInActive visibleSearchWindow={props.visibleSearchWindow}/>
+      
     </div>
   );
 }

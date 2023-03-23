@@ -1,7 +1,6 @@
 import { updateInfo } from "../../Services/userServices";
 import { ContactsCard } from "../ContactsCard";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
-import { useEffect } from "react";
 
 export function ContactWindow(props) {
   const handleClickBack = () => {
@@ -9,18 +8,13 @@ export function ContactWindow(props) {
   };
 
   console.log(props);
+
   const getInfo = async () => {
     try {
       const data = await updateInfo();
-      console.log(data)
-    } catch {
-
-    }
+      console.log(data);
+    } catch {}
   };
-
-  useEffect(() => {
-    getInfo()
-  }, []);
 
   return (
     <div className="flex flex-col justify-center">
