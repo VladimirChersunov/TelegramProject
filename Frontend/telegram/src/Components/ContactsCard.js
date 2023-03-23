@@ -1,15 +1,33 @@
 export function ContactsCard({ contact }) {
+  console.log(contact);
+
+  const handleCreateContact = () =>{
+
+  }
+
   return (
-    <div className="flex flex-row my-1 cursor-pointer ">
+    <div
+    onClick={handleCreateContact}
+    className="flex flex-row my-1 cursor-pointer items-center">
       <div className="align-middle content-center items-center place-content-center p-1">
-        <div className="rounded-full bg-purple-500 w-[40px] h-[40px] text-center p-1 text-2xl ">
-          {contact.image}
-        </div>
+        {contact.photo ? (
+          <img
+            src={""}
+            alt="logo"
+            className="rounded-full  h-[50px] w-[50px]"
+          />
+        ) : (
+          <div className="rounded-full   h-[50px] w-[50px] bg-purple-500 flex items-center justify-center">
+            <p className="text-2xl">
+              {contact.userName[0] + contact.userName[1]}
+            </p>
+          </div>
+        )}
       </div>
-      <div className="flex flex-col ml-2 cursor-pointer">
-        <label className="font-bold pl-2 text-md cursor-pointer">{contact.username}</label>
-        <label className="text-xs opacity-70 cursor-pointer">{contact.lastSeen}</label>
-      </div>
+
+      <p className="font-bold pl-2 text-xl cursor-pointer">
+        {contact.userName}
+      </p>
     </div>
   );
 }

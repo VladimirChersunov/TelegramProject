@@ -5,6 +5,7 @@ import { CollumnContainer } from "./SideBar/CollumnContainer";
 import { InfoContainer } from "./InfoContainer/InfoContainer";
 import { useNavigate } from "react-router-dom";
 import { updateInfo } from "../Services/userServices";
+import { userLogout } from "../Services/userLogout";
 
 export function MainPage(props) {
   const navigate = useNavigate();
@@ -20,11 +21,16 @@ export function MainPage(props) {
     const getData = async () => {
       try {
         setIsLoading(true);
-        const startTime = performance.now();
+        const logout = await userLogout()
+       if(logout){
+        navigate('/signin')
+       }
+        //const startTime = performance.now();
         const data = await updateInfo();
-        const endTime = performance.now();
+        //const endTime = performance.now();
+       
         setCurrentUser(data.user);
-        const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
+        //const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
         //console.log(`Response time: ${responseTime}ms`);
       } catch {
         console.log("error");

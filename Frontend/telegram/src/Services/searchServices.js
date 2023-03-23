@@ -2,7 +2,6 @@ import axiosCreate from "./axiosCreate";
 
 export const getSearchResult = async (data) => {
   const token = localStorage.getItem("token");
-  console.log(token )
 
   if (token) {
     try {
