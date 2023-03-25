@@ -2,7 +2,7 @@ import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { SerchInput } from "./SerchInput";
 import { useEffect, useState } from "react";
 import { getSearchResult } from "../../Services/searchServices";
-import { ContactsCard } from "../ContactsCard";
+import { ContactsCard } from "./ContactsCard";
 import { ChatsCard } from "./ChatCard";
 
 export function SearchWindow(props) {
@@ -10,6 +10,7 @@ export function SearchWindow(props) {
   const [dataInput, setDataInput] = useState("");
   const [searchResults, setSearchResults] = useState({});
   const [error, setError] = useState("");
+  const typeWindow = "search"
 
   const handleClickBack = () => {
     props.visibleSearchWindow(false);
@@ -33,8 +34,7 @@ export function SearchWindow(props) {
       }
     };
     getData();
-    console.log(searchResults);
-    console.log(searchResults.users);
+  
   }, [dataInput]);
 
   const searchInputData = (data) => {
@@ -63,14 +63,14 @@ export function SearchWindow(props) {
           )}
 
         {searchResults?.users?.length > 0 && (
-          <div className=" w-full fleex flex-col items-center justify-center">
+          <div className=" w-full flex flex-col items-center ">
             <p className="font-bold text-lg mb-2 text-center">Users</p>
-            {searchResults.users.map((user) => (
+            {searchResults.users.map((contact) => (
               <div
-                key={user.id}
-                className="flex flex-row items-center justify-between  p-2"
+                key={contact.id}
+                className="flex flex-row items-center   p-2"
               >
-                <ContactsCard contact={user} />
+                <ContactsCard contact={contact} type={typeWindow}/>
               </div>
             ))}
           </div>
@@ -78,11 +78,11 @@ export function SearchWindow(props) {
 
         {searchResults?.chats?.length > 0 && (
           <div className=" w-full flex items-center flex-col">
-            <p className="font-bold text-lg mb-2 mt-4">Chats</p>
+            <p className="font-bold text-lg mb-2 text-center mt-4">Chats</p>
             {searchResults.chats.map((chat) => (
               <div
                 key={chat.id}
-                className="flex flex-row items-center justify-between  p-2"
+                className="flex flex-row items-center   p-2"
               >
                 <ChatsCard chat={chat} />
               </div>

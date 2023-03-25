@@ -7,6 +7,7 @@ import { EnterCode } from "./Components/AuthComponents/EnterCode";
 import { useState } from "react";
 import { EnterEmail } from "./Components/AuthComponents/EnterEmail";
 import { SetNewPassword } from "./Components/AuthComponents/SetNewPassword";
+import { SignUpFinish } from "./Components/AuthComponents/SignUpFinish";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -75,6 +76,12 @@ function App() {
           path="/signup"
           element={
             <SignUp signUpData={signUpData} mainUserData={mainUserData} />
+          }
+        />
+          <Route
+          path="/successful"
+          element={
+           <SignUpFinish/>
           }
         />
         <Route

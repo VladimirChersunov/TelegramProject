@@ -76,15 +76,16 @@ export function CollumnContainer(props) {
   };
 
   const handleCheckedContacts = (props) => {
-    setCheckedContacts((prevChecked) => props);
+    setCheckedContacts( props);
     console.log(props);
   };
 
-  //console.log(props.currentUser.chats)
+ 
 
   return (
     <div
-      className={`h-screen w-1/4 flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted   border-solid min-w-[300px]`}
+      className={`h-screen w-1/4 flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted items-center 
+       border-solid min-w-[300px] max-w-[350px]`}
     >
       {aboutState && <About visibleAbout={visibleAbout} />}
       {bugReportState && <ReportBug visibleBugReport={visibleBugReport} />}

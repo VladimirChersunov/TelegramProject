@@ -105,7 +105,7 @@ export function EnterCode(props) {
 
               if (data.user.id) {
                 localStorage.removeItem("code");
-                navigate("/signin");
+                navigate("/successful");
               }
             } catch (error) {
               setError((prev) => error.message);

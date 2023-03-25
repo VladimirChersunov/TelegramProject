@@ -1,29 +1,14 @@
-
-import art from "./../../Assets/art.jpg";
-import live from "./../../Assets/live.jpg";
-import arduino from "./../../Assets/arduino.jpg";
 import { useState, useRef, useEffect } from "react";
 import { ContextMenu } from "./RightContextOnChat";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 import { SavedIcon } from "../Icons/SavedIcon";
+import moment from 'moment';
+import 'moment/locale/ru';
 
 
 export function RadioElement({chat, currentChat, handleMuted}) {
-  let image;
-  switch (chat.id) {
-    case 1:
-      image = arduino;
-      break;
-    case 2:
-      image = live;
-      break;
-    case 4:
-      image = art;
-      break;
-    default:
-      break;
-  }
+  
   const contextRef = useRef();
   const [savedMessageState, setSavedMessageState] = useState(false);
   const [chatMuteStatus, setChatMuteStatus] = useState(false);
@@ -54,17 +39,17 @@ export function RadioElement({chat, currentChat, handleMuted}) {
  
 
   useEffect(() => {
-    if (chat.id === 0) {
+    if (chat.type === "Favorite") {
       setSavedMessageState(true);
     } else {
       setSavedMessageState(false);
     }
 
-    chat.messages.map((message, id) => {
-      if (message.seenTime === null) {
-        setUnseenCount((prev) => unseenCount + 1);
-      }      
-    }); 
+    // chat.messages.map((message, id) => {
+    //   if (message.seenTime === null) {
+    //     setUnseenCount((prev) => unseenCount + 1);
+    //   }      
+    // }); 
 
     setChatMuteStatus((prevStatus) => chat.muteStatus);
 
@@ -82,6 +67,14 @@ export function RadioElement({chat, currentChat, handleMuted}) {
       setShowContextMenu(false);
     }
   };
+
+  // Форматирование времени
+  const publishTimeFormatted = moment(chat.publishTime).calendar(null, {
+    sameDay: '[Today at] HH:mm',
+    lastDay: '[Yesterday at] HH:mm',
+    lastWeek: 'DD.MM.YYYY',
+    sameElse: 'DD.MM.YYYY'
+  });
 
   return (
     <div className=" w-[97%] m-auto   ">
@@ -106,7 +99,7 @@ export function RadioElement({chat, currentChat, handleMuted}) {
       <div>
         {chat.chatImage ? (
           <img
-            src={image}
+            src={""}
             alt="logo"
             className="rounded-full  h-[50px] w-[50px]"
           />
@@ -130,7 +123,7 @@ export function RadioElement({chat, currentChat, handleMuted}) {
           </div>
 
           <div className="">
-            <time className="mr-1 text-xs opacity-50">{chat.publishTime}</time>
+            <time className="mr-1 text-xs opacity-50">{publishTimeFormatted}</time>
           </div>
         </div>
 
@@ -141,7 +134,7 @@ export function RadioElement({chat, currentChat, handleMuted}) {
            dark:border-skin-border-inverted
           text-xs h-5 w-5"
           >
-            {unseenCount}
+           
           </label>}
         </div>
       </div>

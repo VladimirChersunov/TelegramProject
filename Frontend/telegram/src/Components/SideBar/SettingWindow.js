@@ -40,7 +40,7 @@ export function SettingWindow(props) {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-[350px]">
       <div className="flex flex-row items-center">
         <button
           className="ml-2 mt-4 rounded-full hover:bg-skin-button-accent-hover h-[50px] w-[50px] flex

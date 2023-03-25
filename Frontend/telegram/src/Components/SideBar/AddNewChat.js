@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ContactsCard } from "../ContactsCard";
+import { ContactsCard } from "./ContactsCard";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { EnterIcon } from "../Icons/EnterIcon";
 import CustomFileInput from "./CustomFileInput";
