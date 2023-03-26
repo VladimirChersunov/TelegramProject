@@ -9,7 +9,7 @@ export function MessageTools(props) {
   const [group, setGroup] = useState(false);
 
   const [chat, setChat] = useState(false);
-  console.log();
+ 
   useEffect(() => {
     if (props.chat.type === "channel") {
       setGroup((prevGroup) => false);

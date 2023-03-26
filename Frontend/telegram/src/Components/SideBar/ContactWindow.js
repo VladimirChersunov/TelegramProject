@@ -18,7 +18,7 @@ export function ContactWindow({contacts, visibleContact}) {
   
 
   return (
-    <div className="flex flex-col w-[350px]">
+    <div className="flex flex-col w-[350px] w-min-[350px]">
       <div className="flex flex-row items-center justify-start">
         <button
           className="ml-2 mt-2 rounded-full hover:bg-skin-button-accent-hover h-[50px] w-[50px] flex

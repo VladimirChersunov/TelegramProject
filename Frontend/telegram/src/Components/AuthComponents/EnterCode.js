@@ -87,11 +87,10 @@ export function EnterCode(props) {
     setError((prev) => null);
     setButtonDisabled((prev) => true);
     setTimeLeft((prev) => 10);
-    console.log(email);
+
     const data = await emailCheck(email);
     setInCode((prev) => data.code);
     localStorage.setItem("code", data.code);
-    console.log(data.code);
   };
 
   const handleRegister = async () => {

@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { ContactsContextMenu } from "../ContactsContextMenu";
+import { LastSeen } from "./LastSeen";
 
 export function ContactsCard({ contact, type }) {
+  console.log(contact);
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
@@ -40,7 +42,7 @@ export function ContactsCard({ contact, type }) {
       onContextMenu={handleContextMenu}
       onClick={handleContactClick}
       className="flex flex-row my-1 w-[300px] h-[60px] cursor-pointer items-center mb-2  hover:bg-skin-button-accent-hover pl-2
-       rounded-lg border-b border-skin-border-base dark:border-skin-border-inverted"
+       border-b border-skin-border-base dark:border-skin-border-inverted rounded-[4px]"
     >
       <div className="align-middle content-center items-center place-content-center p-1">
         {contact.photo ? (
@@ -51,8 +53,8 @@ export function ContactsCard({ contact, type }) {
           />
         ) : (
           <div className="rounded-full   h-[40px] w-[40px] bg-purple-500 flex items-center justify-center select-none">
-            <p className="text-2xl">
-              {contact.userName[0] + contact.userName[1]}
+            <p className="text-xl">
+              {contact.userName[0].toUpperCase() + contact.userName[1].toUpperCase()}
             </p>
           </div>
         )}
@@ -66,10 +68,13 @@ export function ContactsCard({ contact, type }) {
           type={type}
         />
       )}
-
-      <p className="font-bold pl-2 text-xl cursor-pointer">
-        {contact.userName}
-      </p>
+      <div className="flex flex-col items-start ml-3">
+        <p className="font-bold pl-2 text-xl cursor-pointer">
+          {contact.userName}
+        </p>
+        
+        <LastSeen lastOnline={contact.lastOnline}/>
+      </div>
     </div>
   );
 }

@@ -5,23 +5,25 @@ import { getSearchResult } from "../../Services/searchServices";
 import { ContactsCard } from "./ContactsCard";
 import { ChatsCard } from "./ChatCard";
 
-export function SearchWindow(props) {
+export function SearchWindow({ visibleSearchWindow }) {
   const [isLoading, setIsLoading] = useState(false);
   const [dataInput, setDataInput] = useState("");
   const [searchResults, setSearchResults] = useState({});
   const [error, setError] = useState("");
-  const typeWindow = "search"
+  const typeWindow = "search";
 
   const handleClickBack = () => {
-    props.visibleSearchWindow(false);
+    visibleSearchWindow(false);
   };
 
+  
   useEffect(() => {
     const getData = async () => {
       if (dataInput.length >= 3) {
         try {
           setIsLoading(true);
           const result = await getSearchResult(dataInput);
+
           setSearchResults(result);
         } catch (error) {
           console.error(error);
@@ -34,7 +36,6 @@ export function SearchWindow(props) {
       }
     };
     getData();
-  
   }, [dataInput]);
 
   const searchInputData = (data) => {
@@ -51,16 +52,27 @@ export function SearchWindow(props) {
           <BackArrowIcon />
         </button>
         <SerchInput
-          visibleSearchWindow={props.visibleSearchWindow}
+          visibleSearchWindow={visibleSearchWindow}
           searchInputData={searchInputData}
         />
       </div>
 
       <div className="flex flex-col items-center justify-center mt-10 w-full">
         {searchResults?.users?.length === 0 &&
-          searchResults?.chats?.length === 0 && (
+        searchResults?.chats?.length === 0 ? (
+          <div>
             <p className="font-bold text-lg text-center">Nothing found yet</p>
-          )}
+          </div>
+        ) : (
+          <div>
+            {!(searchResults?.users?.length > 0) &&
+              !(searchResults?.chats?.length > 0) && (
+                <p className="font-bold text-lg text-center">
+                  Enter your request
+                </p>
+              )}
+          </div>
+        )}
 
         {searchResults?.users?.length > 0 && (
           <div className=" w-full flex flex-col items-center ">
@@ -70,7 +82,7 @@ export function SearchWindow(props) {
                 key={contact.id}
                 className="flex flex-row items-center   p-2"
               >
-                <ContactsCard contact={contact} type={typeWindow}/>
+                <ContactsCard contact={contact} type={typeWindow} />
               </div>
             ))}
           </div>
@@ -80,10 +92,7 @@ export function SearchWindow(props) {
           <div className=" w-full flex items-center flex-col">
             <p className="font-bold text-lg mb-2 text-center mt-4">Chats</p>
             {searchResults.chats.map((chat) => (
-              <div
-                key={chat.id}
-                className="flex flex-row items-center   p-2"
-              >
+              <div key={chat.id} className="flex flex-row items-center   p-2">
                 <ChatsCard chat={chat} />
               </div>
             ))}

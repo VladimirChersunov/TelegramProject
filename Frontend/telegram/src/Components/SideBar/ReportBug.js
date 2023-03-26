@@ -33,7 +33,7 @@ export function ReportBug(props) {
       setIsLoading(true);
       const username = localStorage.getItem("username");
       const data = await bugReport(username, subject, message);
-      console.log(data);
+     
       setError(null);
     } catch (error) {
       setError(error.message);
@@ -44,7 +44,7 @@ export function ReportBug(props) {
   };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col w-[350px] w-min-[350px] justify-center">
       <button
         className="ml-4 mt-4 rounded-full hover:bg-skin-button-accent-hover h-[50px] w-[50px] flex
          justify-center items-center"

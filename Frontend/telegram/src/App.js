@@ -22,8 +22,7 @@ function App() {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
 
-  const setJwtToken = (props) => {
-    console.log(props);
+  const setJwtToken = (props) => {   
     setToken((prev) => props);
   };
 

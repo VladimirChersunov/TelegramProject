@@ -10,6 +10,7 @@ import { AddNewMessage } from "./AddNewMessage";
 import { AddNewChat } from "./AddNewChat";
 import { SearchWindow } from "./SearchWindow";
 import { StartPrivate } from "./StartPrivate";
+import { EditProfile } from "./EditProfile";
 
 export function CollumnContainer(props) {
   const [aboutState, setAboutState] = useState(false);
@@ -24,6 +25,8 @@ export function CollumnContainer(props) {
   const [chatType, setChatType] = useState("");
   const [checkedContacts, setCheckedContacts] = useState([]);
   const [startPrivateState, setStartPrivateState] = useState(false);
+  const [editState, setEditState] = useState(false);
+
 
   const visibleAbout = (props) => {
     setAboutState(props);
@@ -32,7 +35,6 @@ export function CollumnContainer(props) {
 
   const visibleBugReport = (props) => {
     setBugReport(props);
-
     setChatlistState(!props);
   };
 
@@ -77,15 +79,19 @@ export function CollumnContainer(props) {
 
   const handleCheckedContacts = (props) => {
     setCheckedContacts( props);
-    console.log(props);
+    
   };
 
+  const visibleEdit = (props) => {    
+    setEditState(props);
+    setSettingState(!props);
+  };
  
 
   return (
     <div
-      className={`h-screen w-1/4 flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted items-center 
-       border-solid min-w-[300px] max-w-[350px]`}
+      className={`h-screen  flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted items-center 
+       border-solid min-w-[350px] max-w-[400px]`}
     >
       {aboutState && <About visibleAbout={visibleAbout} />}
       {bugReportState && <ReportBug visibleBugReport={visibleBugReport} />}
@@ -93,6 +99,7 @@ export function CollumnContainer(props) {
         <SettingWindow
           visibleSetting={visibleSetting}
           currentUser={props.currentUser}
+          visibleEdit={visibleEdit}
         />
       )}
       {contactState && (
@@ -109,6 +116,8 @@ export function CollumnContainer(props) {
           chatType={chatType}
         />
       )}
+
+     {editState && <EditProfile visibleEdit={visibleEdit}/>}
 
       {addMembersState && (
         <AddMembers

@@ -35,7 +35,7 @@ export function MainPage(props) {
         const data = await updateInfo();
         //const endTime = performance.now();
 
-        //console.log(data.chats);
+       
         setChats(data.chats)
         setContacts(data.contacts)
         setCurrentUser(data.user);

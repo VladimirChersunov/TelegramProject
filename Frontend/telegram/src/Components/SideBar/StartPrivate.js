@@ -9,7 +9,7 @@ export function StartPrivate(props) {
   };
 
   const handleClick = () => {
-    console.log("click");
+    
   };
   return (
     <div className="flex flex-col justify-center">

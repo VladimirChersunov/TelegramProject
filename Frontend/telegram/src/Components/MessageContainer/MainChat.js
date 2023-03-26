@@ -1,8 +1,6 @@
 import { InputPanel } from "./InputPanel";
-
 import { Message } from "./Message";
-import { useEffect, useState } from "react";
-import { ColorRAdioButton } from "../ColorRadioButton";
+import {useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
