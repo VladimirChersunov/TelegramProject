@@ -19,5 +19,24 @@ export const updateInfo = async () => {
   }
 };
 
+export const editProfile = async (id, age, email,  userName, about) => {
+  try {
+    const token = localStorage.getItem("token");
 
+    const response = await axiosCreate.patch(
+      "Users/patchuser",
+      { id,userName, email, about, age},
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.response.data.message);
+  }
+};
 

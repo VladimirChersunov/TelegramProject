@@ -30,7 +30,7 @@ export function ChatCreateButton(props) {
   return (
     <div
       ref={refCreateMenu}
-      className="p-1 pt-3 ml-[80%]  relative select-none"
+      className=" ml-[250px] mb-10   select-none bottom-0 fixed z-1"
     >
       <div
         onClick={toggleVisibleMenu}

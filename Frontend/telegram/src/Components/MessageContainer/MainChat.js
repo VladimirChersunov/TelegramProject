@@ -4,9 +4,9 @@ import {useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export function MainChat(props) {
+export function MainChat({chat,darkMode }) {
   const [type, setType] = useState(false);
-  const [currChat, setCurrChat] = useState(props.chat);
+  const [currChat, setCurrChat] = useState(chat);
   const [windwHeight, setWindwHeight] = useState("80%");
 
   const notify = () =>
@@ -33,19 +33,23 @@ export function MainChat(props) {
   // }, [props.chat.type]);
 
   return (
-    <div className="flex flex-col h-[100%]">
+    <div className="flex flex-col h-screen">
       <div
         className={`h-[${windwHeight}] mt-2 flex flex-col overflow-x-hidden text-skin-base `}
       >
-        {props.chat.messages.map((message) => (
-          <Message message={message} key={message.id} />
-        ))}
+        
         {/* <ColorRAdioButton changeThemes={props.changeThemes} /> */}
         {/* <button onClick={notify} className="w-[200px] h-[100px] bg-green-500">Notify test</button> */}
         <ToastContainer />
       </div>
 
-      <InputPanel darkMode={props.darkMode} />
+      <InputPanel darkMode={darkMode} />
     </div>
   );
 }
+
+// const ret = ( )=>{
+//   {chat.messages.map((message) => (
+//     <Message message={message} key={message.id} />
+//   ))}
+// }

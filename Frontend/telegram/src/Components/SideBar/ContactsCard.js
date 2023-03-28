@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
+import { createPrivate } from "../../Services/chatServices";
 import { ContactsContextMenu } from "../ContactsContextMenu";
 import { LastSeen } from "./LastSeen";
 
 export function ContactsCard({ contact, type }) {
-  console.log(contact);
+  
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
@@ -16,8 +17,19 @@ export function ContactsCard({ contact, type }) {
     setContextMenuY(event.pageY);
   };
 
-  const handleContactClick = (event) => {
+  const handleContactClick = async(event) => {
     setShowContextMenu(false);
+  
+    try{
+      const data = await createPrivate(contact.userName)
+      console.log(data)
+    }
+    catch(error){
+      console.log(error.data)
+    }
+    finally{
+      
+    }
   };
 
   useEffect(() => {

@@ -33,11 +33,11 @@ export function MainPage(props) {
         }
         //const startTime = performance.now();
         const data = await updateInfo();
+        //console.log(data)
         //const endTime = performance.now();
 
-       
-        setChats(data.chats)
-        setContacts(data.contacts)
+        setChats(data.chats);
+        setContacts(data.contacts);
         setCurrentUser(data.user);
         //const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
         //console.log(`Response time: ${responseTime}ms`);
@@ -56,45 +56,6 @@ export function MainPage(props) {
     // Очищать интервал при размонтировании компонента
     return () => clearInterval(intervalId);
   }, []);
-
-  const messages = [
-    {
-      id: 1,
-      username: "Admin",
-      data: "Text",
-      sendTime: "00:00",
-      deilveryStatus: true,
-      seenTime: null,
-    },
-    {
-      id: 2,
-      username: "User",
-      data: "Text",
-      sendTime: "00:00",
-      deilveryStatus: true,
-      seenTime: null,
-    },
-    {
-      id: 3,
-      username: "Admin",
-      data: "Text",
-      sendTime: "00:00",
-      deilveryStatus: true,
-      seenTime: "12:36",
-    },
-    {
-      id: 4,
-      username: "User",
-      data: "Text",
-      sendTime: "00:00",
-      deilveryStatus: true,
-      seenTime: "12:36",
-    },
-  ];
-
- 
-
-  
 
   useEffect(() => {
     if (currChat.id >= 0) {
@@ -117,40 +78,51 @@ export function MainPage(props) {
   };
 
   const currentChat = (chat) => {
+    
     setCurrentChat(chat);
   };
 
   const toggleRightColumn = (state) => {
     setMainRight(state);
   };
-
+  
   return (
     <div
-      className={`${theme} dark:bg-skin-fill-inverted flex flex-row min-h-screen dark:text-skin-inverted dark:border-skin-border-inverted
-      text-skin-base border-skin-border-base bg-skin-fill overflow-hidden font-montserrat`}
+      className={`${theme} dark:bg-skin-fill-inverted  min-h-screen dark:text-skin-inverted dark:border-skin-border-inverted
+      text-skin-base border-skin-border-base bg-skin-fill overflow-hidden font-montserrat flex`}
     >
-      <CollumnContainer
-        currentUser={currentUser}
-        chats={chats}
-        currentChat={currentChat}
-        darkMode={props.darkMode}
-        toggleDarkMode={props.toggleDarkMode}
-        handleMuted={handleMuted}
-        contacts={contacts}
-      />
-
-      {centrVisible && (
-        <MessageContainer
-          chat={currChat}
-          toggleRightColumn={toggleRightColumn}
-          changeThemes={changeThemes}
+      <div className="w-[350px]">
+        <CollumnContainer
+          currentUser={currentUser}
+          chats={chats}
+          currentChat={currentChat}
           darkMode={props.darkMode}
+          toggleDarkMode={props.toggleDarkMode}
+          handleMuted={handleMuted}
+          contacts={contacts}
         />
-      )}
+      </div>
+
+      <div className="flex-grow w-full">
+        {centrVisible && (
+          <MessageContainer
+            chat={currChat}
+            toggleRightColumn={toggleRightColumn}
+            changeThemes={changeThemes}
+            darkMode={props.darkMode}
+          />
+        )}
+        {!centrVisible && <ClearContainer />}
+      </div>
+
       {mainRiht && (
-        <InfoContainer toggleRightColumn={toggleRightColumn} chat={currChat} />
+        <div className="w-[350px]">
+          <InfoContainer
+            toggleRightColumn={toggleRightColumn}
+            chat={currChat}
+          />
+        </div>
       )}
-      {!centrVisible && <ClearContainer />}
     </div>
   );
 }

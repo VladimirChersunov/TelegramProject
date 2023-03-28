@@ -19,6 +19,7 @@ module.exports = {
           "button-accent-hover": "var(--color-button-accent-hover)",
           "button-muted": "var(--color-button-muted)",
           "button-inverted-hover": "var(--color-button-inverted-hover)",
+          "button-inverted": "var( --color-button-inverted)",
           
         },
       },
@@ -42,6 +43,7 @@ module.exports = {
   },
   plugins: [
      require("tailwindcss-autofill"),
+     require('tailwind-scrollbar'),
     ],
   darkMode:"class",
   variants: {

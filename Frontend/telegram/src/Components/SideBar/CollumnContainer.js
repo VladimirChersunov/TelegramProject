@@ -12,7 +12,15 @@ import { SearchWindow } from "./SearchWindow";
 import { StartPrivate } from "./StartPrivate";
 import { EditProfile } from "./EditProfile";
 
-export function CollumnContainer(props) {
+export function CollumnContainer({
+  chats,
+  contacts,
+  currentUser,
+  darkMode,
+  handleMuted,
+  toggleDarkMode,
+  currentChat,
+}) {
   const [aboutState, setAboutState] = useState(false);
   const [chatlistState, setChatlistState] = useState(true);
   const [bugReportState, setBugReport] = useState(false);
@@ -26,7 +34,6 @@ export function CollumnContainer(props) {
   const [checkedContacts, setCheckedContacts] = useState([]);
   const [startPrivateState, setStartPrivateState] = useState(false);
   const [editState, setEditState] = useState(false);
-
 
   const visibleAbout = (props) => {
     setAboutState(props);
@@ -78,50 +85,51 @@ export function CollumnContainer(props) {
   };
 
   const handleCheckedContacts = (props) => {
-    setCheckedContacts( props);
-    
+    setCheckedContacts(props);
   };
 
-  const visibleEdit = (props) => {    
+  const visibleEdit = (props) => {
     setEditState(props);
     setSettingState(!props);
   };
- 
 
   return (
     <div
       className={`h-screen  flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted items-center 
        border-solid min-w-[350px] max-w-[400px]`}
     >
+
       {aboutState && <About visibleAbout={visibleAbout} />}
+
       {bugReportState && <ReportBug visibleBugReport={visibleBugReport} />}
+
+
       {settingState && (
         <SettingWindow
           visibleSetting={visibleSetting}
-          currentUser={props.currentUser}
+          currentUser={currentUser}
           visibleEdit={visibleEdit}
         />
       )}
+
+
       {contactState && (
-        <ContactWindow
-          visibleContact={visibleContact}
-          contacts={props.contacts}
-        />
+        <ContactWindow visibleContact={visibleContact} contacts={contacts} />
       )}
 
       {startPrivateState && (
         <StartPrivate
           visibleStartPrivate={visibleStartPrivate}
-          contacts={props.contacts}
+          contacts={contacts}
           chatType={chatType}
         />
       )}
 
-     {editState && <EditProfile visibleEdit={visibleEdit}/>}
+      {editState && <EditProfile visibleEdit={visibleEdit}  currentUser={currentUser}/>}
 
       {addMembersState && (
         <AddMembers
-          contacts={props.contacts}
+          contacts={contacts}
           visibleAddmembers={visibleAddmembers}
           chatType={chatType}
           visibleAddMessage={visibleAddMessage}
@@ -145,10 +153,10 @@ export function CollumnContainer(props) {
       )}
 
       {chatlistState && (
-        <div className="flex flex-col">
+        <div className="flex flex-col min-w-[350px] max-w-[400px]">
           <LeftHeader
-            darkMode={props.darkMode}
-            toggleDarkMode={props.toggleDarkMode}
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
             visibleAbout={visibleAbout}
             visibleBugReport={visibleBugReport}
             visibleSetting={visibleSetting}
@@ -156,9 +164,9 @@ export function CollumnContainer(props) {
             visibleSearchWindow={visibleSearchWindow}
           />
           <RadioChatList
-            chats={props.chats}
-            currentChat={props.currentChat}
-            handleMuted={props.handleMuted}
+            chats={chats}
+            currentChat={currentChat}
+            handleMuted={handleMuted}
             visibleAddNewChat={visibleAddNewChat}
             visibleAddMessage={visibleAddMessage}
             chatTypeCallback={chatTypeCallback}

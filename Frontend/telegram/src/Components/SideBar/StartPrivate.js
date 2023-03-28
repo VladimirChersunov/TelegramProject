@@ -1,5 +1,4 @@
 import { ContactsCard } from "./ContactsCard";
-
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { SerchInput } from "./SerchInput";
 

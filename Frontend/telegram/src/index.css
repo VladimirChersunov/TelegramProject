@@ -18,6 +18,7 @@
     --color-fill-inverted: #0c0221;
 
     --color-button-accent: #0c0221;
+    --color-button-inverted: #c6bdff;
     --color-button-accent-hover: #584ca3;
     --color-button-muted: #555555;
     --color-button-inverted-hover: #7E5EFC;
@@ -62,4 +63,17 @@
   }
   .light {
   }
+
+  /* Customize the scrollbar */
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+  border-radius: 9999px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 9999px;
+}
 }

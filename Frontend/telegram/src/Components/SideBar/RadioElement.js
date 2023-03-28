@@ -3,12 +3,10 @@ import { ContextMenu } from "./RightContextOnChat";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 import { SavedIcon } from "../Icons/SavedIcon";
-import moment from 'moment';
-import 'moment/locale/ru';
+import moment from "moment";
+import "moment/locale/ru";
 
-
-export function RadioElement({chat, currentChat, handleMuted}) {
-  
+export function RadioElement({ chat, currentChat, handleMuted }) {
   const contextRef = useRef();
   const [savedMessageState, setSavedMessageState] = useState(false);
   const [chatMuteStatus, setChatMuteStatus] = useState(false);
@@ -17,6 +15,9 @@ export function RadioElement({chat, currentChat, handleMuted}) {
   const [contextMenuY, setContextMenuY] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [unseenCount, setUnseenCount] = useState(0);
+  const MAX_LENGTH = 15;
+
+  console.log(chat)
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -35,9 +36,6 @@ export function RadioElement({chat, currentChat, handleMuted}) {
     currentChat(chat);
   };
 
-
- 
-
   useEffect(() => {
     if (chat.type === "Favorite") {
       setSavedMessageState(true);
@@ -45,12 +43,8 @@ export function RadioElement({chat, currentChat, handleMuted}) {
       setSavedMessageState(false);
     }
 
-    // chat.messages.map((message, id) => {
-    //   if (message.seenTime === null) {
-    //     setUnseenCount((prev) => unseenCount + 1);
-    //   }      
-    // }); 
-
+    
+    
     setChatMuteStatus((prevStatus) => chat.muteStatus);
 
     document.addEventListener("contextmenu", handleClickOutside, true);
@@ -68,80 +62,101 @@ export function RadioElement({chat, currentChat, handleMuted}) {
     }
   };
 
+  //форматирование имени чата
+  const formattedChatName = (chat) => {
+    if (chat?.chatName?.length <= MAX_LENGTH) {
+      return chat.chatName;
+    } else {
+      const truncatedChatName = chat?.chatName?.slice(0, MAX_LENGTH) + "...";
+      return truncatedChatName;
+    }
+  };
+
   // Форматирование времени
   const publishTimeFormatted = moment(chat.publishTime).calendar(null, {
-    sameDay: '[Today at] HH:mm',
-    lastDay: '[Yesterday at] HH:mm',
-    lastWeek: 'DD.MM.YYYY',
-    sameElse: 'DD.MM.YYYY'
+    sameDay: "[Today at] HH:mm",
+    lastDay: "[Yesterday at] HH:mm",
+    lastWeek: "DD.MM.YYYY",
+    sameElse: "DD.MM.YYYY",
   });
 
   return (
-    <div className=" w-[97%] m-auto   ">
-    <input
-      type="radio"
-      name="option"
-      id={chat.id}
-      className="peer hidden"
-    />
-     <label
-      ref={contextRef}
-      htmlFor={chat.id}
-      onContextMenu={handleContextMenu}
-      onChange={handleOptionSelect}
-      onClick={handleChatClick}
-      className="flex hover:bg-skin-button-accent-hover  flex-row cursor-pointer select-none 
+    <div className=" w-[330px] ml-2   ">
+      <input type="radio" name="option" id={chat.id} className="peer hidden" />
+      <label
+        ref={contextRef}
+        htmlFor={chat.id}
+        onContextMenu={handleContextMenu}
+        onChange={handleOptionSelect}
+        onClick={handleChatClick}
+        className="flex hover:bg-skin-button-accent-hover  flex-row cursor-pointer select-none 
        border-b p-2 peer-checked:bg-skin-button-accent-hover peer-checked:bg-[#6a37d8]
            border-skin-border-base dark:border-skin-border-inverted "
-    >
-      {showContextMenu && <ContextMenu x={contextMenuX} y={contextMenuY} chat={chat} handleMuted={handleMuted}/>}
-
-      <div>
-        {chat.chatImage ? (
-          <img
-            src={""}
-            alt="logo"
-            className="rounded-full  h-[50px] w-[50px]"
+      >
+        {showContextMenu && (
+          <ContextMenu
+            x={contextMenuX}
+            y={contextMenuY}
+            chat={chat}
+            handleMuted={handleMuted}
           />
-        ) : (
-          <div className="rounded-full   h-[50px] w-[50px] bg-purple-500 flex items-center justify-center">
-            {!savedMessageState && <p className="text-3xl">T</p>}
-            {savedMessageState && <SavedIcon />}
-          </div>
         )}
-      </div>
 
-      <div className="flex flex-col ml-2  w-[85%] mt-1 ">
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-row items-center">
-            <p className="text-lg mr-2">{chat.chatName}</p>
+        <div>
+          {chat.chatImage ? (
+            <img
+              src={""}
+              alt="logo"
+              className="rounded-full  h-[50px] w-[50px]"
+            />
+          ) : (
+            <div className="rounded-full   h-[50px] w-[50px] bg-purple-500 flex items-center justify-center">
+              {!savedMessageState && (
+                <div>
+              <p className="text-xl">                   
+                      {chat?.chatName?.slice(0, 2).toUpperCase()}
+                  </p>
+                 
+                </div>
+              )}
+              {savedMessageState && <SavedIcon />}
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col ml-2  w-[85%] mt-1 ">
+          <div className="flex flex-row justify-between">
+            <div className="flex flex-row items-center">
+              <p className="text-lg mr-2">
+                {formattedChatName(chat)}
+                
+              </p>
+              {!savedMessageState && (
+                <div>
+                  {chatMuteStatus ? <VolumeMuteIcon /> : <VolumeOnIcon />}
+                </div>
+              )}
+            </div>
+
+            <div className="">
+              <time className="mr-1 text-xs opacity-50">
+                {publishTimeFormatted}
+              </time>
+            </div>
+          </div>
+
+          <div className="flex flex-row justify-between">
+            <p className="text-[14px]">{chat.shortMessage.substring(0, 25)}</p>
+
             {!savedMessageState && (
-              <div>
-                {chatMuteStatus ? <VolumeMuteIcon /> : <VolumeOnIcon />}
-              </div>
+              <label
+                className="rounded-full text-center border border-skin-border-base
+                    dark:border-skin-border-inverted text-xs h-5 w-5"
+              ></label>
             )}
           </div>
-
-          <div className="">
-            <time className="mr-1 text-xs opacity-50">{publishTimeFormatted}</time>
-          </div>
         </div>
-
-        <div className="flex flex-row justify-between">
-          <p className="">{chat.shortMessage.substring(0, 25)}</p>
-         {!savedMessageState&& <label
-            className="rounded-full text-center border border-skin-border-base
-           dark:border-skin-border-inverted
-          text-xs h-5 w-5"
-          >
-           
-          </label>}
-        </div>
-      </div>
-    </label>
-  </div>
-  
+      </label>
+    </div>
   );
-
- 
 }

@@ -48,9 +48,9 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
             className="h-[300px] w-[300px] select-none ml-[-10px] rounded-full"
           />
         ) : (
-          <div className="rounded-full   h-[250px] w-[250px] ml-[-15px] bg-purple-500 flex items-center justify-center select-none">
-            <p className="text-[100px]">
-              {currentUser.userName[0] + currentUser.userName[1].toUpperCase()}
+          <div className="rounded-full   h-[150px] w-[150px] ml-[-15px] bg-purple-500 flex items-center justify-center select-none">
+            <p className="text-[50px]">
+              {currentUser.userName[0].toUpperCase() + currentUser.userName[1].toUpperCase()}
             </p>
           </div>
         )}
