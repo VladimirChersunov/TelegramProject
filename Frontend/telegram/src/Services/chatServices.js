@@ -4,6 +4,7 @@ export const createPrivate = async (opponentName) => {
     try {
       const token = localStorage.getItem("token");
       const userName = localStorage.getItem("username");
+      console.log("create pm")
       const response = await axiosCreate.post(
         "Chats/enterprivatechat",
         { userName, opponentName },

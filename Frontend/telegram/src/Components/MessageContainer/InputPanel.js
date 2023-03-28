@@ -1,10 +1,13 @@
 import Picker, { Theme } from "emoji-picker-react";
 import { useState, useEffect } from "react";
+import { createMessaage } from "../../Services/messageServices";
 import { EnterIcon } from "../Icons/EnterIcon";
 import { LinkIcon } from "../Icons/LinkIcon";
 import { SmileIcon } from "../Icons/SmileIcon";
 
-export function InputPanel(props) {
+export function InputPanel({darkMode, currentUser, chat}) {
+
+  const [data, setData] = useState(null);
   
   const handleInputChange = (event) => {
     event.target.style.height = "auto";
@@ -12,26 +15,28 @@ export function InputPanel(props) {
     setMeassageText(event.target.value);
   };
 
-  const [messageText, setMeassageText] = useState("");
-  const [messages, setMessage] = useState([]);
+  const [messageText, setMeassageText] = useState("");  
   const [theme, setTheme] = useState("dark");
   const[visiblEmojiPicker, setvisiblEmojiPicker] = useState(false)
  
   useEffect(() => {
-    if (props.darkMode) {
+    if (darkMode) {
       setTheme((preevTheme) => "dark");
     } else {
       setTheme((preevTheme) => "light");
     }
-  }, [props.darkMode]);
+  }, [darkMode]);
 
-  const addNewMessage = (event) => {
-    const newMessage = {
-      ...messageText,
-      id: Date.now(),
-    };
+  const addNewMessage = async(event) => {
+try{
+const RESPONCE = await createMessaage(currentUser.id, chat.id, data, messageText)
+console.log(RESPONCE)
+}catch(error){
+  console.log(error)
+}finally{
 
-    setMeassageText("");
+}
+     setMeassageText("");
   };
 
   useEffect(()=>{
@@ -43,8 +48,8 @@ export function InputPanel(props) {
   }
 
   return (
-    <div className="w-[100%] relative   h-[60px] flex justify-center  ">
-      <div className="flex flex-row  w-[70%] items-stretch rounded-lg border border-skin-border-base dark:border-skin-border-inverted">
+    <div className="w-full bottom-0 fixed z-1  h-[60px] flex items-center mb-5 ml-10">
+      <div className="flex flex-row items-center justify-center  w-[50%] rounded-lg border border-skin-border-base dark:border-skin-border-inverted">
         {visiblEmojiPicker && <div className="absolute bottom-[65px]">
           <Picker pickerStyle={{ backgroundColor: 'bg-skin-fill' }} />
         </div>}

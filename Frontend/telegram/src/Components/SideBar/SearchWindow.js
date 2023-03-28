@@ -5,7 +5,7 @@ import { getSearchResult } from "../../Services/searchServices";
 import { ContactsCard } from "./ContactsCard";
 import { ChatsCard } from "./ChatCard";
 
-export function SearchWindow({ visibleSearchWindow }) {
+export function SearchWindow({ visibleSearchWindow,currentChat}) {
   const [isLoading, setIsLoading] = useState(false);
   const [dataInput, setDataInput] = useState("");
   const [searchResults, setSearchResults] = useState({});

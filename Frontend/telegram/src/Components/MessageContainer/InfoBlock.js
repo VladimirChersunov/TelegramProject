@@ -7,13 +7,16 @@ export function InfoBlock({ chat, toggleRightColumn }) {
 
   useEffect(() => {
     if (chat.type === "channel") {
+      setFavorite(false)
       setTypeChat(`${chat.members} subscrybers`);
     } else if (chat.type === "group") {
       setTypeChat(`${chat.members} members`);
+      setFavorite(false)
     } else if (chat.type === "Favorite") {
       setFavorite(true)
     }  else {
-      setTypeChat(chat.author);      
+      setTypeChat(chat.author);    
+      setFavorite(false)  
     }
   }, [chat]);
 

@@ -17,7 +17,7 @@ export function RadioElement({ chat, currentChat, handleMuted }) {
   const [unseenCount, setUnseenCount] = useState(0);
   const MAX_LENGTH = 15;
 
-  console.log(chat)
+  //console.log(chat)
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -150,9 +150,11 @@ export function RadioElement({ chat, currentChat, handleMuted }) {
 
             {!savedMessageState && (
               <label
-                className="rounded-full text-center border border-skin-border-base
+                className="rounded-full flex items-center justify-center border border-skin-border-base
                     dark:border-skin-border-inverted text-xs h-5 w-5"
-              ></label>
+              >
+                {chat.notViewedCounter}
+              </label>
             )}
           </div>
         </div>

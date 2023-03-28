@@ -114,7 +114,7 @@ export function CollumnContainer({
 
 
       {contactState && (
-        <ContactWindow visibleContact={visibleContact} contacts={contacts} />
+        <ContactWindow visibleContact={visibleContact} contacts={contacts} currentChat={currentChat}/>
       )}
 
       {startPrivateState && (
@@ -149,7 +149,7 @@ export function CollumnContainer({
       )}
 
       {searchWindowState && (
-        <SearchWindow visibleSearchWindow={visibleSearchWindow} />
+        <SearchWindow visibleSearchWindow={visibleSearchWindow} currentChat={currentChat}/>
       )}
 
       {chatlistState && (

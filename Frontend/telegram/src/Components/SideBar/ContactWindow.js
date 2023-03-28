@@ -3,7 +3,7 @@ import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { useEffect } from "react";
 
 
-export function ContactWindow({contacts, visibleContact}) {
+export function ContactWindow({contacts, visibleContact,currentChat}) {
 
   const handleClickBack = () => {
     visibleContact(false);

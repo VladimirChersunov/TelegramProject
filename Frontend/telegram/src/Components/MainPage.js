@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { updateInfo } from "../Services/userServices";
 import { userLogout } from "../Services/userLogout";
 
-export function MainPage(props) {
+export function MainPage({darkMode,userData,toggleDarkMode}) {
+ 
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +49,7 @@ export function MainPage(props) {
         setIsLoading(false);
       }
     };
-    // Получать данные с сервера каждые 3 секунды
+    // Получать данные с сервера каждую секунды
     const intervalId = setInterval(() => {
       getData();
     }, 1000);
@@ -66,19 +67,14 @@ export function MainPage(props) {
   }, [currChat]);
 
   const handleMuted = (props) => {
-    // setChats(
-    //   chats.map((chat, id) =>
-    //     id === props.chat.id ? { ...chat, muteStatus: true } : chat
-    //   )
-    // );
+    
   };
 
   const changeThemes = (props) => {
-    setTheme((prevTheme) => props);
+    setTheme(props);
   };
 
-  const currentChat = (chat) => {
-    
+  const currentChat = (chat) => {    
     setCurrentChat(chat);
   };
 
@@ -96,8 +92,8 @@ export function MainPage(props) {
           currentUser={currentUser}
           chats={chats}
           currentChat={currentChat}
-          darkMode={props.darkMode}
-          toggleDarkMode={props.toggleDarkMode}
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
           handleMuted={handleMuted}
           contacts={contacts}
         />
@@ -109,7 +105,8 @@ export function MainPage(props) {
             chat={currChat}
             toggleRightColumn={toggleRightColumn}
             changeThemes={changeThemes}
-            darkMode={props.darkMode}
+            darkMode={darkMode}
+            currentUser={currentUser}
           />
         )}
         {!centrVisible && <ClearContainer />}
