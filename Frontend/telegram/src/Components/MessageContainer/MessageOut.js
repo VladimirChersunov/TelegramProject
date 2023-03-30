@@ -1,16 +1,29 @@
-export function MessageOut(props) {
+import moment from "moment";
+import "moment/locale/ru";
+
+export function MessageOut({ message}) {
+  const { data, deliveryStatus,  sendTime, text, } = message;
+
+  // Форматирование времени
+  const sendTimeFormatted = moment(sendTime).calendar(null, {
+    sameDay: "[Today at] HH:mm",
+    lastDay: "[Yesterday at] HH:mm",
+    lastWeek: "DD.MM.YYYY",
+    sameElse: "DD.MM.YYYY",
+  });
+
   return (
     <div className="w-[100%] flex justify-end dark:text-[#0C0221]">
       <div className="w-[600px] flex flex-row mt-2 mr-10">
         <div className="bg-blue-200 w-[100%] rounded-l-xl rounded-t-xl">
-          <div className="flex flex-row justify-between w-[90%] ml-2 mt-1 font-semibold text-lg">
-            {props.message.author}
-            <time className="text-xs opacity-50">{props.message.sendTime}</time>
+          <div className="flex flex-row justify-end items-center w-[90%] ml-2 mt-1 font-semibold text-lg">
+            <time className="text-xs opacity-50">{sendTimeFormatted}</time>
           </div>
           <div className="flex flex-col ml-2">
-            {props.message.data}
-
-            <div className=" opacity-50">{props.message.sendStatus}</div>
+            {data}
+            {text}
+           {deliveryStatus ? <div className="ml-2 opacity-50 text-xs">Delivered </div>
+          : <div className="ml-2 opacity-50 text-xs text-skin-error">Not delivered </div>}
           </div>
         </div>
 

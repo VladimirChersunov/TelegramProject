@@ -8,14 +8,21 @@ import { InfoIcon } from "../Icons/InfoIcon";
 
 export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
   const navigate = useNavigate();
- 
+  const MAX_LENGTH = 16;
   
   const handleClickBack = () => {
     visibleSetting(false);
   };
 
-  
-
+  const formatEmail =(email)=> {
+    if (currentUser.email.length <= MAX_LENGTH) {
+      return currentUser.email;
+    } else {
+      const truncatedEmail = currentUser.email.slice(0, MAX_LENGTH) + '...';
+      return truncatedEmail;
+    }
+  }
+  const formattedEmail = formatEmail(currentUser.email);
   const handleEdit = () =>{
     visibleEdit(true)
   }
@@ -26,7 +33,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
   };
 
   return (
-    <div className="flex flex-col w-[350px] w-min-[350px]">
+    <div className="flex flex-col w-[350px] w-min-[350px] overflow-auto">
       {/* header */}
       <div className="flex flex-row items-center">
         <button
@@ -40,7 +47,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
         <label className="text-2xl mt-4 ml-2 select-none">Setting</label>
       </div>
 
-      <div className="w-[350px] flex flex-col items-center mt-5">
+      <div className="w-[350px] h-screen  flex flex-col items-center mt-5 overflow-y-scroll scrollbar">
         {currentUser.photo ? (
           <img
             src={currentUser.photo}
@@ -66,7 +73,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
 
         <div className="mt-2 text-xl  flex flex-row items-center  w-[90%]  pl-2 h-[40px]">
           <Ahtung />
-          <label className="ml-10">{currentUser.email}</label>
+          <label className="ml-10">{formattedEmail}</label>
         </div>
         <div className="mt-2 text-xl  flex flex-row items-center  w-[90%]  pl-2 h-[40px]">
           <PeopleIcon />
@@ -83,7 +90,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
         </div>
         <div
           onClick={handleLogout}
-          className="mt-2 text-xl  flex flex-row items-center  w-[90%]  
+          className="mt-2 text-xl  flex flex-row items-center  w-[90%]  mb-[60px]
           cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] "
         >
           <Ahtung />

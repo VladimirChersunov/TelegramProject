@@ -24,13 +24,20 @@ export const createMessaage = async (userId,chatId,data,text ) => {
   }
 };
 
-export const getAllMessaages = async (chatId) => {
+export const getAllMessaages = async (chatName, authorId,  privateChat) => {
+  let additionalChatName = null;
     const token = localStorage.getItem("token");
-   
+   if(privateChat === "Private"){
+    additionalChatName = localStorage.getItem("username");
+   }else{
+    additionalChatName = null
+   }
+  
     if (token) {
       try {
-        const response = await axiosCreate.get(
-          `Messages/chat/${chatId}`,         
+        const response = await axiosCreate.post(
+          `Chats/openchat`,  
+          {chatName, authorId,additionalChatName},
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -46,3 +53,5 @@ export const getAllMessaages = async (chatId) => {
       console.log("missing token");
     }
   };
+
+  

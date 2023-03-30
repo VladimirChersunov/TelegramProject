@@ -55,7 +55,7 @@ export function InfoContainer({ toggleRightColumn, chat }) {
           <img
             src={chat.chatImage}
             alt="logo"
-            className="h-[40px] w-[40px] select-none mb-5  rounded-full"
+            className="h-[150px] w-[150px] select-none mb-5  rounded-full"
           />
         ) : (
           <div className="rounded-full   h-[150px] w-[150px] mb-5  bg-purple-500 flex items-center justify-center select-none">

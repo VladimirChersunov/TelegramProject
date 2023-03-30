@@ -59,7 +59,7 @@ export function ContactsCard({ contact, type }) {
       <div className="align-middle content-center items-center place-content-center p-1">
         {contact.photo ? (
           <img
-            src={""}
+            src={contact.photo}
             alt="logo"
             className="rounded-full  h-[50px] w-[50px]"
           />

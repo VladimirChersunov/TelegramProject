@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { ContextMenu } from "./RightContextOnChat";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
-import { SavedIcon } from "../Icons/SavedIcon";
 import moment from "moment";
 import "moment/locale/ru";
 
@@ -13,8 +12,7 @@ export function RadioElement({ chat, currentChat, handleMuted }) {
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [unseenCount, setUnseenCount] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null); 
   const MAX_LENGTH = 15;
 
   //console.log(chat)
@@ -43,8 +41,6 @@ export function RadioElement({ chat, currentChat, handleMuted }) {
       setSavedMessageState(false);
     }
 
-    
-    
     setChatMuteStatus((prevStatus) => chat.muteStatus);
 
     document.addEventListener("contextmenu", handleClickOutside, true);
@@ -103,23 +99,21 @@ export function RadioElement({ chat, currentChat, handleMuted }) {
         )}
 
         <div>
-          {chat.chatImage ? (
+          {chat.chatImage  ? (
             <img
-              src={""}
+              src={chat.chatImage}
               alt="logo"
               className="rounded-full  h-[50px] w-[50px]"
             />
           ) : (
             <div className="rounded-full   h-[50px] w-[50px] bg-purple-500 flex items-center justify-center">
-              {!savedMessageState && (
+             
                 <div>
-              <p className="text-xl">                   
-                      {chat?.chatName?.slice(0, 2).toUpperCase()}
+                  <p className="text-xl">
+                    {chat?.chatName?.slice(0, 2).toUpperCase()}
                   </p>
-                 
                 </div>
-              )}
-              {savedMessageState && <SavedIcon />}
+              
             </div>
           )}
         </div>
@@ -127,10 +121,7 @@ export function RadioElement({ chat, currentChat, handleMuted }) {
         <div className="flex flex-col ml-2  w-[85%] mt-1 ">
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center">
-              <p className="text-lg mr-2">
-                {formattedChatName(chat)}
-                
-              </p>
+              <p className="text-lg mr-2">{formattedChatName(chat)}</p>
               {!savedMessageState && (
                 <div>
                   {chatMuteStatus ? <VolumeMuteIcon /> : <VolumeOnIcon />}

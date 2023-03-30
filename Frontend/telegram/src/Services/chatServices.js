@@ -42,4 +42,25 @@ export const createPrivate = async (opponentName) => {
       throw new Error(error.response.data.message);
     }
   };
+
+  export const leavePublic = async (chatName) => {
+    try {
+      const token = localStorage.getItem("token");
+      const userName = localStorage.getItem("username");
+      const response = await axiosCreate.post(
+        "Chats/leavepublicchat",
+        { userName, chatName },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+  
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.response.data.message);
+    }
+  };
   

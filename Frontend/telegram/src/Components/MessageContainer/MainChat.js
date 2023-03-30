@@ -1,47 +1,45 @@
 import { InputPanel } from "./InputPanel";
-import {useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getAllMessaages } from "../../Services/messageServices";
+import { Message } from "./Message";
+import { getUser, getUserByUsername } from "../../Services/userServices";
 
-
-export function MainChat({chat,changeThemes,darkMode,currentUser }) {
-  const [type, setType] = useState(false);
+export function MainChat({ chat, changeThemes, darkMode, currentUser }) {
+  const [dataMessages, setDataMessages] = useState({});
   const [currChat, setCurrChat] = useState(chat);
   const [windwHeight, setWindwHeight] = useState("80%");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const { chatName, authorId, type } = chat;
 
   useEffect(() => {
-    
     const getData = async () => {
       try {
-       
         //const startTime = performance.now();
-        const data = await getAllMessaages(chat.id);
-        console.log(data)
+        const allMessaages = await getAllMessaages(chatName, authorId, type);
+
+        setDataMessages(allMessaages);
         //const endTime = performance.now();
 
-        
         //const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
         //console.log(`Response time: ${responseTime}ms`);
-      } catch {
-        console.log("error");
+      } catch (error) {
         setError(error);
       } finally {
         setIsLoading(false);
       }
     };
     // Получать данные с сервера каждую секунды
-    const intervalId = setInterval(() => {
-      getData();
-    }, 1000);
-
+    // const intervalId = setInterval(() => {
+    //   getData();
+    // }, 1000);
+    getData();
     // Очищать интервал при размонтировании компонента
-    return () => clearInterval(intervalId);
-  }, []);
-
+    // return () => clearInterval(intervalId);
+  }, [chatName, authorId, type]);
 
   // const notify = () =>
   //   toast.warning("New message!", {
@@ -56,28 +54,28 @@ export function MainChat({chat,changeThemes,darkMode,currentUser }) {
   //     progressClassName: "fancy-progress-bar bg-white",
   //   });
 
-  // useEffect(() => {
-  //   if (props.chat.type === "chat") {
-  //     setType(true);
-  //     setWindwHeight((prevHeight) => "80%");
-  //   } else {
-  //     setType(false);
-  //     setWindwHeight((prevHeight) => "100%");
-  //   }
-  // }, [props.chat.type]);
+  //console.log(dataMessages.messages)
 
   return (
     <div className="flex flex-col h-screen max-w-full">
       <div
-        className={`h-[${windwHeight}] mt-2 flex flex-col overflow-x-hidden text-skin-base `}
+        className={`h-[80%] mt-2 flex flex-col overflow-x-hidden text-skin-base overflow-y-scroll scrollbar `}
       >
-        
+        {dataMessages?.messages?.map((message) => (
+          <Message
+            chatName={chatName}
+            message={message}
+            key={message.id}
+            currentUser={currentUser}
+          />
+        ))}
         {/* <ColorRAdioButton changeThemes={props.changeThemes} /> */}
         {/* <button onClick={notify} className="w-[200px] h-[100px] bg-green-500">Notify test</button> */}
         <ToastContainer />
       </div>
-
-      <InputPanel darkMode={darkMode} currentUser={currentUser} chat={chat}/>
+      
+        <InputPanel darkMode={darkMode} currentUser={currentUser} chat={chat} />
+     
     </div>
   );
 }

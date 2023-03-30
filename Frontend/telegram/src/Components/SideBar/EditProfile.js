@@ -60,9 +60,9 @@ export function EditProfile({ visibleEdit, currentUser }) {
       </div>
       {/* профиль */}
       <div className="overflow-y-scroll scrollbar">
-        <div className="h-[200px]">
+        <div className="h-[200px] w-full">
           {/* картинка */}
-          <div className="relative flex items-center justify-center ">
+          <div className="w-full flex items-center justify-center ">
             {selectedFile ? (
               <div className="relative">
                 <Cropper
@@ -82,14 +82,14 @@ export function EditProfile({ visibleEdit, currentUser }) {
             ) : (
               <label
                 htmlFor="file-input"
-                className="block h-[100px] w-[100px]  px-4 py-2  rounded-full cursor-pointer bg-skin-fill
+                className="block h-[200px] w-[200px]  px-4 py-2  rounded-full cursor-pointer bg-skin-fill
          dark:bg-skin-fill-inverted "
               >
                 <div className="flex items-center justify-center text-5xl">
                   <div className="align-middle content-center items-center place-content-center p-1">
                     {currentUser.photo ? (
                       <img
-                        src={""}
+                        src={currentUser.photo}
                         alt="logo"
                         className="rounded-full  h-[150px] w-[150px]"
                       />
