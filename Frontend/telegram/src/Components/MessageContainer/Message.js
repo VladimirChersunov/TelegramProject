@@ -2,14 +2,18 @@ import { MessageIn } from "./MessageIn";
 import { MessageOut } from "./MessageOut";
 import { useState, useRef, useEffect } from "react";
 import { MessageContextMenu } from "./MessageContextMenu";
-import { getUserById, getUserByUsername } from "../../Services/userServices";
+import { getUserById } from "../../Services/userServices";
 
 export function Message({ message, currentUser, chatName }) {
   const [inMessage, setInMessage] = useState(false);
   const [outMessage, setOutMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const contextRef = useRef();
+  const [showContextMenu, setShowContextMenu] = useState(false);
+  const [contextMenuX, setContextMenuX] = useState(0);
+  const [contextMenuY, setContextMenuY] = useState(0);
+  const [messageAuthor, setMessageAuthor] = useState({});
 
   useEffect(() => {
     if (currentUser.id === message.userId) {
@@ -20,10 +24,9 @@ export function Message({ message, currentUser, chatName }) {
       setOutMessage(false);
     }
     const getData = async () => {
-      try {       
+      try {
         const user = await getUserById(message.userId);
-       
-        setOpponent(user);
+        setMessageAuthor(user);
       } catch (error) {
         setError(error);
       } finally {
@@ -33,12 +36,6 @@ export function Message({ message, currentUser, chatName }) {
 
     getData();
   }, [message]);
-
-  const contextRef = useRef();
-  const [showContextMenu, setShowContextMenu] = useState(false);
-  const [contextMenuX, setContextMenuX] = useState(0);
-  const [contextMenuY, setContextMenuY] = useState(0);
-  const [opponent, setOpponent] = useState({});
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -81,8 +78,10 @@ export function Message({ message, currentUser, chatName }) {
         </MessageContextMenu>
       )}
 
-      {inMessage && <MessageIn message={message} opponent={opponent} />}
-      {outMessage && <MessageOut message={message} opponent={opponent} />}
+      {inMessage && (
+        <MessageIn message={message} messageAuthor={messageAuthor} />
+      )}
+      {outMessage && <MessageOut message={message} />}
     </div>
   );
 }

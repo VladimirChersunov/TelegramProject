@@ -22,8 +22,11 @@ export function MessageOut({ message}) {
           <div className="flex flex-col ml-2">
             {data}
             {text}
-           {deliveryStatus ? <div className="ml-2 opacity-50 text-xs">Delivered </div>
-          : <div className="ml-2 opacity-50 text-xs text-skin-error">Not delivered </div>}
+            <div className="flex w-full justify-end items-center">
+            {deliveryStatus ? <p className=" opacity-50 text-xs mr-2">Delivered </p>
+          : <div className=" opacity-50 text-xs text-skin-error">Not delivered </div>}
+            </div>
+          
           </div>
         </div>
 

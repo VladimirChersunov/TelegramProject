@@ -1,11 +1,11 @@
 import moment from "moment";
 import "moment/locale/ru";
 
-export function MessageIn({ message, opponent }) {
-  //console.log(opponent);
-  const { data, deliveryStatus, id, sendTime, text, userId, viewed } = message;
+export function MessageIn({ message, messageAuthor }) {
+ 
+  const { data,sendTime, text, viewed } = message;
 
-  const { photo, userName } = opponent;
+  const { photo, userName } = messageAuthor?.user;
 
   // Форматирование времени
   const sendTimeFormatted = moment(sendTime).calendar(null, {
@@ -14,7 +14,7 @@ export function MessageIn({ message, opponent }) {
     lastWeek: "DD.MM.YYYY",
     sameElse: "DD.MM.YYYY",
   });
-
+ 
   return (
     <div className="w-[100%] flex justify-start ml-10 dark:text-[#0C0221] ">
       <div className="w-[600px] flex flex-row mt-2">
@@ -34,9 +34,9 @@ export function MessageIn({ message, opponent }) {
                   />
                 ) : (
                   <div className="rounded-full   h-[40px] w-[40px] absolute bg-purple-500 flex items-center justify-center select-none">
-                    {/* <p className="text-xl">
+                    <p className="text-xl">
                       {userName[0].toUpperCase() + userName[1].toUpperCase()}
-                    </p> */}
+                    </p>
                   </div>
                 )}
               
@@ -53,6 +53,9 @@ export function MessageIn({ message, opponent }) {
             <time className="text-xs opacity-50">{sendTimeFormatted}</time>
           </div>
           <div className="flex flex-col ml-2">{text}</div>
+          { viewed  ? <div className="ml-2 opacity-50 text-xs"> Viewed  </div>
+          : <div className="ml-2 opacity-50 text-xs">Not  viewed  </div>}
+         
         </div>
       </div>
     </div>
