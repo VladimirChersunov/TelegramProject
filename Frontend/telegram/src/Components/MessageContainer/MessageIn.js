@@ -1,11 +1,11 @@
 import moment from "moment";
 import "moment/locale/ru";
 
-export function MessageIn({ message, messageAuthor }) {
+export function MessageIn({ message }) {
  
-  const { data,sendTime, text, viewed } = message;
+  const { data,sendTime, text, viewed, author } = message;
 
-  const { photo, userName } = messageAuthor?.user;
+ 
 
   // Форматирование времени
   const sendTimeFormatted = moment(sendTime).calendar(null, {
@@ -14,6 +14,8 @@ export function MessageIn({ message, messageAuthor }) {
     lastWeek: "DD.MM.YYYY",
     sameElse: "DD.MM.YYYY",
   });
+
+  //console.log(messageAuthor)
  
   return (
     <div className="w-[100%] flex justify-start ml-10 dark:text-[#0C0221] ">
@@ -26,16 +28,17 @@ export function MessageIn({ message, messageAuthor }) {
              rounded-br-[200px] "
             >
              
-                {photo ? (
+                {author.photo ? (
                   <img
-                    src={photo}
+                    src={author.photo}
                     alt="logo"
                     className="rounded-full  h-[40px] w-[40px] border absolute"
                   />
                 ) : (
                   <div className="rounded-full   h-[40px] w-[40px] absolute bg-purple-500 flex items-center justify-center select-none">
                     <p className="text-xl">
-                      {userName[0].toUpperCase() + userName[1].toUpperCase()}
+                      {author.userName &&
+                      author.userName[0].toUpperCase() + author.userName[1].toUpperCase()}
                     </p>
                   </div>
                 )}
@@ -49,7 +52,7 @@ export function MessageIn({ message, messageAuthor }) {
           className="bg-blue-200 w-[100%] rounded-r-xl rounded-t-xl "
         >
           <div className="flex flex-row justify-between w-[90%] ml-2 mt-1 font-semibold text-lg">
-            {userName}
+            {author.userName}
             <time className="text-xs opacity-50">{sendTimeFormatted}</time>
           </div>
           <div className="flex flex-col ml-2">{text}</div>

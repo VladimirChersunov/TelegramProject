@@ -1,16 +1,18 @@
 import Picker, { Theme } from "emoji-picker-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import { createMessaage } from "../../Services/messageServices";
 import { EnterIcon } from "../Icons/EnterIcon";
 import { LinkIcon } from "../Icons/LinkIcon";
 import { SmileIcon } from "../Icons/SmileIcon";
 
-export function InputPanel({ darkMode, currentUser, chat, refreshMessage }) {
+export function InputPanel({ darkMode, currentUser, chat, refreshMessage,refreshInputHeeight }) {
   const [data, setData] = useState(null);
   const [messageText, setMeassageText] = useState("");
   const [theme, setTheme] = useState("dark");
   const [visiblEmojiPicker, setvisiblEmojiPicker] = useState(false);
-
+  const[zxcv, setZxcv]=useState(28)
+  const textareaRef = useRef(null);
+  const parentRef = useRef(null);
   useEffect(() => {
     if (darkMode) {
       setTheme((preevTheme) => "dark");
@@ -19,10 +21,27 @@ export function InputPanel({ darkMode, currentUser, chat, refreshMessage }) {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    if (textareaRef.current && parentRef.current) {
+      parentRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  
+  }, [textareaRef]);
+
+  useEffect(() => {
+    
+    refreshInputHeeight(zxcv)
+    
+  }, [zxcv]);
+
   const handleInputChange = (event) => {
     event.target.style.height = "auto";
     event.target.style.height = event.target.scrollHeight + "px";
     setMeassageText(event.target.value);
+    if (textareaRef.current && parentRef.current) {
+      parentRef.current.style.height = `${textareaRef.current.scrollHeight + 5}px`;
+    }
+    setZxcv(event.target.scrollHeight)
   };
 
   const addNewMessage = async (event) => {
@@ -49,7 +68,7 @@ export function InputPanel({ darkMode, currentUser, chat, refreshMessage }) {
   };
 
   return (
-    <div className=" w-[80%] h-[70px] flex flex-row items-center justify-center rounded-lg border border-skin-border-base dark:border-skin-border-inverted ">
+    <div ref={parentRef} className=" w-[80%] min-h-[70px] flex flex-row items-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted ">
       {visiblEmojiPicker && (
         <div className="absolute bottom-[65px]">
           <Picker pickerStyle={{ backgroundColor: "bg-skin-fill" }} />
@@ -59,16 +78,15 @@ export function InputPanel({ darkMode, currentUser, chat, refreshMessage }) {
         <SmileIcon />
       </button>
 
-      <div className="w-[90%] flex items-center justify-center">
+      <div className="w-[90%] flex items-center ">
         <textarea
+         ref={textareaRef}
         rows={1}
           onChange={handleInputChange}
           value={messageText}
           className="w-full h-auto  text-xl rounded-lg outline-none  resize-none overflow-hidden
                bg-skin-fill dark:bg-skin-fill-inverted "
-          maxLength="200"
-          // contentEditable="true"
-          // suppressContentEditableWarning={true}
+          maxLength="500"         
           placeholder="Message..."
         />
       </div>

@@ -6,9 +6,9 @@ import { InfoContainer } from "./InfoContainer/InfoContainer";
 import { useNavigate } from "react-router-dom";
 import { updateInfo } from "../Services/userServices";
 import { userLogout } from "../Services/userLogout";
+import isEqual from "lodash/isEqual";
 
-export function MainPage({darkMode,userData,toggleDarkMode}) {
- 
+export function MainPage({ darkMode, userData, toggleDarkMode }) {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -19,12 +19,16 @@ export function MainPage({darkMode,userData,toggleDarkMode}) {
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState("");
   const [chats, setChats] = useState([]);
+  const [bigData, setBigData] = useState([]);
 
   useEffect(() => {
     const handleBackButton = (event) => {
       navigate("/main");
     };
     window.addEventListener("popstate", handleBackButton);
+  }, []);
+
+  useEffect(() => {
     const getData = async () => {
       try {
         setIsLoading(true);
@@ -32,16 +36,30 @@ export function MainPage({darkMode,userData,toggleDarkMode}) {
         if (logout) {
           navigate("/signin");
         }
-        //const startTime = performance.now();
-        const data = await updateInfo();
-        //console.log(data)
-        //const endTime = performance.now();
+        // const startTime = performance.now();
 
-        setChats(data.chats);
-        setContacts(data.contacts);
-        setCurrentUser(data.user);
-        //const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
-        //console.log(`Response time: ${responseTime}ms`);
+        const data = await updateInfo();
+
+        const chatEqual = isEqual(
+          JSON.stringify(chats),
+          JSON.stringify(data.chats)
+        );
+        const contactEqual = isEqual(
+          JSON.stringify(contacts),
+          JSON.stringify(data.contacts)
+        );
+
+        if (!chatEqual || !contactEqual) {
+          console.log("refresh")
+          setBigData(data);
+          setChats(data.chats);
+          setContacts(data.contacts);
+          setCurrentUser(data.user);
+        }
+        //console.log(data)
+        // const endTime = performance.now();
+        // const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
+        // console.log(`Response time: ${responseTime}ms`);
       } catch {
         console.log("error");
         setError(error);
@@ -56,7 +74,7 @@ export function MainPage({darkMode,userData,toggleDarkMode}) {
 
     // Очищать интервал при размонтировании компонента
     return () => clearInterval(intervalId);
-  }, []);
+  }, [bigData]);
 
   useEffect(() => {
     if (currChat.id >= 0) {
@@ -66,22 +84,20 @@ export function MainPage({darkMode,userData,toggleDarkMode}) {
     }
   }, [currChat]);
 
-  const handleMuted = (props) => {
-    
-  };
+  const handleMuted = (props) => {};
 
   const changeThemes = (props) => {
     setTheme(props);
   };
 
-  const currentChat = (chat) => {    
+  const currentChat = (chat) => {
     setCurrentChat(chat);
   };
 
   const toggleRightColumn = (state) => {
     setMainRight(state);
   };
-  
+
   return (
     <div
       className={`${theme} dark:bg-skin-fill-inverted  min-h-screen dark:text-skin-inverted dark:border-skin-border-inverted

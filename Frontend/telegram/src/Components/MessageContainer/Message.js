@@ -2,40 +2,15 @@ import { MessageIn } from "./MessageIn";
 import { MessageOut } from "./MessageOut";
 import { useState, useRef, useEffect } from "react";
 import { MessageContextMenu } from "./MessageContextMenu";
-import { getUserById } from "../../Services/userServices";
 
-export function Message({ message, currentUser, chatName }) {
-  const [inMessage, setInMessage] = useState(false);
-  const [outMessage, setOutMessage] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+export function Message({ message, currentUser }) {
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
-  const [messageAuthor, setMessageAuthor] = useState({});
+  
 
-  useEffect(() => {
-    if (currentUser.id === message.userId) {
-      setOutMessage(true);
-      setInMessage(false);
-    } else {
-      setInMessage(true);
-      setOutMessage(false);
-    }
-    const getData = async () => {
-      try {
-        const user = await getUserById(message.userId);
-        setMessageAuthor(user);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getData();
-  }, [message]);
+  const isCurrentUser = message.author.id === currentUser.id;
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -77,11 +52,11 @@ export function Message({ message, currentUser, chatName }) {
           <div onClick={() => alert(`Paste `)}>Delete and exit</div>
         </MessageContextMenu>
       )}
-
-      {inMessage && (
-        <MessageIn message={message} messageAuthor={messageAuthor} />
+      {isCurrentUser ? (
+        <MessageOut message={message} />
+      ) : (
+        <MessageIn message={message}/>
       )}
-      {outMessage && <MessageOut message={message} />}
     </div>
   );
 }

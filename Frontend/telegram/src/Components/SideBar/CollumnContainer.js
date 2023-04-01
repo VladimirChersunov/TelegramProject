@@ -153,7 +153,7 @@ export function CollumnContainer({
       )}
 
       {chatlistState && (
-        <div className="flex flex-col min-w-[350px] max-w-[400px]">
+        <div className="flex flex-col min-w-[350px] max-w-[400px] h-screen">
           <LeftHeader
             darkMode={darkMode}
             toggleDarkMode={toggleDarkMode}

@@ -18,6 +18,9 @@ export function ContactsCard({ contact, type }) {
   };
 
   const handleContactClick = async(event) => {
+    if (event.target.id === 'menu-item') {
+      return; // Выход из обработчика событий для элементов меню
+    }
     setShowContextMenu(false);
   
     try{
