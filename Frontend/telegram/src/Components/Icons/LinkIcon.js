@@ -1,7 +1,7 @@
 export function LinkIcon() {
   return (
     <svg
-      className="w-8 h-8 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none"
+      className="w-8 h-8 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none cursor-pointer"
       viewBox="0 0 48 48"
       xmlns="http://www.w3.org/2000/svg"
     >

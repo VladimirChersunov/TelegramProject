@@ -1,23 +1,52 @@
-import Picker, { Theme } from "emoji-picker-react";
-import { useState, useEffect,useRef } from "react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
+import { useState, useEffect, useRef } from "react";
 import { createMessaage } from "../../Services/messageServices";
 import { EnterIcon } from "../Icons/EnterIcon";
 import { LinkIcon } from "../Icons/LinkIcon";
 import { SmileIcon } from "../Icons/SmileIcon";
+import Modal from "react-modal";
+import { CloseIcon } from "../Icons/CloseIcon";
 
-export function InputPanel({ darkMode, currentUser, chat, refreshMessage,refreshInputHeeight }) {
+export function InputPanel({
+  darkMode,
+  currentUser,
+  chat,
+  refreshMessage,
+  refreshInputHeeight,
+}) {
   const [data, setData] = useState(null);
-  const [messageText, setMeassageText] = useState("");
+  const [messageText, setMessageText] = useState("");
   const [theme, setTheme] = useState("dark");
-  const [visiblEmojiPicker, setvisiblEmojiPicker] = useState(false);
-  const[zxcv, setZxcv]=useState(28)
+  const [showPicker, setShowPicker] = useState(false);
+  const [textareaHeight, setTextareaHeight] = useState(28);
+  const [pickerBottom, setPickerBottom] = useState(72);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const textareaRef = useRef(null);
   const parentRef = useRef(null);
+  const pickerRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  // const customStyles = {
+  //   content: {
+  //     top: '50%',
+  //     left: '50%',
+  //     right: 'auto',
+  //     bottom: 'auto',
+  //     marginRight: '-50%',
+  //     transform: 'translate(-50%, -50%)',
+  //     width: '500px',
+  //     height:'300px',
+  //     background: ' #c6bdff'
+
+  //   },
+  // };
+
   useEffect(() => {
     if (darkMode) {
-      setTheme((preevTheme) => "dark");
+      setTheme((prev) => "dark");
     } else {
-      setTheme((preevTheme) => "light");
+      setTheme((prev) => "light");
     }
   }, [darkMode]);
 
@@ -25,77 +54,176 @@ export function InputPanel({ darkMode, currentUser, chat, refreshMessage,refresh
     if (textareaRef.current && parentRef.current) {
       parentRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  
   }, [textareaRef]);
 
   useEffect(() => {
-    
-    refreshInputHeeight(zxcv)
-    
-  }, [zxcv]);
+    setShowPicker(false);
+  }, [chat]);
+
+  useEffect(() => {
+    refreshInputHeeight(textareaHeight);
+  }, [textareaHeight]);
 
   const handleInputChange = (event) => {
     event.target.style.height = "auto";
     event.target.style.height = event.target.scrollHeight + "px";
-    setMeassageText(event.target.value);
+    setMessageText(event.target.value);
     if (textareaRef.current && parentRef.current) {
-      parentRef.current.style.height = `${textareaRef.current.scrollHeight + 5}px`;
+      parentRef.current.style.height = `${
+        textareaRef.current.scrollHeight + 5
+      }px`;
     }
-    setZxcv(event.target.scrollHeight)
+    setTextareaHeight(event.target.scrollHeight);
   };
 
   const addNewMessage = async (event) => {
-    if (messageText.length <= 0) {
-      return;
-    }
+  
+    console.log(data)
+
     try {
-      const dataMessage = await createMessaage(
-        currentUser.id,
-        chat.id,
-        data,
-        messageText
-      );
+      
+      
+      const  dataMessage = await createMessaage(currentUser.id, chat.id, data, messageText);
+     
+     console.log(dataMessage)
     } catch (error) {
       console.log(error);
     } finally {
+      setData(null);
+      setMessageText("");
+      setModalIsOpen(false)
       refreshMessage();
     }
-    setMeassageText("");
   };
 
-  const handleEmojiClick = () => {
-    setvisiblEmojiPicker((prevVisible) => !visiblEmojiPicker);
+  const handleLinkIconClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleModalClose = () => {
+    setModalIsOpen(false);
+  };
+
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setData(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+    setModalIsOpen(true);
+  };
+
+  const handleEmojiClick = (emojiData, event) => {
+    setMessageText((prevInput) => prevInput + emojiData.emoji);
+    setShowPicker((prevState) => !prevState);
   };
 
   return (
-    <div ref={parentRef} className=" w-[80%] min-h-[70px] flex flex-row items-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted ">
-      {visiblEmojiPicker && (
-        <div className="absolute bottom-[65px]">
-          <Picker pickerStyle={{ backgroundColor: "bg-skin-fill" }} />
+    <div
+      ref={parentRef}
+      className=" w-[80%] min-h-[70px] flex flex-row items-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted "
+    >
+      {showPicker && (
+        <div ref={pickerRef} className={`absolute bottom-[${pickerBottom}px] `}>
+          <EmojiPicker
+            onEmojiClick={handleEmojiClick}
+            autoFocusSearch={false}
+            theme={Theme.AUTO}
+          />
         </div>
       )}
-      <button className="mx-3" onClick={handleEmojiClick}>
+      <button className="mx-3" onClick={() => setShowPicker((val) => !val)}>
         <SmileIcon />
       </button>
 
       <div className="w-[90%] flex items-center ">
         <textarea
-         ref={textareaRef}
-        rows={1}
+          ref={textareaRef}
+          rows={1}
           onChange={handleInputChange}
           value={messageText}
           className="w-full h-auto  text-xl rounded-lg outline-none  resize-none overflow-hidden
                bg-skin-fill dark:bg-skin-fill-inverted "
-          maxLength="500"         
-          placeholder="Message..."
+          maxLength="500"
+          placeholder="Type your message here..."
         />
       </div>
 
-      <LinkIcon />
+      <div>
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileInputChange}
+          hidden
+          accept="image/*"
+        />
+        <button onClick={handleLinkIconClick}>
+          <LinkIcon />
+        </button>
+      </div>
 
       <button className="mr-1" onClick={addNewMessage}>
         <EnterIcon style="w-9 h-9 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none" />
       </button>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={handleModalClose}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          },
+          content: {
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "#0c0221", // Добавьте это свойство
+          },
+        }}
+        appElement={document.getElementById("root")}
+        className="w-[500px] h-[300px] absolute  border border-skin-border-inverted bg-skin-fill-base rounded-lg"
+        overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0, 0, 0, 0.5)]  flex items-center justify-center "
+        shouldCloseOnOverlayClick={false}
+      >
+        <div className="flex flex-col w-full h-full">
+          <button
+            onClick={handleModalClose}
+            className="h-[40px] w-[40px] rounded-full ml-2 mt-2 hover:bg-skin-button-accent-hover flex items-center justify-center"
+          >
+            <CloseIcon
+              style={
+                "h-7 w-7 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base"
+              }
+            />
+          </button>
+          {data ? (
+            <div className="flex items-center justify-center mb-2">
+              <img
+                src={data}
+                alt="Selected file"
+                className="w-[300px] h-[200px] object-contain"
+              />
+            </div>
+          ) : (
+            <div className="w-full h-[200px] flex items-center justify-center">
+              <div className="text-center text-skin-inverted text-2xl rounded-full border w-[100px] h-[100px] flex items-center justify-center">
+                Photo
+              </div>
+            </div>
+          )}
+          <div className="w-full flex items-center justify-center">
+            <button
+              onClick={()=>addNewMessage()}
+              className="text-xl text-skin-inverted border w-[100px] rounded-lg"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

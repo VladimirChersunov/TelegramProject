@@ -6,7 +6,7 @@ export function MessageIn({ message }) {
   const { data,sendTime, text, viewed, author } = message;
 
  
-
+ //console.log(message)
   // Форматирование времени
   const sendTimeFormatted = moment(sendTime).calendar(null, {
     sameDay: "[Today at] HH:mm",
@@ -55,7 +55,16 @@ export function MessageIn({ message }) {
             {author.userName}
             <time className="text-xs opacity-50">{sendTimeFormatted}</time>
           </div>
-          <div className="flex flex-col ml-2">{text}</div>
+          {data ?
+              <img
+              src={data}
+              alt="Selected file"
+              className="w-[300px] h-[200px] object-contain"
+            /> 
+            :
+            <div className="flex flex-col ml-2">{text}</div>
+          }
+         
           { viewed  ? <div className="ml-2 opacity-50 text-xs"> Viewed  </div>
           : <div className="ml-2 opacity-50 text-xs">Not  viewed  </div>}
          

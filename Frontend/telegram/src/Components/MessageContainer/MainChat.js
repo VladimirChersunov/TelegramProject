@@ -4,6 +4,7 @@ import { getAllMessaages } from "../../Services/messageServices";
 import { Message } from "./Message";
 
 export function MainChat({ chat, changeThemes, darkMode, currentUser }) {
+  //console.log(chat)
   const messagesEndRef = useRef(null);
   const myRef = useRef(null);
   const [dataMessages, setDataMessages] = useState(null);
@@ -32,8 +33,13 @@ export function MainChat({ chat, changeThemes, darkMode, currentUser }) {
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  
+    const messageContainer = document.getElementById("message-container");
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+   
   }, [dataMessages]);
+  
+  
 
   const refreshMessage = async () => {
     try {
@@ -53,12 +59,12 @@ export function MainChat({ chat, changeThemes, darkMode, currentUser }) {
     if(props>=56){
       setInputHeight(props-56)
     }   
-    console.log(props);
+    
   };
 
   useEffect(() => {
     const height = window.innerHeight - 140 - inputHeight;
-    console.log(height)
+   
     myRef.current.style.height = `${height}px`;
     function handleResize() {
       setWindowHeight(window.innerHeight);
@@ -80,6 +86,7 @@ export function MainChat({ chat, changeThemes, darkMode, currentUser }) {
     >
       <div
         ref={myRef}
+       id="message-container"
         className=" mt-2 flex flex-col  w-full overflow-x-hidden text-skin-base overflow-y-scroll scrollbar "
       >
         {dataMessages &&

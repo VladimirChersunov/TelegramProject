@@ -11,7 +11,7 @@ export const updateInfo = async () => {
       });
       return response.data;
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response);
       throw new Error(error.response.data.message);
     }
   } else {

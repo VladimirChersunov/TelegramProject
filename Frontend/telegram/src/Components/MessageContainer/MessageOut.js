@@ -3,7 +3,7 @@ import "moment/locale/ru";
 
 export function MessageOut({ message}) {
   const { data, deliveryStatus,  sendTime, text, } = message;
-
+  //console.log(message)
   // Форматирование времени
   const sendTimeFormatted = moment(sendTime).calendar(null, {
     sameDay: "[Today at] HH:mm",
@@ -14,14 +14,21 @@ export function MessageOut({ message}) {
 
   return (
     <div className="w-[100%] flex justify-end dark:text-[#0C0221]">
-      <div className="w-[600px] flex flex-row mt-2 mr-10">
+      <div className="w-max h-max flex flex-row mt-2 mr-10">
         <div className="bg-blue-200 w-[100%] rounded-l-xl rounded-t-xl">
           <div className="flex flex-row justify-end items-center w-[90%] ml-2 mt-1 font-semibold text-lg">
             <time className="text-xs opacity-50">{sendTimeFormatted}</time>
           </div>
           <div className="flex flex-col ml-2">
-            {data}
-            {text}
+          {data ?
+              <img
+              src={data}
+              alt="Selected file"
+              className="w-[300px] h-[200px] object-contain mr-2"
+            /> 
+            :
+            <div className="flex flex-col ml-2 max-w-[600px] min-w-[100px]">{text}</div>
+          }
             <div className="flex w-full justify-end items-center">
             {deliveryStatus ? <p className=" opacity-50 text-xs mr-2">Delivered </p>
           : <div className=" opacity-50 text-xs text-skin-error">Not delivered </div>}
