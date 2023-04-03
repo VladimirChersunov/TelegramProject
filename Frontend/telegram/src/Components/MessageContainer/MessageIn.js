@@ -1,7 +1,7 @@
 import moment from "moment";
 import "moment/locale/ru";
 
-export function MessageIn({ message }) {
+export function MessageIn({ message,checkMessage }) {
  
   const { data,sendTime, text, viewed, author } = message;
 
@@ -18,8 +18,10 @@ export function MessageIn({ message }) {
   //console.log(messageAuthor)
  
   return (
-    <div className="w-[100%] flex justify-start ml-10 dark:text-[#0C0221] ">
-      <div className="w-[600px] flex flex-row mt-2">
+    <div className={`w-[98%] mb-1 flex justify-start ml-4 rounded-lg pb-2 ${
+      checkMessage && 'border'
+    }`}>
+      <div className="max-w-[600px] min-w-[100px] flex flex-row mt-2 ml-10">
         <div className="flex flex-col justify-end align-bottom">
           <div className="bg-blue-200 w-[50px] h-[50px] relative">
             <div
@@ -62,7 +64,7 @@ export function MessageIn({ message }) {
               className="w-[300px] h-[200px] object-contain"
             /> 
             :
-            <div className="flex flex-col ml-2">{text}</div>
+            <div className="flex flex-col ml-2 mr-2">{text}</div>
           }
          
           { viewed  ? <div className="ml-2 opacity-50 text-xs"> Viewed  </div>

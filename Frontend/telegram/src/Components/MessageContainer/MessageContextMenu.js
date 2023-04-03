@@ -1,72 +1,111 @@
-import { Ahtung } from "../Icons/Ahtung";
+import { useState } from "react";
+import { deleteMessage } from "../../Services/messageServices";
 import { Copy } from "../Icons/Copy";
 import { FlagIcon } from "../Icons/FlagIcon";
 import { Forward } from "../Icons/Forward";
 import { RecicleIcon } from "../Icons/RecicleIcon";
 import { Reply } from "../Icons/Reply";
 import { SelectAll } from "../Icons/SelectAll";
+import copy from 'copy-to-clipboard';
 
+export function MessageContextMenu({ x, y, message, chat, currentUser,refreshMessage,showContext,checkedMessage }) {
+  const admin = currentUser.id === chat.authorId;
+  const owner = message.author.id === currentUser.id;
 
-export function MessageContextMenu(props) {
+  const [check, setCheck] = useState(false)
+
+  // console.log(admin);
+  // console.log(message.author.id);
+
+  const deletemessage = async () => {
+    try {
+      const data = await deleteMessage(message.id, message.author.id);
+      console.log(data);
+    } catch (error) {
+      console.log(error.data);
+    }
+    finally{
+      refreshMessage()
+    }
+  };
+
+  const handlDeleteClick = () => {
+    if (!owner) {
+      if (admin) {
+        deletemessage()
+      }
+      return;
+    }
+    deletemessage()
+  };
+
+  const handleCopy = ()=>{
+    copy(message.text)
+    showContext(false)
+  }
+
+  const handleChcked = ()=>{
+    setCheck(prev=>!prev)
+    checkedMessage(check)
+
+  }
+
   return (
     <div
       className="w-[180px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
        text-lg  border border-skin-border-base dark:border-skin-border-inverted 
-       rounded-lg z-50"
-      style={{ position: "absolute", top: props.y, left: props.x }}
+       rounded-lg z-50 select-none"
+      style={{ position: "absolute", top: y, left: x }}
     >
       <ul className="rounded-lg ">
         <li
-          onClick={props.onCopy}
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
-           flex-row  items-center text-sm pt-2 pb-2"
+          className=" text-skin-muted rounded-t-lg pl-2  flex
+           flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
-         <Reply/>
+          <Reply />
           <p className="font-bold ml-2">Reply</p>
         </li>
-       
+
         <li
-          onClick={props.onCopy}
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
-           flex-row  items-center text-sm pt-2 pb-2"
+        onClick={handleChcked}
+          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
+           flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
-          <SelectAll/>
+          <SelectAll />
           <p className="font-bold ml-2"> Select</p>
         </li>
-      
+
         <li
-          onClick={props.onCopy}
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
-           flex-row  items-center text-sm pt-2 pb-2"
+          className=" text-skin-muted  pl-2  flex
+           flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
-         <FlagIcon/>
+          <FlagIcon />
           <p className="font-bold ml-2"> Report</p>
         </li>
         <li
-          onClick={props.onCopy}
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
-           flex-row  items-center text-sm pt-2 pb-2"
+        
+          className="   pl-2  flex text-skin-muted
+           flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
-        <Forward/>
+          <Forward />
           <p className="font-bold ml-2"> Forward</p>
         </li>
         <li
-          onClick={props.onCopy}
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
-           flex-row  items-center text-sm pt-2 pb-2"
+        onClick={handleCopy}
+          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
+           flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
-        <Copy/>
+          <Copy />
           <p className="font-bold ml-2"> Copy text</p>
         </li>
-        <li
-          onClick={props.onCopy}
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
-           flex-row text-skin-error  items-center text-sm pt-2 pb-2 "
-        >
-          <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none '}/>
-          <p className="font-bold ml-2">   Delete</p>
-        </li>
-       
+      {(owner || admin)&&<li
+        onClick={handlDeleteClick}
+        className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-b-lg pl-2  flex
+          flex-row text-skin-error  items-center text-sm pt-2 pb-2 select-none "
+      >
+        <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
+        <p className="font-bold ml-2"> Delete</p>
+      </li>}
       </ul>
     </div>
   );

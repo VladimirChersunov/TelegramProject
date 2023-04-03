@@ -3,14 +3,24 @@ import { MessageOut } from "./MessageOut";
 import { useState, useRef, useEffect } from "react";
 import { MessageContextMenu } from "./MessageContextMenu";
 
-export function Message({ message, currentUser }) {
+export function Message({ message, currentUser,chat,refreshMessage }) {
+
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
+  const [checkMessage, setCheckMessage] = useState(false);
   
 
   const isCurrentUser = message.author.id === currentUser.id;
+
+  const showContext = (props)=>{
+    setShowContextMenu(props)
+  }
+
+  const checkedMessage = (props)=>{
+    setCheckMessage(props)
+  }
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -43,19 +53,14 @@ export function Message({ message, currentUser }) {
       className="w-[100%] "
     >
       {showContextMenu && (
-        <MessageContextMenu x={contextMenuX} y={contextMenuY}>
-          <div onClick={() => alert(`Copy `)}>Open in new tab</div>
-          <div onClick={() => alert(`Paste `)}>Mark as read</div>
-          <div onClick={() => alert(`Paste `)}>Mute</div>
-          <div onClick={() => alert(`Paste `)}>Unmute</div>
-          <div onClick={() => alert(`Paste `)}>Report</div>
-          <div onClick={() => alert(`Paste `)}>Delete and exit</div>
-        </MessageContextMenu>
+        <MessageContextMenu x={contextMenuX} y={contextMenuY} message={message} chat={chat} checkedMessage={checkedMessage}
+         currentUser={currentUser} refreshMessage={refreshMessage} showContext={showContext}/>        
+      
       )}
       {isCurrentUser ? (
-        <MessageOut message={message} />
+        <MessageOut message={message} checkMessage={checkMessage}/>
       ) : (
-        <MessageIn message={message}/>
+        <MessageIn message={message} checkMessage={checkMessage}/>
       )}
     </div>
   );

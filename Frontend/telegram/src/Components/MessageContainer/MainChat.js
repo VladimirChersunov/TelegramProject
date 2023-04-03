@@ -82,7 +82,7 @@ export function MainChat({ chat, changeThemes, darkMode, currentUser }) {
 
   return (
     <div
-      className={`flex flex-col h-[${windowHeight} px] max-w-full items-center`}
+      className={`flex flex-col h-[${windowHeight} px] max-w-full items-center w-full`}
     >
       <div
         ref={myRef}
@@ -95,6 +95,8 @@ export function MainChat({ chat, changeThemes, darkMode, currentUser }) {
               message={message}
               key={message.id}
               currentUser={currentUser}
+              chat={chat}
+              refreshMessage={refreshMessage}
             />
           ))}
       </div>
