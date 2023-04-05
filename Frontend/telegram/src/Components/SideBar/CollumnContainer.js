@@ -20,6 +20,7 @@ export function CollumnContainer({
   handleMuted,
   toggleDarkMode,
   currentChat,
+  clearMain
 }) {
   const [aboutState, setAboutState] = useState(false);
   const [chatlistState, setChatlistState] = useState(true);
@@ -165,6 +166,7 @@ export function CollumnContainer({
           />
           <RadioChatList
             chats={chats}
+            clearMain={clearMain}
             currentChat={currentChat}
             handleMuted={handleMuted}
             visibleAddNewChat={visibleAddNewChat}

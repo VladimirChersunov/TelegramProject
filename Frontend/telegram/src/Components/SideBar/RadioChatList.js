@@ -13,10 +13,11 @@ export function RadioChatList(props) {
     <div className="flex max-h-screen w-full flex-col items-center  overflow-hidden ">
       <div className="w-full h-screen overflow-auto overflow-y-scroll scrollbar" x-data="app">
     
-        {props.chats.map((chat, index) => (
+        {props?.chats?.map((chat, index) => (
             <div key={index}>
             <RadioElement
-            chat={chat}            
+            chat={chat}   
+            clearMain={props?.clearMain}         
             currentChat={props.currentChat}
             handleMuted={props.handleMuted}
           /> 

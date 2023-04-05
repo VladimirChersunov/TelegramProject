@@ -86,11 +86,15 @@ export function MainPage({ darkMode, userData, toggleDarkMode }) {
 
   const handleMuted = (props) => {};
 
+  const clearMain = (props) => {
+    setCentrVisible(props)
+  };
+
   const changeThemes = (props) => {
     setTheme(props);
   };
 
-  const currentChat = (chat) => {
+  const currentChat = (chat) => {    
     setCurrentChat(chat);
   };
 
@@ -112,12 +116,14 @@ export function MainPage({ darkMode, userData, toggleDarkMode }) {
           toggleDarkMode={toggleDarkMode}
           handleMuted={handleMuted}
           contacts={contacts}
+          clearMain={clearMain}
         />
       </div>
 
       <div className="flex-grow w-full">
         {centrVisible && (
           <MessageContainer
+          currentChat={currentChat}
             chat={currChat}
             toggleRightColumn={toggleRightColumn}
             changeThemes={changeThemes}

@@ -1,18 +1,32 @@
-import { useState } from "react";
-import { deleteMessage } from "../../Services/messageServices";
+import { useState, useEffect } from "react";
+import { deleteMessage, pinnedMessaages } from "../../Services/messageServices";
 import { Copy } from "../Icons/Copy";
 import { FlagIcon } from "../Icons/FlagIcon";
 import { Forward } from "../Icons/Forward";
 import { RecicleIcon } from "../Icons/RecicleIcon";
 import { Reply } from "../Icons/Reply";
 import { SelectAll } from "../Icons/SelectAll";
-import copy from 'copy-to-clipboard';
+import copy from "copy-to-clipboard";
+import { PinIcon } from "../Icons/PinIcon";
 
-export function MessageContextMenu({ x, y, message, chat, currentUser,refreshMessage,showContext,checkedMessage }) {
+export function MessageContextMenu({
+  x,
+  y,
+  message,
+  chat,
+  currentUser,
+  refreshMessage,
+  showContext,
+  checkedMessage,
+  refreshCallback,
+  currentChat
+}) {
   const admin = currentUser.id === chat.authorId;
   const owner = message.author.id === currentUser.id;
 
-  const [check, setCheck] = useState(false)
+  const [check, setCheck] = useState(false);
+  const [pinnedId, setPinnedId] = useState(chat.pinnedMessageId);
+  const [action, setAction] = useState(null);
 
   // console.log(admin);
   // console.log(message.author.id);
@@ -23,32 +37,50 @@ export function MessageContextMenu({ x, y, message, chat, currentUser,refreshMes
       console.log(data);
     } catch (error) {
       console.log(error.data);
-    }
-    finally{
-      refreshMessage()
+    } finally {
+      refreshMessage();
     }
   };
 
   const handlDeleteClick = () => {
     if (!owner) {
       if (admin) {
-        deletemessage()
+        deletemessage();
       }
       return;
     }
-    deletemessage()
+    deletemessage();
   };
 
-  const handleCopy = ()=>{
-    copy(message.text)
-    showContext(false)
-  }
+  const handleCopy = () => {
+    copy(message.text);
+    showContext(false);
+  };
 
-  const handleChcked = ()=>{
-    setCheck(prev=>!prev)
-    checkedMessage(check)
+  const handleChcked = () => {
+    setCheck((prev) => !prev);
+    checkedMessage(check);
+  };
 
-  }
+ 
+
+  
+
+  const handlePinnedClick = async () => {
+    const action = "Set"
+    try {
+      const data = await pinnedMessaages(action, message.id, chat.id);
+      
+      currentChat(data.chat)
+    } catch (error) {
+      console.log(error.data);
+    } finally {
+     
+      refreshCallback(true)
+      refreshMessage();
+      showContext(false);
+    }
+  };
 
   return (
     <div
@@ -67,12 +99,21 @@ export function MessageContextMenu({ x, y, message, chat, currentUser,refreshMes
         </li>
 
         <li
-        onClick={handleChcked}
+          onClick={handleChcked}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
           <SelectAll />
           <p className="font-bold ml-2"> Select</p>
+        </li>
+
+        <li
+          onClick={handlePinnedClick}
+          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
+           flex-row  items-center text-sm pt-2 pb-2 select-none"
+        >
+          <PinIcon />
+          <p className="font-bold ml-2"> Pin message</p>
         </li>
 
         <li
@@ -83,7 +124,6 @@ export function MessageContextMenu({ x, y, message, chat, currentUser,refreshMes
           <p className="font-bold ml-2"> Report</p>
         </li>
         <li
-        
           className="   pl-2  flex text-skin-muted
            flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
@@ -91,21 +131,23 @@ export function MessageContextMenu({ x, y, message, chat, currentUser,refreshMes
           <p className="font-bold ml-2"> Forward</p>
         </li>
         <li
-        onClick={handleCopy}
+          onClick={handleCopy}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
           <Copy />
           <p className="font-bold ml-2"> Copy text</p>
         </li>
-      {(owner || admin)&&<li
-        onClick={handlDeleteClick}
-        className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-b-lg pl-2  flex
+        {(owner || admin) && (
+          <li
+            onClick={handlDeleteClick}
+            className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-b-lg pl-2  flex
           flex-row text-skin-error  items-center text-sm pt-2 pb-2 select-none "
-      >
-        <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
-        <p className="font-bold ml-2"> Delete</p>
-      </li>}
+          >
+            <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
+            <p className="font-bold ml-2"> Delete</p>
+          </li>
+        )}
       </ul>
     </div>
   );

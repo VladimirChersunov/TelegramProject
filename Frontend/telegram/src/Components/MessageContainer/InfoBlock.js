@@ -6,11 +6,11 @@ export function InfoBlock({ chat, toggleRightColumn }) {
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
-    if (chat.type === "channel") {
+    if (chat.type === "Channel") {
       setFavorite(false)
-      setTypeChat(`${chat.members} subscrybers`);
-    } else if (chat.type === "group") {
-      setTypeChat(`${chat.members} members`);
+      setTypeChat(`${chat.membersCount} subscrybers`);
+    } else if (chat.type === "Group") {
+      setTypeChat(`${chat.membersCount } members`);
       setFavorite(false)
     } else if (chat.type === "Favorite") {
       setFavorite(true)
@@ -25,7 +25,7 @@ export function InfoBlock({ chat, toggleRightColumn }) {
       onClick={() => {
         toggleRightColumn(true);
       }}
-      className="flex flex-row hover:cursor-pointer justify-between w-1/2 "
+      className="flex flex-row hover:cursor-pointer justify-between w-1/2 min-w-[250px]"
     >
       <div className="flex  h-[100%] w-[100%] items-center pl-5 ">
       {chat.chatImage ? (
@@ -38,7 +38,7 @@ export function InfoBlock({ chat, toggleRightColumn }) {
           <div className="rounded-full   h-[40px] w-[40px]  bg-purple-500 flex items-center justify-center select-none">
            { favorite ? <SavedIcon/> :
             <p className="text-lg">
-              {chat.chatName[0].toUpperCase() + chat.chatName[1].toUpperCase()}
+              {chat.chatName&& chat?.chatName[0].toUpperCase() + chat?.chatName[1].toUpperCase()}
             </p>}
           </div>
         )}
@@ -47,7 +47,7 @@ export function InfoBlock({ chat, toggleRightColumn }) {
           <div className="flex flex-row justify-between">
             <div className="flex flex-col">
               <p className="text-lg mr-2 ml-2">{chat.chatName} </p>          
-              {typeChat && <p className="text-xs"> {typeChat} </p>}              
+              {typeChat && <p className="text-xs ml-2"> {typeChat} </p>}              
             </div>
           </div>
         </div>

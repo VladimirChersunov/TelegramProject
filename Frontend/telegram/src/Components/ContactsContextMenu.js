@@ -4,6 +4,7 @@ import { PeopleIcon } from "./Icons/PeopleIcon";
 import { RecicleIcon } from "./Icons/RecicleIcon";
 
 export function ContactsContextMenu({ x, y, userName, type }) {
+  
   const handleCreateContact = (event) => {
     event.stopPropagation();
     const create = async () => {

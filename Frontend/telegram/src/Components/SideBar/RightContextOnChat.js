@@ -5,9 +5,10 @@ import { NewTab } from "../Icons/NewTab";
 import { RecicleIcon } from "../Icons/RecicleIcon";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
+import { deleteChatById, leavePublic } from "../../Services/chatServices";
 
 
-export function ContextMenu({chat, x, y, handleMuted}) {
+export function ContextMenu({chat, x, y, handleMuted,clearMain}) {
   const [myState, setMyState] = useState('initial state');
   const[chats, setChat] = useState(false)
   const[group, setGroup] = useState(false)
@@ -17,24 +18,44 @@ export function ContextMenu({chat, x, y, handleMuted}) {
 
 useEffect(()=>{
  
-if(chat.type==='chat'){
+if(chat.type==='Private'){
   setChat(true)
   setGroup(false)
   setChannel(false)
 }
-if(chat.type==='group'){
+if(chat.type==='Group'){
   setChat(false)
   setGroup(true)
   setChannel(false)
 }
-if(chat.type==='channel'){
+if(chat.type==='Channel'){
   setChat(false)
   setGroup(false)
   setChannel(true)
 }
 },[])
 
+const leaveChat = async()=>{
+  const responce = await leavePublic(chat?.chatName)
+  clearMain(false)
+  console.log(responce)
+}
 
+const deleteChat = async()=>{
+  const responce = await deleteChatById(chat?.id)
+  clearMain(false)
+  console.log(responce)
+}
+
+const handleLeaveChat = (event)=>{
+  event.stopPropagation()
+  leaveChat()
+}
+
+const handleDeleteChat = (event)=>{
+  event.stopPropagation()
+  deleteChat()
+}
   
 const handleOpenNewTab = () =>{
  
@@ -85,14 +106,14 @@ const handleOpenNewTab = () =>{
         </li>}
         <li
          
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
+          className="  rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >
          <FlagIcon/>
-          <p className="font-bold ml-2"> Report</p>
+          <p className="font-bold ml-2 text-skin-muted"> Report</p>
         </li>
        {channel&& <li
-         
+         onClick={handleLeaveChat}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row text-skin-error  items-center text-sm pt-2 pb-2"
         >
@@ -100,7 +121,7 @@ const handleOpenNewTab = () =>{
           <p className="font-bold ml-2">   Leave channel</p>
         </li>}
       {group&&<li
-        
+        onClick={handleLeaveChat}
         className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
           flex-row text-skin-error  items-center text-sm pt-2 pb-2"
       >
@@ -108,7 +129,7 @@ const handleOpenNewTab = () =>{
         <p className="font-bold ml-2">   Delete and exit</p>
       </li>}
        {chats&& <li
-         
+         onClick={handleDeleteChat}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row text-skin-error  items-center text-sm pt-2 pb-2 "
         >

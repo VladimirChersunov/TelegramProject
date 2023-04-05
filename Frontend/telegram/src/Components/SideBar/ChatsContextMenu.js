@@ -1,25 +1,22 @@
+import { enterPublic } from "../../Services/chatServices";
 import { Ahtung } from "../Icons/Ahtung";
 import { PeopleIcon } from "../Icons/PeopleIcon";
 import { RecicleIcon } from "../Icons/RecicleIcon";
 
-
-export function ChatsContextMenu({ x, y, userName, type }) {
-
-
-  const handleCreateContact = () => {
-    const create = async () => {
-        
-    };
-    create();
+export function ChatsContextMenu({ x, y, type, chat }) {
+  //console.log(chat)
+  
+  const handleEnterToChat = (event) => {
+    console.log("click");
+    event.stopPropagation();
+    // try {
+    //   const data =  enterPublic(chat.chatName);
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log(error.data);
+    // }
   };
 
-  const handleDeleteContact = () => {
-    const create = async () => {        
-           
-    };
-    create();
-    
-  };
   return (
     <div
       className="w-[180px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
@@ -27,40 +24,34 @@ export function ChatsContextMenu({ x, y, userName, type }) {
        rounded-lg z-50"
       style={{ position: "absolute", top: y, left: x }}
     >
-      <ul className="rounded-lg ">
-
-        {type==="search" &&<div>
+      <ul className="rounded-lg w-full  h-max">
         <li
-        onClick={handleCreateContact}
+          onClick={() => console.log("Кликнули на элемент!")}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
-           flex-row  items-center text-sm pt-2 pb-2"
+           flex-row  items-center text-sm pt-2 pb-2 "
         >
-          <PeopleIcon/>
-          <p className="font-bold ml-2">Add to contacts</p>
+          <PeopleIcon />
+          <p className="font-bold ml-2">Enter to chat</p>
         </li>
-        </div>}
-       
-     
+
         <li
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
+         onClick={() => console.log("Кликнули на элемент!")}
+          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >
           <Ahtung />
           <p className="font-bold ml-2 text-skin-error">Add to black list</p>
         </li>
-      </ul>
-     {type==="contacts" && <div>
-      <div className="h-[1px] bg-skin-fill-inverted dark:bg-skin-fill w-[80%] m-auto " />
+
         <li
-        onClick={handleDeleteContact}
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
+          onClick={() => console.log("Кликнули на элемент!")}
+          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-b-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >
-          <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none'}/>
-          <p className="font-bold ml-2 text-skin-error">Delete</p>
+          <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none"} />
+          <p className="font-bold ml-2 text-skin-error">Leave the chat</p>
         </li>
-      </div>}
-    
+      </ul>
     </div>
   );
 }
