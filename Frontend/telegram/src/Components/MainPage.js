@@ -95,6 +95,7 @@ export function MainPage({ darkMode, userData, toggleDarkMode }) {
   };
 
   const currentChat = (chat) => {    
+    console.log(chat)
     setCurrentChat(chat);
   };
 

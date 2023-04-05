@@ -136,6 +136,7 @@ export function CollumnContainer({
           visibleAddMessage={visibleAddMessage}
           visibleAddNewChat={visibleAddNewChat}
           handleCheckedContacts={handleCheckedContacts}
+         
         />
       )}
       {addMessageState && (
@@ -146,6 +147,7 @@ export function CollumnContainer({
           visibleAddNewChat={visibleAddNewChat}
           chatType={chatType}
           checkedContacts={checkedContacts}
+          currentUser={currentUser}
         />
       )}
 

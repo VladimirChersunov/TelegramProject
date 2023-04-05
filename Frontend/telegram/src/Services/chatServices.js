@@ -102,3 +102,25 @@ export const deleteChatById = async (chatId) => {
   }
 };
 
+export const createChat = async (chatImage,chatName,shortMessage,publishTime,type,chatInfo,authorId) => {
+  try {
+    const token = localStorage.getItem("token");
+   
+    const response = await axiosCreate.post(
+      "Chats/createchat",
+      { chatImage,chatName,shortMessage,publishTime,type,chatInfo,authorId},
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.response.data.message);
+  }
+};
+
+

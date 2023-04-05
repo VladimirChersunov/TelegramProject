@@ -3,34 +3,58 @@ import { ContactsCard } from "./ContactsCard";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { EnterIcon } from "../Icons/EnterIcon";
 import CustomFileInput from "./CustomFileInput";
+import { createChat } from "../../Services/chatServices";
 
-export function AddNewChat(props) {
+export function AddNewChat({ chatType, visibleAddNewChat, checkedContacts,currentUser }) {
+  const [group, setGroup] = useState(false);
+  const [channel, setChannel] = useState(false)  
+  const [chatImage, setChatImage] = useState(null);
+  const [chatName, setChatName] = useState(null);
+  const [shortMessage, setMessage] = useState(null);
+  const [publishTime, setPublishTime] = useState(new Date().toISOString());
+  const [chatInfo, setChatInfo] = useState(null);
+  
+
   useEffect(() => {
-    if (props.chatType === "Group") {
+    if (chatType === "Group") {
       setGroup(true);
       setChannel(false);
     }
-    if (props.chatType === "Channel") {
+    if (chatType === "Channel") {
       setGroup(false);
       setChannel(true);
     }
   }, []);
 
-  const handleNext = () => {};
-
-  const [group, setGroup] = useState(false);
-  const [channel, setChannel] = useState(false);
-
-  const handleClickBack = () => {
-    props.visibleAddNewChat(false);
+  const handleCreateChat = () => {
+     createchat();
+    visibleAddNewChat(false);
   };
 
-  const [file, setFile] = useState();
+  const createchat = async () => {
+    const responce = await createChat(
+      chatImage,
+      chatName,
+      shortMessage,
+      publishTime,
+      chatType,
+      chatInfo,
+      currentUser.id
+    );
+    console.log(responce)
+  };
 
-  function handleChange(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }
+  const handleClickBack = () => {
+    visibleAddNewChat(false);
+  };
+
+  const handleChatNameChange = (e) => {
+    setChatName(e.target.value);
+  };
+
+  const handleChatInfoChange = (e) => {
+    setChatInfo(e.target.value);
+  };
 
   return (
     <div className="flex flex-col justify-center">
@@ -43,35 +67,39 @@ export function AddNewChat(props) {
           <BackArrowIcon />
         </button>
 
-        <div className="text-2xl mt-3 ml-2 "> New {props.chatType}</div>
+        <div className="text-2xl mt-3 ml-2 "> New {chatType}</div>
       </div>
 
       <div className="w-full text-center mt-10 flex flex-col ">
         <div className="flex flex-row items-end  m-2 "></div>
 
         <CustomFileInput />
+
         <input
           className="m-5 pl-2 text-xl bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
         border-b border-skin-border-base dark:border-skin-border-inverted outline-none"
-          placeholder={`${props.chatType} name`}
+          placeholder={`${chatType} name`}
+          onChange={(e) => setChatName(e.target.value)}
         />
 
         {channel && (
           <div className="flex flex-col">
             <input
+             onChange={(e) => setChatInfo(e.target.value)}
               className="m-5 text-xl bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
         border-b border-skin-border-base dark:border-skin-border-inverted outline-none pl-2"
               placeholder="Description (optional)"
             />
-            <label className="text-xs opacity-70">
-              You can provide an optional description for your channel
-            </label>
+            <p className="text-xs opacity-70">
+              You can provide an optional description for
+            </p>
+            <p className="text-xs opacity-70">your channel</p>
           </div>
         )}
-        <label className="text-lg mt-3">{props.checkedContacts.length} members</label>
+        <label className="text-lg mt-3">{checkedContacts.length} members</label>
         <div className="mx-5 flex flex-col justify-center">
-          {props.checkedContacts.map((contact) => (
-            <div className="flex flex-col m-1">
+          {checkedContacts.map((contact) => (
+            <div key={contact.id} className="flex flex-col m-1">
               <ContactsCard contact={contact} />
             </div>
           ))}
@@ -80,7 +108,7 @@ export function AddNewChat(props) {
 
       <div className="h-[15%] ">
         <button
-          onClick={handleNext}
+          onClick={handleCreateChat}
           className="h-[50px] w-[50px]  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted
          dark:bg-skin-fill hover:bg-skin-button-inverted-hover dark:hover:bg-skin-button-inverted-hover"
         >

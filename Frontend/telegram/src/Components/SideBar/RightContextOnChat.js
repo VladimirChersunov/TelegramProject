@@ -126,7 +126,7 @@ const handleOpenNewTab = () =>{
           flex-row text-skin-error  items-center text-sm pt-2 pb-2"
       >
         <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none '}/>
-        <p className="font-bold ml-2">   Delete and exit</p>
+        <p className="font-bold ml-2">Delete and exit</p>
       </li>}
        {chats&& <li
          onClick={handleDeleteChat}

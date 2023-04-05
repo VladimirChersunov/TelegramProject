@@ -138,7 +138,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain }) {
           </div>
 
           <div className="flex flex-row justify-between">
-            <p className="text-[14px]">{chat.shortMessage.substring(0, 25)}</p>
+            <p className="text-[14px]">{chat?.shortMessage?.substring(0, 25)}</p>
 
             {!savedMessageState && (
               <label

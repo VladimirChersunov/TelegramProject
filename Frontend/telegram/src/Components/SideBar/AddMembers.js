@@ -3,14 +3,20 @@ import { useState } from "react";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { EnterIcon } from "../Icons/EnterIcon";
 
-export function AddMembers(props) {
+export function AddMembers({
+  visibleAddmembers,
+  visibleAddNewChat,
+  handleCheckedContacts,
+  contacts,
+ 
+}) {
+  const [inputValue, setInputValue] = useState("");
+
   const handleClickBack = () => {
-    props.visibleAddmembers(false);
+    visibleAddmembers(false);
   };
 
-
   const [checked, setChecked] = useState([]);
-  
 
   // Add/Remove checked item from list
   const handleCheck = (event, contact) => {
@@ -21,13 +27,16 @@ export function AddMembers(props) {
     }
   };
 
- 
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   const handleNext = () => {
-    props.visibleAddNewChat(true);
-    props.handleCheckedContacts(checked);
+    visibleAddNewChat(true);
+    handleCheckedContacts(checked);
   };
   const handleClick = () => {
-    console.log('click')
+    console.log("click");
   };
   return (
     <div className="flex flex-col justify-center">
@@ -44,18 +53,24 @@ export function AddMembers(props) {
 
       <div className="flex justify-center    h-10">
         <input
+          value={inputValue}
+          onChange={handleInputChange}
           placeholder="Who would you like to add?"
           className="text-lg w-[80%] outline-none bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
-           border-b border-skin-border-base dark:border-skin-border-inverted"
+           border-b border-skin-border-base dark:border-skin-border-inverted pl-5"
         />
       </div>
       <div className="m-3  h-[100%]">
         <div className="w-[100%] h-[85%]">
-          {props.contacts.map((contact) => (
+          {contacts
+          .filter((contact) => contact.userName.toLowerCase().includes(inputValue.toLowerCase()))
+          .map((contact) => (
             <div
-            onClick={handleClick}
-             className="flex flex-row  border-b border-skin-border-base dark:border-skin-border-inverted  m-1">
-             <input
+            key={contact.id}
+              onClick={handleClick}
+              className="flex flex-row    m-1"
+            >
+              <input
                 value={contact}
                 type="checkbox"
                 onChange={(e) => handleCheck(e, contact)}
@@ -67,7 +82,7 @@ export function AddMembers(props) {
         </div>
       </div>
 
-     <div className="h-[15%] ">
+      <div className="h-[15%] ">
         <button
           onClick={handleNext}
           className="h-[50px] w-[50px]  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted
