@@ -19,14 +19,12 @@ export function MessageContextMenu({
   showContext,
   checkedMessage,
   refreshCallback,
-  currentChat
+  currentChat,
 }) {
   const admin = currentUser.id === chat.authorId;
-  const owner = message.author.id === currentUser.id;
-
+  const owner = message.author.id === currentUser.id;  
   const [check, setCheck] = useState(false);
-  const [pinnedId, setPinnedId] = useState(chat.pinnedMessageId);
-  const [action, setAction] = useState(null);
+ 
 
   // console.log(admin);
   // console.log(message.author.id);
@@ -41,6 +39,9 @@ export function MessageContextMenu({
       refreshMessage();
     }
   };
+
+ 
+  
 
   const handlDeleteClick = () => {
     if (!owner) {
@@ -62,21 +63,16 @@ export function MessageContextMenu({
     checkedMessage(check);
   };
 
- 
-
-  
-
   const handlePinnedClick = async () => {
-    const action = "Set"
+    const action = "Set";
     try {
       const data = await pinnedMessaages(action, message.id, chat.id);
-      
-      currentChat(data.chat)
+
+      currentChat(data.chat);
     } catch (error) {
       console.log(error.data);
     } finally {
-     
-      refreshCallback(true)
+      refreshCallback(true);
       refreshMessage();
       showContext(false);
     }

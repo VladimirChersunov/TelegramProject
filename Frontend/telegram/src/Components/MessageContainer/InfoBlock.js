@@ -6,16 +6,16 @@ export function InfoBlock({ chat, toggleRightColumn }) {
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
-    if (chat.type === "Channel") {
+    if (chat?.type === "Channel") {
       setFavorite(false)
-      setTypeChat(`${chat.membersCount} subscrybers`);
-    } else if (chat.type === "Group") {
-      setTypeChat(`${chat.membersCount } members`);
+      setTypeChat(`${chat?.membersCount} subscrybers`);
+    } else if (chat?.type === "Group") {
+      setTypeChat(`${chat?.membersCount } members`);
       setFavorite(false)
-    } else if (chat.type === "Favorite") {
+    } else if (chat?.type === "Favorite") {
       setFavorite(true)
     }  else {
-      setTypeChat(chat.author);    
+      setTypeChat(chat?.author);    
       setFavorite(false)  
     }
   }, [chat]);
@@ -28,9 +28,9 @@ export function InfoBlock({ chat, toggleRightColumn }) {
       className="flex flex-row hover:cursor-pointer justify-between w-1/2 min-w-[250px]"
     >
       <div className="flex  h-[100%] w-[100%] items-center pl-5 ">
-      {chat.chatImage ? (
+      {chat?.chatImage ? (
           <img
-            src={chat.chatImage }
+            src={chat?.chatImage }
             alt="logo"
             className="h-[40px] w-[40px] select-none  rounded-full"
           />
@@ -38,7 +38,7 @@ export function InfoBlock({ chat, toggleRightColumn }) {
           <div className="rounded-full   h-[40px] w-[40px]  bg-purple-500 flex items-center justify-center select-none">
            { favorite ? <SavedIcon/> :
             <p className="text-lg">
-              {chat.chatName&& chat?.chatName[0].toUpperCase() + chat?.chatName[1].toUpperCase()}
+              {chat?.chatName&& chat?.chatName[0]?.toUpperCase() + chat?.chatName[1]?.toUpperCase()}
             </p>}
           </div>
         )}
@@ -46,7 +46,7 @@ export function InfoBlock({ chat, toggleRightColumn }) {
         <div className="flex flex-col  w-[85%] mt-1">
           <div className="flex flex-row justify-between">
             <div className="flex flex-col">
-              <p className="text-lg mr-2 ml-2">{chat.chatName} </p>          
+              <p className="text-lg mr-2 ml-2">{chat?.chatName} </p>          
               {typeChat && <p className="text-xs ml-2"> {typeChat} </p>}              
             </div>
           </div>

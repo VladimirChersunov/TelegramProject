@@ -123,6 +123,8 @@ export function CollumnContainer({
           visibleStartPrivate={visibleStartPrivate}
           contacts={contacts}
           chatType={chatType}
+          currentChat={currentChat}
+          currentUser={currentUser}
         />
       )}
 

@@ -45,7 +45,7 @@ function App() {
   };
 
   return (
-    <div className={`h-full w-full ${darkMode ? "dark" : ""}  `}>
+    <div className={`h-full overflow-hidden w-full ${darkMode ? "dark" : ""}  `}>
       <Routes>
         <Route
           path="/main"

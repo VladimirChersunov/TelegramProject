@@ -53,7 +53,7 @@ export function InfoContainer({ toggleRightColumn, chat }) {
       <div className="h-[100%]  border-l border-skin-border-base dark:border-skin-border-inverted pt-2 flex items-center flex-col ">
         {chat.chatImage ? (
           <img
-            src={chat.chatImage}
+            src={chat?.chatImage}
             alt="logo"
             className="h-[150px] w-[150px] select-none mb-5  rounded-full"
           />

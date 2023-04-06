@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { SearchIcon } from "../Icons/SearchIcon";
 
-export function SerchInput({visibleSearchWindow, searchInputData}) {
+export  const  SerchInput = forwardRef(({ visibleSearchWindow, searchInputData }, ref) => {
   const [valExist, setValExist] = useState(false);
   const [value, setValue] = useState("");
   
@@ -27,6 +27,7 @@ export function SerchInput({visibleSearchWindow, searchInputData}) {
         <SearchIcon />
 
         <input
+         ref={ref}
           className="h-[40px] w-[90%]  text-xl rounded-xl outline-none bg-skin-fill dark:bg-skin-fill-inverted ml-2"
           type="text"
           maxLength="20"
@@ -48,9 +49,9 @@ export function SerchInput({visibleSearchWindow, searchInputData}) {
             >
               <CloseIcon />
             </button>
-          )}
+        )}
         </div>
       </div>
     </div>
   );
-}
+});

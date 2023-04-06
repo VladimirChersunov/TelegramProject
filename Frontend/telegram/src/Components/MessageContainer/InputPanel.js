@@ -27,21 +27,6 @@ export function InputPanel({
   const pickerRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  // const customStyles = {
-  //   content: {
-  //     top: '50%',
-  //     left: '50%',
-  //     right: 'auto',
-  //     bottom: 'auto',
-  //     marginRight: '-50%',
-  //     transform: 'translate(-50%, -50%)',
-  //     width: '500px',
-  //     height:'300px',
-  //     background: ' #c6bdff'
-
-  //   },
-  // };
-
   useEffect(() => {
     if (darkMode) {
       setTheme((prev) => "dark");
@@ -77,21 +62,19 @@ export function InputPanel({
   };
 
   const addNewMessage = async (event) => {
-  
-    console.log(data)
-
     try {
-      
-      
-      const  dataMessage = await createMessaage(currentUser.id, chat.id, data, messageText);
-     
-     console.log(dataMessage)
+      const dataMessage = await createMessaage(
+        currentUser.id,
+        chat.id,
+        data,
+        messageText
+      );
     } catch (error) {
       console.log(error);
     } finally {
       setData(null);
       setMessageText("");
-      setModalIsOpen(false)
+      setModalIsOpen(false);
       refreshMessage();
     }
   };
@@ -116,6 +99,13 @@ export function InputPanel({
     setModalIsOpen(true);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      addNewMessage();
+    }
+  };
+
   const handleEmojiClick = (emojiData, event) => {
     setMessageText((prevInput) => prevInput + emojiData.emoji);
     setShowPicker((prevState) => !prevState);
@@ -127,7 +117,7 @@ export function InputPanel({
       className=" w-[80%] min-h-[70px] flex flex-row items-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted "
     >
       {showPicker && (
-        <div ref={pickerRef} className={`absolute bottom-[${pickerBottom}px] `}>
+        <div ref={pickerRef} className={`absolute bottom-[72px] `}>
           <EmojiPicker
             onEmojiClick={handleEmojiClick}
             autoFocusSearch={false}
@@ -144,6 +134,7 @@ export function InputPanel({
           ref={textareaRef}
           rows={1}
           onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
           value={messageText}
           className="w-full h-auto  text-xl rounded-lg outline-none  resize-none overflow-hidden
                bg-skin-fill dark:bg-skin-fill-inverted "
@@ -166,7 +157,7 @@ export function InputPanel({
       </div>
 
       <button className="mr-1" onClick={addNewMessage}>
-        <EnterIcon style="w-9 h-9 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none" />
+        <EnterIcon styles="w-9 h-9 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none" />
       </button>
 
       <Modal
@@ -216,7 +207,7 @@ export function InputPanel({
           )}
           <div className="w-full flex items-center justify-center">
             <button
-              onClick={()=>addNewMessage()}
+              onClick={() => addNewMessage()}
               className="text-xl text-skin-inverted border w-[100px] rounded-lg"
             >
               Send

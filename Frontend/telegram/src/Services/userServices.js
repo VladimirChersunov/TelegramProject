@@ -19,13 +19,13 @@ export const updateInfo = async () => {
   }
 };
 
-export const editProfile = async (id, age, email,  userName, about) => {
+export const editProfile = async (id, userName, email, about, age, photo) => {
   try {
     const token = localStorage.getItem("token");
 
     const response = await axiosCreate.patch(
       "Users/patchuser",
-      { id,userName, email, about, age},
+      { id, userName, email, about, age, photo },
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -44,14 +44,11 @@ export const getUserByUsername = async (username) => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await axiosCreate.get(
-      `Users/username/${username}`,     
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
+    const response = await axiosCreate.get(`Users/username/${username}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
 
     return response.data;
   } catch (error) {
@@ -64,14 +61,11 @@ export const getUserById = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await axiosCreate.get(
-      `Users/${id}`,     
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
+    const response = await axiosCreate.get(`Users/${id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
 
     return response.data;
   } catch (error) {
@@ -79,4 +73,3 @@ export const getUserById = async (id) => {
     throw new Error(error.response.data.message);
   }
 };
-

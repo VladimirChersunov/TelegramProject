@@ -50,7 +50,7 @@ export function MessageContainer({
 
   return (
     <div
-      className={`flex flex-col h-[${windowHeight} px]  overflow--hidden w-full`}
+      className={`flex flex-col h-[${windowHeight} px]  overflow-hidden w-full`}
     >
       <MessageHeader
         chat={chat}

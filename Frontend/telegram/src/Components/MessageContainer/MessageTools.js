@@ -11,19 +11,19 @@ export function MessageTools(props) {
   const [chat, setChat] = useState(false);
  
   useEffect(() => {
-    if (props.chat.type === "channel") {
+    if (props?.chat?.type === "Channel") {
       setGroup((prevGroup) => false);
       setChat((prevChat) => false);
     }
-    if (props.chat.type === "group") {
+    if (props?.chat?.type === "Group") {
       setGroup((prevGroup) => true);
       setChat((prevChat) => false);
     }
-    if (props.chat.type === "chat") {
+    if (props?.chat?.type === "Chat") {
       setChat((prevChat) => true);
       setGroup((prevGroup) => false);
     }
-  }, [props.chat.type]);
+  }, [props?.chat?.type]);
 
   return (
     <div className="flex flex-row justify-end pr-5 w-1/4">
@@ -49,7 +49,7 @@ export function MessageTools(props) {
           }
         />
       </button>
-      <RightMenuButton chat={props.chat}/>
+      <RightMenuButton chat={props?.chat}/>
     </div>
   );
 }

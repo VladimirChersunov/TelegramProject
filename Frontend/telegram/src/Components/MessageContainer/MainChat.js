@@ -7,7 +7,7 @@ import {
   useLayoutEffect,
   createRef,
 } from "react";
-import { getAllMessaages } from "../../Services/messageServices";
+import { getAllMessaages, readMessaages } from "../../Services/messageServices";
 import { Message } from "./Message";
 
 export function MainChat({
@@ -32,13 +32,12 @@ export function MainChat({
   const[group, setGroup] = useState(false)
   const[channel, setChannel] = useState(false)
 
-  const { chatName, authorId, type } = chat;
-
+  
   
 
   const getData = async () => {
     try {
-      const allMessaages = await getAllMessaages(chatName, authorId, type);
+      const allMessaages = await getAllMessaages(chat?.chatName, chat?.authorId, chat?.type);
       setDataMessages(allMessaages);
     } catch (error) {
       setError(error);
@@ -47,36 +46,43 @@ export function MainChat({
     }
   };
 
-  const admin = authorId===currentUser.id
+  const admin = chat?.authorId===currentUser?.id
     
+  const markRead = async () => {
+    
+    const responce = await readMessaages(chat?.id);
+   
+   
+  };
 
   useEffect(() => {
-    if(type==='Private'){
+    if(chat?.type==='Private'){
       setChat(true)
       setGroup(false)
       setChannel(false)
     }
-    if(type==='Group'){
+    if(chat?.type==='Group'){
       setChat(false)
       setGroup(true)
       setChannel(false)
     }
-    if(type==='Channel'){
+    if(chat?.type==='Channel'){
       setChat(false)
       setGroup(false)
       setChannel(true)
     }
     getData();
-  }, [type]);
+  }, [chat?.type]);
 
   useEffect(() => {
     const messageContainer = document.getElementById("message-container");
     messageContainer.scrollTop = messageContainer.scrollHeight;
+    markRead()
   }, [dataMessages]);
 
   const refreshMessage = async () => {
     try {
-      const allMessaages = await getAllMessaages(chatName, authorId, type);
+      const allMessaages = await getAllMessaages(chat?.chatName, chat?.authorId, chat?.type);
       setDataMessages(allMessaages);
       setMessages(allMessaages.messages);
       setMembers(allMessaages.members);
@@ -110,7 +116,7 @@ export function MainChat({
   useEffect(() => {
     getData();
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chatName, authorId, type]);
+  }, [chat?.chatName, chat?.authorId, chat?.type]);
 
   
   return (

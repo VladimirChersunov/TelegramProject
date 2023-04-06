@@ -127,3 +127,28 @@ export const pinnedMessaages = async (action, messageId, chatId) => {
     console.log("missing token");
   }
 };
+
+export const readMessaages = async (chatId) => {
+  const token = localStorage.getItem("token");
+
+  if (token && chatId) {
+    try {
+      const response = await axiosCreate.post(
+        `Messages/readmessages/${chatId}`,
+        {  chatId },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  } else {
+    console.log("missing token");
+  }
+};
+

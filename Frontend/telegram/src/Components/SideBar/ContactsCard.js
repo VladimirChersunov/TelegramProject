@@ -2,14 +2,16 @@ import { useState, useRef, useEffect } from "react";
 import { createPrivate } from "../../Services/chatServices";
 import { ContactsContextMenu } from "../ContactsContextMenu";
 import { LastSeen } from "./LastSeen";
+import { getAllMessaages } from "../../Services/messageServices";
 
-export function ContactsCard({ contact, type }) {
+export function ContactsCard({ contact, type,currentChat,currentUser }) {
   
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
-
+  const[chat, setChat] = useState(null)
+  //"Private"
   const handleContextMenu = (event) => {
     event.preventDefault();
     setShowContextMenu(true);
@@ -17,21 +19,28 @@ export function ContactsCard({ contact, type }) {
     setContextMenuY(event.pageY);
   };
 
+  const getChat = async()=>{
+    const data = await getAllMessaages(contact?.userName, contact?.id, type); 
+    console.log(data.chat)
+    setChat(data.chat)
+  }
+
   const handleContactClick = async(event) => {
-    if (event.target.id === 'menu-item') {
-      return; // Выход из обработчика событий для элементов меню
-    }
+   
     setShowContextMenu(false);
   
     try{
       const data = await createPrivate(contact.userName)
       console.log(data)
+     getChat()
     }
     catch(error){
-      console.log(error.data)
+      console.log(error)
+      getChat()
+      currentChat(chat)
     }
     finally{
-      
+      currentChat(chat)
     }
   };
 

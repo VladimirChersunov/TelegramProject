@@ -68,14 +68,16 @@ export const getChatById = async (chatId) => {
   try {
     const token = localStorage.getItem("token");
     if (token && chatId) {
-      const response = await axiosCreate.get(`Chats/${chatId}`,
-     
-       {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      
+      const response = await axiosCreate.get(
+        `Chats/${chatId}`,
+
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
       return response.data;
     }
   } catch (error) {
@@ -87,14 +89,16 @@ export const deleteChatById = async (chatId) => {
   try {
     const token = localStorage.getItem("token");
     if (token && chatId) {
-      const response = await axiosCreate.delete(`Chats/${chatId}`,
-     
-       {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      
+      const response = await axiosCreate.delete(
+        `Chats/${chatId}`,
+
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
       return response.data;
     }
   } catch (error) {
@@ -102,13 +106,21 @@ export const deleteChatById = async (chatId) => {
   }
 };
 
-export const createChat = async (chatImage,chatName,shortMessage,publishTime,type,chatInfo,authorId) => {
+export const createChat = async (
+  chatImage,
+  chatName,
+  type,
+  chatInfo,
+  authorId,
+  members
+) => {
+  
   try {
     const token = localStorage.getItem("token");
-   
+
     const response = await axiosCreate.post(
       "Chats/createchat",
-      { chatImage,chatName,shortMessage,publishTime,type,chatInfo,authorId},
+      { chatImage, chatName, type, chatInfo, authorId, members },
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -122,5 +134,3 @@ export const createChat = async (chatImage,chatName,shortMessage,publishTime,typ
     throw new Error(error.response.data.message);
   }
 };
-
-

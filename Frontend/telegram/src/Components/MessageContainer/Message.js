@@ -17,8 +17,13 @@ export function Message({
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
   const [checkMessage, setCheckMessage] = useState(false);
-
   const isCurrentUser = message.author.id === currentUser.id;
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;  
+  const [posX, setPosX] = useState(0);
+  const [posY, setPosY] = useState(0);
+  const [coordinatesChecked, setCoordinatesChecked] = useState(false);
+
 
   const showContext = (props) => {
     setShowContextMenu(props);
@@ -35,6 +40,27 @@ export function Message({
     setContextMenuX(event.pageX);
     setContextMenuY(event.pageY);
   };
+
+  useEffect(() => {
+   
+    if (contextMenuX > screenWidth - 210) {
+      setPosX(screenWidth - 210);
+    }else{
+      setPosX(contextMenuX)      
+    }
+    if (contextMenuY > screenHeight - 260) {
+      setPosY(screenHeight - 260);
+    }else{
+      setPosY(contextMenuY);
+    }
+
+    if(contextMenuY > screenHeight - 250 && contextMenuX > screenWidth - 200){
+      setPosX(screenWidth - 200);
+      setPosY(screenHeight - 250);
+    }
+
+    setCoordinatesChecked(true); 
+  }, [contextMenuX,contextMenuY]);
 
   useEffect(() => {
     document.addEventListener("contextmenu", handleClickOutside, true);
@@ -60,10 +86,10 @@ export function Message({
       onContextMenu={handleContextMenu}
       className="w-[100%] "
     >
-      {showContextMenu && (
+      {coordinatesChecked && showContextMenu  && (posX>0 && posY>0) && (
         <MessageContextMenu
-          x={contextMenuX}
-          y={contextMenuY}
+          x={posX}
+          y={posY}
           message={message}
           chat={chat}
           checkedMessage={checkedMessage}

@@ -27,6 +27,7 @@ export function RadioChatList(props) {
       </div>
      
         <ChatCreateButton 
+        currentChat={props.currentChat}
          visibleStartPrivate={props.visibleStartPrivate}
          visibleAddNewChat={props.visibleAddNewChat}
          visibleAddMessage={props.visibleAddMessage}

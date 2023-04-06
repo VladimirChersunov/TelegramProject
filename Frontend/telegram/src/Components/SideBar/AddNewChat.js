@@ -5,29 +5,30 @@ import { EnterIcon } from "../Icons/EnterIcon";
 import CustomFileInput from "./CustomFileInput";
 import { createChat } from "../../Services/chatServices";
 
-export function AddNewChat({ chatType, visibleAddNewChat, checkedContacts,currentUser }) {
-  const [group, setGroup] = useState(false);
-  const [channel, setChannel] = useState(false)  
+export function AddNewChat({
+  chatType,
+  visibleAddNewChat,
+  checkedContacts,
+  currentUser,
+}) {
+  //console.log(checkedContacts)
+
+  const [channel, setChannel] = useState(false);
   const [chatImage, setChatImage] = useState(null);
   const [chatName, setChatName] = useState(null);
-  const [shortMessage, setMessage] = useState(null);
-  const [publishTime, setPublishTime] = useState(new Date().toISOString());
+  const members = checkedContacts.map((contact) => contact.id);
   const [chatInfo, setChatInfo] = useState(null);
-  
 
   useEffect(() => {
-    if (chatType === "Group") {
-      setGroup(true);
+    if (chatType === "Channel") {
+      setChannel(true);
+    } else {
       setChannel(false);
     }
-    if (chatType === "Channel") {
-      setGroup(false);
-      setChannel(true);
-    }
-  }, []);
+  }, [chatType]);
 
   const handleCreateChat = () => {
-     createchat();
+    createchat();
     visibleAddNewChat(false);
   };
 
@@ -35,13 +36,12 @@ export function AddNewChat({ chatType, visibleAddNewChat, checkedContacts,curren
     const responce = await createChat(
       chatImage,
       chatName,
-      shortMessage,
-      publishTime,
       chatType,
       chatInfo,
-      currentUser.id
+      currentUser.id,
+      members
     );
-    console.log(responce)
+    console.log(responce);
   };
 
   const handleClickBack = () => {
@@ -79,13 +79,13 @@ export function AddNewChat({ chatType, visibleAddNewChat, checkedContacts,curren
           className="m-5 pl-2 text-xl bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
         border-b border-skin-border-base dark:border-skin-border-inverted outline-none"
           placeholder={`${chatType} name`}
-          onChange={(e) => setChatName(e.target.value)}
+          onChange={handleChatNameChange}
         />
 
         {channel && (
           <div className="flex flex-col">
             <input
-             onChange={(e) => setChatInfo(e.target.value)}
+              onChange={handleChatInfoChange}
               className="m-5 text-xl bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
         border-b border-skin-border-base dark:border-skin-border-inverted outline-none pl-2"
               placeholder="Description (optional)"
@@ -112,7 +112,7 @@ export function AddNewChat({ chatType, visibleAddNewChat, checkedContacts,curren
           className="h-[50px] w-[50px]  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted
          dark:bg-skin-fill hover:bg-skin-button-inverted-hover dark:hover:bg-skin-button-inverted-hover"
         >
-          <EnterIcon style="w-9 h-9 stroke-skin-stroke-inverted dark:stroke-skin-stroke-base fill-none" />
+          <EnterIcon styles="w-9 h-9 stroke-skin-stroke-inverted dark:stroke-skin-stroke-base fill-none" />
         </button>
       </div>
     </div>

@@ -7,7 +7,7 @@ import { editProfile } from "../../Services/userServices";
 
 export function EditProfile({ visibleEdit, currentUser }) {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [cropData, setCropData] = useState("#");
+  
   const [usernamePlaceholder, setUsernamePlaceholder] = useState(
     currentUser.userName
   );
@@ -18,13 +18,12 @@ export function EditProfile({ visibleEdit, currentUser }) {
   const [ageData, setAgeData] = useState("");
   const [aboutData, setAboutData] = useState("");
   const cropperRef = useRef(null);
+  const[photo, setPhoto]=useState(null)
 
   function handleFileInputChange(event) {
     setSelectedFile(event.target.files[0]);
   }
-  function handleCrop() {
-    setCropData(cropperRef.current.getCroppedCanvas().toDataURL());
-  }
+ 
 
   const handleClickBack = () => {
     visibleEdit(false);
@@ -34,10 +33,11 @@ export function EditProfile({ visibleEdit, currentUser }) {
     try {
       const data = await editProfile(
         currentUser.id,
-        ageData,
-        emailData,
         usernameData,
-        aboutData
+        emailData,
+        aboutData,
+        ageData,       
+        photo
       );
       console.log(data);
     } catch {
@@ -77,7 +77,7 @@ export function EditProfile({ visibleEdit, currentUser }) {
                   dragMode="move"
                   autoCropArea={1}
                 />
-                <button onClick={handleCrop}>Crop</button>
+               
               </div>
             ) : (
               <label

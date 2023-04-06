@@ -59,6 +59,7 @@ export function ChatCreateButton(props) {
        chatTypeCallback={props.chatTypeCallback}
        visibleAddmembers={props.visibleAddmembers}
        visibleStartPrivate={props. visibleStartPrivate}
+       currentChat={props.currentChat}
       />}
     </div>
   );

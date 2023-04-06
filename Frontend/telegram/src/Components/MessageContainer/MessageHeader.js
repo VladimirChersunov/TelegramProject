@@ -11,7 +11,7 @@ export function MessageHeader({chat,toggleRightColumn, currentChat,messageRef}) 
         chat={chat}
         toggleRightColumn={toggleRightColumn}
       />
-      {chat.pinnedMessageId > 0 && <PinnedMessage pinned={chat.pinnedMessageId} chat={chat}  currentChat={currentChat} messageRef={messageRef} />}
+      {chat?.pinnedMessageId > 0 && <PinnedMessage pinned={chat?.pinnedMessageId} chat={chat}  currentChat={currentChat} messageRef={messageRef} />}
       <MessageTools chat={chat} />
     </div>
   );

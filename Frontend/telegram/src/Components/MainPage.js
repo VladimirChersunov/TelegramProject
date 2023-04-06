@@ -8,11 +8,9 @@ import { updateInfo } from "../Services/userServices";
 import { userLogout } from "../Services/userLogout";
 import isEqual from "lodash/isEqual";
 
-export function MainPage({ darkMode, userData, toggleDarkMode }) {
+export function MainPage({ darkMode, toggleDarkMode }) {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [contacts, setContacts] = useState([]);
   const [mainRiht, setMainRight] = useState(false);
   const [currChat, setCurrentChat] = useState({});
@@ -22,7 +20,7 @@ export function MainPage({ darkMode, userData, toggleDarkMode }) {
   const [bigData, setBigData] = useState([]);
 
   useEffect(() => {
-    const handleBackButton = (event) => {
+    const handleBackButton = () => {
       navigate("/main");
     };
     window.addEventListener("popstate", handleBackButton);
@@ -31,7 +29,6 @@ export function MainPage({ darkMode, userData, toggleDarkMode }) {
   useEffect(() => {
     const getData = async () => {
       try {
-        setIsLoading(true);
         const logout = await userLogout();
         if (logout) {
           navigate("/signin");
@@ -50,21 +47,18 @@ export function MainPage({ darkMode, userData, toggleDarkMode }) {
         );
 
         if (!chatEqual || !contactEqual) {
-          console.log("refresh")
+          console.log("refresh");
           setBigData(data);
           setChats(data.chats);
           setContacts(data.contacts);
           setCurrentUser(data.user);
         }
-        //console.log(data)
+
         // const endTime = performance.now();
         // const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
         // console.log(`Response time: ${responseTime}ms`);
       } catch {
         console.log("error");
-        setError(error);
-      } finally {
-        setIsLoading(false);
       }
     };
     // Получать данные с сервера каждую секунды
@@ -74,10 +68,10 @@ export function MainPage({ darkMode, userData, toggleDarkMode }) {
 
     // Очищать интервал при размонтировании компонента
     return () => clearInterval(intervalId);
-  }, [bigData]);
+  }, [bigData, chats, contacts]);
 
   useEffect(() => {
-    if (currChat.id >= 0) {
+    if (currChat?.id >= 0) {
       setCentrVisible(true);
     } else {
       setCentrVisible(false);
@@ -87,15 +81,14 @@ export function MainPage({ darkMode, userData, toggleDarkMode }) {
   const handleMuted = (props) => {};
 
   const clearMain = (props) => {
-    setCentrVisible(props)
+    setCentrVisible(props);
   };
 
   const changeThemes = (props) => {
     setTheme(props);
   };
 
-  const currentChat = (chat) => {    
-    console.log(chat)
+  const currentChat = (chat) => {
     setCurrentChat(chat);
   };
 
@@ -124,7 +117,7 @@ export function MainPage({ darkMode, userData, toggleDarkMode }) {
       <div className="flex-grow w-full">
         {centrVisible && (
           <MessageContainer
-          currentChat={currentChat}
+            currentChat={currentChat}
             chat={currChat}
             toggleRightColumn={toggleRightColumn}
             changeThemes={changeThemes}
