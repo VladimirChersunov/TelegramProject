@@ -8,7 +8,7 @@ import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 import { deleteChatById, leavePublic } from "../../Services/chatServices";
 import { readMessaages } from "../../Services/messageServices";
 
-export function ContextMenu({ chat, x, y, handleMuted, clearMain }) {
+export function ContextMenu({ chat, x, y, handleMuted, clearMain, currentUser }) {
   const [myState, setMyState] = useState("initial state");
   const [chats, setChat] = useState(false);
   const [group, setGroup] = useState(false);
@@ -67,7 +67,7 @@ export function ContextMenu({ chat, x, y, handleMuted, clearMain }) {
 
   const markRead = async () => {
     
-    const responce = await readMessaages(chat?.id);
+    const responce = await readMessaages(chat?.id, currentUser?.id);
    
    
   };

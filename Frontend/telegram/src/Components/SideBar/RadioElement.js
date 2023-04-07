@@ -5,7 +5,7 @@ import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 import moment from "moment";
 import "moment/locale/ru";
 
-export function RadioElement({ chat, currentChat, handleMuted,clearMain }) {
+export function RadioElement({ chat, currentChat, handleMuted,clearMain, currentUser }) {
   const contextRef = useRef();
   const [savedMessageState, setSavedMessageState] = useState(false);
   const [chatMuteStatus, setChatMuteStatus] = useState(false);
@@ -96,6 +96,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain }) {
             chat={chat}
             handleMuted={handleMuted}
             clearMain={clearMain}
+            currentUser={ currentUser}
           />
         )}
 

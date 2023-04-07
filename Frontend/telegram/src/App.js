@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { SignIn } from "./Components/AuthComponents/SignIn";
 import { SignUp } from "./Components/AuthComponents/SignUp";
 import { EnterCode } from "./Components/AuthComponents/EnterCode";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { EnterEmail } from "./Components/AuthComponents/EnterEmail";
 import { SetNewPassword } from "./Components/AuthComponents/SetNewPassword";
 import { SignUpFinish } from "./Components/AuthComponents/SignUpFinish";
@@ -16,15 +16,15 @@ function App() {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [userData, setUserData] = useState({});
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState("");
 
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
 
-  const setJwtToken = (props) => {   
-    setToken((prev) => props);
-  };
+ 
+
+ 
 
   const signUpData = ({ username, email, password, code }) => {
     setUsername((prevUsername) => username);
@@ -44,8 +44,19 @@ function App() {
     setUserData((prev) => props);
   };
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("token", token);
+  }, [token]);
+
   return (
-    <div className={`h-full overflow-hidden w-full ${darkMode ? "dark" : ""}  `}>
+    <div className={`h-full ove w-full ${darkMode ? "dark" : ""}  `}>
       <Routes>
         <Route
           path="/main"
@@ -66,7 +77,7 @@ function App() {
           path="/setnewpassword"
           element={<SetNewPassword email={email} />}
         />
-        <Route path="/signin" element={<SignIn setJwtToken={setJwtToken} />} />
+       <Route path="/signin" element={<SignIn setToken={setToken} />} />
         <Route
           path="/recovery"
           element={<EnterEmail recoveryData={recoveryData} />}

@@ -57,8 +57,7 @@ export function MainChat({
     
   const markRead = async () => {
     
-    const responce = await readMessaages(chat?.id);
-   
+    const responce = await readMessaages(chat?.id,currentUser?.id);   
    
   };
 

@@ -14,7 +14,9 @@ export function InputPanel({
   refreshMessage,
   refreshInputHeeight,
 }) {
+
   
+
   const [data, setData] = useState(null);
   const [messageText, setMessageText] = useState("");
   const [theme, setTheme] = useState("dark");
@@ -62,6 +64,7 @@ export function InputPanel({
   };
 
   const addNewMessage = async (event) => {
+    console.log(messageText)
     try {
       const dataMessage = await createMessaage(
         currentUser.id,
@@ -122,7 +125,7 @@ export function InputPanel({
             onEmojiClick={handleEmojiClick}
             autoFocusSearch={false}
             theme={Theme.AUTO}
-            emojiStyle="native"
+            emojiStyle="apple"
           />
         </div>
       )}

@@ -28,6 +28,8 @@ export function ContactsCard({ contact, type,currentChat}) {
   const handleContactClick = async(event) => {
    
     setShowContextMenu(false);
+
+    
   
     try{
       const data = await createPrivate(contact.userName)

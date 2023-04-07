@@ -1,5 +1,6 @@
 import axiosCreate from "./axiosCreate";
 
+//Chats/enterprivatechat
 export const createPrivate = async (opponentName) => {
   try {
     const token = localStorage.getItem("token");
@@ -22,6 +23,7 @@ export const createPrivate = async (opponentName) => {
   }
 };
 
+//Chats/enterpublicchat
 export const enterPublic = async (chatName) => {
   try {
     const token = localStorage.getItem("token");
@@ -43,6 +45,7 @@ export const enterPublic = async (chatName) => {
   }
 };
 
+//Chats/leavepublicchat
 export const leavePublic = async (chatName) => {
   try {
     const token = localStorage.getItem("token");
@@ -64,6 +67,8 @@ export const leavePublic = async (chatName) => {
   }
 };
 
+
+//get Chats/${chatId}
 export const getChatById = async (chatId) => {
   try {
     const token = localStorage.getItem("token");
@@ -85,6 +90,7 @@ export const getChatById = async (chatId) => {
   }
 };
 
+//delete Chats/${chatId}
 export const deleteChatById = async (chatId) => {
   try {
     const token = localStorage.getItem("token");
@@ -106,6 +112,7 @@ export const deleteChatById = async (chatId) => {
   }
 };
 
+//Chats/createchat
 export const createChat = async (
   chatImage,
   chatName,

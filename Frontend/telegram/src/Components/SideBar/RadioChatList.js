@@ -16,10 +16,11 @@ export function RadioChatList(props) {
         {props?.chats?.map((chat, index) => (
             <div key={index}>
             <RadioElement
+             currentUser={props?.currentUser}
             chat={chat}   
             clearMain={props?.clearMain}         
-            currentChat={props.currentChat}
-            handleMuted={props.handleMuted}
+            currentChat={props?.currentChat}
+            handleMuted={props?.handleMuted}
           /> 
            </div>
          

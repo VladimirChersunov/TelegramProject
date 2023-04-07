@@ -6,7 +6,7 @@ import { PreviewOpen } from "../Icons/PreviewOpen";
 
 
 
-function LoginForm(props) {
+function LoginForm({setToken}) {
 
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState(""); 
@@ -22,12 +22,17 @@ function LoginForm(props) {
       setIsLoading(true); 
         const data = await login(usernameOrEmail, password);
         setError(null);
+
+      console.log(data)
+
+       if(data?.jwtToken){
        
-       if(data.user.id){
-        props.setJwtToken(localStorage.getItem('token'))
+        setToken(data?.jwtToken)
+       
         navigate("/main");
        }
       } catch (error) {
+        console.log(error)
         setError(error.message);
       }
       finally {

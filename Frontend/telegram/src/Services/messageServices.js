@@ -1,5 +1,7 @@
 import axiosCreate from "./axiosCreate";
 
+
+//Messages/sendmessage
 export const createMessaage = async (userId, chatId, data, text) => {
   const token = localStorage.getItem("token");
 
@@ -24,8 +26,10 @@ export const createMessaage = async (userId, chatId, data, text) => {
   }
 };
 
+
+//Chats/openchat актуализация меседжей
 export const getAllMessaages = async (chatName, authorId, privateChat) => {
-  //console.log(chatName)
+  
   let additionalChatName = null;
   const token = localStorage.getItem("token");
   if (privateChat === "Private") {
@@ -56,12 +60,13 @@ export const getAllMessaages = async (chatName, authorId, privateChat) => {
   }
 };
 
-export const getMessaagesById = async (pinned) => {
+
+//Messages/${id}
+export const getMessaagesById = async (id) => {
   const token = localStorage.getItem("token");
-//console.log(pinned)
   if (token) {
     try {
-      const response = await axiosCreate.get(`Messages/${pinned}`, {
+      const response = await axiosCreate.get(`Messages/${id}`, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -76,6 +81,7 @@ export const getMessaagesById = async (pinned) => {
   }
 };
 
+//Messages/deletemessage
 export const deleteMessage = async (messageId, userId) => {
   const token = localStorage.getItem("token");
 
@@ -104,6 +110,8 @@ export const deleteMessage = async (messageId, userId) => {
   }
 };
 
+
+//Chats/setpinnedmessage  добавление и удаление pinned
 export const pinnedMessaages = async (action, messageId, chatId) => {
   const token = localStorage.getItem("token");
 
@@ -128,14 +136,16 @@ export const pinnedMessaages = async (action, messageId, chatId) => {
   }
 };
 
-export const readMessaages = async (chatId) => {
+
+//Messages/readmessages
+export const readMessaages = async (chatId,userId) => {
   const token = localStorage.getItem("token");
 
   if (token && chatId) {
     try {
       const response = await axiosCreate.post(
-        `Messages/readmessages/${chatId}`,
-        {  chatId },
+        `Messages/readmessages`,
+        {  chatId,userId },
         {
           headers: {
             Authorization: "Bearer " + token,

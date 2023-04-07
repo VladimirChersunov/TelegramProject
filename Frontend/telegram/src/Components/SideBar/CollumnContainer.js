@@ -175,6 +175,7 @@ export function CollumnContainer({
             visibleSearchWindow={visibleSearchWindow}
           />
           <RadioChatList
+           currentUser={ currentUser}
             chats={chats}
             clearMain={clearMain}
             currentChat={currentChat}
