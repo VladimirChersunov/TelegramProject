@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ContactsCard } from "./ContactsCard";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { EnterIcon } from "../Icons/EnterIcon";
-import CustomFileInput from "./CustomFileInput";
 import { createChat } from "../../Services/chatServices";
+import { AddPicture } from "../Icons/AddPicture";
 
 export function AddNewChat({
   chatType,
   visibleAddNewChat,
   checkedContacts,
   currentUser,
+  visibleAddNewChatFinish,
 }) {
   //console.log(checkedContacts)
 
+  const fileInputRef = useRef(null);
   const [channel, setChannel] = useState(false);
   const [chatImage, setChatImage] = useState(null);
   const [chatName, setChatName] = useState(null);
@@ -27,12 +29,13 @@ export function AddNewChat({
     }
   }, [chatType]);
 
-  const handleCreateChat = () => {
-    createchat();
-    visibleAddNewChat(false);
+  const handleCreateChat = async() => {
+    const responce = await createchat();
+   
   };
 
   const createchat = async () => {
+    console.log(chatImage);
     const responce = await createChat(
       chatImage,
       chatName,
@@ -41,7 +44,25 @@ export function AddNewChat({
       currentUser.id,
       members
     );
-    console.log(responce);
+    
+    if(responce.result === 'success'){
+      visibleAddNewChatFinish(false);
+    }
+  };
+
+  const handleLinkIconClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setChatImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleClickBack = () => {
@@ -70,12 +91,33 @@ export function AddNewChat({
         <div className="text-2xl mt-3 ml-2 "> New {chatType}</div>
       </div>
 
-      <div className="w-full text-center mt-10 flex flex-col ">
-        <div className="flex flex-row items-end  m-2 "></div>
+      <div className="w-full text-center mt-5 flex flex-col ">
+       
 
-        <CustomFileInput />
+        <div>
+          <input
+            type="file"
+            
+            ref={fileInputRef}
+            onChange={handleFileInputChange}
+            hidden
+            accept="image/*"
+          />
+          <button onClick={handleLinkIconClick}>
+            {chatImage ? (
+              <img
+                src={chatImage}
+                alt="Selected"
+                className="w-[150px] h-[150px] object-cover rounded-full mb-5"
+              />
+            ) : (
+              <AddPicture />
+            )}
+          </button>
+        </div>
 
         <input
+        required={true}
           className="m-5 pl-2 text-xl bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
         border-b border-skin-border-base dark:border-skin-border-inverted outline-none"
           placeholder={`${chatType} name`}

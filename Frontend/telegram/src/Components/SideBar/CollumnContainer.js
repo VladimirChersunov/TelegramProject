@@ -75,6 +75,11 @@ export function CollumnContainer({
     setAddMembersState(!props);
   };
 
+  const visibleAddNewChatFinish = (props) => {
+    setAddGroupState(props);
+    setChatlistState(!props);
+  };
+
   const visibleSearchWindow = (props) => {
     setSearchWindowState(props);
     setChatlistState(!props);
@@ -146,6 +151,7 @@ export function CollumnContainer({
       )}
       {addGroupState && (
         <AddNewChat
+        visibleAddNewChatFinish={visibleAddNewChatFinish}
           visibleAddNewChat={visibleAddNewChat}
           chatType={chatType}
           checkedContacts={checkedContacts}

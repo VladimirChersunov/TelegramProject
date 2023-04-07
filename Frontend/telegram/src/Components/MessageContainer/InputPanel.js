@@ -14,12 +14,12 @@ export function InputPanel({
   refreshMessage,
   refreshInputHeeight,
 }) {
+  
   const [data, setData] = useState(null);
   const [messageText, setMessageText] = useState("");
   const [theme, setTheme] = useState("dark");
   const [showPicker, setShowPicker] = useState(false);
-  const [textareaHeight, setTextareaHeight] = useState(28);
-  const [pickerBottom, setPickerBottom] = useState(72);
+  const [textareaHeight, setTextareaHeight] = useState(28);  
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const textareaRef = useRef(null);
@@ -122,6 +122,7 @@ export function InputPanel({
             onEmojiClick={handleEmojiClick}
             autoFocusSearch={false}
             theme={Theme.AUTO}
+            emojiStyle="native"
           />
         </div>
       )}

@@ -16,9 +16,9 @@ export function MainChat({
   currentUser,
   refreshCallback,
   currentChat,
-  setCurrentRef,
+ 
 }) {
-  //console.log(chat)
+  
   const messagesEndRef = useRef(null);
   const myRef = useRef(null);
   const [dataMessages, setDataMessages] = useState(null);
@@ -37,7 +37,14 @@ export function MainChat({
 
   const getData = async () => {
     try {
-      const allMessaages = await getAllMessaages(chat?.chatName, chat?.authorId, chat?.type);
+      
+     let allMessaages = null;
+      if(chats){
+        allMessaages = await getAllMessaages(chat?.chatName, null, chat?.type);
+      }
+      else{
+        allMessaages = await getAllMessaages(chat?.chatName, chat.authorId, chat?.type);
+      }     
       setDataMessages(allMessaages);
     } catch (error) {
       setError(error);
@@ -76,13 +83,20 @@ export function MainChat({
 
   useEffect(() => {
     const messageContainer = document.getElementById("message-container");
-    messageContainer.scrollTop = messageContainer.scrollHeight;
+    messageContainer.scrollTop = messageContainer?.scrollHeight;
     markRead()
   }, [dataMessages]);
 
   const refreshMessage = async () => {
     try {
-      const allMessaages = await getAllMessaages(chat?.chatName, chat?.authorId, chat?.type);
+      let allMessaages = null;
+      if(chats){
+        allMessaages = await getAllMessaages(chat?.chatName, null, chat?.type);
+      }
+      else{
+        allMessaages = await getAllMessaages(chat?.chatName, chat.authorId, chat?.type);
+      }   
+      
       setDataMessages(allMessaages);
       setMessages(allMessaages.messages);
       setMembers(allMessaages.members);
@@ -129,11 +143,11 @@ export function MainChat({
         className=" mt-2 flex flex-col  w-full overflow-x-hidden text-skin-base overflow-y-scroll scrollbar "
       >
         {dataMessages &&
-          dataMessages.messages.map((message, index) => (
+          dataMessages?.messages?.map((message, index) => (
             <Message
             
               message={message}
-              key={message.id}
+              key={message?.id}
               currentUser={currentUser}
               chat={chat}
               refreshMessage={refreshMessage}

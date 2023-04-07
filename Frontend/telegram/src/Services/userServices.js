@@ -20,6 +20,7 @@ export const updateInfo = async () => {
 };
 
 export const editProfile = async (id, userName, email, about, age, photo) => {
+ 
   try {
     const token = localStorage.getItem("token");
 
@@ -32,10 +33,10 @@ export const editProfile = async (id, userName, email, about, age, photo) => {
         },
       }
     );
-
+    console.log(response);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error(error.response.data.message);
   }
 };

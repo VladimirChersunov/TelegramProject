@@ -114,23 +114,26 @@ export const createChat = async (
   authorId,
   members
 ) => {
+  const token = localStorage.getItem("token");
+  if(token && chatName){
+    try {
+     
   
-  try {
-    const token = localStorage.getItem("token");
-
-    const response = await axiosCreate.post(
-      "Chats/createchat",
-      { chatImage, chatName, type, chatInfo, authorId, members },
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
-
-    return response.data;
-  } catch (error) {
-    console.log(error);
-    throw new Error(error.response.data.message);
+      const response = await axiosCreate.post(
+        "Chats/createchat",
+        { chatImage, chatName, type, chatInfo, authorId, members },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+  
+      return response.data;
+    } catch (error) {
+      console.log(error.response.data );
+      throw new Error(error.response.data.message);
+    }
   }
+ 
 };

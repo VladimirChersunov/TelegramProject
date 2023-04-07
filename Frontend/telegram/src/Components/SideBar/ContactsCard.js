@@ -4,14 +4,14 @@ import { ContactsContextMenu } from "../ContactsContextMenu";
 import { LastSeen } from "./LastSeen";
 import { getAllMessaages } from "../../Services/messageServices";
 
-export function ContactsCard({ contact, type,currentChat,currentUser }) {
+export function ContactsCard({ contact, type,currentChat}) {
   
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
   const[chat, setChat] = useState(null)
-  //"Private"
+  
   const handleContextMenu = (event) => {
     event.preventDefault();
     setShowContextMenu(true);
@@ -20,7 +20,7 @@ export function ContactsCard({ contact, type,currentChat,currentUser }) {
   };
 
   const getChat = async()=>{
-    const data = await getAllMessaages(contact?.userName, contact?.id, type); 
+    const data = await getAllMessaages(contact?.userName, null, "Private"); 
     console.log(data.chat)
     setChat(data.chat)
   }
@@ -33,6 +33,7 @@ export function ContactsCard({ contact, type,currentChat,currentUser }) {
       const data = await createPrivate(contact.userName)
       console.log(data)
      getChat()
+     currentChat(chat)
     }
     catch(error){
       console.log(error)
