@@ -19,6 +19,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [chats, setChats] = useState([]);
   const [bigData, setBigData] = useState([]);
 
+  //отключаем кнопку назад
   useEffect(() => {
     const handleBackButton = () => {
       navigate("/main");
@@ -26,6 +27,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     window.addEventListener("popstate", handleBackButton);
   }, []);
 
+  //обновление данных
   useEffect(() => {
     const getData = async () => {
       try {
@@ -53,6 +55,8 @@ export function MainPage({ darkMode, toggleDarkMode }) {
           setContacts(data.contacts);
           setCurrentUser(data.user);
         }
+
+        setCurrentUser(data.user);
 
         // const endTime = performance.now();
         // const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах

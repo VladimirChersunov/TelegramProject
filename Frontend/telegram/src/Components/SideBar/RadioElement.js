@@ -100,7 +100,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
           />
         )}
 
-        <div>
+        <div className="flex items-center justify-center">
           {chat.chatImage  ? (
             <img
               src={chat.chatImage}
@@ -121,6 +121,11 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
         </div>
 
         <div className="flex flex-col ml-2  w-[85%] mt-1 ">
+          <div className="flex items-center justify-end">
+          <time className="mr-1 text-xs opacity-50 ">
+                {publishTimeFormatted}
+              </time>
+          </div>
           <div className="flex flex-row justify-between">
             <div className="flex flex-row items-center">
               <p className="text-lg mr-2">{formattedChatName(chat)}</p>
@@ -131,22 +136,19 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
               )}
             </div>
 
-            <div className="">
-              <time className="mr-1 text-xs opacity-50">
-                {publishTimeFormatted}
-              </time>
-            </div>
+          
           </div>
 
           <div className="flex flex-row justify-between">
             <p className="text-[14px]">{chat?.shortMessage?.substring(0, 25)}</p>
 
-            {!savedMessageState && (
+            {!savedMessageState && chat?.notViewedCounter>0 && (
               <label
                 className="rounded-full flex items-center justify-center border border-skin-border-base
                     dark:border-skin-border-inverted text-xs h-5 w-5"
               >
-                {chat.notViewedCounter}
+
+                {chat?.notViewedCounter}
               </label>
             )}
           </div>

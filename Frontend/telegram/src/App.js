@@ -77,7 +77,7 @@ function App() {
           path="/setnewpassword"
           element={<SetNewPassword email={email} />}
         />
-       <Route path="/signin" element={<SignIn setToken={setToken} />} />
+       <Route path="/signin" element={<SignIn  />} />
         <Route
           path="/recovery"
           element={<EnterEmail recoveryData={recoveryData} />}

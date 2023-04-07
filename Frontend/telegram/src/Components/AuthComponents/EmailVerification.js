@@ -8,9 +8,11 @@ function EmailVerification() {
   const [isCodeCorrect, setIsCodeCorrect] = useState(false);
 
   const sendCode = () => {
-    axios.post("http://localhost:5000/api/sendcode", { email }).then((response) => {
-      setIsEmailSent(true);
-    });
+    axios
+      .post("http://localhost:5000/api/sendcode", { email })
+      .then((response) => {
+        setIsEmailSent(true);
+      });
   };
 
   const verifyCode = () => {

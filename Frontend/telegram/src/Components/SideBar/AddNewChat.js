@@ -30,12 +30,6 @@ export function AddNewChat({
   }, [chatType]);
 
   const handleCreateChat = async() => {
-    const responce = await createchat();
-   
-  };
-
-  const createchat = async () => {
-    console.log(chatImage);
     const responce = await createChat(
       chatImage,
       chatName,
@@ -49,6 +43,8 @@ export function AddNewChat({
       visibleAddNewChatFinish(false);
     }
   };
+
+  
 
   const handleLinkIconClick = () => {
     fileInputRef.current.click();

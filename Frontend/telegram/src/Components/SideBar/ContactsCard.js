@@ -1,17 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import { createPrivate } from "../../Services/chatServices";
-import { ContactsContextMenu } from "../ContactsContextMenu";
+import { ContactsContextMenu } from "./ContactsContextMenu";
 import { LastSeen } from "./LastSeen";
 import { getAllMessaages } from "../../Services/messageServices";
 
-export function ContactsCard({ contact, type,currentChat}) {
-  
+export function ContactsCard({ contact, type, currentChat }) {
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
-  const[chat, setChat] = useState(null)
   
+
   const handleContextMenu = (event) => {
     event.preventDefault();
     setShowContextMenu(true);
@@ -19,32 +18,12 @@ export function ContactsCard({ contact, type,currentChat}) {
     setContextMenuY(event.pageY);
   };
 
-  const getChat = async()=>{
-    const data = await getAllMessaages(contact?.userName, null, "Private"); 
-    console.log(data.chat)
-    setChat(data.chat)
-  }
-
-  const handleContactClick = async(event) => {
-   
+  const handleContactClick = async () => {
     setShowContextMenu(false);
 
-    
-  
-    try{
-      const data = await createPrivate(contact.userName)
-      console.log(data)
-     getChat()
-     currentChat(chat)
-    }
-    catch(error){
-      console.log(error)
-      getChat()
-      currentChat(chat)
-    }
-    finally{
-      currentChat(chat)
-    }
+    const privateMessage = await createPrivate(contact?.userName);
+    const data = await getAllMessaages(contact?.userName, null, "Private");
+    currentChat(data.chat);
   };
 
   useEffect(() => {
@@ -81,7 +60,8 @@ export function ContactsCard({ contact, type,currentChat}) {
         ) : (
           <div className="rounded-full   h-[40px] w-[40px] bg-purple-500 flex items-center justify-center select-none">
             <p className="text-xl">
-              {contact.userName[0].toUpperCase() + contact.userName[1].toUpperCase()}
+              {contact.userName[0].toUpperCase() +
+                contact.userName[1].toUpperCase()}
             </p>
           </div>
         )}
@@ -99,8 +79,8 @@ export function ContactsCard({ contact, type,currentChat}) {
         <p className="font-bold pl-2 text-xl cursor-pointer">
           {contact.userName}
         </p>
-        
-        <LastSeen lastOnline={contact.lastOnline}/>
+
+        <LastSeen lastOnline={contact.lastOnline} />
       </div>
     </div>
   );

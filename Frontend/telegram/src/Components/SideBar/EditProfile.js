@@ -6,11 +6,11 @@ import { editProfile } from "../../Services/userServices";
 
 export function EditProfile({ visibleEdit, currentUser }) {
  
-console.log(currentUser)
-  const [usernameData, setUsernameData] = useState(currentUser?.userName);
-  const [emailData, setEmailData] = useState(currentUser?.email);
-  const [ageData, setAgeData] = useState(currentUser?.age);
-  const [aboutData, setAboutData] = useState(currentUser?.aboutUser);
+
+  const [usernameData, setUsernameData] = useState(currentUser?.userName || "");
+  const [emailData, setEmailData] = useState(currentUser?.email || "");
+  const [ageData, setAgeData] = useState(currentUser?.age || "");
+  const [aboutData, setAboutData] = useState(currentUser?.aboutUser || "");
   const [photo, setPhoto] = useState(currentUser?.photo);
   const fileInputRef = useRef(null);
   
@@ -46,7 +46,8 @@ console.log(currentUser)
               photo
             );
             console.log(data);
-          } catch {
+          } catch(error) {
+            console.log(error)
           } finally {
           }
        

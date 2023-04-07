@@ -6,7 +6,7 @@ import { PreviewOpen } from "../Icons/PreviewOpen";
 
 
 
-function LoginForm({setToken}) {
+function LoginForm() {
 
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState(""); 
@@ -27,7 +27,7 @@ function LoginForm({setToken}) {
 
        if(data?.jwtToken){
        
-        setToken(data?.jwtToken)
+      
        
         navigate("/main");
        }

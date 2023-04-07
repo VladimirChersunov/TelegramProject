@@ -1,7 +1,7 @@
-import { addContact, deleteContacts } from "../Services/contactServices";
-import { Ahtung } from "./Icons/Ahtung";
-import { PeopleIcon } from "./Icons/PeopleIcon";
-import { RecicleIcon } from "./Icons/RecicleIcon";
+import { addContact, deleteContacts } from "../../Services/contactServices";
+import { Ahtung } from "../Icons/Ahtung";
+import { PeopleIcon } from "../Icons/PeopleIcon";
+import { RecicleIcon } from "../Icons/RecicleIcon";
 
 export function ContactsContextMenu({ x, y, userName, type }) {
   

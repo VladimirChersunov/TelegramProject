@@ -48,19 +48,22 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
       </div>
 
       <div className="w-[350px] h-screen  flex flex-col items-center mt-5 overflow-y-scroll scrollbar">
+        <div className="">
         {currentUser.photo ? (
           <img
             src={currentUser.photo}
             alt="logo"
-            className="h-[300px] w-[300px] select-none ml-[-10px] rounded-full"
+            className="h-[250px] w-[250px] select-none  rounded-full"
           />
         ) : (
-          <div className="rounded-full   h-[150px] w-[150px] ml-[-15px] bg-purple-500 flex items-center justify-center select-none">
+          <div className="rounded-full   h-[250px] w-[250px]  bg-purple-500 flex items-center justify-center select-none">
             <p className="text-[50px]">
               {currentUser.userName[0].toUpperCase() + currentUser.userName[1].toUpperCase()}
             </p>
           </div>
         )}
+        </div>
+       
 
         <div className="mt-10 text-xl  flex flex-row w-[90%] pl-2 ">
           <InfoIcon />
