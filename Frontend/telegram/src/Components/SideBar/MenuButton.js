@@ -3,8 +3,6 @@ import { Hamburger } from "../Icons/Hamburger";
 import { LeftMenu } from "./LeftMenu";
 
 export function MenuButton(props) {
-
-  
   const refLeftMenu = useRef(null);
 
   const [open, setOpen] = useState(false);
@@ -33,11 +31,13 @@ export function MenuButton(props) {
           className="  w-[45px] h-[45px] 
            rounded-full  hover:bg-skin-button-accent-hover  flex items-center justify-center"
         >
-         <Hamburger/>
+          <Hamburger />
         </button>
 
         {open && (
           <LeftMenu
+            currentChat={props.currentChat}
+            chats={props.chats}
             darkMode={props.darkMode}
             toggleDarkMode={props.toggleDarkMode}
             visibleAbout={props.visibleAbout}

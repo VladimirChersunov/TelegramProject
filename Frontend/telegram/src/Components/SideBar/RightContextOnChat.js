@@ -38,10 +38,13 @@ export function ContextMenu({ chat, x, y, handleMuted, clearMain, currentUser })
   useEffect(() => {
    
     if(y>(screenHeight-185)){
-      setPosY(screenHeight-185)
+      setPosY(screenHeight-195)
      
     }
-  }, [ y]);
+    else{
+      setPosY(y)
+    }
+  }, [y]);
 
   const leaveChat = async () => {
     const responce = await leavePublic(chat?.chatName);

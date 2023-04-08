@@ -154,7 +154,7 @@ export const readMessaages = async (chatId,userId) => {
       );
       return response.data;
     } catch (error) {
-      console.log(error.response);
+      console.log(error.response.data);
       return error.response;
     }
   } else {

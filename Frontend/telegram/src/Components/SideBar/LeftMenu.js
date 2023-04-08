@@ -6,38 +6,61 @@ import { BugIcon } from "../Icons/BugIcon";
 import { InfoIcon } from "../Icons/InfoIcon";
 import { Switch } from "./Switch";
 
-export function LeftMenu(props) {
+export function LeftMenu({
+  darkMode,
+  toggleDarkMode,
+  visibleAbout,
+  visibleBugReport,
+  visibleContact,
+  visibleSetting,
+  currentChat,
+  chats,
+}) {
+  const savedMessage = chats.find((chat) => chat.type === "Favorite");
+
   return (
     <ul
       className={`absolute block mt-1 group-hover:block shadow-2xl bg-skin-fill dark:bg-skin-fill-inverted
        border border-skin-border-base dark:border-skin-border-inverted rounded-lg  w-[200px] select-none`}
     >
-      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg h-8 p-1 flex flex-row items-center">
+      <li
+        onClick={() => {
+          currentChat(savedMessage);
+        }}
+        className="hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg h-8 p-1 flex flex-row items-center"
+      >
         <SavedIcon />
         <p className="font-bold ml-2">Saved Messsages</p>
       </li>
-      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1
-       flex flex-row items-center" onClick={()=>{props.visibleContact(true)}}>
+      <li
+        className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1
+       flex flex-row items-center"
+        onClick={() => {
+          visibleContact(true);
+        }}
+      >
         <PeopleIcon />
         <p className="font-bold ml-2">Contacts</p>
       </li>
-      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row
-       items-center" onClick={()=>{props.visibleSetting(true)}}>
+      <li
+        className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row
+       items-center"
+        onClick={() => {
+          visibleSetting(true);
+        }}
+      >
         <SettingIcon />
         <p className="font-bold ml-2">Setting</p>
       </li>
       <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
         <MoonIcon />
         <p className="font-bold ml-2 mr-4">Night Mode</p>
-        <Switch
-          darkMode={props.darkMode}
-          toggleDarkMode={props.toggleDarkMode}
-        />
+        <Switch darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </li>
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
         onClick={() => {
-          props.visibleBugReport(true);
+          visibleBugReport(true);
         }}
       >
         <BugIcon />
@@ -46,7 +69,7 @@ export function LeftMenu(props) {
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
         onClick={() => {
-          props.visibleAbout(true);
+          visibleAbout(true);
         }}
       >
         <InfoIcon />
