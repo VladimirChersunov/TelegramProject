@@ -1,15 +1,14 @@
 import { useState, useRef, useEffect } from "react";
-import { createPrivate } from "../../Services/chatServices";
+import { chatExist, createPrivate } from "../../Services/chatServices";
 import { ContactsContextMenu } from "./ContactsContextMenu";
 import { LastSeen } from "./LastSeen";
 import { getAllMessaages } from "../../Services/messageServices";
 
-export function ContactsCard({ contact, type, currentChat }) {
+export function ContactsCard({ contact, type, currentChat, currentUser }) {
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
-  
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -20,10 +19,21 @@ export function ContactsCard({ contact, type, currentChat }) {
 
   const handleContactClick = async () => {
     setShowContextMenu(false);
+    const chatExisted = await chatExist(contact?.id);
+if(chatExisted){
+  const data = await getAllMessaages(contact?.userName, null, "Private");
+  console.log('only enter')
+  currentChat(data?.chat);
+}
+else{
 
-    const privateMessage = await createPrivate(contact?.userName);
-    const data = await getAllMessaages(contact?.userName, null, "Private");
-    currentChat(data.chat);
+  const privateMessage = await createPrivate(contact?.userName);  
+  const data = await getAllMessaages(contact?.userName, null, "Private");
+  console.log('create and enter')
+  console.log(data?.chat)
+  currentChat(data?.chat);
+}
+   
   };
 
   useEffect(() => {

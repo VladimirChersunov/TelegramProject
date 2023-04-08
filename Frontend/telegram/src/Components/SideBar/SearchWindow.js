@@ -5,7 +5,7 @@ import { getSearchResult } from "../../Services/searchServices";
 import { ContactsCard } from "./ContactsCard";
 import { ChatsCard } from "./ChatCard";
 
-export function SearchWindow({ visibleSearchWindow }) {
+export function SearchWindow({ visibleSearchWindow, currentChat }) {
   const [isLoading, setIsLoading] = useState(false);
   const [dataInput, setDataInput] = useState("");
   const [searchResults, setSearchResults] = useState({});
@@ -87,7 +87,7 @@ export function SearchWindow({ visibleSearchWindow }) {
                 key={contact.id}
                 className="flex flex-row items-center   p-2"
               >
-                <ContactsCard contact={contact} type={typeWindow} />
+                <ContactsCard contact={contact} type={typeWindow} currentChat={currentChat}/>
               </div>
             ))}
           </div>

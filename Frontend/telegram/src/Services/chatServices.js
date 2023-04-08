@@ -67,7 +67,6 @@ export const leavePublic = async (chatName) => {
   }
 };
 
-
 //get Chats/${chatId}
 export const getChatById = async (chatId) => {
   try {
@@ -122,10 +121,8 @@ export const createChat = async (
   members
 ) => {
   const token = localStorage.getItem("token");
-  if(token && chatName){
+  if (token && chatName) {
     try {
-     
-  
       const response = await axiosCreate.post(
         "Chats/createchat",
         { chatImage, chatName, type, chatInfo, authorId, members },
@@ -135,12 +132,36 @@ export const createChat = async (
           },
         }
       );
-  
+
       return response.data;
     } catch (error) {
-      console.log(error.response.data );
+      console.log(error.response.data);
       throw new Error(error.response.data.message);
     }
   }
- 
+};
+
+//Chats/enterprivatechat
+export const chatExist = async (opponentId) => {
+  try {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    const id = user?.id;
+    if (id && opponentId) {
+      const response = await axiosCreate.post(
+        "Chats/chatexists",
+        { id, opponentId },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+console.log(response.data)
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.response.data.message);
+  }
 };

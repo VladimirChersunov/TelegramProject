@@ -1,5 +1,6 @@
 import axiosCreate from "./axiosCreate";
 
+//UserContacts/user/${currentUser}
 export const getContacts = async () => {
   const token = localStorage.getItem("token");
   const currentUser = localStorage.getItem("username");
@@ -24,6 +25,8 @@ export const getContacts = async () => {
   }
 };
 
+
+//UserContacts/deletecontact
 export const deleteContacts = async (contactUserName) => {
     const token = localStorage.getItem("token");
     const currentUserLogin = localStorage.getItem("username");
@@ -50,7 +53,8 @@ export const deleteContacts = async (contactUserName) => {
     }
   };
   
-
+  
+//UserContacts/createcontact
 export const addContact = async (contactUserName) => {
   const token = localStorage.getItem("token");
   const currentUserLogin = localStorage.getItem("username");

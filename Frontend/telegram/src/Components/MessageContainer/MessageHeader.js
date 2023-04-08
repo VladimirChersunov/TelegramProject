@@ -2,7 +2,7 @@ import { MessageTools } from "./MessageTools";
 import { InfoBlock } from "./InfoBlock";
 import { PinnedMessage } from "./PinnedMessage";
 
-export function MessageHeader({chat,toggleRightColumn, currentChat,messageRef}) {
+export function MessageHeader({chat,toggleRightColumn}) {
 //console.log(chat)
 
   return (
@@ -11,7 +11,7 @@ export function MessageHeader({chat,toggleRightColumn, currentChat,messageRef}) 
         chat={chat}
         toggleRightColumn={toggleRightColumn}
       />
-      {chat?.pinnedMessageId > 0 && <PinnedMessage pinned={chat?.pinnedMessageId} chat={chat}  currentChat={currentChat} messageRef={messageRef} />}
+      {chat?.pinnedMessageId > 0 && <PinnedMessage pinned={chat?.pinnedMessageId} chat={chat} />}
       <MessageTools chat={chat} />
     </div>
   );

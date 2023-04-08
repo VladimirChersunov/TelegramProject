@@ -1,5 +1,7 @@
 import axiosCreate from "./axiosCreate";
 
+
+//Email/validatetoken проверяем валидность токена
 export const userLogout = async () => {
   const token = localStorage.getItem("token");
 

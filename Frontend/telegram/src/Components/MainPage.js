@@ -92,7 +92,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     setTheme(props);
   };
 
-  const currentChat = (chat) => {
+  const currentChat = (chat) => {    
     setCurrentChat(chat);
   };
 

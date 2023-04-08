@@ -1,6 +1,6 @@
 import axiosCreate from "./axiosCreate";
 
-
+//BugReports
 export const bugReport = async (userName, bugTitle, bugDescription) => {
   try {
     const token = localStorage.getItem("token");

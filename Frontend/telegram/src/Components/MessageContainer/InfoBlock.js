@@ -4,7 +4,7 @@ import { SavedIcon } from "../Icons/SavedIcon";
 export function InfoBlock({ chat, toggleRightColumn }) {
   const [typeChat, setTypeChat] = useState(null);
   const [favorite, setFavorite] = useState(false);
-
+//console.log(chat)
   useEffect(() => {
     if (chat?.type === "Channel") {
       setFavorite(false)

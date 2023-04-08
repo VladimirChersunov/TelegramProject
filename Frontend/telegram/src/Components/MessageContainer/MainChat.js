@@ -18,7 +18,7 @@ export function MainChat({
   currentChat,
  
 }) {
-  
+  // console.log(chat)
   const messagesEndRef = useRef(null);
   const myRef = useRef(null);
   const [dataMessages, setDataMessages] = useState(null);
@@ -28,21 +28,21 @@ export function MainChat({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [inputHeight, setInputHeight] = useState(0);
-  const[chats, setChat] = useState(false)
-  const[group, setGroup] = useState(false)
-  const[channel, setChannel] = useState(false)
+
 
   
   
 
   const getData = async () => {
     try {
-      
+     
      let allMessaages = null;
-      if(chats){
-        allMessaages = await getAllMessaages(chat?.chatName, null, chat?.type);
+      if(chat.type === 'Private'){
+       
+        allMessaages = await getAllMessaages(chat?.chatName, null, 'Private');
       }
       else{
+        
         allMessaages = await getAllMessaages(chat?.chatName, chat.authorId, chat?.type);
       }     
       setDataMessages(allMessaages);
@@ -56,29 +56,17 @@ export function MainChat({
   const admin = chat?.authorId===currentUser?.id
     
   const markRead = async () => {
-    
+   
     const responce = await readMessaages(chat?.id,currentUser?.id);   
    
   };
 
   useEffect(() => {
-    if(chat?.type==='Private'){
-      setChat(true)
-      setGroup(false)
-      setChannel(false)
-    }
-    if(chat?.type==='Group'){
-      setChat(false)
-      setGroup(true)
-      setChannel(false)
-    }
-    if(chat?.type==='Channel'){
-      setChat(false)
-      setGroup(false)
-      setChannel(true)
-    }
+   
     getData();
   }, [chat?.type]);
+
+  
 
   useEffect(() => {
     const messageContainer = document.getElementById("message-container");
@@ -89,7 +77,7 @@ export function MainChat({
   const refreshMessage = async () => {
     try {
       let allMessaages = null;
-      if(chats){
+      if(chat.type === 'Private'){
         allMessaages = await getAllMessaages(chat?.chatName, null, chat?.type);
       }
       else{
@@ -142,22 +130,20 @@ export function MainChat({
         className=" mt-2 flex flex-col  w-full overflow-x-hidden text-skin-base overflow-y-scroll scrollbar "
       >
         {dataMessages &&
-          dataMessages?.messages?.map((message, index) => (
-            <Message
-            
+          dataMessages?.messages?.map((message) => (
+            <Message           
               message={message}
               key={message?.id}
               currentUser={currentUser}
               chat={chat}
               refreshMessage={refreshMessage}
               refreshCallback={refreshCallback}
-              currentChat={currentChat}
-              
+              currentChat={currentChat}              
             />
           ))}
       </div>
       <div ref={messagesEndRef} />
-     {(!channel || admin && channel && admin) && <InputPanel
+     {(!(chat.type === 'Channel') || admin && (chat.type === 'Channel') && admin) && <InputPanel
         refreshInputHeeight={refreshInputHeeight}
         darkMode={darkMode}
         currentUser={currentUser}

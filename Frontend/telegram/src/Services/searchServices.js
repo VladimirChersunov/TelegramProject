@@ -1,5 +1,7 @@
 import axiosCreate from "./axiosCreate";
 
+
+//Chats/findchats
 export const getSearchResult = async (data) => {
   const token = localStorage.getItem("token");
 
