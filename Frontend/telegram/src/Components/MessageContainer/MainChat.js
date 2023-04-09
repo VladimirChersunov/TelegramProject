@@ -6,8 +6,7 @@ import { Message } from "./Message";
 export function MainChat({
   chat,
   darkMode,
-  currentUser,
- 
+  currentUser, 
   currentChat,
 }) {
  
@@ -72,8 +71,12 @@ export function MainChat({
   };
 
   const refreshInputHeeight = (props) => {
+    console.log(props)
     if (props >= 56) {
       setInputHeight(props - 56);
+    }
+    else{
+      setInputHeight(0);
     }
   };
 

@@ -1,0 +1,145 @@
+Date : 2023-04-09 17:37:31
+Directory : c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src
+Total : 109 files,  6334 codes, 206 comments, 789 blanks, all 7329 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |        107 |      6,250 |        205 |        776 |      7,231 |
+| PostCSS    |          1 |         67 |          1 |         12 |         80 |
+| XML        |          1 |         17 |          0 |          1 |         18 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                      | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                         |        109 |      6,334 |        206 |        789 |      7,329 |
+| . (Files)                                                                                                                 |          3 |        185 |          1 |         27 |        213 |
+| Assets                                                                                                                    |          1 |         17 |          0 |          1 |         18 |
+| Components                                                                                                                |         95 |      5,461 |        172 |        657 |      6,290 |
+| Components (Files)                                                                                                        |          2 |        204 |          9 |         24 |        237 |
+| Components\AuthComponents                                                                                                 |         11 |        986 |          7 |        106 |      1,099 |
+| Components\Icons                                                                                                          |         38 |      1,160 |          0 |         77 |      1,237 |
+| Components\InfoContainer                                                                                                  |          4 |        283 |          1 |         33 |        317 |
+| Components\MessageContainer                                                                                               |         13 |        854 |         77 |        129 |      1,060 |
+| Components\SideBar                                                                                                        |         27 |      1,974 |         78 |        288 |      2,340 |
+| Services                                                                                                                  |         10 |        671 |         33 |        104 |        808 |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                  | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\App.js                                            | JavaScript |        107 |          0 |         13 |        120 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Assets\Logo.svg                                   | XML        |         17 |          0 |          1 |         18 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\EmailVerification.js    | JavaScript |         52 |          0 |          6 |         58 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\EnterCode.js            | JavaScript |        213 |          0 |         21 |        234 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\EnterEmail.js           | JavaScript |         79 |          1 |         12 |         92 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\LoginForm.js            | JavaScript |        106 |          0 |         13 |        119 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\NewPassword.js          | JavaScript |         47 |          0 |          4 |         51 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\RegForm.js              | JavaScript |        121 |          5 |          5 |        131 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\SetNewPassword.js       | JavaScript |        127 |          0 |         15 |        142 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\SignIn.js               | JavaScript |         12 |          0 |          2 |         14 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\SignUp.js               | JavaScript |        178 |          1 |         19 |        198 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\SignUpFinish.js         | JavaScript |         24 |          0 |          5 |         29 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\AuthComponents\StartPage.js            | JavaScript |         27 |          0 |          4 |         31 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\ColorRadioButton.js                    | JavaScript |         84 |          1 |          5 |         90 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\AddPicture.js                    | JavaScript |         36 |          0 |          1 |         37 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\Ahtung.js                        | JavaScript |         32 |          0 |          1 |         33 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\BackArrowIcon.js                 | JavaScript |         22 |          0 |          2 |         24 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\BanIcon.js                       | JavaScript |         28 |          0 |          2 |         30 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\BugIcon.js                       | JavaScript |         70 |          0 |          2 |         72 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\CameraIcon.js                    | JavaScript |         33 |          0 |          2 |         35 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\CloseIcon.js                     | JavaScript |         32 |          0 |          4 |         36 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\Copy.js                          | JavaScript |         23 |          0 |          1 |         24 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\DotsIcon.js                      | JavaScript |         13 |          0 |          2 |         15 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\EnterIcon.js                     | JavaScript |         31 |          0 |          4 |         35 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\FlagIcon.js                      | JavaScript |         28 |          0 |          2 |         30 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\Forward.js                       | JavaScript |         23 |          0 |          2 |         25 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\ForwardArrowIcon.js              | JavaScript |         22 |          0 |          2 |         24 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\Hamburger.js                     | JavaScript |         29 |          0 |          1 |         30 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\InfoIcon.js                      | JavaScript |         34 |          0 |          1 |         35 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\LinkIcon.js                      | JavaScript |         16 |          0 |          2 |         18 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\LogoutIcon.js                    | JavaScript |         28 |          0 |          2 |         30 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\MailIcon.js                      | JavaScript |         34 |          0 |          1 |         35 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\MoonIcon.js                      | JavaScript |         16 |          0 |          2 |         18 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\NewTab.js                        | JavaScript |         36 |          0 |          2 |         38 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\PenIcon.js                       | JavaScript |         56 |          0 |          4 |         60 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\PeopleIcon.js                    | JavaScript |         22 |          0 |          1 |         23 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\PeoplesIcon.js                   | JavaScript |         34 |          0 |          1 |         35 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\PhoneIcon.js                     | JavaScript |         16 |          0 |          2 |         18 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\PinIcon.js                       | JavaScript |         23 |          0 |          2 |         25 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\PreviewClose.js                  | JavaScript |         29 |          0 |          2 |         31 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\PreviewOpen.js                   | JavaScript |         23 |          0 |          2 |         25 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\RecicleIcon.js                   | JavaScript |         38 |          0 |          2 |         40 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\Reply.js                         | JavaScript |         23 |          0 |          2 |         25 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\SavedIcon.js                     | JavaScript |         29 |          0 |          4 |         33 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\SearchIcon.js                    | JavaScript |         35 |          0 |          4 |         39 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\SelectAll.js                     | JavaScript |         29 |          0 |          1 |         30 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\SettingIcon.js                   | JavaScript |         22 |          0 |          2 |         24 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\SmileIcon.js                     | JavaScript |         34 |          0 |          2 |         36 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\SpeakerIcon.js                   | JavaScript |         44 |          0 |          2 |         46 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\SunIcon.js                       | JavaScript |         48 |          0 |          2 |         50 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\VolumeMuteIcon.js                | JavaScript |         42 |          0 |          2 |         44 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\Icons\VolumeOnIcon.js                  | JavaScript |         27 |          0 |          2 |         29 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\InfoContainer\InfoContainer.js         | JavaScript |         90 |          0 |          6 |         96 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\InfoContainer\MuteSwitch.js            | JavaScript |         34 |          0 |          5 |         39 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\InfoContainer\RightMenu.js             | JavaScript |        128 |          0 |         14 |        142 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\InfoContainer\RightMenuButton.js       | JavaScript |         31 |          1 |          8 |         40 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MainPage.js                            | JavaScript |        120 |          8 |         19 |        147 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\ClearContainer.js     | JavaScript |          6 |          0 |          1 |          7 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\InfoBlock.js          | JavaScript |         53 |          1 |          4 |         58 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\InputPanel.js         | JavaScript |        122 |         69 |         18 |        209 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\MainChat.js           | JavaScript |        116 |          0 |         15 |        131 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\Message.js            | JavaScript |         91 |          0 |         19 |        110 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\MessageContainer.js   | JavaScript |         90 |          0 |          7 |         97 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\MessageContextMenu.js | JavaScript |        130 |          2 |         19 |        151 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\MessageHeader.js      | JavaScript |         37 |          0 |          5 |         42 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\MessageIn.js          | JavaScript |         63 |          3 |         12 |         78 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\MessageOut.js         | JavaScript |         47 |          2 |          5 |         54 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\MessageTools.js       | JavaScript |         16 |          0 |          8 |         24 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\PinnedMessage.js      | JavaScript |         66 |          0 |         12 |         78 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\MessageContainer\SavedMessages.js      | JavaScript |         17 |          0 |          4 |         21 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\About.js                       | JavaScript |         71 |          0 |          2 |         73 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\AddMembers.js                  | JavaScript |         86 |          1 |         10 |         97 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\AddNewChat.js                  | JavaScript |         81 |         60 |         18 |        159 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\AddNewMessage.js               | JavaScript |          7 |          0 |          1 |          8 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\ChatCard.js                    | JavaScript |         37 |          0 |         17 |         54 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\ChatCardContextMenu.js         | JavaScript |         39 |          0 |          4 |         43 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\ChatCreateButton.js            | JavaScript |         59 |          0 |          8 |         67 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\ChatListContextMenu.js         | JavaScript |        181 |          0 |         17 |        198 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\CollumnContainer.js            | JavaScript |        214 |          0 |         35 |        249 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\ContactWindow.js               | JavaScript |         36 |          0 |         11 |         47 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\ContactsCard.js                | JavaScript |         90 |          0 |         11 |        101 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\ContactsContextMenu.js         | JavaScript |         92 |          1 |          9 |        102 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\CreateMenu.js                  | JavaScript |         51 |          0 |         11 |         62 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\EditProfile.js                 | JavaScript |        119 |         14 |         19 |        152 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\LastSeen.js                    | JavaScript |         28 |          0 |          2 |         30 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\LeftHeader.js                  | JavaScript |         19 |          0 |          4 |         23 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\LeftMenu.js                    | JavaScript |         83 |          0 |          3 |         86 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\MenuButton.js                  | JavaScript |         45 |          0 |          8 |         53 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\RadioChatList.js               | JavaScript |         30 |          0 |         13 |         43 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\RadioElement.js                | JavaScript |        136 |          2 |         26 |        164 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\ReportBug.js                   | JavaScript |        128 |          0 |          8 |        136 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\SearchInputInActive.js         | JavaScript |         19 |          0 |          4 |         23 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\SearchWindow.js                | JavaScript |        101 |          0 |         12 |        113 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\SerchInput.js                  | JavaScript |         50 |          0 |          8 |         58 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\SettingWindow.js               | JavaScript |         95 |          0 |         13 |        108 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\StartPrivate.js                | JavaScript |         51 |          0 |         10 |         61 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Components\SideBar\ThemeSwitch.js                 | JavaScript |         26 |          0 |          4 |         30 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\authService.js                           | JavaScript |         88 |          7 |         14 |        109 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\axiosCreate.js                           | JavaScript |          4 |          0 |          2 |          6 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\bugReportService.js                      | JavaScript |         19 |          1 |          4 |         24 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\chatServices.js                          | JavaScript |        184 |          9 |         19 |        212 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\contactServices.js                       | JavaScript |         93 |          4 |         11 |        108 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\messageServices.js                       | JavaScript |        138 |          6 |         21 |        165 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\searchServices.js                        | JavaScript |         23 |          1 |          4 |         28 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\tokenServices.js                         | JavaScript |         35 |          0 |         10 |         45 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\userLogout.js                            | JavaScript |         22 |          1 |          5 |         28 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\Services\userServices.js                          | JavaScript |         65 |          4 |         14 |         83 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\index.css                                         | PostCSS    |         67 |          1 |         12 |         80 |
+| c:\Users\kb674\OneDrive\Документы\TelegramProject\Frontend\telegram\src\index.js                                          | JavaScript |         11 |          0 |          2 |         13 |
+| Total                                                                                                                     |            |      6,334 |        206 |        789 |      7,329 |
++---------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

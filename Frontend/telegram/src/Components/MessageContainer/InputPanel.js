@@ -36,12 +36,14 @@ export function InputPanel({
 
   useEffect(() => {
     refreshInputHeeight(textareaHeight);
-  }, [textareaHeight]);
+  }, [textareaHeight,messageText]);
 
   const handleInputChange = (event) => {
     event.target.style.height = "auto";
     event.target.style.height = event.target.scrollHeight + "px";
+
     setMessageText(event.target.value);
+    
     if (textareaRef.current && parentRef.current) {
       parentRef.current.style.height = `${
         textareaRef.current.scrollHeight + 5
@@ -50,8 +52,8 @@ export function InputPanel({
     setTextareaHeight(event.target.scrollHeight);
   };
 
-  const addNewMessage = async (event) => {
-    //console.log(messageText)
+  const addNewMessage = async () => {
+    
     try {
       await createMessaage(currentUser.id, chat.id, data, messageText);
     } catch (error) {
