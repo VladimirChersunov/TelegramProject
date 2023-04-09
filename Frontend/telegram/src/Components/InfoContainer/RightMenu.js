@@ -1,42 +1,72 @@
 import { useState, useEffect } from "react";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
-
 import { RecicleIcon } from "../Icons/RecicleIcon";
 import { FlagIcon } from "../Icons/FlagIcon";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
-import { Ahtung } from "../Icons/Ahtung";
-import { SelectAll } from "../Icons/SelectAll";
+import {
+  chatNotifications,
+  deleteChatById,
+  leavePublic,
+} from "../../Services/chatServices";
 
-export function RightMenu({chat}) {
+export function RightMenu({ chat, clearMain, visibleModalReport }) {
   const [mute, setMute] = useState(chat.muteStatus);
-  const[chats, setChat] = useState(false)
-  const[group, setGroup] = useState(false)
-  const[channel, setChannel] = useState(false)
-  
-  useEffect(()=>{
- 
-    if(chat.type==='chat'){
-      
-      setChat(true)
-      setGroup(false)
-      setChannel(false)
-    }
-    if(chat.type==='group'){
-      
-      setChat(false)
-      setGroup(true)
-      setChannel(false)
-    }
-    if(chat.type==='channel'){
-    
-      setChat(false)
-      setGroup(false)
-      setChannel(true)
-    }
-   
-    },[])
+  const [chats, setChat] = useState(false);
+  const [group, setGroup] = useState(false);
+  const [channel, setChannel] = useState(false);
 
-  
+  useEffect(() => {
+    if (chat.type === "Private") {
+      setChat(true);
+      setGroup(false);
+      setChannel(false);
+    }
+    if (chat.type === "Group") {
+      setChat(false);
+      setGroup(true);
+      setChannel(false);
+    }
+    if (chat.type === "Channel") {
+      setChat(false);
+      setGroup(false);
+      setChannel(true);
+    }
+  }, [chat.type]);
+
+  useEffect(() => {
+    setMute(chat.muteStatus);
+  }, [chat.muteStatus]);
+
+
+  const handleMuteChat = (event) => {
+    const muteChat = async () => {
+      const responce = await chatNotifications(chat?.id);
+      setMute((prev)=>!prev)
+      console.log(responce.result);
+    };
+    event.stopPropagation();
+    muteChat();
+  };
+
+  const handleLeaveChat = (event) => {
+    event.stopPropagation();
+    const leaveChat = async () => {
+      const responce = await leavePublic(chat?.chatName);
+      clearMain(false);
+      console.log(responce);
+    };
+    leaveChat();
+  };
+
+  const handleDeleteChat = (event) => {
+    event.stopPropagation();
+    const deleteChat = async () => {
+      const responce = await deleteChatById(chat?.id);
+      clearMain(false);
+      console.log(responce);
+    };
+    deleteChat();
+  };
 
   return (
     <ul
@@ -45,31 +75,30 @@ export function RightMenu({chat}) {
     >
       {!mute && (
         <li
-          onClick={() => {}}
+          onClick={handleMuteChat}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2 p-1 flex flex-row  items-center"
         >
-          <VolumeMuteIcon />
+          <VolumeOnIcon />
+         
           <p className="font-bold ml-2">Mute</p>
         </li>
       )}
       {mute && (
         <li
-          onClick={() => {}}
+          onClick={handleMuteChat}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2 p-1 flex flex-row  items-center"
         >
-          <VolumeOnIcon />
+           <VolumeMuteIcon />
           <p className="font-bold ml-2">Unmute</p>
         </li>
       )}
+
       <li
-        onClick={() => {}}
-        className="hover:bg-skin-button-accent-hover hover:cursor-pointer pl-2 p-1 flex flex-row  items-center"
-      >
-       <SelectAll/>
-        <p className="font-bold ml-2">Select message</p>
-      </li>
-      <li
-        onClick={() => {}}
+        onClick={(event) => {
+          event.stopPropagation();
+
+          visibleModalReport(true);
+        }}
         className="hover:bg-skin-button-accent-hover hover:cursor-pointer pl-2 p-1 flex flex-row  items-center"
       >
         <FlagIcon />
@@ -80,27 +109,33 @@ export function RightMenu({chat}) {
         <div className="w-[80%] h-[1px] bg-skin-fill mt-2 "></div>
       </div>
 
-      {channel&&<li
-       
-        className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
-      >
-        <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none '}/>
-        <p className="font-bold ml-2">Leave Channel</p>
-      </li>}
-     {group&& <li
-       
-        className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
-      >
-        <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none '}/>
-        <p className="font-bold ml-2">Delete and exit</p>
-      </li>}
-     {chats&& <li
-        onClick={() => {}}
-        className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
-      >
-        <RecicleIcon styles={'h-5 w-5 stroke-red-600    fill-none '}/>
-        <p className="font-bold ml-2">Delete</p>
-      </li>}
+      {channel && (
+        <li
+          onClick={handleLeaveChat}
+          className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
+        >
+          <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
+          <p className="font-bold ml-2">Leave Channel</p>
+        </li>
+      )}
+      {group && (
+        <li
+          onClick={handleLeaveChat}
+          className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
+        >
+          <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
+          <p className="font-bold ml-2">Delete and exit</p>
+        </li>
+      )}
+      {chats && (
+        <li
+          onClick={handleDeleteChat}
+          className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
+        >
+          <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
+          <p className="font-bold ml-2">Delete</p>
+        </li>
+      )}
     </ul>
   );
 }

@@ -8,34 +8,21 @@ import Modal from "react-modal";
 import { CloseIcon } from "../Icons/CloseIcon";
 
 export function InputPanel({
-  darkMode,
   currentUser,
   chat,
   refreshMessage,
   refreshInputHeeight,
 }) {
-
-  
-
   const [data, setData] = useState(null);
   const [messageText, setMessageText] = useState("");
-  const [theme, setTheme] = useState("dark");
   const [showPicker, setShowPicker] = useState(false);
-  const [textareaHeight, setTextareaHeight] = useState(28);  
+  const [textareaHeight, setTextareaHeight] = useState(28);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const textareaRef = useRef(null);
   const parentRef = useRef(null);
   const pickerRef = useRef(null);
   const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    if (darkMode) {
-      setTheme((prev) => "dark");
-    } else {
-      setTheme((prev) => "light");
-    }
-  }, [darkMode]);
 
   useEffect(() => {
     if (textareaRef.current && parentRef.current) {
@@ -66,12 +53,7 @@ export function InputPanel({
   const addNewMessage = async (event) => {
     //console.log(messageText)
     try {
-      const dataMessage = await createMessaage(
-        currentUser.id,
-        chat.id,
-        data,
-        messageText
-      );
+      await createMessaage(currentUser.id, chat.id, data, messageText);
     } catch (error) {
       console.log(error);
     } finally {
@@ -189,7 +171,7 @@ export function InputPanel({
             className="h-[40px] w-[40px] rounded-full ml-2 mt-2 hover:bg-skin-button-accent-hover flex items-center justify-center"
           >
             <CloseIcon
-              style={
+              styles={
                 "h-7 w-7 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base"
               }
             />

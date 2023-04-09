@@ -4,7 +4,7 @@ import { SettingIcon } from "../Icons/SettingIcon";
 import { MoonIcon } from "../Icons/MoonIcon";
 import { BugIcon } from "../Icons/BugIcon";
 import { InfoIcon } from "../Icons/InfoIcon";
-import { Switch } from "./Switch";
+import { ThemeSwitch } from "./ThemeSwitch";
 
 export function LeftMenu({
   darkMode,
@@ -55,7 +55,7 @@ export function LeftMenu({
       <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
         <MoonIcon />
         <p className="font-bold ml-2 mr-4">Night Mode</p>
-        <Switch darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <ThemeSwitch darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </li>
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"

@@ -3,7 +3,7 @@ import { RightMenuButton } from "../InfoContainer/RightMenuButton";
 
 import { SearchIcon } from "../Icons/SearchIcon";
 
-export function MessageTools(props) {
+export function MessageTools({clearMain, chat,visibleModalReport}) {
   
 
  
@@ -17,7 +17,7 @@ export function MessageTools(props) {
           }
         />
       </button>
-      <RightMenuButton chat={props?.chat} />
+      <RightMenuButton chat={chat} clearMain={clearMain} visibleModalReport={visibleModalReport}/>
     </div>
   );
 }

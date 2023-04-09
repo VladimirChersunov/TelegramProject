@@ -4,20 +4,22 @@ import { NewTab } from "../Icons/NewTab";
 import { RecicleIcon } from "../Icons/RecicleIcon";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
-import { chatNotifications, deleteChatById, leavePublic } from "../../Services/chatServices";
+import {
+  chatNotifications,
+  deleteChatById,
+  leavePublic,
+} from "../../Services/chatServices";
 import { readMessaages } from "../../Services/messageServices";
 import { SelectAll } from "../Icons/SelectAll";
 
-export function ContextMenu({
+export function ChatListContextMenu({
   chat,
   x,
   y,
-  handleMuted,
   clearMain,
   currentUser,
   visibleModalReport,
 }) {
-  const [myState, setMyState] = useState("initial state");
   const [chats, setChat] = useState(false);
   const [group, setGroup] = useState(false);
   const [channel, setChannel] = useState(false);
@@ -42,7 +44,11 @@ export function ContextMenu({
       setGroup(false);
       setChannel(true);
     }
-  }, []);
+  }, [chat.type]);
+
+  useEffect(() => {
+    setMute(chat.muteStatus);
+  }, [chat.muteStatus]);
 
   useEffect(() => {
     if (y > screenHeight - 185) {
@@ -50,7 +56,7 @@ export function ContextMenu({
     } else {
       setPosY(y);
     }
-  }, [y]);
+  }, [y, screenHeight]);
 
   const leaveChat = async () => {
     const responce = await leavePublic(chat?.chatName);
@@ -65,14 +71,13 @@ export function ContextMenu({
   };
 
   const muteChat = async () => {
-   
-    const responce = await  chatNotifications(chat?.id);   
-    console.log(responce);
+    const responce = await chatNotifications(chat?.id);
+    console.log(responce.result);
   };
 
   const handleMuteChat = (event) => {
     event.stopPropagation();
-    muteChat()
+    muteChat();
   };
 
   const handleLeaveChat = (event) => {
@@ -96,8 +101,7 @@ export function ContextMenu({
   };
 
   const handleOpenNewTab = () => {
-    const stateParam = encodeURIComponent(JSON.stringify(myState));
-    window.open(`http://localhost:3000/main?state=${stateParam}`, "_blank");
+    window.open(`http://localhost:3000/main`, "_blank");
   };
 
   return (
@@ -127,7 +131,7 @@ export function ContextMenu({
         </li>
         {!mute && (
           <li
-          onClick={handleMuteChat}
+            onClick={handleMuteChat}
             className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
           >
@@ -137,7 +141,7 @@ export function ContextMenu({
         )}
         {mute && (
           <li
-          onClick={handleMuteChat}
+            onClick={handleMuteChat}
             className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
           >

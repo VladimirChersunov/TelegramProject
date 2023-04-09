@@ -231,7 +231,7 @@ export function CollumnContainer({
             className="h-[30px] w-[30px] rounded-full mr-2 mt-2 hover:bg-skin-button-accent-hover flex items-center justify-center"
           >
             <CloseIcon
-              style={
+              styles={
                 "h-5 w-5 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base"
               }
             />

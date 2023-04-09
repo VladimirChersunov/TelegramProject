@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function Switch(props) {
+export function ThemeSwitch(props) {
   const [toggle, setToggle] = useState(props.darkMode);
   const toggleClass = " transform translate-x-5";  
   

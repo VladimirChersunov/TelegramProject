@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Switch } from "../SideBar/Switch";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { PenIcon } from "../Icons/PenIcon";
 import { InfoIcon } from "../Icons/InfoIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 import { SavedIcon } from "../Icons/SavedIcon";
+import { MuteSwitch } from "./MuteSwitch";
 
 export function InfoContainer({ toggleRightColumn, chat }) {
   const [type, setType] = useState(false);
@@ -23,7 +23,6 @@ export function InfoContainer({ toggleRightColumn, chat }) {
     }
   }, [chat.type]);
 
-  
   return (
     <div className={`w-[350px] block h-screen`}>
       <div
@@ -61,7 +60,7 @@ export function InfoContainer({ toggleRightColumn, chat }) {
           <div className="rounded-full   h-[150px] w-[150px] mb-5  bg-purple-500 flex items-center justify-center select-none">
             {favorite ? (
               <SavedIcon
-                style={
+                styles={
                   "h-[100px] w-[100px] stroke-skin-stroke-base  fill-none dark:stroke-skin-stroke-inverted"
                 }
               />
@@ -87,7 +86,7 @@ export function InfoContainer({ toggleRightColumn, chat }) {
               <label className="text-lg">Notifications</label>
             </div>
 
-            <Switch chat={chat} />
+            <MuteSwitch chat={chat} />
           </div>
         )}
       </div>

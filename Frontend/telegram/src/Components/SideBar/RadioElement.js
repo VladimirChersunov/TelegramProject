@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { ContextMenu } from "./RightContextOnChat";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 import moment from "moment";
 import "moment/locale/ru";
+import { ChatListContextMenu } from "./ChatListContextMenu";
 
 export function RadioElement({ chat, currentChat, handleMuted,clearMain, currentUser,visibleModalReport }) {
   const contextRef = useRef();
@@ -11,8 +11,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
   const [chatMuteStatus, setChatMuteStatus] = useState(false);
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
-  const [contextMenuY, setContextMenuY] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null); 
+  const [contextMenuY, setContextMenuY] = useState(0);  
   const MAX_LENGTH = 15;
 
   
@@ -24,8 +23,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
     setContextMenuY(event.pageY);
   };
 
-  const handleOptionSelect = (event) => {
-    setSelectedOption(event.target.value);
+  const handleOptionSelect = (event) => {    
     setShowContextMenu(false);
   };
 
@@ -50,7 +48,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
       document.removeEventListener("click", handleClickOutside, true);
       document.removeEventListener("contextmenu", handleClickOutside, true);
     };
-  }, []);
+  }, [chat.type,chat.muteStatus]);
 
   useEffect(() => {
     setChatMuteStatus((prev)=>chat.muteStatus)
@@ -94,7 +92,8 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
            border-skin-border-base dark:border-skin-border-inverted "
       >
         {showContextMenu && (
-          <ContextMenu
+         
+          < ChatListContextMenu
           visibleModalReport={visibleModalReport}
             x={contextMenuX}
             y={contextMenuY}

@@ -2,17 +2,15 @@ import { useState, useEffect, useRef } from "react";
 
 import { RightMenu } from "./RightMenu";
 
-export function RightMenuButton(props) {
+export function RightMenuButton({chat,clearMain,visibleModalReport}) {
   const [open, setOpen] = useState(false);
   const refRightMenu = useRef(null);
 
   //следим за изменением стейта open и добавляем или удаляем обработчик
   useEffect(() => {
-    
     document.addEventListener("click", handleClickOutsideRightMenu, true);
     return () => {
       document.removeEventListener("click", handleClickOutsideRightMenu, true);
-      
     };
   }, [open]);
 
@@ -35,7 +33,7 @@ export function RightMenuButton(props) {
         &#x22EE;
       </div>
 
-      {open && <RightMenu chat={props.chat}/>}
+      {open && <RightMenu chat={chat} clearMain={clearMain} visibleModalReport={visibleModalReport}/>}
     </div>
   );
 }

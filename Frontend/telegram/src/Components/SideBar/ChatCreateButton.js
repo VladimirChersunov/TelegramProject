@@ -3,9 +3,7 @@ import { CreateMenu } from "./CreateMenu";
 import { PenIcon } from "../Icons/PenIcon";
 import { CloseIcon } from "../Icons/CloseIcon";
 
-
 export function ChatCreateButton(props) {
-
   const [open, setOpen] = useState(false);
   const refCreateMenu = useRef(null);
 
@@ -39,28 +37,30 @@ export function ChatCreateButton(props) {
       >
         {open && (
           <CloseIcon
-            style={
+            styles={
               "h-7 w-7 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base"
             }
           />
         )}
         {!open && (
           <PenIcon
-            style={
+            styles={
               "h-7 w-7 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base"
             }
           />
         )}
       </div>
 
-      {open && <CreateMenu
-       visibleAddMessage={props.visibleAddMessage}
-       visibleAddNewChat={props. visibleAddNewChat}
-       chatTypeCallback={props.chatTypeCallback}
-       visibleAddmembers={props.visibleAddmembers}
-       visibleStartPrivate={props. visibleStartPrivate}
-       currentChat={props.currentChat}
-      />}
+      {open && (
+        <CreateMenu
+          visibleAddMessage={props.visibleAddMessage}
+          visibleAddNewChat={props.visibleAddNewChat}
+          chatTypeCallback={props.chatTypeCallback}
+          visibleAddmembers={props.visibleAddmembers}
+          visibleStartPrivate={props.visibleStartPrivate}
+          currentChat={props.currentChat}
+        />
+      )}
     </div>
   );
 }
