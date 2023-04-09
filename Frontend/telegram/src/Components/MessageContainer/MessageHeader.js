@@ -17,8 +17,11 @@ export function MessageHeader({
   };
 
   useEffect(() => {
+   
     if (chat?.pinnedMessageId > 0) {
       setPinnedMessage(true);
+    }else{
+      setPinnedMessage(false);
     }
   }, [chat?.pinnedMessageId]);
 

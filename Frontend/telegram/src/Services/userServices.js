@@ -1,6 +1,5 @@
 import axiosCreate from "./axiosCreate";
 
-
 //Users/updateinfo апдейт всего, кроме меседжей
 export const updateInfo = async () => {
   const login = localStorage.getItem("username");
@@ -23,7 +22,6 @@ export const updateInfo = async () => {
 
 //Users/patchuser редактируем профиль
 export const editProfile = async (id, userName, email, about, age, photo) => {
- 
   try {
     const token = localStorage.getItem("token");
 
@@ -36,7 +34,7 @@ export const editProfile = async (id, userName, email, about, age, photo) => {
         },
       }
     );
-    
+
     return response.data;
   } catch (error) {
     console.log(error.response.data);
@@ -62,19 +60,20 @@ export const getUserByUsername = async (username) => {
   }
 };
 
-
 //get Users/${id}
 export const getUserById = async (id) => {
   try {
     const token = localStorage.getItem("token");
+    if (token && id > 0) {
+      const response = await axiosCreate.get(`Users/${id}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      return response.data;
+    }
 
-    const response = await axiosCreate.get(`Users/${id}`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-
-    return response.data;
+   
   } catch (error) {
     console.log(error);
     throw new Error(error.response.data.message);

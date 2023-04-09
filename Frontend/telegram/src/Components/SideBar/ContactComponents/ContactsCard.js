@@ -1,15 +1,18 @@
 import { useState, useRef, useEffect } from "react";
-import { chatExist, createPrivate } from "../../Services/chatServices";
+import { chatExist, createPrivate } from "../../../Services/chatServices";
 import { ContactsContextMenu } from "./ContactsContextMenu";
-import { LastSeen } from "./LastSeen";
-import { getAllMessaages } from "../../Services/messageServices";
+import { LastSeen } from "../LastSeen";
+import { getAllMessaages } from "../../../Services/messageServices";
+import { isContact } from "../../../Services/contactServices";
 
 export function ContactsCard({ contact, type, currentChat, contacts }) {
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
+  const [contactExists, setContactExists] = useState(null);
 
+  //открытие меню
   const handleContextMenu = (event) => {
     event.preventDefault();
     setShowContextMenu(true);
@@ -17,39 +20,63 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
     setContextMenuY(event.pageY);
   };
 
+  useEffect(() => {
+    const contactCheck = async () => {
+      const data = await isContact(contact?.id);
+
+      setContactExists(data.result);
+    };
+    contactCheck();
+  }, [contact?.userName, contact?.id, contacts]);
+
+  //закрытие меню
   const handleCloseContextMenu = () => {
     setShowContextMenu(false);
   };
 
+  //клик по контакту
   const handleContactClick = async () => {
-    setShowContextMenu(false);
+    //проверяем существует ли уже чат с этим юзером
     const chatExisted = await chatExist(contact?.id);
-    if (chatExisted) {
+   
+    if (chatExisted.exists) {
+      //если существует то открываем чат
       const data = await getAllMessaages(contact?.userName, null, "Private");
       console.log("only enter");
+      //передаем  в колбэкфункцию этот чат, чтобы актулизировать хедер мейна
       currentChat(data?.chat);
     } else {
+      //если НЕ существует чат, то создаем чат, а потом уже открываем его
       await createPrivate(contact?.userName);
       const data = await getAllMessaages(contact?.userName, null, "Private");
       console.log("create and enter");
-      console.log(data?.chat);
       currentChat(data?.chat);
     }
   };
 
+  //обработчик событий для отслеживания кликов снаружи
   useEffect(() => {
-    document.addEventListener("contextmenu", handleClickOutside, true);
-    document.addEventListener("click", handleClickOutside, true);
+   
+    if(showContextMenu){
+      console.log('create')
+      document.addEventListener("contextmenu", handleClickOutside, true);
+      document.addEventListener("click", handleClickOutside, true);
+    }
+   
 
     return () => {
+      console.log('delete')
       document.removeEventListener("click", handleClickOutside, true);
       document.removeEventListener("contextmenu", handleClickOutside, true);
     };
-  }, []);
+  }, [showContextMenu]);
 
+  //метод для обработчика событий для отслеживания кликов снаружи
   const handleClickOutside = (e) => {
     if (!contextRef?.current?.contains(e.target)) {
       setShowContextMenu(false);
+      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("contextmenu", handleClickOutside, true);
     }
   };
 
@@ -86,6 +113,7 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
           type={type}
           handleCloseContextMenu={handleCloseContextMenu}
           contacts={contacts}
+          contactExists={contactExists}
         />
       )}
       <div className="flex flex-col items-start ml-3">

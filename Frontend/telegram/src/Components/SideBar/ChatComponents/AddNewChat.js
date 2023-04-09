@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ContactsCard } from "./ContactsCard";
-import { BackArrowIcon } from "../Icons/BackArrowIcon";
-import { EnterIcon } from "../Icons/EnterIcon";
-import { createChat } from "../../Services/chatServices";
-import { AddPicture } from "../Icons/AddPicture";
+import { ContactsCard } from "../ContactComponents/ContactsCard";
+import { BackArrowIcon } from "../../Icons/BackArrowIcon";
+import { EnterIcon } from "../../Icons/EnterIcon";
+import { createChat } from "../../../Services/chatServices";
+import { AddPicture } from "../../Icons/AddPicture";
 
 export function AddNewChat({
   chatType,

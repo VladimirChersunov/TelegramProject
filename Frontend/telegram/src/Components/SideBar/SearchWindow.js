@@ -2,8 +2,8 @@ import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { SerchInput } from "./SerchInput";
 import { useEffect, useState, useRef } from "react";
 import { getSearchResult } from "../../Services/searchServices";
-import { ContactsCard } from "./ContactsCard";
-import { ChatsCard } from "./ChatCard";
+import { ContactsCard } from "./ContactComponents/ContactsCard";
+import { ChatsCard } from "./ChatComponents/ChatCard";
 
 export function SearchWindow({ visibleSearchWindow, currentChat, contacts }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -98,14 +98,14 @@ export function SearchWindow({ visibleSearchWindow, currentChat, contacts }) {
             <p className="font-bold text-lg mb-2 text-center mt-4">Chats</p>
             {searchResults.chats.map((chat) => (
               <div key={chat.id} className="flex flex-row items-center   p-2">
-                <ChatsCard chat={chat} />
+                <ChatsCard chat={chat} currentChat={currentChat} />
               </div>
             ))}
           </div>
         )}
       </div>
 
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p className="w-full text-center">Loading...</p>}
       {error && <p>Error: {error.message}</p>}
     </div>
   );

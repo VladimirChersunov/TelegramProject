@@ -64,7 +64,7 @@ export const getAllMessaages = async (chatName, authorId, privateChat) => {
 //Messages/${id}
 export const getMessaagesById = async (id) => {
   const token = localStorage.getItem("token");
-  if (token) {
+  if (token && id>0) {
     try {
       const response = await axiosCreate.get(`Messages/${id}`, {
         headers: {

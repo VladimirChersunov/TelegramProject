@@ -1,12 +1,7 @@
-import {
-  addContact,
-  deleteContacts,
-  isContact,
-} from "../../Services/contactServices";
-import { BanIcon } from "../Icons/BanIcon";
-import { PeopleIcon } from "../Icons/PeopleIcon";
-import { RecicleIcon } from "../Icons/RecicleIcon";
-import { useEffect, useState } from "react";
+import { addContact, deleteContacts } from "../../../Services/contactServices";
+import { BanIcon } from "../../Icons/BanIcon";
+import { PeopleIcon } from "../../Icons/PeopleIcon";
+import { RecicleIcon } from "../../Icons/RecicleIcon";
 
 export function ContactsContextMenu({
   x,
@@ -14,22 +9,10 @@ export function ContactsContextMenu({
   contact,
   type,
   handleCloseContextMenu,
-  contacts,
+  contactExists,
 }) {
-  const [contactExists, setContactExists] = useState(null);
 
-  useEffect(() => {
-    //const data = contacts.some((contact) => contact.username === userName);
-
-    const contactCheck = async () => {
-      const data = await isContact(contact?.id);
-      console.log(data);
-      setContactExists(data);
-    };
-
-    contactCheck();
-  }, [contact?.userName, contact?.id, contacts]);
-
+  console.log(contactExists)
   const handleCreateContact = (event) => {
     event.stopPropagation();
     if (!contactExists) {
@@ -51,8 +34,7 @@ export function ContactsContextMenu({
     deleteContact();
     handleCloseContextMenu();
   };
-
-  console.log(contactExists);
+  
   return (
     <div
       className="w-[180px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
@@ -61,7 +43,7 @@ export function ContactsContextMenu({
       style={{ position: "absolute", top: y, left: x }}
     >
       <ul className="rounded-lg ">
-        {contactExists && (
+        {!contactExists && (
           <li
             id="menu-item"
             onClick={handleCreateContact}
@@ -82,7 +64,7 @@ export function ContactsContextMenu({
           <p className="font-bold ml-2 text-skin-error">Add to black list</p>
         </li>
       </ul>
-      {type === "contacts" && (
+      {contactExists &&
         <div>
           <div className="menu-item h-[1px] bg-skin-fill-inverted dark:bg-skin-fill w-[80%] m-auto " />
           <li
@@ -95,7 +77,7 @@ export function ContactsContextMenu({
             <p className=" font-bold ml-2 text-skin-error">Delete</p>
           </li>
         </div>
-      )}
+      }
     </div>
   );
 }

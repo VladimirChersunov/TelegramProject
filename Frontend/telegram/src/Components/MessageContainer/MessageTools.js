@@ -1,15 +1,10 @@
 import { RightMenuButton } from "../InfoContainer/RightMenuButton";
 
-
 import { SearchIcon } from "../Icons/SearchIcon";
 
-export function MessageTools({clearMain, chat,visibleModalReport}) {
-  
-
- 
+export function MessageTools({ clearMain, chat, visibleModalReport }) {
   return (
     <div className="flex flex-row justify-end pr-5 min-w-[80px]">
-    
       <button className="mx-4">
         <SearchIcon
           styles={
@@ -17,7 +12,11 @@ export function MessageTools({clearMain, chat,visibleModalReport}) {
           }
         />
       </button>
-      <RightMenuButton chat={chat} clearMain={clearMain} visibleModalReport={visibleModalReport}/>
+      <RightMenuButton
+        chat={chat}
+        clearMain={clearMain}
+        visibleModalReport={visibleModalReport}
+      />
     </div>
   );
 }

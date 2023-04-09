@@ -1,4 +1,4 @@
-import { ContactsCard } from "./ContactsCard";
+import { ContactsCard } from "./ContactComponents/ContactsCard";
 import { useState } from "react";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { EnterIcon } from "../Icons/EnterIcon";

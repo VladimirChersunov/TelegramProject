@@ -141,7 +141,7 @@ export const createChat = async (
   }
 };
 
-//Chats/enterprivatechat
+//Chats/chatexists
 export const chatExist = async (opponentId) => {
   try {
     const token = localStorage.getItem("token");
@@ -157,7 +157,7 @@ export const chatExist = async (opponentId) => {
           },
         }
       );
-      console.log(response.data);
+      
       return response.data;
     }
   } catch (error) {

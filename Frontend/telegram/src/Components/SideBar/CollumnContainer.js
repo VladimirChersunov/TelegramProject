@@ -4,15 +4,16 @@ import { RadioChatList } from "./RadioChatList";
 import { useState } from "react";
 import { ReportBug } from "./ReportBug";
 import { SettingWindow } from "./SettingWindow";
-import { ContactWindow } from "./ContactWindow";
+import { ContactWindow } from "./ContactComponents/ContactWindow";
 import { AddMembers } from "./AddMembers";
 import { AddNewMessage } from "./AddNewMessage";
-import { AddNewChat } from "./AddNewChat";
+
 import { SearchWindow } from "./SearchWindow";
 import { StartPrivate } from "./StartPrivate";
 import { EditProfile } from "./EditProfile";
 import Modal from "react-modal";
 import { CloseIcon } from "../Icons/CloseIcon";
+import { AddNewChat } from "./ChatComponents/AddNewChat";
 
 export function CollumnContainer({
   chats,
@@ -24,6 +25,7 @@ export function CollumnContainer({
   currentChat,
   clearMain
 }) {
+  
   const [aboutState, setAboutState] = useState(false);
   const [chatlistState, setChatlistState] = useState(true);
   const [bugReportState, setBugReport] = useState(false);

@@ -1,5 +1,5 @@
 import { ContactsCard } from "./ContactsCard";
-import { BackArrowIcon } from "../Icons/BackArrowIcon";
+import { BackArrowIcon } from "../../Icons/BackArrowIcon";
 import { useEffect } from "react";
 
 
