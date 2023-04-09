@@ -8,7 +8,7 @@ export function SavedIcon(props) {
   if(props.style){
     setStyle((prevStyle) => props.style)
   }
- },[])
+ },[props.style])
   return (
     <svg
     className={`${style} `}

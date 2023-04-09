@@ -31,7 +31,8 @@ export function MessageContainer({
     >
       <MessageHeader
         chat={chat}
-        toggleRightColumn={toggleRightColumn}       
+        toggleRightColumn={toggleRightColumn}   
+        currentChat={currentChat}    
       />
       <MainChat
         chat={chat}

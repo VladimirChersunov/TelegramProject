@@ -4,7 +4,7 @@ import { ContactsContextMenu } from "./ContactsContextMenu";
 import { LastSeen } from "./LastSeen";
 import { getAllMessaages } from "../../Services/messageServices";
 
-export function ContactsCard({ contact, type, currentChat, currentUser }) {
+export function ContactsCard({ contact, type, currentChat, contacts }) {
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
@@ -17,23 +17,24 @@ export function ContactsCard({ contact, type, currentChat, currentUser }) {
     setContextMenuY(event.pageY);
   };
 
+  const handleCloseContextMenu = () => {
+    setShowContextMenu(false);
+  };
+
   const handleContactClick = async () => {
     setShowContextMenu(false);
     const chatExisted = await chatExist(contact?.id);
-if(chatExisted){
-  const data = await getAllMessaages(contact?.userName, null, "Private");
-  console.log('only enter')
-  currentChat(data?.chat);
-}
-else{
-
-  const privateMessage = await createPrivate(contact?.userName);  
-  const data = await getAllMessaages(contact?.userName, null, "Private");
-  console.log('create and enter')
-  console.log(data?.chat)
-  currentChat(data?.chat);
-}
-   
+    if (chatExisted) {
+      const data = await getAllMessaages(contact?.userName, null, "Private");
+      console.log("only enter");
+      currentChat(data?.chat);
+    } else {
+      await createPrivate(contact?.userName);
+      const data = await getAllMessaages(contact?.userName, null, "Private");
+      console.log("create and enter");
+      console.log(data?.chat);
+      currentChat(data?.chat);
+    }
   };
 
   useEffect(() => {
@@ -81,8 +82,10 @@ else{
         <ContactsContextMenu
           x={contextMenuX}
           y={contextMenuY}
-          userName={contact.userName}
+          contact={contact}
           type={type}
+          handleCloseContextMenu={handleCloseContextMenu}
+          contacts={contacts}
         />
       )}
       <div className="flex flex-col items-start ml-3">

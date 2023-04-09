@@ -8,7 +8,7 @@ export function SetNewPassword({ email }) {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-    const [passwordError, setPasswordError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,7 @@ export function SetNewPassword({ email }) {
     const passwordRegex = /^.{6,20}$/;
 
     const setPass = async (email, password) => {
-      setIsLoading(true); 
+      setIsLoading(true);
       const data = await setNewPassword(email, password);
       try {
         if (data.result === "success") {
@@ -40,8 +40,7 @@ export function SetNewPassword({ email }) {
         }
       } catch (error) {
         setError((prev) => error.message || "Server error");
-      }
-      finally {
+      } finally {
         setIsLoading(false); // установить состояние isLoading в значение false
       }
     };
@@ -80,7 +79,11 @@ export function SetNewPassword({ email }) {
             required
             maxLength="20"
             className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted
-            ${passwordError ? ' border-skin-border-error text-skin-error' : 'border-skin-border-inverted text-skin-inverted' }  
+            ${
+              passwordError
+                ? " border-skin-border-error text-skin-error"
+                : "border-skin-border-inverted text-skin-inverted"
+            }  
           border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px]`}
           />
           <div className="h-[20px]">
@@ -99,7 +102,11 @@ export function SetNewPassword({ email }) {
             }}
             maxLength="20"
             required
-            className={`${confirmPasswordError ? '  border-skin-border-error text-skin-error' : 'border-skin-border-inverted text-skin-inverted'} 
+            className={`${
+              confirmPasswordError
+                ? "  border-skin-border-error text-skin-error"
+                : "border-skin-border-inverted text-skin-inverted"
+            } 
             
             text-[16px] placeholder:text-skin-muted bg-skin-fill-inverted
           border-b-[1px] outline-none  mt-[29px] pl-2 pb-[10px]`}
@@ -107,7 +114,7 @@ export function SetNewPassword({ email }) {
           <div className="h-[20px]">
             {confirmPasswordError && (
               <label className="text-skin-error text-[12px] pt-1 pl-1">
-               {confirmPasswordError}
+                {confirmPasswordError}
               </label>
             )}
           </div>
@@ -119,13 +126,13 @@ export function SetNewPassword({ email }) {
           )}
 
           <button
-           disabled={isLoading}
+            disabled={isLoading}
             onSubmit={handleSubmit}
             onClick={handleSubmit}
             className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-[36px] tracking-normal"
           >
-             {isLoading ? "Loading..." : "Next"}
+            {isLoading ? "Loading..." : "Next"}
           </button>
         </div>
       </div>

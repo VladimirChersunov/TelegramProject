@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { deleteMessage, pinnedMessaages } from "../../Services/messageServices";
 import { Copy } from "../Icons/Copy";
 import { FlagIcon } from "../Icons/FlagIcon";
@@ -18,7 +18,7 @@ export function MessageContextMenu({
   refreshMessage,
   showContext,
   checkedMessage,
-  refreshCallback,
+ 
   currentChat,
 }) {
   const admin = currentUser.id === chat.authorId;
@@ -72,7 +72,7 @@ export function MessageContextMenu({
     } catch (error) {
       console.log(error.data);
     } finally {
-      refreshCallback(true);
+     
       refreshMessage();
       showContext(false);
     }

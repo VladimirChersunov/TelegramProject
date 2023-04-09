@@ -8,7 +8,7 @@ export function Message({
   currentUser,
   chat,
   refreshMessage,
-  refreshCallback,
+ 
   currentChat,
 }) {
   
@@ -60,7 +60,7 @@ export function Message({
     }
 
     setCoordinatesChecked(true); 
-  }, [contextMenuX,contextMenuY]);
+  }, [contextMenuX,contextMenuY,screenHeight,screenWidth]);
 
   useEffect(() => {
     document.addEventListener("contextmenu", handleClickOutside, true);
@@ -95,8 +95,7 @@ export function Message({
           checkedMessage={checkedMessage}
           currentUser={currentUser}
           refreshMessage={refreshMessage}
-          showContext={showContext}
-          refreshCallback={refreshCallback}
+          showContext={showContext}         
           currentChat={currentChat}
         />
       )}

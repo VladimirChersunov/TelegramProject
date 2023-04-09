@@ -29,7 +29,6 @@ export function SignUp(props) {
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const passwordRegex = /^.{6,20}$/;
     const usernameRegex = /^.{3,20}$/;
-
     if (password !== confirmPassword) {
       setConfirmPasswordError("Password mismatch");
     } else {

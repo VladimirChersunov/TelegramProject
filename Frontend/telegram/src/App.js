@@ -1,6 +1,6 @@
 import { StartPage } from "./Components/AuthComponents/StartPage";
 import { MainPage } from "./Components/MainPage";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useLocation } from "react-router-dom";
 import { SignIn } from "./Components/AuthComponents/SignIn";
 import { SignUp } from "./Components/AuthComponents/SignUp";
 import { EnterCode } from "./Components/AuthComponents/EnterCode";
@@ -16,8 +16,8 @@ function App() {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [userData, setUserData] = useState({});
-  const [token, setToken] = useState("");
-
+  const location = useLocation();
+  const [token, setToken] = useState( location.state?.token || "");
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
@@ -52,7 +52,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("token", token);
+    const storedToken = localStorage.getItem("token");
+    if (token) {
+      setToken(token);
+    } else if (storedToken) {
+      setToken(storedToken);
+    }
   }, [token]);
 
   return (

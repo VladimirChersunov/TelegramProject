@@ -3,8 +3,8 @@ import { getMessaagesById, pinnedMessaages } from "../../Services/messageService
 import { getUserById } from "../../Services/userServices";
 import { CloseIcon } from "../Icons/CloseIcon";
 
-export function PinnedMessage({ pinned, chat, currentChat }) {
-  //console.log(pinned);
+export function PinnedMessage({ pinned, chat, currentChat,pinnedClose }) {
+  
 
   const [message, setMessage] = useState(null);
   const [user, setUser] = useState(null);
@@ -30,8 +30,9 @@ export function PinnedMessage({ pinned, chat, currentChat }) {
       const data = await pinnedMessaages(action, message.id, chat.id);
       console.log(data);
       currentChat(data.chat)
+      pinnedClose(false)
     } catch (error) {
-      console.log(error.data);
+      console.log(error);
     } 
   };
 
@@ -40,7 +41,7 @@ export function PinnedMessage({ pinned, chat, currentChat }) {
   return (
     <div
       
-      className=" w-max min-w-[250px] flex flex-row justify-between border-l border-skin-border-base dark:border-skin-border-inverted cursor-pointer"
+      className=" w-max min-w-[200px] max-w-[300px] flex flex-row justify-between border-l border-skin-border-base dark:border-skin-border-inverted cursor-pointer"
     >
       <div className="flex flex-row items-center  h-[100%] w-[100%]  ">
         {user?.photo ? (
@@ -65,7 +66,7 @@ export function PinnedMessage({ pinned, chat, currentChat }) {
             <p className="text-xs">{message?.text.slice(0, 60)}</p>
           </div>
           <div className="flex items-center justify-center">
-            <button onClick={handleUnPinnedClick} className="rounded-full w-[30px] h-[30px] flex items-center justify-center hover:bg-skin-button-accent-hover">
+            <button onClick={handleUnPinnedClick} className="rounded-full w-[30px] ml-1 h-[30px] flex items-center justify-center hover:bg-skin-button-accent-hover">
               <CloseIcon />
             </button>
           </div>

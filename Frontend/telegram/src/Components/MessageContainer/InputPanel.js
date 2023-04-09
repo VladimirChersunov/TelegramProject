@@ -64,7 +64,7 @@ export function InputPanel({
   };
 
   const addNewMessage = async (event) => {
-    console.log(messageText)
+    //console.log(messageText)
     try {
       const dataMessage = await createMessaage(
         currentUser.id,

@@ -1,25 +1,58 @@
-import { addContact, deleteContacts } from "../../Services/contactServices";
-import { Ahtung } from "../Icons/Ahtung";
+import {
+  addContact,
+  deleteContacts,
+  isContact,
+} from "../../Services/contactServices";
+import { BanIcon } from "../Icons/BanIcon";
 import { PeopleIcon } from "../Icons/PeopleIcon";
 import { RecicleIcon } from "../Icons/RecicleIcon";
+import { useEffect, useState } from "react";
 
-export function ContactsContextMenu({ x, y, userName, type }) {
-  
+export function ContactsContextMenu({
+  x,
+  y,
+  contact,
+  type,
+  handleCloseContextMenu,
+  contacts,
+}) {
+  const [contactExists, setContactExists] = useState(null);
+
+  useEffect(() => {
+    //const data = contacts.some((contact) => contact.username === userName);
+
+    const contactCheck = async () => {
+      const data = await isContact(contact?.id);
+      console.log(data);
+      setContactExists(data);
+    };
+
+    contactCheck();
+  }, [contact?.userName, contact?.id, contacts]);
+
   const handleCreateContact = (event) => {
     event.stopPropagation();
-    const create = async () => {
-      const data = await addContact(userName);
-    };
-    create();
+    if (!contactExists) {
+      const create = async () => {
+        const data = await addContact(contact?.userName);
+        console.log(data);
+      };
+      create();
+      handleCloseContextMenu();
+    }
   };
 
   const handleDeleteContact = (event) => {
     event.stopPropagation();
-    const create = async () => {
-      const data = await deleteContacts(userName);
+    const deleteContact = async () => {
+      const data = await deleteContacts(contact?.userName);
+      console.log(data);
     };
-    create();
+    deleteContact();
+    handleCloseContextMenu();
   };
+
+  console.log(contactExists);
   return (
     <div
       className="w-[180px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
@@ -28,26 +61,24 @@ export function ContactsContextMenu({ x, y, userName, type }) {
       style={{ position: "absolute", top: y, left: x }}
     >
       <ul className="rounded-lg ">
-        {type === "search" && (
-          <div>
-            <li
+        {contactExists && (
+          <li
             id="menu-item"
-              onClick={handleCreateContact}
-              className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
+            onClick={handleCreateContact}
+            className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
-            >
-              <PeopleIcon />
-              <p className="font-bold ml-2">Add to contacts</p>
-            </li>
-          </div>
+          >
+            <PeopleIcon />
+            <p className="font-bold ml-2">Add to contacts</p>
+          </li>
         )}
 
         <li
-         id="menu-item"
+          id="menu-item"
           className="menu-item hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >
-          <Ahtung />
+          <BanIcon />
           <p className="font-bold ml-2 text-skin-error">Add to black list</p>
         </li>
       </ul>
@@ -55,7 +86,7 @@ export function ContactsContextMenu({ x, y, userName, type }) {
         <div>
           <div className="menu-item h-[1px] bg-skin-fill-inverted dark:bg-skin-fill w-[80%] m-auto " />
           <li
-           id="menu-item"
+            id="menu-item"
             onClick={handleDeleteContact}
             className="menu-item hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"

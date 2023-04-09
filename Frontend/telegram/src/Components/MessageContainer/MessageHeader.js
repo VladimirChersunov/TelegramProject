@@ -1,9 +1,21 @@
 import { MessageTools } from "./MessageTools";
 import { InfoBlock } from "./InfoBlock";
 import { PinnedMessage } from "./PinnedMessage";
+import { useState, useEffect } from "react";
 
-export function MessageHeader({chat,toggleRightColumn}) {
-//console.log(chat)
+export function MessageHeader({chat,toggleRightColumn,currentChat}) {
+
+const[pinnedMessage, setPinnedMessage] = useState(false)
+
+const pinnedClose = (props)=>{  
+  setPinnedMessage(props)
+}
+
+useEffect(() => {
+  if(chat?.pinnedMessageId>0){
+    setPinnedMessage(true)
+  }
+}, [chat?.pinnedMessageId]);
 
   return (
     <div className="h-[60px] flex flex-row max-w-full border-b border-b-skin-border-base dark:border-b-skin-border-inverted text-2xl justify-between">
@@ -11,8 +23,11 @@ export function MessageHeader({chat,toggleRightColumn}) {
         chat={chat}
         toggleRightColumn={toggleRightColumn}
       />
-      {chat?.pinnedMessageId > 0 && <PinnedMessage pinned={chat?.pinnedMessageId} chat={chat} />}
+      <div className="flex flex-row">
+      {pinnedMessage && <PinnedMessage pinned={chat?.pinnedMessageId} currentChat={currentChat} chat={chat} pinnedClose={pinnedClose}/>}
       <MessageTools chat={chat} />
+      </div>
+    
     </div>
   );
 }

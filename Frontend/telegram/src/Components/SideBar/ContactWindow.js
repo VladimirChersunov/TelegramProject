@@ -35,7 +35,7 @@ export function ContactWindow({contacts, visibleContact,currentChat}) {
           <div className=" w-full fleex flex-col items-center justify-center">           
             {contacts.map((contact, index) => (
               <div key={index}>
-               <ContactsCard contact={contact} type={typeWindow} currentChat={currentChat}/> 
+               <ContactsCard contact={contact} type={typeWindow} currentChat={currentChat} contacts={contacts}/> 
               </div>
             ))}
           </div>

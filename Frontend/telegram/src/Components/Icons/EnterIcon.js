@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 
-export function EnterIcon({styles}) {
-  const [style, setStyle] = useState("h-5 w-5 stroke-skin-stroke-base  fill-none dark:stroke-skin-stroke-inverted")
+export function EnterIcon({ styles }) {
+  const [style, setStyle] = useState(
+    "h-5 w-5 stroke-skin-stroke-base  fill-none dark:stroke-skin-stroke-inverted"
+  );
 
- useEffect(()=>{
-  if(styles){
-    setStyle((prevStyle) => styles)
-  }
- },[styles])
+  useEffect(() => {
+    if (styles) {
+      setStyle((prevStyle) => styles);
+    }
+  }, [styles]);
 
   return (
     <svg
-    
       className={`${style} `}
       viewBox="0 0 48 48"
       xmlns="http://www.w3.org/2000/svg"

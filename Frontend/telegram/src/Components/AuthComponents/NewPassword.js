@@ -16,15 +16,24 @@ export function NewPassword() {
           className="bg-skin-fill border-b-[#C6BDFF]
         border-b-[1px] outline-none text-skin-base pl-2 mt-10"
         />
-<div className="flex justify-between">
-<button onClick={() => {
-            navigate("/entercode");
-          }} className="text-skin-base mt-5 text-xs ml-2">Recovery password</button>
-<button onClick={() => {
-            navigate("/signup");
-          }} className="text-skin-base mt-5 text-xs mr-2">Signup</button>
-</div>
-       
+        <div className="flex justify-between">
+          <button
+            onClick={() => {
+              navigate("/entercode");
+            }}
+            className="text-skin-base mt-5 text-xs ml-2"
+          >
+            Recovery password
+          </button>
+          <button
+            onClick={() => {
+              navigate("/signup");
+            }}
+            className="text-skin-base mt-5 text-xs mr-2"
+          >
+            Signup
+          </button>
+        </div>
 
         <button
           onClick={() => {

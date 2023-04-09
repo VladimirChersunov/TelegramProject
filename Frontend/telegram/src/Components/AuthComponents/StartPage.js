@@ -10,10 +10,10 @@ export function StartPage() {
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
         <div className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
-        Welcome to the official Cryptic app
+          Welcome to the official Cryptic app
         </div>
         <div className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
-       It's fast and secure
+          It's fast and secure
         </div>
         <button
           onClick={() => {

@@ -41,7 +41,7 @@ function RegistrationForm() {
         setPasswordValid(true);
       }
       // Проверяем правильность повторного введенного пароля
-    if (password !== confirmPassword) {
+      if (password !== confirmPassword) {
         setIsConfirmPasswordValid(false);
         return;
       } else {
@@ -56,78 +56,75 @@ function RegistrationForm() {
         setRegistrationErrorMessage(error.response.data.message);
         console.log("Ошибка регистрации: ", error);
       }
-    };
-      console.log("Данные отправлены: ", username, email, password);
     }
+    console.log("Данные отправлены: ", username, email, password);
   };
+}
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          Имя пользователя:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            style={{
-              color: usernameValid ? "black" : "red",
-              border: usernameValid ? "1px solid black" : "1px solid red",
-            }}
-            required
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{
-              color: emailValid ? "black" : "red",
-              border: emailValid ? "1px solid black" : "1px solid red",
-            }}
-            required
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Пароль:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              color: passwordValid ? "black" : "red",
-              border: passwordValid ? "1px solid black" : "1px solid red",
-            }}
-            required
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Подтвержение пароля:
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            style={{
-              color: confirmPasswordValid ? "black" : "red",
-              border: confirmPasswordValid
-                ? "1px solid black"
-                : "1px solid red",
-            }}
-            required
-          />
-        </label>
-      </div>
-      <button type="submit">Зарегистрироваться</button>
-    </form>
-  );
-
+return (
+  <form onSubmit={handleSubmit}>
+    <div>
+      <label>
+        Имя пользователя:
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          style={{
+            color: usernameValid ? "black" : "red",
+            border: usernameValid ? "1px solid black" : "1px solid red",
+          }}
+          required
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Email:
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{
+            color: emailValid ? "black" : "red",
+            border: emailValid ? "1px solid black" : "1px solid red",
+          }}
+          required
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Пароль:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={{
+            color: passwordValid ? "black" : "red",
+            border: passwordValid ? "1px solid black" : "1px solid red",
+          }}
+          required
+        />
+      </label>
+    </div>
+    <div>
+      <label>
+        Подтвержение пароля:
+        <input
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          style={{
+            color: confirmPasswordValid ? "black" : "red",
+            border: confirmPasswordValid ? "1px solid black" : "1px solid red",
+          }}
+          required
+        />
+      </label>
+    </div>
+    <button type="submit">Зарегистрироваться</button>
+  </form>
+);
 
 export default RegistrationForm;

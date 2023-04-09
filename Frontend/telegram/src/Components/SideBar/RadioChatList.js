@@ -16,6 +16,7 @@ export function RadioChatList(props) {
         {props?.chats?.map((chat, index) => (
             <div key={index}>
             <RadioElement
+            visibleModalReport={props.visibleModalReport}
              currentUser={props?.currentUser}
             chat={chat}   
             clearMain={props?.clearMain}         

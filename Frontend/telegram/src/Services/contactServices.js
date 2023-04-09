@@ -78,3 +78,30 @@ export const addContact = async (contactUserName) => {
     console.log("missing token");
   }
 };
+
+
+//UserContacts/iscontact проверка юзера, в контактах ли он
+export const isContact = async (contactId) => {
+  const token = localStorage.getItem("token");
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const userId = currentUser?.id 
+  if (token && userId) {
+    try {
+      const response = await axiosCreate.post(
+        "UserContacts/iscontact",
+        { userId, contactId },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  } else {
+    console.log("missing token");
+  }
+};

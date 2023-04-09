@@ -145,7 +145,7 @@ export const createChat = async (
 export const chatExist = async (opponentId) => {
   try {
     const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
+    const user = JSON.parse(localStorage.getItem("user"));
     const id = user?.id;
     if (id && opponentId) {
       const response = await axiosCreate.post(
@@ -157,9 +157,54 @@ export const chatExist = async (opponentId) => {
           },
         }
       );
-console.log(response.data)
+      console.log(response.data);
       return response.data;
     }
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.response.data.message);
+  }
+};
+
+//Chats/notifications/${chatId}
+export const chatNotifications = async (chatId) => {
+  try {
+    const token = localStorage.getItem("token");
+    if (token && chatId) {
+      const response = await axiosCreate.patch(
+        `Chats/notifications/${chatId}`,
+        {},
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//Chats/isuserinchat
+export const isUserInChat = async (chatId) => {
+  try {
+    const token = localStorage.getItem("token");
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+  const userId = currentUser?.id 
+    const response = await axiosCreate.post(
+      "Chats/isuserinchat",
+      { userId, chatId },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+
+    return response.data;
   } catch (error) {
     console.log(error);
     throw new Error(error.response.data.message);

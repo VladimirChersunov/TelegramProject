@@ -11,6 +11,8 @@ import { AddNewChat } from "./AddNewChat";
 import { SearchWindow } from "./SearchWindow";
 import { StartPrivate } from "./StartPrivate";
 import { EditProfile } from "./EditProfile";
+import Modal from "react-modal";
+import { CloseIcon } from "../Icons/CloseIcon";
 
 export function CollumnContainer({
   chats,
@@ -36,6 +38,13 @@ export function CollumnContainer({
   const [startPrivateState, setStartPrivateState] = useState(false);
   const [editState, setEditState] = useState(false);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const handleModalClose = () => {
+    setModalIsOpen(false);
+  };
+
+ 
   const visibleAbout = (props) => {
     setAboutState(props);
     setChatlistState(!props);
@@ -78,6 +87,10 @@ export function CollumnContainer({
   const visibleAddNewChatFinish = (props) => {
     setAddGroupState(props);
     setChatlistState(!props);
+  };
+
+  const visibleModalReport = (props) => {
+    setModalIsOpen(props)
   };
 
   const visibleSearchWindow = (props) => {
@@ -160,7 +173,7 @@ export function CollumnContainer({
       )}
 
       {searchWindowState && (
-        <SearchWindow visibleSearchWindow={visibleSearchWindow} currentChat={currentChat}/>
+        <SearchWindow visibleSearchWindow={visibleSearchWindow} currentChat={currentChat}  contacts={contacts}/>
       )}
 
       {chatlistState && (
@@ -177,6 +190,7 @@ export function CollumnContainer({
             visibleSearchWindow={visibleSearchWindow}
           />
           <RadioChatList
+          visibleModalReport={visibleModalReport}
            currentUser={ currentUser}
             chats={chats}
             clearMain={clearMain}
@@ -190,6 +204,45 @@ export function CollumnContainer({
           />
         </div>
       )}
+
+<Modal
+        isOpen={modalIsOpen}
+        onRequestClose={handleModalClose}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          },
+          content: {
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "#0c0221", // Добавьте это свойство
+          },
+        }}
+        appElement={document.getElementById("root")}
+        className="w-[250px] h-[150px] absolute  border border-skin-border-inverted bg-skin-fill-base rounded-lg"
+        overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0, 0, 0, 0.5)]  flex items-center justify-center "
+        shouldCloseOnOverlayClick={false}
+      >
+        <div className="flex flex-col w-full h-full ">
+          <div className="flex w-full justify-end">
+          <button
+            onClick={handleModalClose}
+            className="h-[30px] w-[30px] rounded-full mr-2 mt-2 hover:bg-skin-button-accent-hover flex items-center justify-center"
+          >
+            <CloseIcon
+              style={
+                "h-5 w-5 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base"
+              }
+            />
+          </button>
+          </div>
+          
+        <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base tracking-wider">Report   </span>
+        <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base">sent successfully!</span>
+         
+        </div>
+      </Modal>
     </div>
   );
 }

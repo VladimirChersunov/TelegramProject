@@ -4,10 +4,10 @@ export function SearchIcon(props) {
 
   const [style, setStyle] = useState("w-5 h-5 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none")
  useEffect(()=>{
-  if(props.style){
-    setStyle((prevStyle) => props.style)
+  if(props.styles){
+    setStyle((prevStyle) => props.styles)
   }
- })
+ },[props.styles])
 
   return (
     <svg

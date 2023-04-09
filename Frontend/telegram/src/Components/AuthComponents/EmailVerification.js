@@ -12,7 +12,7 @@ function EmailVerification() {
       .post("http://localhost:5000/api/sendcode", { email })
       .then((response) => {
         setIsEmailSent(true);
-      });
+      });      
   };
 
   const verifyCode = () => {

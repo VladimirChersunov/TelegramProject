@@ -1,5 +1,6 @@
 export function Forward() {
   return (
+    
     <svg
       className="w-5 h-5 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none"
       viewBox="0 0 48 48"

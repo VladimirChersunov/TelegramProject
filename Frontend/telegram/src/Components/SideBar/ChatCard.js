@@ -1,58 +1,27 @@
-import { useState, useRef, useEffect } from "react";
-import { enterPublic } from "../../Services/chatServices";
-import { ChatsContextMenu } from "./ChatsContextMenu";
+import { useState} from "react";
+import { ChatCardContextMenu } from "./ChatCardContextMenu";
+
 
 
 
 export function ChatsCard({ chat, type }) {
-
-
-
-  const contextRef = useRef();
+  
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
 
   const handleContextMenu = (event) => {
-    event.preventDefault();
+  event.preventDefault();
     setShowContextMenu(true);
     setContextMenuX(event.pageX);
     setContextMenuY(event.pageY);
   };
 
-  const handleContactClick = async(event) => {
-    setShowContextMenu(false);
   
-    try{
-      const data = await enterPublic(chat.chatName)
-      console.log(data)
-    }
-    catch(error){
-      console.log(error.data)
-    }
-    finally{
-      
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("contextmenu", handleClickOutside, true);
-    document.addEventListener("click", handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-      document.removeEventListener("contextmenu", handleClickOutside, true);
-    };
-  }, []);
-
-  const handleClickOutside = (e) => {
-    if (!contextRef?.current?.contains(e.target)) {
-      setShowContextMenu(false);
-    }
-  };
 
 
   return (
+    
     <div
     onContextMenu={handleContextMenu}
     onClick={()=> console.log('Кликнули на элемент!')}
@@ -64,12 +33,12 @@ export function ChatsCard({ chat, type }) {
           <p className="text-xl">{chat?.chatName[0].toUpperCase() + chat?.chatName[1].toUpperCase()}</p>
         </div>
       )}
- {showContextMenu && (
-        <ChatsContextMenu
+  {showContextMenu && (
+    
+        <ChatCardContextMenu
           x={contextMenuX}
-          y={contextMenuY}
-          type={type}
-          chat={chat}
+          y={contextMenuY}               
+         
         />
       )}
 

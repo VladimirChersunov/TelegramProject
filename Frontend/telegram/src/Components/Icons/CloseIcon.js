@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 
 export function CloseIcon(props) {
+  const [style, setStyle] = useState(
+    "h-5 w-5 stroke-skin-stroke-base   fill-none dark:stroke-skin-stroke-inverted"
+  );
 
-  const [style, setStyle] = useState("h-5 w-5 stroke-skin-stroke-base   fill-none dark:stroke-skin-stroke-inverted")
-
- useEffect(()=>{
-  if(props.style){
-    setStyle((prevStyle) => props.style)
-  }
- })
+  useEffect(() => {
+    if (props.style) {
+      setStyle((prevStyle) => props.style);
+    }
+  },[props.style]);
 
   return (
     <svg

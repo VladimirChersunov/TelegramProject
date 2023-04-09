@@ -22,7 +22,6 @@ export function EnterEmail({ recoveryData }) {
       setError("Please enter a valid email address.");
       return;
     }
-
     try {
       setButtonDisabled((prev) => true);
       const data = await emailCheck(email);

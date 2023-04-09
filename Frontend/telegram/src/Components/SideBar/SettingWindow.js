@@ -4,6 +4,8 @@ import { Ahtung } from "../Icons/Ahtung";
 import { PenIcon } from "../Icons/PenIcon";
 import { PeopleIcon } from "../Icons/PeopleIcon";
 import { InfoIcon } from "../Icons/InfoIcon";
+import { LogoutIcon } from "../Icons/LogoutIcon";
+import { MailIcon } from "../Icons/MailIcon";
 
 
 export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
@@ -75,7 +77,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
         </div>
 
         <div className="mt-2 text-xl  flex flex-row items-center  w-[90%]  pl-2 h-[40px]">
-          <Ahtung />
+          <MailIcon/>
           <label className="ml-10">{formattedEmail}</label>
         </div>
         <div className="mt-2 text-xl  flex flex-row items-center  w-[90%]  pl-2 h-[40px]">
@@ -96,7 +98,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
           className="mt-2 text-xl  flex flex-row items-center  w-[90%]  mb-[60px]
           cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] "
         >
-          <Ahtung />
+          <LogoutIcon/>
           <p className="ml-10">Logout</p>
         </div>
       </div>

@@ -1,55 +1,23 @@
-import { PinIcon } from "../Icons/PinIcon";
 import { RightMenuButton } from "../InfoContainer/RightMenuButton";
-import { useState, useEffect } from "react";
-import { PhoneIcon } from "../Icons/PhoneIcon";
-import { CameraIcon } from "../Icons/CameraIcon";
+
+
 import { SearchIcon } from "../Icons/SearchIcon";
 
 export function MessageTools(props) {
-  const [group, setGroup] = useState(false);
+  
 
-  const [chat, setChat] = useState(false);
  
-  useEffect(() => {
-    if (props?.chat?.type === "Channel") {
-      setGroup((prevGroup) => false);
-      setChat((prevChat) => false);
-    }
-    if (props?.chat?.type === "Group") {
-      setGroup((prevGroup) => true);
-      setChat((prevChat) => false);
-    }
-    if (props?.chat?.type === "Chat") {
-      setChat((prevChat) => true);
-      setGroup((prevGroup) => false);
-    }
-  }, [props?.chat?.type]);
-
   return (
-    <div className="flex flex-row justify-end pr-5 w-1/4">
-      {group && (
-        <button className="text-5xl ml-6">
-          <PinIcon />
-        </button>
-      )}
-      {chat && (
-        <button className="text-5xl ml-6">
-          <PhoneIcon />
-        </button>
-      )}
-      {chat && (
-        <button className="text-3xl ml-6">
-          <CameraIcon />
-        </button>
-      )}
-      <button className="mx-6">
+    <div className="flex flex-row justify-end pr-5 min-w-[80px]">
+    
+      <button className="mx-4">
         <SearchIcon
-          style={
+          styles={
             "w-7 h-7 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none"
           }
         />
       </button>
-      <RightMenuButton chat={props?.chat}/>
+      <RightMenuButton chat={props?.chat} />
     </div>
   );
 }

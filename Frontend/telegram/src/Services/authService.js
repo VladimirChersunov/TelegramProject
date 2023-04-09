@@ -5,8 +5,8 @@ export const login = async (login, password) => {
   try {
     const response = await axiosCreate.post("Users/login", { login, password });
     localStorage.setItem("token", response.data.jwtToken);
-    localStorage.setItem("username", response.data.user.userName);
-    localStorage.setItem("user", response.data.user);
+    localStorage.setItem("username", response.data.user.userName);   
+    localStorage.setItem("user",JSON.stringify(response.data.user));
     const jsonString = JSON.stringify(response.data.user);
     const blob = new Blob([jsonString]);
 
@@ -14,8 +14,9 @@ export const login = async (login, password) => {
 
     console.log(`${sizeInKB} KB`);
     return response.data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
+  } catch (error) {    
+    console.log(error.message)   
+    throw new Error(error.response.data.message);    
   }
 };
 

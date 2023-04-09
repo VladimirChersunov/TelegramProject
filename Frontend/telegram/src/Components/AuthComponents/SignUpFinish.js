@@ -10,9 +10,9 @@ export function SignUpFinish() {
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
         <p className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
-        Registration was successful, now you can log in
+          Registration was successful, now you can log in
         </p>
-      
+
         <button
           onClick={() => {
             navigate("/signin");

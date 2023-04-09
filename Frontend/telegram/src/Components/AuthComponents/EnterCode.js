@@ -19,7 +19,6 @@ export function EnterCode(props) {
 
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [timeLeft, setTimeLeft] = useState(10);
-
   const [error, setError] = useState(null);
   const firstInputRef = useRef(null);
   const secondInputRef = useRef(null);

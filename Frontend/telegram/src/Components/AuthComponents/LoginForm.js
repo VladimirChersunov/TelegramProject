@@ -1,126 +1,116 @@
-import { useState} from "react";
+import { useState } from "react";
 import { login } from "../../Services/authService";
 import { useNavigate } from "react-router-dom";
 import { PreviewClose } from "../Icons/PreviewClose";
 import { PreviewOpen } from "../Icons/PreviewOpen";
 
-
-
 function LoginForm() {
-
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
-  const [password, setPassword] = useState(""); 
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();   
-    
+    event.preventDefault();
+
     try {
-      setIsLoading(true); 
-        const data = await login(usernameOrEmail, password);
-        setError(null);
+      setIsLoading(true);
+      const data = await login(usernameOrEmail, password);
+      setError(null);
 
-      console.log(data)
-
-       if(data?.jwtToken){
-       
-      
-       
-        navigate("/main");
-       }
-      } catch (error) {
-        console.log(error)
-        setError(error.message);
+      const token = data.token;
+      if (data.user) {
+        console.log(data);
+        navigate("/main", { state: { token } });
       }
-      finally {
-        setIsLoading(false); 
-      }
-   
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleShowPasswordClick = () => {
-    setShowPassword((prev)=>!showPassword);
+    setShowPassword((prev) => !showPassword);
   };
 
-  const handleUsernameInput = (e) =>{
-    setUsernameOrEmail((prevValue)=>e.target.value)
-   
-  }
-
- 
+  const handleUsernameInput = (e) => {
+    setUsernameOrEmail((prevValue) => e.target.value);
+  };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off" className="flex justify-center flex-col select-none">
-     
-     <div className="relative">
-          <input
-            type="text"
-            placeholder="Username or email"
-            value={usernameOrEmail}
-            autoComplete="off"
-            onChange={handleUsernameInput }
-            className={`border-b  border-skin-border-inverted text-skin-inverted
+    <form
+      onSubmit={handleSubmit}
+      autoComplete="off"
+      className="flex justify-center flex-col select-none"
+    >
+      <div className="relative">
+        <input
+          type="text"
+          placeholder="Username or email"
+          value={usernameOrEmail}
+          autoComplete="off"
+          onChange={handleUsernameInput}
+          className={`border-b  border-skin-border-inverted text-skin-inverted
              bg-skin-fill-inverted pl-2 pb-[10px]  w-full focus:outline-none text-[16px] placeholder:text-skin-muted `}
-            required
-          />    
-        
-       
-          <input
+          required
+        />
+
+        <input
           placeholder="Password"
           type={showPassword ? "text" : "password"}
-            value={password}
-            autoComplete="off"
-            onChange={(e) => setPassword((prevValue)=>e.target.value)}
-            className={`border-b border-skin-border-inverted text-skin-inverted text-[16px]
+          value={password}
+          autoComplete="off"
+          onChange={(e) => setPassword((prevValue) => e.target.value)}
+          className={`border-b border-skin-border-inverted text-skin-inverted text-[16px]
              bg-skin-fill-inverted placeholder:text-skin-muted w-full outline-none  mt-[49px] pl-2 pb-[10px]`}
-            required
-          />
-             <div
+          required
+        />
+        <div
           className={`absolute top-[80px] right-[5px] cursor-pointer`}
           onClick={handleShowPasswordClick}
         >
-          {showPassword ? <PreviewClose/> : <PreviewOpen/>}
+          {showPassword ? <PreviewClose /> : <PreviewOpen />}
         </div>
-         </div>
-       
-        {error&&<p className="m-0 text-skin-error mt-2 text-center text-xs">{error}</p>}
-        <div className="flex items-center justify-center">
-          <button
-            onClick={() => {
-              navigate("/recovery");
-            }}
-            className="text-skin-inverted mt-5 text-[16px ml-2 border-b hover:text-slate-200 border-skin-border-inverted"
-          >
-            Forgot your password?
-          </button>
-         
-        </div>
+      </div>
 
-       
+      {error && (
+        <p className="m-0 text-skin-error mt-2 text-center text-xs">{error}</p>
+      )}
+      <div className="flex items-center justify-center">
         <button
+          onClick={() => {
+            navigate("/recovery");
+          }}
+          className="text-skin-inverted mt-5 text-[16px ml-2 border-b hover:text-slate-200 border-skin-border-inverted"
+        >
+          Forgot your password?
+        </button>
+      </div>
+
+      <button
         disabled={isLoading}
-         type="submit"    
-         onClick={ handleSubmit}     
-          className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
+        type="submit"
+        onClick={handleSubmit}
+        className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
-        >
-         {isLoading ? "Loading..." : "Next"}
-        </button>
+      >
+        {isLoading ? "Loading..." : "Next"}
+      </button>
 
-        <button
-         type="submit"    
-         onClick={() => {
+      <button
+        type="submit"
+        onClick={() => {
           navigate("/signup");
-        }}   
-          className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-inverted text-[17px] font-medium
+        }}
+        className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-inverted text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill-inverted mx-auto mt-14 tracking-normal border border-skin-border-inverted"
-        >
-         Signup
-        </button>
-    
+      >
+        Signup
+      </button>
     </form>
   );
 }

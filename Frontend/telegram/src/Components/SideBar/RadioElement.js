@@ -5,7 +5,7 @@ import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 import moment from "moment";
 import "moment/locale/ru";
 
-export function RadioElement({ chat, currentChat, handleMuted,clearMain, currentUser }) {
+export function RadioElement({ chat, currentChat, handleMuted,clearMain, currentUser,visibleModalReport }) {
   const contextRef = useRef();
   const [savedMessageState, setSavedMessageState] = useState(false);
   const [chatMuteStatus, setChatMuteStatus] = useState(false);
@@ -15,7 +15,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
   const [selectedOption, setSelectedOption] = useState(null); 
   const MAX_LENGTH = 15;
 
-  //console.log(chat)
+  
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -51,6 +51,10 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
       document.removeEventListener("contextmenu", handleClickOutside, true);
     };
   }, []);
+
+  useEffect(() => {
+    setChatMuteStatus((prev)=>chat.muteStatus)
+  }, [chat.muteStatus]);
 
   const handleClickOutside = (e) => {
     if (!contextRef?.current?.contains(e.target)) {
@@ -91,6 +95,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
       >
         {showContextMenu && (
           <ContextMenu
+          visibleModalReport={visibleModalReport}
             x={contextMenuX}
             y={contextMenuY}
             chat={chat}

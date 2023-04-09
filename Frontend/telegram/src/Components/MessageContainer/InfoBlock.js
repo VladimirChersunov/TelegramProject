@@ -25,7 +25,7 @@ export function InfoBlock({ chat, toggleRightColumn }) {
       onClick={() => {
         toggleRightColumn(true);
       }}
-      className="flex flex-row hover:cursor-pointer justify-between w-1/2 min-w-[250px]"
+      className="flex flex-row hover:cursor-pointer justify-between  min-w-[250px]"
     >
       <div className="flex  h-[100%] w-[100%] items-center pl-5 ">
       {chat?.chatImage ? (

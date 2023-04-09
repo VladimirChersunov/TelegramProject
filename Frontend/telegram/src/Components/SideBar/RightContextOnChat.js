@@ -1,20 +1,29 @@
 import { useState, useEffect } from "react";
-import { Ahtung } from "../Icons/Ahtung";
 import { FlagIcon } from "../Icons/FlagIcon";
 import { NewTab } from "../Icons/NewTab";
 import { RecicleIcon } from "../Icons/RecicleIcon";
 import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
-import { deleteChatById, leavePublic } from "../../Services/chatServices";
+import { chatNotifications, deleteChatById, leavePublic } from "../../Services/chatServices";
 import { readMessaages } from "../../Services/messageServices";
+import { SelectAll } from "../Icons/SelectAll";
 
-export function ContextMenu({ chat, x, y, handleMuted, clearMain, currentUser }) {
+export function ContextMenu({
+  chat,
+  x,
+  y,
+  handleMuted,
+  clearMain,
+  currentUser,
+  visibleModalReport,
+}) {
   const [myState, setMyState] = useState("initial state");
   const [chats, setChat] = useState(false);
   const [group, setGroup] = useState(false);
   const [channel, setChannel] = useState(false);
-  const [mute, setMute] = useState(chat.muteStatus); 
+  const [mute, setMute] = useState(chat.muteStatus);
   const [posY, setPosY] = useState(null);
+
   const screenHeight = window.innerHeight;
 
   useEffect(() => {
@@ -36,13 +45,10 @@ export function ContextMenu({ chat, x, y, handleMuted, clearMain, currentUser })
   }, []);
 
   useEffect(() => {
-   
-    if(y>(screenHeight-185)){
-      setPosY(screenHeight-195)
-     
-    }
-    else{
-      setPosY(y)
+    if (y > screenHeight - 185) {
+      setPosY(screenHeight - 195);
+    } else {
+      setPosY(y);
     }
   }, [y]);
 
@@ -58,6 +64,17 @@ export function ContextMenu({ chat, x, y, handleMuted, clearMain, currentUser })
     console.log(responce);
   };
 
+  const muteChat = async () => {
+   
+    const responce = await  chatNotifications(chat?.id);   
+    console.log(responce);
+  };
+
+  const handleMuteChat = (event) => {
+    event.stopPropagation();
+    muteChat()
+  };
+
   const handleLeaveChat = (event) => {
     event.stopPropagation();
     leaveChat();
@@ -69,22 +86,20 @@ export function ContextMenu({ chat, x, y, handleMuted, clearMain, currentUser })
   };
 
   const markRead = async () => {
-    
     const responce = await readMessaages(chat?.id, currentUser?.id);
-   
-   
+    console.log(responce);
   };
 
   const handleMarkRead = (event) => {
     event.stopPropagation();
-    markRead()
+    markRead();
   };
 
   const handleOpenNewTab = () => {
     const stateParam = encodeURIComponent(JSON.stringify(myState));
     window.open(`http://localhost:3000/main?state=${stateParam}`, "_blank");
   };
-  
+
   return (
     <div
       className="w-[180px] h-[183px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
@@ -103,15 +118,16 @@ export function ContextMenu({ chat, x, y, handleMuted, clearMain, currentUser })
         </li>
         <div className="h-[1px] bg-skin-fill-inverted dark:bg-skin-fill w-[80%] m-auto " />
         <li
-        onClick={handleMarkRead }
+          onClick={handleMarkRead}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
         >
-          <Ahtung />
+          <SelectAll />
           <p className="font-bold ml-2"> Mark as read</p>
         </li>
         {!mute && (
           <li
+          onClick={handleMuteChat}
             className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
           >
@@ -121,6 +137,7 @@ export function ContextMenu({ chat, x, y, handleMuted, clearMain, currentUser })
         )}
         {mute && (
           <li
+          onClick={handleMuteChat}
             className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2"
           >
@@ -129,11 +146,16 @@ export function ContextMenu({ chat, x, y, handleMuted, clearMain, currentUser })
           </li>
         )}
         <li
-          className="  rounded-t-lg pl-2  flex
-           flex-row  items-center text-sm pt-2 pb-2"
+          onClick={(event) => {
+            event.stopPropagation();
+
+            visibleModalReport(true);
+          }}
+          className="   pl-2  flex
+           flex-row  items-center text-sm pt-2 pb-2 hover:cursor-pointer hover:bg-skin-button-accent-hover"
         >
           <FlagIcon />
-          <p className="font-bold ml-2 text-skin-muted"> Report</p>
+          <p className="font-bold ml-2 "> Report</p>
         </li>
         {channel && (
           <li

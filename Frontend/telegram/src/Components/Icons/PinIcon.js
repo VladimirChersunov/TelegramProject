@@ -1,5 +1,6 @@
 export function PinIcon() {
   return (
+    
     <svg
       className="w-5 h-7 stroke-skin-stroke-base dark:stroke-skin-stroke-inverted fill-none"
       viewBox="0 0 48 48"

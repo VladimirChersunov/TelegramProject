@@ -1,5 +1,6 @@
 export function BackArrowIcon() {
   return (
+    
     <svg
       className="w-7 h-7 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none"
       viewBox="0 0 48 48"
