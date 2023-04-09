@@ -73,7 +73,7 @@ export function ChatsCard({ chat, currentChat }) {
 
       <div className="flex flex-col">
         <p className="text-xl ml-2">{chat?.chatName}</p>
-        <span className="ml-2 text-xs">{chat.shortMessage.slice(0, 20)}</span>
+        <span className="ml-2 text-xs">{chat?.shortMessage.slice(0, 20)}</span>
       </div>
     </div>
   );

@@ -6,8 +6,7 @@ import { RecicleIcon } from "../../Icons/RecicleIcon";
 export function ContactsContextMenu({
   x,
   y,
-  contact,
-  type,
+  contact,  
   handleCloseContextMenu,
   contactExists,
 }) {

@@ -25,6 +25,7 @@ export function EnterEmail({ recoveryData }) {
     try {
       setButtonDisabled((prev) => true);
       const data = await emailCheck(email);
+      console.log(data)
       recoveryData(data);
       navigate("/entercode");
     } catch (error) {

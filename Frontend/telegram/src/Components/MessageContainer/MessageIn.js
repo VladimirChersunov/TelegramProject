@@ -53,7 +53,7 @@ export function MessageIn({ message,checkMessage }) {
           id="textPart"
           className="bg-blue-200 w-[100%] rounded-r-xl rounded-t-xl "
         >
-          <div className="flex flex-row justify-between w-[90%] ml-2 mt-1 font-semibold text-lg">
+          <div className="flex flex-row justify-between items-center w-[90%] ml-2 mt-1 mr-5 font-semibold text-lg">
             {author.userName}
             <time className="text-xs opacity-50">{sendTimeFormatted}</time>
           </div>

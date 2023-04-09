@@ -1,10 +1,10 @@
 import { StartPage } from "./Components/AuthComponents/StartPage";
 import { MainPage } from "./Components/MainPage";
-import { Routes, Route,useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { SignIn } from "./Components/AuthComponents/SignIn";
 import { SignUp } from "./Components/AuthComponents/SignUp";
 import { EnterCode } from "./Components/AuthComponents/EnterCode";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { EnterEmail } from "./Components/AuthComponents/EnterEmail";
 import { SetNewPassword } from "./Components/AuthComponents/SetNewPassword";
 import { SignUpFinish } from "./Components/AuthComponents/SignUpFinish";
@@ -17,14 +17,10 @@ function App() {
   const [code, setCode] = useState("");
   const [userData, setUserData] = useState({});
   const location = useLocation();
-  const [token, setToken] = useState( location.state?.token || "");
+  const [token, setToken] = useState(location.state?.token || "");
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
-
- 
-
- 
 
   const signUpData = ({ username, email, password, code }) => {
     setUsername((prevUsername) => username);
@@ -82,7 +78,7 @@ function App() {
           path="/setnewpassword"
           element={<SetNewPassword email={email} />}
         />
-       <Route path="/signin" element={<SignIn  />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route
           path="/recovery"
           element={<EnterEmail recoveryData={recoveryData} />}
@@ -93,12 +89,7 @@ function App() {
             <SignUp signUpData={signUpData} mainUserData={mainUserData} />
           }
         />
-          <Route
-          path="/successful"
-          element={
-           <SignUpFinish/>
-          }
-        />
+        <Route path="/successful" element={<SignUpFinish />} />
         <Route
           path="/entercode"
           element={

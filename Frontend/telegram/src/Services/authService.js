@@ -62,38 +62,23 @@ export const emailUnique = async (email, username) => {
   }
 };
 
-//Email/unique ???
+//Users/setpassword
 export const setNewPassword = async (email, newPassword) => {
   try {
-    const response = await axiosCreate.patch("Email/unique", {
+    console.log(email)
+    const response = await axiosCreate.patch("Users/setpassword", {
       email,
       newPassword,
     });
 
     return response.data;
   } catch (error) {
-    console.log("error");
+    console.log(error);
     throw new Error(error.response.data.message);
   }
 };
 
-//Users/me ????
-export const getAuthenticatedUser = async () => {
-  const token = localStorage.getItem("token");
 
-  try {
-    const response = await axiosCreate.get("Users/me", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    return response.data;
-  } catch (error) {
-    console.log("error");
-    throw new Error(error.response.data.message);
-  }
-};
 
 //Email/validatetoken
 export const tokenCheck = async () => {
