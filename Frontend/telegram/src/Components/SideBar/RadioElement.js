@@ -13,8 +13,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);  
   const MAX_LENGTH = 15;
-
-  
+   
 
   const handleContextMenu = (event) => {
     event.preventDefault();
@@ -135,7 +134,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
               <p className="text-lg mr-2">{formattedChatName(chat)}</p>
               {!savedMessageState && (
                 <div>
-                  {chatMuteStatus ? <VolumeMuteIcon /> : <VolumeOnIcon />}
+                  {chatMuteStatus ? <VolumeOnIcon /> : <VolumeMuteIcon />}
                 </div>
               )}
             </div>
@@ -144,7 +143,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
           </div>
 
           <div className="flex flex-row justify-between">
-            <p className="text-[14px]">{chat?.shortMessage?.substring(0, 25)}</p>
+            <p className="text-[14px]">{chat?.shortMsg?.username+': ' + chat?.shortMsg?.message?.substring(0, 25)}</p>
 
             {!savedMessageState && chat?.notViewedCounter>0 && (
               <label

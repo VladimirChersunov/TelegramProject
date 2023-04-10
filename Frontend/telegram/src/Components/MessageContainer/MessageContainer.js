@@ -12,6 +12,7 @@ export function MessageContainer({
   currentUser,
   currentChat,
   clearMain,
+  chats
 }) {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -49,6 +50,7 @@ export function MessageContainer({
         darkMode={darkMode}
         currentUser={currentUser}
         currentChat={currentChat}
+        chats={chats}
       />
       <Modal
         isOpen={modalIsOpen}

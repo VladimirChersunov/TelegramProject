@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { getAllMessaages, readMessaages } from "../../Services/messageServices";
 import { Message } from "./Message";
 
-export function MainChat({ chat, darkMode, currentUser, currentChat }) {
+export function MainChat({ chat, darkMode, currentUser, currentChat,chats }) {
   //console.log(chat)
   const messagesEndRef = useRef(null);
   const myRef = useRef(null);
@@ -15,6 +15,7 @@ export function MainChat({ chat, darkMode, currentUser, currentChat }) {
 
   const admin = chat?.authorId === currentUser?.id;
 
+ 
   useEffect(() => {
     const getData = async () => {
       try {
@@ -44,7 +45,7 @@ export function MainChat({ chat, darkMode, currentUser, currentChat }) {
     const messageContainer = document.getElementById("message-container");
     messageContainer.scrollTop = messageContainer?.scrollHeight;
     markRead();
-  }, [dataMessages, chat?.id, currentUser?.id]);
+  }, [dataMessages, chat?.id, currentUser?.id,chats]);
 
   const refreshMessage = async () => {
     try {
@@ -66,7 +67,7 @@ export function MainChat({ chat, darkMode, currentUser, currentChat }) {
   };
 
   const refreshInputHeeight = (props) => {
-    console.log(props);
+    
     if (props >= 56) {
       setInputHeight(props - 56);
     } else {

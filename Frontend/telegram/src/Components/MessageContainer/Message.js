@@ -7,8 +7,7 @@ export function Message({
   message,
   currentUser,
   chat,
-  refreshMessage,
- 
+  refreshMessage, 
   currentChat,
 }) {
   
@@ -18,6 +17,7 @@ export function Message({
   const [contextMenuY, setContextMenuY] = useState(0);
   const [checkMessage, setCheckMessage] = useState(false);
   const isCurrentUser = message.author.id === currentUser.id;
+  const isAdmin = message.author.id === 745;
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;  
   const [posX, setPosX] = useState(0);
