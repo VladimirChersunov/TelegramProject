@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { updateInfo } from "../Services/userServices";
 import { userLogout } from "../Services/userLogout";
 import isEqual from "lodash/isEqual";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { MessageIn } from "./MessageContainer/MessageIn";
+import { MessageForToast } from "./MessageContainer/MessageForToast";
 
 export function MainPage({ darkMode, toggleDarkMode }) {
   const navigate = useNavigate();
@@ -18,7 +22,11 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [theme, setTheme] = useState("");
   const [chats, setChats] = useState([]);
   const [bigData, setBigData] = useState([]);
+  const [lastMessage, setLastMessage] = useState(null);
 
+  
+
+ 
   //отключаем кнопку назад
   useEffect(() => {
     const handleBackButton = () => {
@@ -26,6 +34,43 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     };
     window.addEventListener("popstate", handleBackButton);
   }, []);
+
+  useEffect(() => {
+    if (currChat.chatName) {
+      document.title = `${currChat.chatName}`;
+    } else {
+      document.title = `Cryptic`;
+    }
+  }, [currChat]);
+
+  useEffect(() => {
+    // определяем последнее измененное сообщение
+    // сортируем массив чатов по publishTime в порядке убывания
+    const sortedChats = chats.sort(
+      (a, b) => new Date(b?.publishTime) - new Date(a?.publishTime)
+    );
+
+    // получаем первый чат в отсортированном массиве
+    const latestChat = sortedChats[0];
+
+    // получаем короткое сообщение из последнего чата
+    const latestMessage = latestChat?.shortMessage;
+
+    if (latestMessage && latestMessage !== lastMessage) {
+      setLastMessage(latestMessage);
+      toast(<MessageForToast message={latestMessage} />, {
+        position: "bottom-right",
+        autoClose: 30000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }, [chats, lastMessage]);
+  
 
   //обновление данных
   useEffect(() => {
@@ -133,6 +178,20 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         {!centrVisible && <ClearContainer />}
       </div>
 
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        limit={1}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        containerId="custom"
+      />
       {mainRiht && (
         <div className="w-[350px]">
           <InfoContainer

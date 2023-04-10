@@ -3,13 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import { getAllMessaages, readMessaages } from "../../Services/messageServices";
 import { Message } from "./Message";
 
-export function MainChat({
-  chat,
-  darkMode,
-  currentUser, 
-  currentChat,
-}) {
- 
+export function MainChat({ chat, darkMode, currentUser, currentChat }) {
+  //console.log(chat)
   const messagesEndRef = useRef(null);
   const myRef = useRef(null);
   const [dataMessages, setDataMessages] = useState(null);
@@ -71,11 +66,10 @@ export function MainChat({
   };
 
   const refreshInputHeeight = (props) => {
-    console.log(props)
+    console.log(props);
     if (props >= 56) {
       setInputHeight(props - 56);
-    }
-    else{
+    } else {
       setInputHeight(0);
     }
   };
@@ -104,14 +98,16 @@ export function MainChat({
       >
         {dataMessages &&
           dataMessages?.messages?.map((message) => (
-            <Message
-              message={message}
-              key={message?.id}
-              currentUser={currentUser}
-              chat={chat}
-              refreshMessage={refreshMessage}             
-              currentChat={currentChat}
-            />
+          
+              <Message
+                message={message}
+                key={message?.id}
+                currentUser={currentUser}
+                chat={chat}
+                refreshMessage={refreshMessage}
+                currentChat={currentChat}
+              />
+            
           ))}
       </div>
       <div ref={messagesEndRef} />

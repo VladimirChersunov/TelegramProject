@@ -30,17 +30,17 @@ export function MessageIn({ message,checkMessage }) {
              rounded-br-[200px] "
             >
              
-                {author.photo ? (
+                {author?.photo ? (
                   <img
-                    src={author.photo}
+                    src={author?.photo}
                     alt="logo"
                     className="rounded-full  h-[40px] w-[40px] border absolute"
                   />
                 ) : (
                   <div className="rounded-full   h-[40px] w-[40px] absolute bg-purple-500 flex items-center justify-center select-none">
                     <p className="text-xl">
-                      {author.userName &&
-                      author.userName[0].toUpperCase() + author.userName[1].toUpperCase()}
+                      {author?.userName &&
+                      author?.userName[0].toUpperCase() + author?.userName[1].toUpperCase()}
                     </p>
                   </div>
                 )}
@@ -54,7 +54,7 @@ export function MessageIn({ message,checkMessage }) {
           className="bg-blue-200 w-[100%] rounded-r-xl rounded-t-xl "
         >
           <div className="flex flex-row justify-between items-center w-[90%] ml-2 mt-1 mr-5 font-semibold text-lg">
-            {author.userName}
+            {author?.userName}
             <time className="text-xs opacity-50">{sendTimeFormatted}</time>
           </div>
           {data ?

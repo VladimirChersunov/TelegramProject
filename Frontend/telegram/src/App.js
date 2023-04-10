@@ -48,6 +48,10 @@ function App() {
   }, []);
 
   useEffect(() => {
+    document.title = "Cryptic";
+  }, []);
+
+  useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (token) {
       setToken(token);
