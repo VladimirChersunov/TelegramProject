@@ -9,6 +9,7 @@ export function Message({
   chat,
   refreshMessage, 
   currentChat,
+  getReplay
 }) {
   
   const contextRef = useRef();
@@ -97,6 +98,7 @@ export function Message({
           refreshMessage={refreshMessage}
           showContext={showContext}         
           currentChat={currentChat}
+          getReplay={getReplay}
         />
       )}
       {isCurrentUser ? (

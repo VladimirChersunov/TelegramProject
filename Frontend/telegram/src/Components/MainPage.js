@@ -6,7 +6,6 @@ import { InfoContainer } from "./InfoContainer/InfoContainer";
 import { useNavigate } from "react-router-dom";
 import { getUserById, updateInfo } from "../Services/userServices";
 import { userLogout } from "../Services/userLogout";
-import isEqual from "lodash/isEqual";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MessageForToast } from "./MessageContainer/MessageForToast";
@@ -20,7 +19,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState("");
   const [chats, setChats] = useState([]);
-  const [bigData, setBigData] = useState([]);
+
   const [lastMessage, setLastMessage] = useState(null);
 
   //отключаем кнопку назад
@@ -40,10 +39,10 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   }, [currChat]);
 
   const startToast = async (chats) => {
+    //копируем массив, чтобы не триггерить useEffect
+    const arraySort = [...chats];
     // определяем последнее измененное сообщение
     // сортируем массив чатов по publishTime в порядке убывания
-    const arraySort = [...chats];
-
     const sortedChats = arraySort.sort(
       (a, b) => new Date(b?.publishTime) - new Date(a?.publishTime)
     );
@@ -52,15 +51,17 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     const latestChat = sortedChats[0];
 
     const autor = await getUserById(latestChat?.shortMsg?.userId);
-    const isCurrent = currentUser.id === latestChat?.shortMsg?.userId;
-    console.log(isCurrent);
-    if (latestChat.muteStatus) {
+    const isCurrent = currentUser?.id === latestChat?.shortMsg?.userId;
+
+    if (latestChat?.muteStatus) {
       if (!isCurrent) {
         // получаем короткое сообщение из последнего чата
         const latestMessage = latestChat?.shortMsg;
 
-        if (latestMessage && latestMessage !== lastMessage) {
-          setLastMessage(latestMessage);
+        if (latestMessage?.message !== lastMessage?.message) {
+          console.log(latestMessage?.message);
+          console.log(lastMessage);
+          setLastMessage((prev) => latestMessage);
           toast(<MessageForToast message={latestMessage} user={autor} />, {
             position: "bottom-right",
             autoClose: 2000,
@@ -88,22 +89,27 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 
         const data = await updateInfo();
 
-        const chatEqual = isEqual(
-          JSON.stringify(chats),
-          JSON.stringify(data.chats)
-        );
-        const contactEqual = isEqual(
-          JSON.stringify(contacts),
-          JSON.stringify(data.contacts)
-        );
+        const chatEqual = JSON.stringify(chats) === JSON.stringify(data.chats);
 
-        if (!chatEqual || !contactEqual) {
-          console.log("refresh");
-          setBigData(data);
-          setChats(data.chats);
-          setContacts(data.contacts);
+        const currentUserEqual =
+          JSON.stringify(currentUser) === JSON.stringify(data.user);
+
+        const contactEqual =
+          JSON.stringify(contacts) === JSON.stringify(data.contacts);
+
+        if (!currentUserEqual) {
+          console.log("user " + currentUserEqual);
           setCurrentUser(data.user);
-          startToast(data.chats);
+        }
+
+        if (!contactEqual) {
+          console.log("contact " + contactEqual);
+          setContacts(data.contacts);
+        }
+
+        if (!chatEqual) {
+          console.log("chat " + chatEqual);
+          setChats(data.chats);
         }
 
         setCurrentUser(data.user);
@@ -122,8 +128,13 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 
     // Очищать интервал при размонтировании компонента
     return () => clearInterval(intervalId);
-  }, [bigData, chats, contacts]);
+  }, [chats, contacts, currentUser]);
 
+  useEffect(() => {
+    startToast(chats);
+  }, [chats]);
+
+  //следим за значением из колбэкб включаем отображение главное окно чата, если выбрали в списке чат
   useEffect(() => {
     if (currChat?.id >= 0) {
       setCentrVisible(true);
@@ -131,8 +142,6 @@ export function MainPage({ darkMode, toggleDarkMode }) {
       setCentrVisible(false);
     }
   }, [currChat]);
-
-  const handleMuted = (props) => {};
 
   const clearMain = (props) => {
     setCentrVisible(props);
@@ -162,7 +171,6 @@ export function MainPage({ darkMode, toggleDarkMode }) {
           currentChat={currentChat}
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
-          handleMuted={handleMuted}
           contacts={contacts}
           clearMain={clearMain}
         />
@@ -198,6 +206,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         theme="dark"
         containerId="custom"
       />
+
       {mainRiht && (
         <div className="w-[350px]">
           <InfoContainer

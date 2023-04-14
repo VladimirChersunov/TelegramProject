@@ -6,12 +6,14 @@ import { LinkIcon } from "../Icons/LinkIcon";
 import { SmileIcon } from "../Icons/SmileIcon";
 import Modal from "react-modal";
 import { CloseIcon } from "../Icons/CloseIcon";
+import { Replay } from "./Replay";
 
 export function InputPanel({
   currentUser,
   chat,
   refreshMessage,
   refreshInputHeeight,
+  replay
 }) {
   const [data, setData] = useState(null);
   const [messageText, setMessageText] = useState("");
@@ -36,14 +38,14 @@ export function InputPanel({
 
   useEffect(() => {
     refreshInputHeeight(textareaHeight);
-  }, [textareaHeight,messageText]);
+  }, [textareaHeight, messageText]);
 
   const handleInputChange = (event) => {
     event.target.style.height = "auto";
     event.target.style.height = event.target.scrollHeight + "px";
 
     setMessageText(event.target.value);
-    
+
     if (textareaRef.current && parentRef.current) {
       parentRef.current.style.height = `${
         textareaRef.current.scrollHeight + 5
@@ -53,7 +55,6 @@ export function InputPanel({
   };
 
   const addNewMessage = async () => {
-    
     try {
       await createMessaage(currentUser.id, chat.id, data, messageText);
     } catch (error) {
@@ -90,6 +91,7 @@ export function InputPanel({
     if (event.key === "Enter") {
       event.preventDefault();
       addNewMessage();
+      setMessageText("");
     }
   };
 
@@ -101,7 +103,8 @@ export function InputPanel({
   return (
     <div
       ref={parentRef}
-      className=" w-[80%] min-h-[70px] flex flex-row items-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted "
+      className=" w-[80%] h-max min-h-[70px] flex flex-col items-center justify-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted "
+      
     >
       {showPicker && (
         <div ref={pickerRef} className={`absolute bottom-[72px] `}>
@@ -113,6 +116,13 @@ export function InputPanel({
           />
         </div>
       )}
+
+
+{replay&&<div className="w-[70%] h-[50px]">
+  <Replay message={replay}/>
+</div>}
+
+      <div className="flex flex-row w-full" >
       <button className="mx-3" onClick={() => setShowPicker((val) => !val)}>
         <SmileIcon />
       </button>
@@ -124,14 +134,15 @@ export function InputPanel({
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}
           value={messageText}
-          className="w-full h-auto  text-xl rounded-lg outline-none  resize-none overflow-hidden
-               bg-skin-fill dark:bg-skin-fill-inverted "
+          className={`w-full    text-xl rounded-lg outline-none  resize-none overflow-hidden
+               bg-skin-fill dark:bg-skin-fill-inverted`}
+          style={{ height: messageText ? `28px` : "auto" }}
           maxLength="500"
           placeholder="Type your message here..."
         />
       </div>
 
-      <div>
+      <div className="flex items-center">
         <input
           type="file"
           ref={fileInputRef}
@@ -147,6 +158,8 @@ export function InputPanel({
       <button className="mr-1" onClick={addNewMessage}>
         <EnterIcon styles="w-9 h-9 stroke-skin-stroke-base dark:stroke-[#C6BDFF] fill-none" />
       </button>
+      </div>
+     
 
       <Modal
         isOpen={modalIsOpen}

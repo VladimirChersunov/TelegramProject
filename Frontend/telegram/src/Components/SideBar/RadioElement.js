@@ -77,6 +77,8 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
     sameElse: "DD.MM.YYYY",
   });
 
+  const shortMessageText = chat?.shortMsg?.username+': ' + chat?.shortMsg?.message
+
   return (
     <div className=" w-[330px] ml-2   ">
       <input type="radio" name="option" id={chat.id} className="peer hidden" />
@@ -143,7 +145,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
           </div>
 
           <div className="flex flex-row justify-between">
-            <p className="text-[14px]">{chat?.shortMsg?.username+': ' + chat?.shortMsg?.message?.substring(0, 25)}</p>
+            <p className="text-[14px]">{shortMessageText?.substring(0, 25)}</p>
 
             {!savedMessageState && chat?.notViewedCounter>0 && (
               <label

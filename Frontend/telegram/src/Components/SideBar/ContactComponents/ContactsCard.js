@@ -38,7 +38,7 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
   const handleContactClick = async () => {
     //проверяем существует ли уже чат с этим юзером
     const chatExisted = await chatExist(contact?.id);
-   
+
     if (chatExisted.exists) {
       //если существует то открываем чат
       const data = await getAllMessaages(contact?.userName, null, "Private");
@@ -56,16 +56,12 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
 
   //обработчик событий для отслеживания кликов снаружи
   useEffect(() => {
-   
-    if(showContextMenu){
-      console.log('create')
+    if (showContextMenu) {
       document.addEventListener("contextmenu", handleClickOutside, true);
       document.addEventListener("click", handleClickOutside, true);
     }
-   
 
     return () => {
-      console.log('delete')
       document.removeEventListener("click", handleClickOutside, true);
       document.removeEventListener("contextmenu", handleClickOutside, true);
     };

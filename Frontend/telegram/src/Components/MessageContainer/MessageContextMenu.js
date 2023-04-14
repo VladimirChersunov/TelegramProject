@@ -18,7 +18,7 @@ export function MessageContextMenu({
   refreshMessage,
   showContext,
   checkedMessage,
- 
+  getReplay,
   currentChat,
 }) {
   const admin = currentUser.id === chat.authorId;
@@ -78,6 +78,10 @@ export function MessageContextMenu({
     }
   };
 
+  const handleReplay = ()=>{
+    getReplay(message)
+  }
+
   return (
     <div
       className="w-[180px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
@@ -87,8 +91,9 @@ export function MessageContextMenu({
     >
       <ul className="rounded-lg ">
         <li
-          className=" text-skin-muted rounded-t-lg pl-2  flex
-           flex-row  items-center text-sm pt-2 pb-2 select-none"
+        onClick={handleReplay}
+          className=" text-skin-base dark:text-skin-inverted rounded-t-lg pl-2  flex
+           flex-row  items-center text-sm pt-2 pb-2 select-none cursor-pointer hover:bg-skin-button-accent-hover"
         >
           <Reply />
           <p className="font-bold ml-2">Reply</p>

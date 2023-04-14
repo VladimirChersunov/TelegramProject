@@ -42,7 +42,7 @@ export function NewPassword() {
           className="rounded-3xl text-skin-inverted w-[200px]
          hover:cursor-pointer hover:bg-skin-button-accent-hover h-[40px] bg-skin-button-accent mx-auto mt-14"
         >
-          Продовжити
+          Continue
         </button>
       </div>
     </div>

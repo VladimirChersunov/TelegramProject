@@ -27,8 +27,7 @@ export function PinnedMessage({ pinned, chat, currentChat,pinnedClose }) {
   const handleUnPinnedClick = async () => {
     const action = "Remove"
     try {      
-      const data = await pinnedMessaages(action, message.id, chat.id);
-      console.log(data);
+      const data = await pinnedMessaages(action, message.id, chat.id);     
       currentChat(data.chat)
       pinnedClose(false)
     } catch (error) {

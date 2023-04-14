@@ -29,7 +29,7 @@ export function MessageOut({ message,checkMessage}) {
               className="w-[300px] h-[200px] object-contain mr-2"
             /> 
             :
-            <div className="flex flex-col ml-2 max-w-[600px] min-w-[100px] mr-2">{text}</div>
+            <p className="flex flex-col ml-2 max-w-[600px] min-w-[100px] mr-2 whitespace-normal break-words">{text}</p>
           }
             <div className="flex w-full justify-end items-center">
             {deliveryStatus ? <p className=" opacity-50 text-xs mr-2">Delivered </p>

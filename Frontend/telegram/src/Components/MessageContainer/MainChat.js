@@ -3,8 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import { getAllMessaages, readMessaages } from "../../Services/messageServices";
 import { Message } from "./Message";
 
-export function MainChat({ chat, darkMode, currentUser, currentChat,chats }) {
-  //console.log(chat)
+export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
+  //console.log(chats)
   const messagesEndRef = useRef(null);
   const myRef = useRef(null);
   const [dataMessages, setDataMessages] = useState(null);
@@ -13,10 +13,12 @@ export function MainChat({ chat, darkMode, currentUser, currentChat,chats }) {
 
   const [inputHeight, setInputHeight] = useState(0);
 
+  const [replay, setReplay] = useState(null);
+
   const admin = chat?.authorId === currentUser?.id;
 
- 
   useEffect(() => {
+    console.log('chat change')
     const getData = async () => {
       try {
         let allMessaages = null;
@@ -36,7 +38,7 @@ export function MainChat({ chat, darkMode, currentUser, currentChat,chats }) {
     };
     getData();
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat?.type, chat?.chatName, chat?.authorId]);
+  }, [chat?.type, chat?.chatName, chat?.authorId,chats]);
 
   useEffect(() => {
     const markRead = async () => {
@@ -45,7 +47,7 @@ export function MainChat({ chat, darkMode, currentUser, currentChat,chats }) {
     const messageContainer = document.getElementById("message-container");
     messageContainer.scrollTop = messageContainer?.scrollHeight;
     markRead();
-  }, [dataMessages, chat?.id, currentUser?.id,chats]);
+  }, [dataMessages, chat?.id, currentUser?.id, chats]);
 
   const refreshMessage = async () => {
     try {
@@ -66,12 +68,17 @@ export function MainChat({ chat, darkMode, currentUser, currentChat,chats }) {
     }
   };
 
+  const getReplay = (props)=>{   
+    setReplay(props)
+  }
+
   const refreshInputHeeight = (props) => {
-    
     if (props >= 56) {
       setInputHeight(props - 56);
+     console.log(props)
     } else {
       setInputHeight(0);
+      
     }
   };
 
@@ -99,27 +106,29 @@ export function MainChat({ chat, darkMode, currentUser, currentChat,chats }) {
       >
         {dataMessages &&
           dataMessages?.messages?.map((message) => (
-          
-              <Message
-                message={message}
-                key={message?.id}
-                currentUser={currentUser}
-                chat={chat}
-                refreshMessage={refreshMessage}
-                currentChat={currentChat}
-              />
-            
+            <Message
+            getReplay={getReplay}
+              message={message}
+              key={message?.id}
+              currentUser={currentUser}
+              chat={chat}
+              refreshMessage={refreshMessage}
+              currentChat={currentChat}
+            />
           ))}
       </div>
       <div ref={messagesEndRef} />
       {(!(chat?.type === "Channel") ||
         (admin && chat?.type === "Channel" && admin)) && (
         <InputPanel
+        replay={replay}
           refreshInputHeeight={refreshInputHeeight}
           darkMode={darkMode}
           currentUser={currentUser}
           chat={chat}
           refreshMessage={refreshMessage}
+          setInputHeight={setInputHeight}
+          setWindowHeight={setWindowHeight}
         />
       )}
     </div>

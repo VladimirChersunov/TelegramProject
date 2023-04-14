@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { emailCheck, emailUnique } from "../../Services/authService";
 
 export function SignUp(props) {
@@ -17,7 +17,7 @@ export function SignUp(props) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {}, []);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();

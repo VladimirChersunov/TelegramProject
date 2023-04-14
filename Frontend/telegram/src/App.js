@@ -18,6 +18,8 @@ function App() {
   const [userData, setUserData] = useState({});
   const location = useLocation();
   const [token, setToken] = useState(location.state?.token || "");
+
+
   const toggleDarkMode = () => {
     setDarkMode((prevDarkMode) => !prevDarkMode);
   };
@@ -40,15 +42,18 @@ function App() {
     setUserData((prev) => props);
   };
 
+  const setTokenCallback = (props) =>{
+    setToken(props)
+  }
+ 
+
   useEffect(() => {
+    document.title = "Cryptic";
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
     }
-  }, []);
-
-  useEffect(() => {
-    document.title = "Cryptic";
+   
   }, []);
 
   useEffect(() => {
@@ -58,7 +63,7 @@ function App() {
     } else if (storedToken) {
       setToken(storedToken);
     }
-  }, [token]);
+  }, [token,location.state?.token]);
 
   return (
     <div className={`h-full ove w-full ${darkMode ? "dark" : ""}  `}>
@@ -82,7 +87,7 @@ function App() {
           path="/setnewpassword"
           element={<SetNewPassword email={email} />}
         />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn setTokenCallback={setTokenCallback}/>} />
         <Route
           path="/recovery"
           element={<EnterEmail recoveryData={recoveryData} />}

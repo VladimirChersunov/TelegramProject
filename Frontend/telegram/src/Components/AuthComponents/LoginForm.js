@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { PreviewClose } from "../Icons/PreviewClose";
 import { PreviewOpen } from "../Icons/PreviewOpen";
 
-function LoginForm() {
+function LoginForm({setTokenCallback}) {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -22,7 +22,8 @@ function LoginForm() {
 
       const token = data.token;
       if (data.user) {
-        console.log(data);
+        if(setTokenCallback)
+        setTokenCallback(token)
         navigate("/main", { state: { token } });
       }
     } catch (error) {
