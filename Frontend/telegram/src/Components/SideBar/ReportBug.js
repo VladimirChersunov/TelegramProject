@@ -32,7 +32,7 @@ export function ReportBug(props) {
     try {
       setIsLoading(true);
       const username = localStorage.getItem("username");
-      const data = await bugReport(username, subject, message);
+      await bugReport(username, subject, message);
      
       setError(null);
     } catch (error) {

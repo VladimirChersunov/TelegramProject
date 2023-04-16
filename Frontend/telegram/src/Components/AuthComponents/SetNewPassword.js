@@ -2,6 +2,9 @@ import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
 import { useState, useEffect } from "react";
 import { setNewPassword } from "../../Services/authService";
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
+
 
 export function SetNewPassword({ email }) {
   const navigate = useNavigate();
@@ -11,9 +14,19 @@ export function SetNewPassword({ email }) {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+  const language = location.state?.language;
+  
+  const { t, i18n } = useTranslation();
+  
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+    
+  }, [i18n, language]);
 
   if(!email){
-    navigate("/signin");
+    navigate("/signin",{ language: language });
   }
 
   useEffect(() => {
@@ -38,22 +51,22 @@ export function SetNewPassword({ email }) {
       try {
         if (data.result === "success") {
           setError(null);
-          navigate("/signin");
+          navigate("/signin", { language: language });
         } else {
-          setError((prev) => "Unexpected error");
+          setError((prev) => `${t("setnewPasswordPage.error1")}`);
         }
       } catch (error) {
-        setError((prev) => error.message || "Server error");
+        setError((prev) => error.message || `${t("setnewPasswordPage.error2")}`);
       } finally {
         setIsLoading(false); // установить состояние isLoading в значение false
       }
     };
 
     if (password !== confirmPassword) {
-      setConfirmPasswordError(" Password mismatch");
+      setConfirmPasswordError(`${t("setnewPasswordPage.error4")}`);
     } else {
       if (!passwordRegex.test(password)) {
-        setPasswordError("Password must be between 6 and 20 characters");
+        setPasswordError(`${t("setnewPasswordPage.error3")}`);
         return;
       }
       setPasswordError("");
@@ -64,7 +77,7 @@ export function SetNewPassword({ email }) {
       } else if (localStorage.getItem("email")) {
         setPass(localStorage.getItem("email"), password);
       } else {
-        navigate("/signin");
+        navigate("/signin", { language: language });
       }
     }
   };
@@ -74,8 +87,12 @@ export function SetNewPassword({ email }) {
         <div className="w-[384px]  h-[500px] flex flex-col ">
           <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
+          <label className="text-skin-inverted text-lg mb-10 text-center">
+        {t("setnewPasswordPage.part1")}
+        </label>
+
           <input
-            placeholder="Password"
+            placeholder={t("setnewPasswordPage.placeholder1")}
             type="password"
             onChange={(e) => {
               setPassword((prev) => e.target.value);
@@ -99,7 +116,7 @@ export function SetNewPassword({ email }) {
           </div>
 
           <input
-            placeholder="Confirm password"
+            placeholder={t("setnewPasswordPage.placeholder2")}
             type="password"
             onChange={(e) => {
               setConfirmPassword((prev) => e.target.value);
@@ -136,7 +153,7 @@ export function SetNewPassword({ email }) {
             className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-[36px] tracking-normal"
           >
-            {isLoading ? "Loading..." : "Next"}
+            {isLoading ? `${t("setnewPasswordPage.btnLoading")}` : `${t("setnewPasswordPage.btnNext")}`}
           </button>
         </div>
       </div>

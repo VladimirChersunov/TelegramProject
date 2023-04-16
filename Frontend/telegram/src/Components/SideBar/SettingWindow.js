@@ -1,6 +1,5 @@
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { useNavigate } from "react-router-dom";
-import { Ahtung } from "../Icons/Ahtung";
 import { PenIcon } from "../Icons/PenIcon";
 import { PeopleIcon } from "../Icons/PeopleIcon";
 import { InfoIcon } from "../Icons/InfoIcon";

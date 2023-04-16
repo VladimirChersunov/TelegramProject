@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { emailCheck, register } from "../../Services/authService";
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 export function EnterCode(props) {
   const navigate = useNavigate();
@@ -25,6 +27,16 @@ export function EnterCode(props) {
   const thirdInputRef = useRef(null);
   const fourthInputRef = useRef(null);
   const fifthInputRef = useRef(null);
+  const location = useLocation();
+  const language = location.state?.language;
+  const isRecovery = location.state?.isRecovery;
+  const { t, i18n } = useTranslation();
+  
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+    console.log(isRecovery)
+  }, [i18n, language]);
 
   useEffect(() => {
     if (props.username) {
@@ -96,40 +108,44 @@ export function EnterCode(props) {
     if (code) {
       if (inCode === code) {
         if (username) {
-          if (username.length > 4) {
+          if (isRecovery) {
+            console.log('isRecovery')
+            setError((prev) => null);
+            navigate("/setnewpassword", { language: language });
+          }
+
+          if (username.length >= 4) {
             try {
               const data = await register(username, email, password);
               setError((prev) => null);
 
               if (data.user.id) {
                 localStorage.removeItem("code");
-                navigate("/successful");
+                navigate("/successful", { language: language });
               }
             } catch (error) {
               setError((prev) => error.message);
             }
           }
-        } else {
-          setError((prev) => null);
-
-          navigate("/setnewpassword");
         }
       } else {
-        setError("Code does not match, please try again");
+        setError(`${t("entercodePage.error1")}`);
       }
     } else {
-      setError("Code does not match, please try again");
+      setError(`${t("entercodePage.error1")}`);
     }
   };
 
-  const buttonText = buttonDisabled ? `Wait (${timeLeft})` : "Resend";
+  const buttonText = buttonDisabled
+    ? `${t("entercodePage.btnWait")} (${timeLeft})`
+    : `${t("entercodePage.btnResend")}`;
 
   return (
     <div className="w-[100%] bg-skin-fill-inverted h-screen flex justify-center font-montserrat content-center items-center">
       <div className="w-[384px]  h-[500px] flex flex-col text-center">
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
         <label className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
-          A verification code has been sent to your mailbox
+          {t("entercodePage.part1")}
         </label>
 
         <div className="flex flex-row mt-5 justify-around ">
@@ -214,7 +230,7 @@ export function EnterCode(props) {
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
-          Next
+          {t("entercodePage.btnNext")}
         </button>
 
         <button

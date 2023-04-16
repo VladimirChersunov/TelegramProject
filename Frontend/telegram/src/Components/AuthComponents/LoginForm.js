@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { login } from "../../Services/authService";
 import { useNavigate } from "react-router-dom";
 import { PreviewClose } from "../Icons/PreviewClose";
 import { PreviewOpen } from "../Icons/PreviewOpen";
+import { useTranslation } from "react-i18next";
 
-function LoginForm({setTokenCallback}) {
+function LoginForm({setTokenCallback,language}) {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,7 +57,7 @@ function LoginForm({setTokenCallback}) {
       <div className="relative">
         <input
           type="text"
-          placeholder="Username or email"
+          placeholder={t("signinPage.placeholder1")}
           value={usernameOrEmail}
           autoComplete="off"
           onChange={handleUsernameInput}
@@ -61,7 +67,7 @@ function LoginForm({setTokenCallback}) {
         />
 
         <input
-          placeholder="Password"
+          placeholder={t("signinPage.placeholder2")}
           type={showPassword ? "text" : "password"}
           value={password}
           autoComplete="off"
@@ -84,11 +90,11 @@ function LoginForm({setTokenCallback}) {
       <div className="flex items-center justify-center">
         <button
           onClick={() => {
-            navigate("/recovery");
+            navigate("/recovery", { language: language });
           }}
           className="text-skin-inverted mt-5 text-[16px ml-2 border-b hover:text-slate-200 border-skin-border-inverted"
         >
-          Forgot your password?
+          {t("signinPage.recaveryLink")}
         </button>
       </div>
 
@@ -99,18 +105,18 @@ function LoginForm({setTokenCallback}) {
         className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
       >
-        {isLoading ? "Loading..." : "Next"}
+        {isLoading ? `${t("signinPage.btnLoading")}` : `${t("signinPage.btnNext")}`}
       </button>
 
       <button
         type="submit"
         onClick={() => {
-          navigate("/signup");
+          navigate("/signup", { language: language });
         }}
         className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-inverted text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill-inverted mx-auto mt-14 tracking-normal border border-skin-border-inverted"
       >
-        Signup
+         {t("signinPage.btnSignUp")}
       </button>
     </form>
   );

@@ -1,13 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
-import { useState } from "react";
+import { useState,useEffect  } from "react";
 import { emailCheck } from "../../Services/authService";
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 export function EnterEmail({ recoveryData }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [error, setError] = useState("");
+  const location = useLocation();
+  const language = location.state?.language;
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   const validateEmail = (input) => {
     // Email validation regex pattern
@@ -19,7 +28,7 @@ export function EnterEmail({ recoveryData }) {
     event.preventDefault();
 
     if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
+      setError(`${t("recoveryPage.error1")}`);
       return;
     }
     try {
@@ -27,10 +36,10 @@ export function EnterEmail({ recoveryData }) {
       const data = await emailCheck(email);
       console.log(data)
       recoveryData(data);
-      navigate("/entercode");
+      navigate("/entercode", { state: { language: language, isRecovery: true } });
     } catch (error) {
       setButtonDisabled((prev) => false);
-      setError("Something went wrong. Please try again later.");
+      setError(`${t("recoveryPage.error2")}`);
     }
   };
 
@@ -47,12 +56,12 @@ export function EnterEmail({ recoveryData }) {
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
         <label className="text-skin-inverted text-lg mb-10 text-center">
-          Enter your email to reset your password
+        {t("recoveryPage.part1")}
         </label>
 
         <input
           type="text"
-          placeholder="email"
+          placeholder={t("recoveryPage.placeholder1")}
           value={email}
           autoComplete="off"
           
@@ -84,7 +93,7 @@ export function EnterEmail({ recoveryData }) {
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
            w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
-          Recovery
+           {t("recoveryPage.btnRecovery")}
         </button>
       </div>
     </div>

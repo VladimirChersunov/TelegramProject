@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import logo from "./../../Assets/Logo.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { emailCheck, emailUnique } from "../../Services/authService";
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 export function SignUp(props) {
   const navigate = useNavigate();
@@ -15,7 +17,15 @@ export function SignUp(props) {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const language = location.state?.language;
   const [isLoading, setIsLoading] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
+
 
 
 
@@ -30,20 +40,20 @@ export function SignUp(props) {
     const passwordRegex = /^.{6,20}$/;
     const usernameRegex = /^.{3,20}$/;
     if (password !== confirmPassword) {
-      setConfirmPasswordError("Password mismatch");
+      setConfirmPasswordError(`${t("signupPage.error1")}`);
     } else {
       if (!emailRegex.test(email)) {
-        setEmailError("Please enter a valid email address.");
+        setEmailError(`${t("signupPage.error2")}`);
         return;
       }
 
       if (!usernameRegex.test(username)) {
-        setUsernameError("Username must be between 3 and 20 characters");
+        setUsernameError(`${t("signupPage.error3")}`);
         return;
       }
 
       if (!passwordRegex.test(password)) {
-        setPasswordError("Password must be between 6 and 20 characters");
+        setPasswordError(`${t("signupPage.error4")}`);
         return;
       }
       // отправляем данные на сервер
@@ -62,9 +72,9 @@ export function SignUp(props) {
           const code = await emailCheck(email);
 
           props.signUpData({ username, email, password, code });
-          navigate("/entercode");
+          navigate("/entercode", { language: language });
         } else {
-          setError("Email or username already exists");
+          setError(`${t("signupPage.error5")}`);
         }
       } catch (error) {
         setError(error.message);
@@ -80,10 +90,10 @@ export function SignUp(props) {
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
         <input
-          placeholder="Email"
+          placeholder={t("signupPage.placeholder1")}
           type="email"
           value={email}
-          maxLength="20"
+          maxLength="40"
           onChange={(e) => {
             setEmail((prevValue) => e.target.value);
           }}
@@ -106,7 +116,7 @@ export function SignUp(props) {
         </div>
 
         <input
-          placeholder="Username"
+          placeholder={t("signupPage.placeholder2")}
           onChange={(e) => {
             setUsername((prevValue) => e.target.value);
           }}
@@ -129,7 +139,7 @@ export function SignUp(props) {
         </div>
 
         <input
-          placeholder="Password"
+          placeholder={t("signupPage.placeholder3")}
           type="password"
           onChange={(e) => {
             setPassword((prevValue) => e.target.value);
@@ -153,7 +163,7 @@ export function SignUp(props) {
         </div>
 
         <input
-          placeholder="Confirm password"
+          placeholder={t("signupPage.placeholder4")}
           type="password"
           onChange={(e) => {
             setConfirmPassword((prevValue) => e.target.value);
@@ -189,7 +199,7 @@ export function SignUp(props) {
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-[36px] tracking-normal"
         >
-          {isLoading ? "Loading..." : "Next"}
+          {isLoading ? `${t("signinPage.btnLoading")}` : `${t("signinPage.btnNext")}`}
         </button>
       </div>
     </div>
