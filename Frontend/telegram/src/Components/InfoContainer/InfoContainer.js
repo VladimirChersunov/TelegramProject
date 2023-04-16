@@ -5,10 +5,18 @@ import { InfoIcon } from "../Icons/InfoIcon";
 import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 import { SavedIcon } from "../Icons/SavedIcon";
 import { MuteSwitch } from "./MuteSwitch";
+import { useTranslation } from "react-i18next";
 
 export function InfoContainer({ toggleRightColumn, chat }) {
   const [type, setType] = useState(false);
   const [favorite, setFavorite] = useState(false);
+  const language = localStorage.getItem("language"); 
+  console.log(language)
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
 
   useEffect(() => {
     if (chat.type === "chat") {
@@ -83,7 +91,7 @@ export function InfoContainer({ toggleRightColumn, chat }) {
           <div className="flex flex-row h-[40px] w-[100%] pl-5  items-center justify-between mt-5 pr-5">
             <VolumeOnIcon />
             <div className="flex flex-row w-[80%] ml-5">
-              <label className="text-lg">Notifications</label>
+              <label className="text-lg">{t("mainPage.notifications")}</label>
             </div>
 
             <MuteSwitch chat={chat} />

@@ -29,8 +29,8 @@ function LoginForm({setTokenCallback,language}) {
       const token = data.token;
       if (data.user) {
         if(setTokenCallback)
-        setTokenCallback(token)
-        navigate("/main", { state: { token } });
+        setTokenCallback(token)       
+        navigate("/main", { state: { token:token, language: language } });
       }
     } catch (error) {
       console.log(error);

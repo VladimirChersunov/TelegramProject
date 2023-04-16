@@ -1,13 +1,22 @@
 import moment from "moment";
 import "moment/locale/ru";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export function MessageOut({ message,checkMessage}) {
   const { data, deliveryStatus,  sendTime, text, } = message;
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
+
   //console.log(message)
   // Форматирование времени
   const sendTimeFormatted = moment(sendTime).calendar(null, {
-    sameDay: "[Today at] HH:mm",
-    lastDay: "[Yesterday at] HH:mm",
+    sameDay: `[${t("mainPage.Today at")}] HH:mm`,
+    lastDay: `[${t("mainPage.yesterdayAt")}] HH:mm`,
     lastWeek: "DD.MM.YYYY",
     sameElse: "DD.MM.YYYY",
   });
@@ -32,8 +41,8 @@ export function MessageOut({ message,checkMessage}) {
             <p className="flex flex-col ml-2 max-w-[600px] min-w-[100px] mr-2 whitespace-normal break-words">{text}</p>
           }
             <div className="flex w-full justify-end items-center">
-            {deliveryStatus ? <p className=" opacity-50 text-xs mr-2">Delivered </p>
-          : <div className=" opacity-50 text-xs text-skin-error">Not delivered </div>}
+            {deliveryStatus ? <p className=" opacity-50 text-xs mr-2">{t("mainPage.delivered")} </p>
+          : <div className=" opacity-50 text-xs text-skin-error">{t("mainPage.notDelivered")}</div>}
             </div>
           
           </div>

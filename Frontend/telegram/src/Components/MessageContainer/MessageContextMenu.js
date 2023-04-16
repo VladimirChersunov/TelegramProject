@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { deleteMessage, pinnedMessaages } from "../../Services/messageServices";
 import { Copy } from "../Icons/Copy";
 import { FlagIcon } from "../Icons/FlagIcon";
@@ -8,6 +8,7 @@ import { Reply } from "../Icons/Reply";
 import { SelectAll } from "../Icons/SelectAll";
 import copy from "copy-to-clipboard";
 import { PinIcon } from "../Icons/PinIcon";
+import { useTranslation } from "react-i18next";
 
 export function MessageContextMenu({
   x,
@@ -24,6 +25,12 @@ export function MessageContextMenu({
   const admin = currentUser.id === chat.authorId;
   const owner = message.author.id === currentUser.id;  
   const [check, setCheck] = useState(false);
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
  
 
   // console.log(admin);
@@ -96,7 +103,7 @@ export function MessageContextMenu({
            flex-row  items-center text-sm pt-2 pb-2 select-none cursor-pointer hover:bg-skin-button-accent-hover"
         >
           <Reply />
-          <p className="font-bold ml-2">Reply</p>
+          <p className="font-bold ml-2">{t("mainPage.reply")}</p>
         </li>
 
         <li
@@ -105,7 +112,7 @@ export function MessageContextMenu({
            flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
           <SelectAll />
-          <p className="font-bold ml-2"> Select</p>
+          <p className="font-bold ml-2">{t("mainPage.select")}</p>
         </li>
 
         <li
@@ -114,7 +121,7 @@ export function MessageContextMenu({
            flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
           <PinIcon />
-          <p className="font-bold ml-2"> Pin message</p>
+          <p className="font-bold ml-2"> {t("mainPage.pinMessage")}</p>
         </li>
 
         <li
@@ -122,14 +129,14 @@ export function MessageContextMenu({
            flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
           <FlagIcon />
-          <p className="font-bold ml-2"> Report</p>
+          <p className="font-bold ml-2"> {t("mainPage.report")}</p>
         </li>
         <li
           className="   pl-2  flex text-skin-muted
            flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
           <Forward />
-          <p className="font-bold ml-2"> Forward</p>
+          <p className="font-bold ml-2">{t("mainPage.forward")}</p>
         </li>
         <li
           onClick={handleCopy}
@@ -137,7 +144,7 @@ export function MessageContextMenu({
            flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
           <Copy />
-          <p className="font-bold ml-2"> Copy text</p>
+          <p className="font-bold ml-2"> {t("mainPage.copyText")}</p>
         </li>
         {(owner || admin) && (
           <li
@@ -146,7 +153,7 @@ export function MessageContextMenu({
           flex-row text-skin-error  items-center text-sm pt-2 pb-2 select-none "
           >
             <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
-            <p className="font-bold ml-2"> Delete</p>
+            <p className="font-bold ml-2"> {t("mainPage.delete")}</p>
           </li>
         )}
       </ul>

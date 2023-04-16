@@ -9,6 +9,8 @@ import { userLogout } from "../Services/userLogout";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MessageForToast } from "./MessageContainer/MessageForToast";
+import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 export function MainPage({ darkMode, toggleDarkMode }) {
   const navigate = useNavigate();
@@ -19,13 +21,21 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState("");
   const [chats, setChats] = useState([]);
-
   const [lastMessage, setLastMessage] = useState(null);
+  const location = useLocation();
+  const [currentLanguage, setCurrentLanguage] = useState(
+    location.state?.language || localStorage.getItem("language")
+  );
+  const { i18n } = useTranslation();
+  
+  useEffect(() => {
+    i18n.changeLanguage(currentLanguage);
+  }, [i18n, currentLanguage]);
 
   //отключаем кнопку назад
   useEffect(() => {
     const handleBackButton = () => {
-      navigate("/main");
+      navigate("/main", { language: currentLanguage });
     };
     window.addEventListener("popstate", handleBackButton);
   }, []);
@@ -83,7 +93,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
       try {
         const logout = await userLogout();
         if (logout) {
-          navigate("/signin");
+          navigate("/signin", { language: currentLanguage });
         }
         // const startTime = performance.now();
 

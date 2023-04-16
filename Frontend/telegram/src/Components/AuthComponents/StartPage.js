@@ -11,6 +11,7 @@ export function StartPage() {
 
   useEffect(() => {
     setCurrentLanguage(i18n.language);
+    localStorage.setItem("language",i18n.language)
     setLanguageButtonState(false);
   }, [i18n.language]);
 
@@ -71,6 +72,7 @@ export function StartPage() {
         </div>
         <button
           onClick={() => {
+            
             navigate("/signin ", { language: currentLanguage });
           }}
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium

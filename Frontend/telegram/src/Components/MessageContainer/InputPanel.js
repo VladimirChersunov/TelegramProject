@@ -7,6 +7,7 @@ import { SmileIcon } from "../Icons/SmileIcon";
 import Modal from "react-modal";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { Replay } from "./Replay";
+import { useTranslation } from "react-i18next";
 
 export function InputPanel({
   currentUser,
@@ -25,6 +26,12 @@ export function InputPanel({
   const parentRef = useRef(null);
   const pickerRef = useRef(null);
   const fileInputRef = useRef(null);
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   useEffect(() => {
     if (textareaRef.current && parentRef.current) {
@@ -103,7 +110,7 @@ export function InputPanel({
   return (
     <div
       ref={parentRef}
-      className=" w-[80%] h-max min-h-[70px] flex flex-col items-center justify-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted "
+      className=" w-[80%] h-max min-h-[70px] flex flex-col  justify-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted "
       
     >
       {showPicker && (
@@ -138,7 +145,7 @@ export function InputPanel({
                bg-skin-fill dark:bg-skin-fill-inverted`}
           style={{ height: messageText ? `28px` : "auto" }}
           maxLength="500"
-          placeholder="Type your message here..."
+          placeholder={t("mainPage.inputPanelPlaceholder")}
         />
       </div>
 
@@ -202,7 +209,7 @@ export function InputPanel({
           ) : (
             <div className="w-full h-[200px] flex items-center justify-center">
               <div className="text-center text-skin-inverted text-2xl rounded-full border w-[100px] h-[100px] flex items-center justify-center">
-                Photo
+              {t("mainPage.photo")}
               </div>
             </div>
           )}
@@ -211,7 +218,7 @@ export function InputPanel({
               onClick={() => addNewMessage()}
               className="text-xl text-skin-inverted border w-[100px] rounded-lg"
             >
-              Send
+             {t("mainPage.send")}
             </button>
           </div>
         </div>

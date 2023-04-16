@@ -8,12 +8,19 @@ import {
   deleteChatById,
   leavePublic,
 } from "../../Services/chatServices";
+import { useTranslation } from "react-i18next";
 
 export function RightMenu({ chat, clearMain, visibleModalReport }) {
   const [mute, setMute] = useState(chat.muteStatus);
   const [chats, setChat] = useState(false);
   const [group, setGroup] = useState(false);
   const [channel, setChannel] = useState(false);
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   useEffect(() => {
     if (chat.type === "Private") {
@@ -80,7 +87,7 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
         >
           <VolumeOnIcon />
          
-          <p className="font-bold ml-2">Mute</p>
+          <p className="font-bold ml-2">{t("mainPage.mute")}</p>
         </li>
       )}
       {mute && (
@@ -89,7 +96,7 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2 p-1 flex flex-row  items-center"
         >
            <VolumeMuteIcon />
-          <p className="font-bold ml-2">Unmute</p>
+          <p className="font-bold ml-2">{t("mainPage.unmute")}</p>
         </li>
       )}
 
@@ -102,7 +109,7 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
         className="hover:bg-skin-button-accent-hover hover:cursor-pointer pl-2 p-1 flex flex-row  items-center"
       >
         <FlagIcon />
-        <p className="font-bold ml-2">Report</p>
+        <p className="font-bold ml-2">{t("mainPage.report")}</p>
       </li>
 
       <div className="w-[100%] flex justify-center">
@@ -115,7 +122,7 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
           className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
         >
           <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
-          <p className="font-bold ml-2">Leave Channel</p>
+          <p className="font-bold ml-2">{t("mainPage.leaveChannel")}</p>
         </li>
       )}
       {group && (
@@ -124,7 +131,7 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
           className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
         >
           <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
-          <p className="font-bold ml-2">Delete and exit</p>
+          <p className="font-bold ml-2">{t("mainPage.deleteAndExit")}</p>
         </li>
       )}
       {chats && (
@@ -133,7 +140,7 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
           className="hover:bg-skin-button-accent-hover hover:cursor-pointer text-skin-error rounded-b-lg pl-2 p-1 flex flex-row  items-center"
         >
           <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
-          <p className="font-bold ml-2">Delete</p>
+          <p className="font-bold ml-2">{t("mainPage.delete")}</p>
         </li>
       )}
     </ul>

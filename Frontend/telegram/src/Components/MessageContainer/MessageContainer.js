@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { MessageHeader } from "./MessageHeader";
+import { useTranslation } from "react-i18next";
 
 export function MessageContainer({
   chat,
@@ -16,6 +17,12 @@ export function MessageContainer({
 }) {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   const handleModalClose = () => {
     setModalIsOpen(false);
@@ -86,10 +93,10 @@ export function MessageContainer({
           </div>
 
           <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base tracking-wider">
-            Report{" "}
+          {t("mainPage.report")}
           </span>
           <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base">
-            sent successfully!
+          {t("mainPage.sentSuccessfully")}
           </span>
         </div>
       </Modal>

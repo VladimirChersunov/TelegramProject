@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import Backend from 'i18next-http-backend';
+//import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 // don't want to use this?
 // have a look at the Quick start guide 
@@ -11,7 +11,7 @@ i18n
   // load translation using http -> see /public/locales (i.e. https://github.com/i18next/react-i18next/tree/master/example/react/public/locales)
   // learn more: https://github.com/i18next/i18next-http-backend
   // want your translations to be loaded from a professional CDN? => https://github.com/locize/react-tutorial#step-2---use-the-locize-cdn
-  .use(Backend)
+  // .use(Backend)
   // detect user language
   // learn more: https://github.com/i18next/i18next-browser-languageDetector
   .use(LanguageDetector)
@@ -84,7 +84,33 @@ i18n
                 btnNext:'Next',
                 btnLoading:'Loading...',      
                 part1:"Enter new password"  
-              }
+              },
+              mainPage:{
+                notifications: "Notifications",                          
+                mute:"Mute",
+                unmute:"Unmute",
+                report:"Report",
+                leaveChannel:"Leave Channel",
+                deleteAndExit:"Delete and exit",
+                delete:"Delete",
+                inputPanelPlaceholder:"Type your message here...",
+                photo:"Photo",
+                send:"Send",
+                sentSuccessfully:"sent successfully!",
+                reply:"Reply",
+                select:"Select",
+                pinMessage:"Pin message",
+                forward:"Forward",
+                copyText:"Copy text",
+                todayAt:"Today at",
+                yesterdayAt:"Yesterday at",
+                viewed:"Viewed",
+                notViewed:"Not viewed",
+                delivered:"Delivered",
+                notDelivered:"Not delivered",
+                pinnedMessage:"Pinned Message",
+
+              },
           }
         },
         ukr: {
@@ -145,7 +171,32 @@ i18n
                 btnNext:'Далі',
                 btnLoading:'Завантаження...',   
                 part1:"Введіть новий пароль"    
-              }
+              },
+              mainPage:{
+                notifications: "Сповіщення",                           
+                mute:"Вимкнути звук",
+                unmute:"Увімкнути звук",
+                report:"Звіт",
+                leaveChannel:"Залишити канал",
+                deleteAndExit:"Видалити та вийти",
+                delete:"Видалити",
+                inputPanelPlaceholder:"Введіть своє повідомлення тут...",
+                photo:"Фото",
+                send:"Надіслати", 
+                sentSuccessfully:"відправлено успішно!",
+                reply:"Відповісти",
+                select:"Виберіть",
+                pinMessage:"Закріпити повідомлення",
+                forward:"Вперед",
+                copyText:"Скопіюйте текст",
+                todayAt:"Сьогодні о",
+                yesterdayAt:"Вчора о",
+                viewed:"Переглянуто",
+                notViewed:"Не переглядався",
+                delivered:"Доставлено",
+                notDelivered:"Не доставлений",
+                pinnedMessage:"Повідомлення",
+              },
             }
           }
       }

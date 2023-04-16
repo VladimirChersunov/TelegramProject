@@ -1,16 +1,25 @@
 import moment from "moment";
 import "moment/locale/ru";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export function MessageIn({ message,checkMessage }) {
  
   const { data,sendTime, text, viewed, author } = message;
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
+
 
  
  //console.log(message)
   // Форматирование времени
   const sendTimeFormatted = moment(sendTime).calendar(null, {
-    sameDay: "[Today at] HH:mm",
-    lastDay: "[Yesterday at] HH:mm",
+    sameDay: `[${t("mainPage.Today at")}] HH:mm`,
+    lastDay: `[${t("mainPage.yesterdayAt")}] HH:mm`,
     lastWeek: "DD.MM.YYYY",
     sameElse: "DD.MM.YYYY",
   });
@@ -67,8 +76,8 @@ export function MessageIn({ message,checkMessage }) {
             <div className="flex flex-col ml-2 mr-2">{text}</div>
           }
          
-          { viewed  ? <div className="ml-2 opacity-50 text-xs"> Viewed  </div>
-          : <div className="ml-2 opacity-50 text-xs">Not  viewed  </div>}
+          { viewed  ? <div className="ml-2 opacity-50 text-xs"> {t("mainPage.viewed")}  </div>
+          : <div className="ml-2 opacity-50 text-xs">{t("mainPage.notViewed")}   </div>}
          
         </div>
       </div>

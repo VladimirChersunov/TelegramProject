@@ -2,12 +2,19 @@ import { useEffect, useState } from "react";
 import { getMessaagesById, pinnedMessaages } from "../../Services/messageServices";
 import { getUserById } from "../../Services/userServices";
 import { CloseIcon } from "../Icons/CloseIcon";
+import { useTranslation } from "react-i18next";
 
 export function PinnedMessage({ pinned, chat, currentChat,pinnedClose }) {
   
 
   const [message, setMessage] = useState(null);
   const [user, setUser] = useState(null);
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   useEffect(() => {
     const getPinnedMessage = async () => {
@@ -61,7 +68,7 @@ export function PinnedMessage({ pinned, chat, currentChat,pinnedClose }) {
 
         <div className="flex flex-row items-center justify-center ml-2">
           <div className="flex flex-col">
-            <p className="mr-2 text-base select-none">Pinned Message</p>
+            <p className="mr-2 text-base select-none">{t("mainPage.pinnedMessage")}</p>
             <p className="text-xs">{message?.text.slice(0, 60)}</p>
           </div>
           <div className="flex items-center justify-center">
