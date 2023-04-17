@@ -1,10 +1,21 @@
 import { RecicleIcon } from "../../Icons/RecicleIcon";
 import { PeoplesIcon } from "../../Icons/PeoplesIcon";
-import { enterPublic, isUserInChat, leavePublic } from "../../../Services/chatServices";
+import {
+  enterPublic,
+  isUserInChat,
+  leavePublic,
+} from "../../../Services/chatServices";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-export function ChatCardContextMenu({ x, y,handleCloseContextMenu, chat }) {
+export function ChatCardContextMenu({ x, y, handleCloseContextMenu, chat }) {
   const [userInChat, setUserInChat] = useState(false);
+  const language = localStorage.getItem("language");
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
 
   useEffect(() => {
     const checkChat = async () => {
@@ -24,7 +35,7 @@ export function ChatCardContextMenu({ x, y,handleCloseContextMenu, chat }) {
       }
     };
     enterChat();
-    handleCloseContextMenu()
+    handleCloseContextMenu();
   };
 
   const handleDeleteChat = (event) => {
@@ -36,7 +47,7 @@ export function ChatCardContextMenu({ x, y,handleCloseContextMenu, chat }) {
       }
     };
     leaveChat();
-    handleCloseContextMenu()
+    handleCloseContextMenu();
   };
   //console.log(chat)
   return (
@@ -55,7 +66,7 @@ export function ChatCardContextMenu({ x, y,handleCloseContextMenu, chat }) {
          flex-row  items-center text-sm pt-2 pb-2"
           >
             <PeoplesIcon />
-            <p className="font-bold ml-2">Enter to chat</p>
+            <p className="font-bold ml-2">{t("mainPage.enterToChat")}</p>
           </li>
         )}
 
@@ -67,7 +78,7 @@ export function ChatCardContextMenu({ x, y,handleCloseContextMenu, chat }) {
          flex-row  items-center text-sm pt-2 pb-2"
           >
             <RecicleIcon styles={"h-5 w-5 stroke-red-600 fill-none"} />
-            <p className="font-bold ml-2 text-skin-error">Leave chat</p>
+            <p className="font-bold ml-2 text-skin-error">{t("mainPage.leaveChat")}</p>
           </li>
         )}
       </ul>

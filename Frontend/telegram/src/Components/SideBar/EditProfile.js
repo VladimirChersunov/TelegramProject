@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef,useEffect } from "react";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { AddPicture } from "../Icons/AddPicture";
 import { editProfile } from "../../Services/userServices";
+import { useTranslation } from "react-i18next";
 
 
 export function EditProfile({ visibleEdit, currentUser }) {
@@ -13,6 +14,12 @@ export function EditProfile({ visibleEdit, currentUser }) {
   const [aboutData, setAboutData] = useState(currentUser?.aboutUser || "");
   const [photo, setPhoto] = useState(currentUser?.photo);
   const fileInputRef = useRef(null);
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
   
   const handleClickBack = () => {
     visibleEdit(false);
@@ -65,7 +72,7 @@ export function EditProfile({ visibleEdit, currentUser }) {
           <BackArrowIcon />
         </button>
 
-        <label className="text-2xl mt-4 ml-2 select-none">Edit Profile</label>
+        <label className="text-2xl mt-4 ml-2 select-none">{t("mainPage.editProfile")}</label>
       </div>
       {/* профиль */}
       <div className="overflow-y-scroll scrollbar">
@@ -92,7 +99,7 @@ export function EditProfile({ visibleEdit, currentUser }) {
 
         {/* инпуты */}
         <div className="flex flex-col items-center justify-center">
-          <label className="text-xs text-left w-[250px] ml-5">Username</label>
+          <label className="text-xs text-left w-[250px] ml-5"> {t("mainPage.username")}</label>
           <input
             type="text"
             value={usernameData}
@@ -102,7 +109,7 @@ export function EditProfile({ visibleEdit, currentUser }) {
           />
 
           <label className="text-xs text-left w-[250px] ml-5 mt-10">
-            Email
+          {t("mainPage.email")}
           </label>
           <input
             type="text"
@@ -112,7 +119,7 @@ export function EditProfile({ visibleEdit, currentUser }) {
        dark:bg-skin-fill-inverted placeholder:text-skin-base dark:placeholder:text-skin-inverted placeholder:text-center  text-center"
           />
 
-          <label className="text-xs text-left w-[250px] ml-5 mt-10">Age</label>
+          <label className="text-xs text-left w-[250px] ml-5 mt-10"> {t("mainPage.age")}</label>
           <input
             type="text"
             value={ageData}
@@ -122,7 +129,7 @@ export function EditProfile({ visibleEdit, currentUser }) {
           />
 
           <label className="text-xs text-left w-[250px] ml-5 mt-10">
-            About myself
+          {t("mainPage.aboutMyself")}
           </label>
           <textarea
             id="message"
@@ -142,7 +149,7 @@ export function EditProfile({ visibleEdit, currentUser }) {
            dark:text-skin-inverted text-skin-base border border-skin-border-base dark:border-skin-border-inverted
             rounded-2xl "
           >
-            Apply
+            {t("mainPage.apply")}
           </button>
         </div>
       </div>

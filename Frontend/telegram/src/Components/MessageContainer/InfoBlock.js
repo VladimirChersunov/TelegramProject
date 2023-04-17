@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import { SavedIcon } from "../Icons/SavedIcon";
+import { useTranslation } from "react-i18next";
 
 export function InfoBlock({ chat, toggleRightColumn }) {
   const [typeChat, setTypeChat] = useState(null);
   const [favorite, setFavorite] = useState(false);
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 //console.log(chat)
   useEffect(() => {
     if (chat?.type === "Channel") {
       setFavorite(false)
-      setTypeChat(`${chat?.membersCount} subscrybers`);
+      setTypeChat(`${chat?.membersCount} ${t("mainPage.subscrybers")}`);
     } else if (chat?.type === "Group") {
-      setTypeChat(`${chat?.membersCount } members`);
+      setTypeChat(`${chat?.membersCount } ${t("mainPage.members")}`);
       setFavorite(false)
     } else if (chat?.type === "Favorite") {
       setFavorite(true)

@@ -1,6 +1,7 @@
 import { ContactsCard } from "./ContactComponents/ContactsCard";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -8,6 +9,12 @@ export function StartPrivate({visibleStartPrivate,contacts,currentChat,currentUs
   const handleClickBack = () => {
     visibleStartPrivate(false);
   };
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -27,14 +34,14 @@ export function StartPrivate({visibleStartPrivate,contacts,currentChat,currentUs
         >
           <BackArrowIcon />
         </button>
-        <span className="text-2xl">Start private chat</span>
+        <span className="text-xl">{t("mainPage.startPrivateChat")}</span>
       </div>
 
       <div className="flex justify-center my-5    h-10">
         <input
           value={inputValue}
           onChange={handleInputChange}
-          placeholder="Who do you want to chat with?"
+          placeholder={t("mainPage.toChatWith")}
           className="text-lg w-[80%] outline-none bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
            border-b border-skin-border-base dark:border-skin-border-inverted pl-5 placeholder:text-[14px]"
         />

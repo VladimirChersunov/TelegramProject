@@ -5,6 +5,8 @@ import { MoonIcon } from "../Icons/MoonIcon";
 import { BugIcon } from "../Icons/BugIcon";
 import { InfoIcon } from "../Icons/InfoIcon";
 import { ThemeSwitch } from "./ThemeSwitch";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export function LeftMenu({
   darkMode,
@@ -16,12 +18,18 @@ export function LeftMenu({
   currentChat,
   chats,
 }) {
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
   const savedMessage = chats.find((chat) => chat.type === "Favorite");
 
   return (
     <ul
-      className={`absolute block mt-1 group-hover:block shadow-2xl bg-skin-fill dark:bg-skin-fill-inverted
-       border border-skin-border-base dark:border-skin-border-inverted rounded-lg  w-[200px] select-none`}
+      className={`absolute z-50 block mt-1 group-hover:block shadow-2xl bg-skin-fill dark:bg-skin-fill-inverted
+       border border-skin-border-base dark:border-skin-border-inverted rounded-lg  w-max select-none`}
     >
       <li
         onClick={() => {
@@ -30,7 +38,7 @@ export function LeftMenu({
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg h-8 p-1 flex flex-row items-center"
       >
         <SavedIcon />
-        <p className="font-bold ml-2">Saved Messsages</p>
+        <p className="font-bold ml-2">{t("mainPage.savedMesssages")}</p>
       </li>
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1
@@ -40,7 +48,7 @@ export function LeftMenu({
         }}
       >
         <PeopleIcon />
-        <p className="font-bold ml-2">Contacts</p>
+        <p className="font-bold ml-2">{t("mainPage.contacts")}</p>
       </li>
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row
@@ -50,11 +58,11 @@ export function LeftMenu({
         }}
       >
         <SettingIcon />
-        <p className="font-bold ml-2">Setting</p>
+        <p className="font-bold ml-2">{t("mainPage.setting")}</p>
       </li>
       <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
         <MoonIcon />
-        <p className="font-bold ml-2 mr-4">Night Mode</p>
+        <p className="font-bold ml-2 mr-4">{t("mainPage.nightMode")}</p>
         <ThemeSwitch darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </li>
       <li
@@ -64,7 +72,7 @@ export function LeftMenu({
         }}
       >
         <BugIcon />
-        <p className="font-bold ml-2">Report bug</p>
+        <p className="font-bold ml-2">{t("mainPage.reportBug")}</p>
       </li>
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
@@ -73,7 +81,7 @@ export function LeftMenu({
         }}
       >
         <InfoIcon />
-        <p className="font-bold ml-2">About Us</p>
+        <p className="font-bold ml-2">{t("mainPage.aboutUs")}</p>
       </li>
       <li className="flex justify-center items-center">
         <p className="text-center w-[100%] ml-2 text-xs h-8 p-1   ">

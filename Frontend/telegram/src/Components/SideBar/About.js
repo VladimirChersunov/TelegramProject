@@ -1,6 +1,14 @@
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export function About(props) {
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
   const handleClickBack = () => {
     props.visibleAbout(false);
   };
@@ -62,9 +70,12 @@ export function About(props) {
           </defs>
         </svg>
       </div>
-      <div className="w-full text-center mt-10 flex justify-center">
+      <div className="w-full flex-col  mt-10 flex justify-center items-center text-center">
         <p className="w-[75%]">
-        Welcome to the official Cryptic app It's fast and secure
+        {t("startPage.part1")} 
+        </p>
+        <p className="w-[75%]">
+         {t("startPage.part2")}
         </p>
       </div>
     </div>

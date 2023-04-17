@@ -5,8 +5,8 @@ import { useState } from "react";
 import { ReportBug } from "./ReportBug";
 import { SettingWindow } from "./SettingWindow";
 import { ContactWindow } from "./ContactComponents/ContactWindow";
-import { AddMembers } from "./AddMembers";
-import { AddNewMessage } from "./AddNewMessage";
+import { AddMembers } from "./ChatComponents/AddMembers";
+
 
 import { SearchWindow } from "./SearchWindow";
 import { StartPrivate } from "./StartPrivate";
@@ -161,9 +161,7 @@ export function CollumnContainer({
          
         />
       )}
-      {addMessageState && (
-        <AddNewMessage visibleAddMessage={visibleAddMessage} />
-      )}
+      
       {addGroupState && (
         <AddNewChat
         visibleAddNewChatFinish={visibleAddNewChatFinish}

@@ -4,6 +4,7 @@ import { BackArrowIcon } from "../../Icons/BackArrowIcon";
 import { EnterIcon } from "../../Icons/EnterIcon";
 import { createChat } from "../../../Services/chatServices";
 import { AddPicture } from "../../Icons/AddPicture";
+import { useTranslation } from "react-i18next";
 
 export function AddNewChat({
   chatType,
@@ -20,6 +21,12 @@ export function AddNewChat({
   const [chatName, setChatName] = useState(null);
   const members = checkedContacts.map((contact) => contact.id);
   const [chatInfo, setChatInfo] = useState(null);
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   useEffect(() => {
     if (chatType === "Channel") {
@@ -84,7 +91,7 @@ export function AddNewChat({
           <BackArrowIcon />
         </button>
 
-        <div className="text-2xl mt-3 ml-2 "> New {chatType}</div>
+        <div className="text-2xl mt-3 ml-2 "> {channel ? `${t("mainPage.newChannel")}` : `${t("mainPage.newGroup")}`}</div>
       </div>
 
       <div className="w-full text-center mt-5 flex flex-col ">
@@ -116,25 +123,26 @@ export function AddNewChat({
         required={true}
           className="m-5 pl-2 text-xl bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
         border-b border-skin-border-base dark:border-skin-border-inverted outline-none"
-          placeholder={`${chatType} name`}
+          placeholder={channel ? `${t("mainPage.channelName")}` : `${t("mainPage.groupName")}`}
           onChange={handleChatNameChange}
         />
 
         {channel && (
           <div className="flex flex-col">
             <input
+            
               onChange={handleChatInfoChange}
               className="m-5 text-xl bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
         border-b border-skin-border-base dark:border-skin-border-inverted outline-none pl-2"
-              placeholder="Description (optional)"
+              placeholder={t("mainPage.description")}
             />
             <p className="text-xs opacity-70">
-              You can provide an optional description for
+            {t("mainPage.chatGroup1")}
             </p>
-            <p className="text-xs opacity-70">your channel</p>
+            <p className="text-xs opacity-70">{t("mainPage.chatGroup2")}</p>
           </div>
         )}
-        <label className="text-lg mt-3">{checkedContacts.length} members</label>
+        <label className="text-lg mt-3">{checkedContacts.length} {t("mainPage.members")}</label>
         <div className="mx-5 flex flex-col justify-center">
           {checkedContacts.map((contact) => (
             <div key={contact.id} className="flex flex-col m-1">

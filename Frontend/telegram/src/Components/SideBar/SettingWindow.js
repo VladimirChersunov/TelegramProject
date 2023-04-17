@@ -5,11 +5,19 @@ import { PeopleIcon } from "../Icons/PeopleIcon";
 import { InfoIcon } from "../Icons/InfoIcon";
 import { LogoutIcon } from "../Icons/LogoutIcon";
 import { MailIcon } from "../Icons/MailIcon";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 
 export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
   const navigate = useNavigate();
   const MAX_LENGTH = 16;
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
   
   const handleClickBack = () => {
     visibleSetting(false);
@@ -45,7 +53,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
           <BackArrowIcon />
         </button>
 
-        <label className="text-2xl mt-4 ml-2 select-none">Setting</label>
+        <label className="text-2xl mt-4 ml-2 select-none">{t("mainPage.setting")}</label>
       </div>
 
       <div className="w-[350px] h-screen  flex flex-col items-center mt-5 overflow-y-scroll scrollbar">
@@ -71,7 +79,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
           <p className="h-[100px] ml-3 mt-[-2px]">
             {currentUser.aboutUser
               ? currentUser.aboutUser
-              : "A few words about myself"}
+              : `${t("mainPage.aboutMyselfSetting")}`}
           </p>
         </div>
 
@@ -90,7 +98,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
           cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px]"
         >
           <PenIcon />
-          <p className="ml-10">Edit profile</p>
+          <p className="ml-10">{t("mainPage.editProfile")}</p>
         </div>
         <div
           onClick={handleLogout}
@@ -98,7 +106,7 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
           cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] "
         >
           <LogoutIcon/>
-          <p className="ml-10">Logout</p>
+          <p className="ml-10">{t("mainPage.logout")}</p>
         </div>
       </div>
     </div>

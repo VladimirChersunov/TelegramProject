@@ -4,6 +4,7 @@ import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
 import moment from "moment";
 import "moment/locale/ru";
 import { ChatListContextMenu } from "./ChatListContextMenu";
+import { useTranslation } from "react-i18next";
 
 export function RadioElement({ chat, currentChat, handleMuted,clearMain, currentUser,visibleModalReport }) {
   const contextRef = useRef();
@@ -13,6 +14,12 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);  
   const MAX_LENGTH = 15;
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
    
 
   const handleContextMenu = (event) => {
@@ -71,8 +78,8 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
 
   // Форматирование времени
   const publishTimeFormatted = moment(chat.publishTime).calendar(null, {
-    sameDay: "[Today at] HH:mm",
-    lastDay: "[Yesterday at] HH:mm",
+    sameDay: `[${t("mainPage.todayAt")}] HH:mm`,
+    lastDay: `[${t("mainPage.yesterdayAt")}] HH:mm`,
     lastWeek: "DD.MM.YYYY",
     sameElse: "DD.MM.YYYY",
   });
@@ -136,7 +143,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
               <p className="text-lg mr-2">{formattedChatName(chat)}</p>
               {!savedMessageState && (
                 <div>
-                  {chatMuteStatus ? <VolumeOnIcon /> : <VolumeMuteIcon />}
+                  {chatMuteStatus ? <VolumeOnIcon /> : ''}
                 </div>
               )}
             </div>

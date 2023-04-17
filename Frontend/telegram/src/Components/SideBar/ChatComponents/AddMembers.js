@@ -1,7 +1,8 @@
-import { ContactsCard } from "./ContactComponents/ContactsCard";
-import { useState } from "react";
-import { BackArrowIcon } from "../Icons/BackArrowIcon";
-import { EnterIcon } from "../Icons/EnterIcon";
+import { ContactsCard } from "../ContactComponents/ContactsCard";
+import { useState,useEffect } from "react";
+import { BackArrowIcon } from "../../Icons/BackArrowIcon";
+import { EnterIcon } from "../../Icons/EnterIcon";
+import { useTranslation } from "react-i18next";
 
 export function AddMembers({
   visibleAddmembers,
@@ -11,6 +12,12 @@ export function AddMembers({
  
 }) {
   const [inputValue, setInputValue] = useState("");
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   const handleClickBack = () => {
     visibleAddmembers(false);
@@ -48,14 +55,14 @@ export function AddMembers({
         >
           <BackArrowIcon />
         </button>
-        <div className="text-2xl mt-3 ml-2">Add Members</div>
+        <div className="text-2xl mt-3 ml-2">{t("mainPage.addMembers")}</div>
       </div>
 
       <div className="flex justify-center    h-10">
         <input
           value={inputValue}
           onChange={handleInputChange}
-          placeholder="Who would you like to add?"
+          placeholder={t("mainPage.wouldYouLike")}
           className="text-lg w-[80%] outline-none bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
            border-b border-skin-border-base dark:border-skin-border-inverted pl-5"
         />

@@ -11,6 +11,7 @@ import {
 } from "../../Services/chatServices";
 import { readMessaages } from "../../Services/messageServices";
 import { SelectAll } from "../Icons/SelectAll";
+import { useTranslation } from "react-i18next";
 
 export function ChatListContextMenu({
   chat,
@@ -25,6 +26,12 @@ export function ChatListContextMenu({
   const [channel, setChannel] = useState(false);
   const [mute, setMute] = useState(chat.muteStatus);
   const [posY, setPosY] = useState(null);
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   const screenHeight = window.innerHeight;
 
@@ -51,8 +58,8 @@ export function ChatListContextMenu({
   }, [chat.muteStatus]);
 
   useEffect(() => {
-    if (y > screenHeight - 185) {
-      setPosY(screenHeight - 195);
+    if (y > screenHeight - 225) {
+      setPosY(screenHeight - 230);
     } else {
       setPosY(y);
     }
@@ -106,7 +113,7 @@ export function ChatListContextMenu({
 
   return (
     <div
-      className="w-[180px] h-[183px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
+      className="w-[185px] h-[225px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
        text-lg  border border-skin-border-base dark:border-skin-border-inverted 
        rounded-lg z-50"
       style={{ position: "absolute", top: posY, left: x }}
@@ -118,7 +125,7 @@ export function ChatListContextMenu({
            flex-row  items-center text-sm pt-2 pb-2"
         >
           <NewTab />
-          <p className="font-bold ml-2">Open in new tab</p>
+          <p className="font-bold ml-2">{t("mainPage.openInNewTab")}</p>
         </li>
         <div className="h-[1px] bg-skin-fill-inverted dark:bg-skin-fill w-[80%] m-auto " />
         <li
@@ -127,7 +134,7 @@ export function ChatListContextMenu({
            flex-row  items-center text-sm pt-2 pb-2"
         >
           <SelectAll />
-          <p className="font-bold ml-2"> Mark as read</p>
+          <p className="font-bold ml-2"> {t("mainPage.markRead")}</p>
         </li>
         {!mute && (
           <li
@@ -136,7 +143,7 @@ export function ChatListContextMenu({
            flex-row  items-center text-sm pt-2 pb-2"
           >
             <VolumeMuteIcon />
-            <p className="font-bold ml-2"> Mute</p>
+            <p className="font-bold ml-2"> {t("mainPage.mute")}</p>
           </li>
         )}
         {mute && (
@@ -146,7 +153,7 @@ export function ChatListContextMenu({
            flex-row  items-center text-sm pt-2 pb-2"
           >
             <VolumeOnIcon />
-            <p className="font-bold ml-2"> Unmute</p>
+            <p className="font-bold ml-2"> {t("mainPage.unmute")}</p>
           </li>
         )}
         <li
@@ -159,7 +166,7 @@ export function ChatListContextMenu({
            flex-row  items-center text-sm pt-2 pb-2 hover:cursor-pointer hover:bg-skin-button-accent-hover"
         >
           <FlagIcon />
-          <p className="font-bold ml-2 "> Report</p>
+          <p className="font-bold ml-2 "> {t("mainPage.report")}</p>
         </li>
         {channel && (
           <li
@@ -168,7 +175,7 @@ export function ChatListContextMenu({
            flex-row text-skin-error  items-center text-sm pt-2 pb-2"
           >
             <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
-            <p className="font-bold ml-2"> Leave channel</p>
+            <p className="font-bold ml-2">  {t("mainPage.leaveChannel")}</p>
           </li>
         )}
         {group && (
@@ -178,7 +185,7 @@ export function ChatListContextMenu({
           flex-row text-skin-error  items-center text-sm pt-2 pb-2"
           >
             <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
-            <p className="font-bold ml-2">Delete and exit</p>
+            <p className="font-bold ml-2"> {t("mainPage.deleteAndExit")}</p>
           </li>
         )}
         {chats && (
@@ -188,7 +195,7 @@ export function ChatListContextMenu({
            flex-row text-skin-error  items-center text-sm pt-2 pb-2 "
           >
             <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
-            <p className="font-bold ml-2"> Delete</p>
+            <p className="font-bold ml-2">{t("mainPage.delete")}</p>
           </li>
         )}
       </ul>

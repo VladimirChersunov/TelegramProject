@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { getSearchResult } from "../../Services/searchServices";
 import { ContactsCard } from "./ContactComponents/ContactsCard";
 import { ChatsCard } from "./ChatComponents/ChatCard";
+import { useTranslation } from "react-i18next";
 
 export function SearchWindow({ visibleSearchWindow, currentChat, contacts }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,17 +13,22 @@ export function SearchWindow({ visibleSearchWindow, currentChat, contacts }) {
   const [error, setError] = useState("");
   const typeWindow = "search";
   const inputRef = useRef(null);
+  const language = localStorage.getItem("language");
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
 
   const handleClickBack = () => {
     visibleSearchWindow(false);
   };
 
   useEffect(() => {
-
-    if ( inputRef.current) {
+    if (inputRef.current) {
       inputRef.current.focus(); // установка фокуса на инпуте
     }
-    
+
     const getData = async () => {
       if (dataInput.length >= 3) {
         try {
@@ -66,14 +72,15 @@ export function SearchWindow({ visibleSearchWindow, currentChat, contacts }) {
         {searchResults?.users?.length === 0 &&
         searchResults?.chats?.length === 0 ? (
           <div>
-            <p className="font-bold text-lg text-center">Nothing found yet</p>
+            <p className="font-bold text-lg text-center">{t("mainPage.nothingFound")}
+</p>
           </div>
         ) : (
           <div>
             {!(searchResults?.users?.length > 0) &&
               !(searchResults?.chats?.length > 0) && (
                 <p className="font-bold text-lg text-center">
-                  Enter your request
+                  {t("mainPage.enterRequest")}
                 </p>
               )}
           </div>
@@ -81,13 +88,18 @@ export function SearchWindow({ visibleSearchWindow, currentChat, contacts }) {
 
         {searchResults?.users?.length > 0 && (
           <div className=" w-full flex flex-col items-center ">
-            <p className="font-bold text-lg mb-2 text-center">Users</p>
+            <p className="font-bold text-lg mb-2 text-center">{t("mainPage.users")}</p>
             {searchResults.users.map((contact) => (
               <div
                 key={contact.id}
                 className="flex flex-row items-center   p-2"
               >
-                <ContactsCard contact={contact} type={typeWindow} currentChat={currentChat}  contacts={contacts}/>
+                <ContactsCard
+                  contact={contact}
+                  type={typeWindow}
+                  currentChat={currentChat}
+                  contacts={contacts}
+                />
               </div>
             ))}
           </div>
@@ -95,7 +107,7 @@ export function SearchWindow({ visibleSearchWindow, currentChat, contacts }) {
 
         {searchResults?.chats?.length > 0 && (
           <div className=" w-full flex items-center flex-col">
-            <p className="font-bold text-lg mb-2 text-center mt-4">Chats</p>
+            <p className="font-bold text-lg mb-2 text-center mt-4">{t("mainPage.chats")}</p>
             {searchResults.chats.map((chat) => (
               <div key={chat.id} className="flex flex-row items-center   p-2">
                 <ChatsCard chat={chat} currentChat={currentChat} />
@@ -105,8 +117,8 @@ export function SearchWindow({ visibleSearchWindow, currentChat, contacts }) {
         )}
       </div>
 
-      {isLoading && <p className="w-full text-center">Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
+      {isLoading && <p className="w-full text-center">{t("mainPage.loading")}</p>}
+      {error && <p className="text-center text-skin-error">{error.message}</p>}
     </div>
   );
 }

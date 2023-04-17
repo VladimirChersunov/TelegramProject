@@ -1,10 +1,17 @@
 import { useState, useEffect, forwardRef } from "react";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { SearchIcon } from "../Icons/SearchIcon";
+import { useTranslation } from "react-i18next";
 
 export  const  SerchInput = forwardRef(({ visibleSearchWindow, searchInputData }, ref) => {
   const [valExist, setValExist] = useState(false);
   const [value, setValue] = useState("");
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
   
 
   useEffect(() => {
@@ -31,7 +38,7 @@ export  const  SerchInput = forwardRef(({ visibleSearchWindow, searchInputData }
           className="h-[40px] w-[90%]  text-xl rounded-xl outline-none bg-skin-fill dark:bg-skin-fill-inverted ml-2"
           type="text"
           maxLength="20"
-          placeholder="Search..."
+          placeholder={t("mainPage.search")}
           value={value}
           onClick={handleSerchWindow}
           onChange={(e) => {

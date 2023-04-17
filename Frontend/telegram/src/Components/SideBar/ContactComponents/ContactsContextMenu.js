@@ -2,6 +2,8 @@ import { addContact, deleteContacts } from "../../../Services/contactServices";
 import { BanIcon } from "../../Icons/BanIcon";
 import { PeopleIcon } from "../../Icons/PeopleIcon";
 import { RecicleIcon } from "../../Icons/RecicleIcon";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 export function ContactsContextMenu({
   x,
@@ -10,6 +12,13 @@ export function ContactsContextMenu({
   handleCloseContextMenu,
   contactExists,
 }) {
+
+  const language = localStorage.getItem("language");
+ const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n,language]);
 
   console.log(contactExists)
   const handleCreateContact = (event) => {
@@ -50,7 +59,7 @@ export function ContactsContextMenu({
            flex-row  items-center text-sm pt-2 pb-2"
           >
             <PeopleIcon />
-            <p className="font-bold ml-2">Add to contacts</p>
+            <p className="font-bold ml-2">{t("mainPage.addToContacts")}</p>
           </li>
         )}
 
@@ -60,7 +69,7 @@ export function ContactsContextMenu({
            flex-row  items-center text-sm pt-2 pb-2"
         >
           <BanIcon />
-          <p className="font-bold ml-2 text-skin-error">Add to black list</p>
+          <p className="font-bold ml-2 text-skin-error">{t("mainPage.baned")}</p>
         </li>
       </ul>
       {contactExists &&
@@ -73,7 +82,7 @@ export function ContactsContextMenu({
            flex-row  items-center text-sm pt-2 pb-2"
           >
             <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none"} />
-            <p className=" font-bold ml-2 text-skin-error">Delete</p>
+            <p className=" font-bold ml-2 text-skin-error">{t("mainPage.delete")}</p>
           </li>
         </div>
       }
