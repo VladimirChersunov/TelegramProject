@@ -7,9 +7,12 @@ import { LogoutIcon } from "../Icons/LogoutIcon";
 import { MailIcon } from "../Icons/MailIcon";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import { ColorThemeIcon } from "../Icons/ColorThemeIcon";
+import { LanguageIcon } from "../Icons/LanguageIcon";
 
 
-export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
+
+export function SettingWindow({ currentUser, visibleSetting, visibleEdit,visibleLanguagePicker,visibleThemesPicker }) {
   const navigate = useNavigate();
   const MAX_LENGTH = 16;
   const language = localStorage.getItem("language");
@@ -41,8 +44,17 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
     navigate("/signin");
   };
 
+  const handleLanguagePickerVisible = ()=>{
+    visibleLanguagePicker(true)
+  }
+
+  const handleVisibleThemesPicker = ()=>{
+    visibleThemesPicker(true)
+  }
+
   return (
     <div className="flex flex-col w-[350px] w-min-[350px] overflow-auto">
+     
       {/* header */}
       <div className="flex flex-row items-center">
         <button
@@ -99,6 +111,20 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit }) {
         >
           <PenIcon />
           <p className="ml-10">{t("mainPage.editProfile")}</p>
+        </div>
+        <div
+        onClick={handleLanguagePickerVisible}
+        className="mt-2 text-xl ml-[-10px]  flex flex-row items-center  w-[90%] 
+        cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] ">
+        <LanguageIcon/>
+         <p className="ml-7">Change language</p>
+       </div>
+        <div
+        onClick={handleVisibleThemesPicker}
+         className="mt-2 text-xl ml-[-10px]  flex flex-row items-center  w-[90%] 
+         cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] ">
+          <ColorThemeIcon/>
+          <p className="ml-7">Change theme</p>
         </div>
         <div
           onClick={handleLogout}

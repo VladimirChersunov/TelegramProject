@@ -7,13 +7,14 @@ import { SettingWindow } from "./SettingWindow";
 import { ContactWindow } from "./ContactComponents/ContactWindow";
 import { AddMembers } from "./ChatComponents/AddMembers";
 
-
 import { SearchWindow } from "./SearchWindow";
 import { StartPrivate } from "./StartPrivate";
 import { EditProfile } from "./EditProfile";
 import Modal from "react-modal";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { AddNewChat } from "./ChatComponents/AddNewChat";
+import { LanguagePicker } from "./LanguagePicker";
+import { ThemesPicker } from "./ThemesPicker";
 
 export function CollumnContainer({
   chats,
@@ -23,22 +24,24 @@ export function CollumnContainer({
   handleMuted,
   toggleDarkMode,
   currentChat,
-  clearMain
+  clearMain,
+  changeThemes
 }) {
-  
   const [aboutState, setAboutState] = useState(false);
   const [chatlistState, setChatlistState] = useState(true);
   const [bugReportState, setBugReport] = useState(false);
   const [settingState, setSettingState] = useState(false);
   const [contactState, setContactState] = useState(false);
   const [addMembersState, setAddMembersState] = useState(false);
-  const [addMessageState, setAddMessageState] = useState(false);
+
   const [addGroupState, setAddGroupState] = useState(false);
   const [searchWindowState, setSearchWindowState] = useState(false);
   const [chatType, setChatType] = useState("");
   const [checkedContacts, setCheckedContacts] = useState([]);
   const [startPrivateState, setStartPrivateState] = useState(false);
   const [editState, setEditState] = useState(false);
+  const [languagePickerState, setLanguagePickerState] = useState(false);
+  const [themesPickerState, setThemesPickerState] = useState(false);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -46,7 +49,6 @@ export function CollumnContainer({
     setModalIsOpen(false);
   };
 
- 
   const visibleAbout = (props) => {
     setAboutState(props);
     setChatlistState(!props);
@@ -76,11 +78,6 @@ export function CollumnContainer({
     setChatType(props);
   };
 
-  const visibleAddMessage = (props) => {
-    setAddMessageState(props);
-    setChatlistState(!props);
-  };
-
   const visibleAddNewChat = (props) => {
     setAddGroupState(props);
     setAddMembersState(!props);
@@ -92,7 +89,7 @@ export function CollumnContainer({
   };
 
   const visibleModalReport = (props) => {
-    setModalIsOpen(props)
+    setModalIsOpen(props);
   };
 
   const visibleSearchWindow = (props) => {
@@ -114,28 +111,41 @@ export function CollumnContainer({
     setSettingState(!props);
   };
 
+  const visibleLanguagePicker = (props) => {
+    setLanguagePickerState(props);
+    setSettingState(!props);
+  };
+
+  const visibleThemesPicker = (props) => {
+    setThemesPickerState(props);
+    setSettingState(!props);
+  };
+
   return (
     <div
       className={`h-screen  flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted items-center 
        border-solid min-w-[350px] max-w-[400px]`}
     >
-
       {aboutState && <About visibleAbout={visibleAbout} />}
 
       {bugReportState && <ReportBug visibleBugReport={visibleBugReport} />}
-
 
       {settingState && (
         <SettingWindow
           visibleSetting={visibleSetting}
           currentUser={currentUser}
           visibleEdit={visibleEdit}
+          visibleLanguagePicker={visibleLanguagePicker}
+          visibleThemesPicker={visibleThemesPicker}
         />
       )}
 
-
       {contactState && (
-        <ContactWindow visibleContact={visibleContact} contacts={contacts} currentChat={currentChat}/>
+        <ContactWindow
+          visibleContact={visibleContact}
+          contacts={contacts}
+          currentChat={currentChat}
+        />
       )}
 
       {startPrivateState && (
@@ -148,23 +158,31 @@ export function CollumnContainer({
         />
       )}
 
-      {editState && <EditProfile visibleEdit={visibleEdit}  currentUser={currentUser}/>}
+      {editState && (
+        <EditProfile visibleEdit={visibleEdit} currentUser={currentUser} />
+      )}
+
+{themesPickerState && (
+        <ThemesPicker visibleThemesPicker={visibleThemesPicker}   changeThemes={changeThemes}/>
+      )}
+
+{languagePickerState && (
+        <LanguagePicker visibleLanguagePicker={visibleLanguagePicker}  />
+      )}
 
       {addMembersState && (
         <AddMembers
           contacts={contacts}
           visibleAddmembers={visibleAddmembers}
           chatType={chatType}
-          visibleAddMessage={visibleAddMessage}
           visibleAddNewChat={visibleAddNewChat}
           handleCheckedContacts={handleCheckedContacts}
-         
         />
       )}
-      
+
       {addGroupState && (
         <AddNewChat
-        visibleAddNewChatFinish={visibleAddNewChatFinish}
+          visibleAddNewChatFinish={visibleAddNewChatFinish}
           visibleAddNewChat={visibleAddNewChat}
           chatType={chatType}
           checkedContacts={checkedContacts}
@@ -173,14 +191,18 @@ export function CollumnContainer({
       )}
 
       {searchWindowState && (
-        <SearchWindow visibleSearchWindow={visibleSearchWindow} currentChat={currentChat}  contacts={contacts}/>
+        <SearchWindow
+          visibleSearchWindow={visibleSearchWindow}
+          currentChat={currentChat}
+          contacts={contacts}
+        />
       )}
 
       {chatlistState && (
         <div className="flex flex-col min-w-[350px] max-w-[400px] h-screen">
           <LeftHeader
-          currentChat={currentChat}
-           chats={chats}
+            currentChat={currentChat}
+            chats={chats}
             darkMode={darkMode}
             toggleDarkMode={toggleDarkMode}
             visibleAbout={visibleAbout}
@@ -190,14 +212,13 @@ export function CollumnContainer({
             visibleSearchWindow={visibleSearchWindow}
           />
           <RadioChatList
-          visibleModalReport={visibleModalReport}
-           currentUser={ currentUser}
+            visibleModalReport={visibleModalReport}
+            currentUser={currentUser}
             chats={chats}
             clearMain={clearMain}
             currentChat={currentChat}
             handleMuted={handleMuted}
             visibleAddNewChat={visibleAddNewChat}
-            visibleAddMessage={visibleAddMessage}
             chatTypeCallback={chatTypeCallback}
             visibleAddmembers={visibleAddmembers}
             visibleStartPrivate={visibleStartPrivate}
@@ -205,7 +226,7 @@ export function CollumnContainer({
         </div>
       )}
 
-<Modal
+      <Modal
         isOpen={modalIsOpen}
         onRequestClose={handleModalClose}
         style={{
@@ -226,21 +247,24 @@ export function CollumnContainer({
       >
         <div className="flex flex-col w-full h-full ">
           <div className="flex w-full justify-end">
-          <button
-            onClick={handleModalClose}
-            className="h-[30px] w-[30px] rounded-full mr-2 mt-2 hover:bg-skin-button-accent-hover flex items-center justify-center"
-          >
-            <CloseIcon
-              styles={
-                "h-5 w-5 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base"
-              }
-            />
-          </button>
+            <button
+              onClick={handleModalClose}
+              className="h-[30px] w-[30px] rounded-full mr-2 mt-2 hover:bg-skin-button-accent-hover flex items-center justify-center"
+            >
+              <CloseIcon
+                styles={
+                  "h-5 w-5 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base"
+                }
+              />
+            </button>
           </div>
-          
-        <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base tracking-wider">Report   </span>
-        <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base">sent successfully!</span>
-         
+
+          <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base tracking-wider">
+            Report{" "}
+          </span>
+          <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base">
+            sent successfully!
+          </span>
         </div>
       </Modal>
     </div>

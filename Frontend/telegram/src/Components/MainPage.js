@@ -183,6 +183,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
           toggleDarkMode={toggleDarkMode}
           contacts={contacts}
           clearMain={clearMain}
+          changeThemes={changeThemes}
         />
       </div>
 
@@ -194,7 +195,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
             chat={currChat}
             chats={chats}
             toggleRightColumn={toggleRightColumn}
-            changeThemes={changeThemes}
+           
             darkMode={darkMode}
             currentUser={currentUser}
           />

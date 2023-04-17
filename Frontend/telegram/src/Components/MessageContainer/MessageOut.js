@@ -15,7 +15,7 @@ export function MessageOut({ message,checkMessage}) {
   //console.log(message)
   // Форматирование времени
   const sendTimeFormatted = moment(sendTime).calendar(null, {
-    sameDay: `[${t("mainPage.Today at")}] HH:mm`,
+    sameDay: `[${t("mainPage.todayAt")}] HH:mm`,
     lastDay: `[${t("mainPage.yesterdayAt")}] HH:mm`,
     lastWeek: "DD.MM.YYYY",
     sameElse: "DD.MM.YYYY",
