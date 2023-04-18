@@ -6,10 +6,9 @@
 @layer base {
   :root {
     --color-text-base: #0c0221;
-    --color-text-muted: #383453;    
+    --color-text-muted: #383453;
     --color-text-inverted: #c6bdff;
-    --color-text-error: #DC2626;
-
+    --color-text-error: #dc2626;
 
     --color-stroke-base: #0c0221;
     --color-stroke-inverted: #c6bdff;
@@ -21,42 +20,71 @@
     --color-button-inverted: #c6bdff;
     --color-button-accent-hover: #584ca3;
     --color-button-muted: #555555;
-    --color-button-inverted-hover: #7E5EFC;
+    --color-button-inverted-hover: #7e5efc;
 
     --color-border-base: #0c0221;
     --color-border-inverted: #c6bdff;
-    --color-border-error: #DC2626;
+    --color-border-error: #dc2626;
   }
 
   .theme-swiss {
-    --color-text-base: #ffffff;
-    --color-text-muted: #fecaca;
-    --color-text-inverted: #dc2626;
-    --color-fill: #b91c1c;
-    --color-button-accent: #ffffff;
-    --color-button-accent-hover: #fef2f2;
-    --color-button-muted: #ef4444;
-    --color-border-base: #0c0221;
+    --color-text-base: #591d75;
+    --color-text-muted: #886798;
+
+    --color-text-error: #e31150;
+
+    --color-stroke-base: #591d75;
+
+    --color-fill: #fcceec;
+
+    --color-button-accent: #591d75;
+
+    --color-button-accent-hover: #bb33fb;
+    --color-button-muted: #555555;
+
+    --color-border-base: #591d75;
+
+    --color-border-error: #e31150;
   }
 
   .theme-neon {
-    --color-text-base: #111802;
-    --color-text-muted: #2f4306;
-    --color-text-inverted: #ebfacc;
-    --color-fill: #b3ff17;
-    --color-button-accent: #243403;
-    --color-button-accent-hover: #374f05;
-    --color-button-muted: #d4ff7a;
+    --color-text-base: #163F27;
+    --color-text-muted: #4F6859;
+
+    --color-text-error: #D71313;
+
+    --color-stroke-base: #163F27;
+
+    --color-fill: #BBECAA;
+
+    --color-button-accent: #163F27;
+
+    --color-button-accent-hover: #137039;
+    --color-button-muted: #555555;
+
+    --color-border-base: #163F27;
+
+    --color-border-error: #D71313;
   }
 
   .theme-blue {
-    --color-text-base: #ffffff;
-    --color-text-muted: #c7d2fe;
-    --color-text-inverted: #4f46e5;
-    --color-fill: #4338ca;
-    --color-button-accent: #ffffff;
-    --color-button-accent-hover: #eef2ff;
-    --color-button-muted: #6366f1;
+    --color-text-base: #13333A;
+    --color-text-muted: #526367;
+
+    --color-text-error: #F40D29;
+
+    --color-stroke-base: #13333A;
+
+    --color-fill: #C3F5F9;
+
+    --color-button-accent: #13333A;
+
+    --color-button-accent-hover: #24616F;
+    --color-button-muted: #555555;
+
+    --color-border-base: #13333A;
+
+    --color-border-error: #F40D29;
   }
 
   .dark {
@@ -65,15 +93,15 @@
   }
 
   /* Customize the scrollbar */
-.scrollbar::-webkit-scrollbar {
-  width: 8px;
-}
-.scrollbar::-webkit-scrollbar-track {
-  background-color: #f5f5f5;
-  border-radius: 9999px;
-}
-.scrollbar::-webkit-scrollbar-thumb {
-  background-color: #999;
-  border-radius: 9999px;
-}
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .scrollbar::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    border-radius: 9999px;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #999;
+    border-radius: 9999px;
+  }
 }

@@ -19,15 +19,15 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [mainRiht, setMainRight] = useState(false);
   const [currChat, setCurrentChat] = useState({});
   const [centrVisible, setCentrVisible] = useState(false);
-  const [theme, setTheme] = useState("");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "");
   const [chats, setChats] = useState([]);
   const [lastMessage, setLastMessage] = useState(null);
   const location = useLocation();
-  const [currentLanguage, setCurrentLanguage] = useState(
-    location.state?.language || localStorage.getItem("language")
-  );
+  const currentLanguage =
+    location.state?.language || localStorage.getItem("language");
+
   const { i18n } = useTranslation();
-  
+
   useEffect(() => {
     i18n.changeLanguage(currentLanguage);
   }, [i18n, currentLanguage]);
@@ -39,6 +39,14 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     };
     window.addEventListener("popstate", handleBackButton);
   }, []);
+
+  useEffect(() => {
+    if (darkMode) {
+      changeThemes("");
+    } else {
+      changeThemes(theme || localStorage.getItem("theme"));
+    }
+  }, [theme]);
 
   useEffect(() => {
     if (currChat.chatName) {
@@ -108,7 +116,6 @@ export function MainPage({ darkMode, toggleDarkMode }) {
           JSON.stringify(contacts) === JSON.stringify(data.contacts);
 
         if (!currentUserEqual) {
-          console.log("user " + currentUserEqual);
           setCurrentUser(data.user);
         }
 
@@ -195,7 +202,6 @@ export function MainPage({ darkMode, toggleDarkMode }) {
             chat={currChat}
             chats={chats}
             toggleRightColumn={toggleRightColumn}
-           
             darkMode={darkMode}
             currentUser={currentUser}
           />

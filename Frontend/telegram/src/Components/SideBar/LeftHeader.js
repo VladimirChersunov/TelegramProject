@@ -6,6 +6,7 @@ export function LeftHeader(props) {
   return (
     <div className="h-[60px] flex flex-row max-w-full">
       <MenuButton
+      changeThemes={props.changeThemes}
        currentChat={props.currentChat}
        chats={props.chats}
         darkMode={props.darkMode}

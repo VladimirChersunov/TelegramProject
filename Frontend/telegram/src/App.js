@@ -20,8 +20,8 @@ function App() {
   const [token, setToken] = useState(location.state?.token || "");
 
 
-  const toggleDarkMode = () => {
-    setDarkMode((prevDarkMode) => !prevDarkMode);
+  const toggleDarkMode = (props) => {
+    setDarkMode((prevDarkMode) => props);
   };
 
   const signUpData = ({ username, email, password, code }) => {
@@ -66,7 +66,7 @@ function App() {
   }, [token,location.state?.token]);
 
   return (
-    <div className={`h-full ove w-full ${darkMode ? "dark" : ""}  `}>
+    <div className={`h-full w-full ${darkMode ? "dark" : ""}  `}>
       <Routes>
         <Route
           path="/main"

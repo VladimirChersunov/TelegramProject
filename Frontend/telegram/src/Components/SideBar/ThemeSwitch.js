@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export function ThemeSwitch(props) {
-  const [toggle, setToggle] = useState(props.darkMode);
-  const toggleClass = " transform translate-x-5";  
+export function ThemeSwitch({darkMode,toggleDarkMode,changeThemes}) {
+  const [toggle, setToggle] = useState(darkMode);
+  const toggleClass = "transform translate-x-5";  
+
+  useEffect(() => {
+    if(toggle){      
+      toggleDarkMode(toggle);
+      changeThemes("")
+    }else{
+      toggleDarkMode(toggle);
+      changeThemes(localStorage.getItem('theme'))
+    }
+    
+  }, [toggle]);
   
 
   const handelClick = () => {
-    setToggle((prevToggle) => !toggle);
-    props.toggleDarkMode();
+    setToggle((prevToggle) => !toggle);   
   };
+
+
   return (
     <>
       <div
@@ -19,7 +31,7 @@ export function ThemeSwitch(props) {
         {/* Switch */}
         <div
           className={
-            " h-4 w-4 rounded-full shadow-md transform duration-300 ease-in-out bg-slate-600 dark:bg-[#0C0221]" +
+            " h-4 w-4 rounded-full shadow-md transform duration-300  ease-in-out bg-skin-button-accent-hover dark:bg-skin-fill-inverted" +
             (toggle ? toggleClass : null)
           }
         ></div>

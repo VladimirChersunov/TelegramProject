@@ -117,14 +117,14 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit,visible
         className="mt-2 text-xl ml-[-10px]  flex flex-row items-center  w-[90%] 
         cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] ">
         <LanguageIcon/>
-         <p className="ml-7">Change language</p>
+         <p className="ml-7">{t("mainPage.changeLanguage")}</p>
        </div>
         <div
         onClick={handleVisibleThemesPicker}
          className="mt-2 text-xl ml-[-10px]  flex flex-row items-center  w-[90%] 
          cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] ">
           <ColorThemeIcon/>
-          <p className="ml-7">Change theme</p>
+          <p className="ml-7">{t("mainPage.changeTheme")}</p>
         </div>
         <div
           onClick={handleLogout}

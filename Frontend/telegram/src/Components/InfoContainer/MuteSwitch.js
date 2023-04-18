@@ -28,7 +28,7 @@ export function MuteSwitch({ chat }) {
         {/* Switch */}
         <div
           className={
-            " h-4 w-4 rounded-full shadow-md transform duration-300 ease-in-out bg-slate-600 dark:bg-[#0C0221]" +
+            " h-4 w-4 rounded-full shadow-md transform duration-300 ease-in-out bg-skin-button-accent-hover dark:bg-skin-fill-inverted" +
             (mute ? toggleClass : null)
           }
         ></div>

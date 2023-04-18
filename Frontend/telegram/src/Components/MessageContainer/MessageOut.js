@@ -51,7 +51,7 @@ export function MessageOut({ message,checkMessage}) {
         <div className="flex flex-col justify-end align-bottom">
           <div className="bg-blue-200 w-[50px] h-[50px] relative">
             <div
-              className=" absolute bg-skin-fill dark:bg-[#0C0221] w-[50px] h-[50px] bottom-0 left-0
+              className=" absolute bg-skin-fill dark:bg-skin-fill-inverted w-[50px] h-[50px] bottom-0 left-0
              rounded-bl-[100px] mt-3"
             ></div>
           </div>

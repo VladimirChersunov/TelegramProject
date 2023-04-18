@@ -36,6 +36,7 @@ export function MenuButton(props) {
 
         {open && (
           <LeftMenu
+          changeThemes={props.changeThemes}
             currentChat={props.currentChat}
             chats={props.chats}
             darkMode={props.darkMode}

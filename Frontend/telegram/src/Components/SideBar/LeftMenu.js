@@ -17,6 +17,7 @@ export function LeftMenu({
   visibleSetting,
   currentChat,
   chats,
+  changeThemes
 }) {
   const language = localStorage.getItem("language");
  const { t, i18n } = useTranslation();
@@ -63,7 +64,7 @@ export function LeftMenu({
       <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
         <MoonIcon />
         <p className="font-bold ml-2 mr-4">{t("mainPage.nightMode")}</p>
-        <ThemeSwitch darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <ThemeSwitch darkMode={darkMode} toggleDarkMode={toggleDarkMode} changeThemes={changeThemes}/>
       </li>
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"

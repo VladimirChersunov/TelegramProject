@@ -10,8 +10,7 @@ import { useTranslation } from "react-i18next";
 export function InfoContainer({ toggleRightColumn, chat }) {
   const [type, setType] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  const language = localStorage.getItem("language"); 
-  console.log(language)
+  const language = localStorage.getItem("language");  
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
