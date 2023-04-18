@@ -30,7 +30,8 @@ module.exports = {
       },
       backgroundColor: {
         skin: {
-          fill: "var(--color-fill)",
+          fill: "var(--color-fill)",         
+          "fill-message": "var(--color-fill-message)",
           "fill-inverted": "var(--color-fill-inverted)",
           "button-accent": "var( --color-button-accent)",
           "button-accent-hover": "var(--color-button-accent-hover)",

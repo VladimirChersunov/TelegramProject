@@ -14,6 +14,7 @@
     --color-stroke-inverted: #c6bdff;
 
     --color-fill: #c6bdff;
+    --color-fill-message: #FFFFFF;
     --color-fill-inverted: #0c0221;
 
     --color-button-accent: #0c0221;
@@ -36,6 +37,7 @@
     --color-stroke-base: #591d75;
 
     --color-fill: #fcceec;
+    --color-fill-message: #FFEEF9;
 
     --color-button-accent: #591d75;
 
@@ -56,6 +58,7 @@
     --color-stroke-base: #163F27;
 
     --color-fill: #BBECAA;
+    --color-fill-message: #E4FDDB;
 
     --color-button-accent: #163F27;
 
@@ -76,6 +79,7 @@
     --color-stroke-base: #13333A;
 
     --color-fill: #C3F5F9;
+    --color-fill-message: #EDFCFD;
 
     --color-button-accent: #13333A;
 

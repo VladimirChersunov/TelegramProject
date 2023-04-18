@@ -26,7 +26,7 @@ export function MessageOut({ message,checkMessage}) {
       checkMessage && 'border'
     }`}>
       <div className="w-max h-max flex flex-row mt-2 mr-10 ">
-        <div className="bg-blue-200 w-[100%] rounded-l-xl rounded-t-xl">
+        <div className="text-skin-base bg-skin-fill-message dark:bg-[#170146] dark:text-skin-inverted w-[100%] rounded-l-xl rounded-t-xl">
           <div className="flex flex-row justify-end items-center w-[90%] ml-2  mt-1 font-semibold text-lg">
             <time className="text-xs opacity-50 mr-2">{sendTimeFormatted}</time>
           </div>
@@ -49,7 +49,7 @@ export function MessageOut({ message,checkMessage}) {
         </div>
 
         <div className="flex flex-col justify-end align-bottom">
-          <div className="bg-blue-200 w-[50px] h-[50px] relative">
+          <div className=" bg-skin-fill-message dark:bg-[#170146]  w-[50px] h-[50px] relative">
             <div
               className=" absolute bg-skin-fill dark:bg-skin-fill-inverted w-[50px] h-[50px] bottom-0 left-0
              rounded-bl-[100px] mt-3"

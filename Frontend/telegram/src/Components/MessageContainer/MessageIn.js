@@ -32,7 +32,7 @@ export function MessageIn({ message,checkMessage }) {
     }`}>
       <div className="max-w-[600px] min-w-[100px] flex flex-row mt-2 ml-10">
         <div className="flex flex-col justify-end align-bottom">
-          <div className="bg-blue-200 w-[50px] h-[50px] relative">
+          <div className="bg-skin-fill-message dark:bg-[#170146] w-[50px] h-[50px] relative">
             <div
               id="roundPart"
               className="absolute  w-[55px] h-[50px] bg-skin-fill  dark:bg-skin-fill-inverted  bottom-0 right-0 
@@ -60,7 +60,7 @@ export function MessageIn({ message,checkMessage }) {
 
         <div
           id="textPart"
-          className="bg-blue-200 w-[100%] rounded-r-xl rounded-t-xl "
+          className="w-[100%] text-skin-base bg-skin-fill-message dark:bg-[#170146] dark:text-skin-inverted rounded-r-xl rounded-t-xl "
         >
           <div className="flex flex-row justify-between items-center w-[90%] ml-2 mt-1 mr-5 font-semibold text-lg">
             {author?.userName}
