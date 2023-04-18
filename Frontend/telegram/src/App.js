@@ -10,7 +10,7 @@ import { SetNewPassword } from "./Components/AuthComponents/SetNewPassword";
 import { SignUpFinish } from "./Components/AuthComponents/SignUpFinish";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('darkMode')) ?? true );
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -45,6 +45,7 @@ function App() {
   const setTokenCallback = (props) =>{
     setToken(props)
   }
+ 
  
 
   useEffect(() => {

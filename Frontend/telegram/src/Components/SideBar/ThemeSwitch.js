@@ -8,9 +8,11 @@ export function ThemeSwitch({darkMode,toggleDarkMode,changeThemes}) {
     if(toggle){      
       toggleDarkMode(toggle);
       changeThemes("")
+      localStorage.setItem('darkMode', true)
     }else{
       toggleDarkMode(toggle);
       changeThemes(localStorage.getItem('theme'))
+      localStorage.setItem('darkMode', false)
     }
     
   }, [toggle]);

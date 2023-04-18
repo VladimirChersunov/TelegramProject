@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function ColorRAdioButton({ changeThemes, darkMode, toggleDarkMode }) {
   const [color, setColor] = useState(localStorage.getItem("theme") || "");
+  const isDark = darkMode;
+
+  useEffect(() => {
+   
+  }, [color]);
 
   function onChangeValue(event) {
+    console.log('click')
     if (isDark) {
       toggleDarkMode(false);
+      localStorage.setItem('darkMode', false)
     }
     setColor(event.target.value);
     changeThemes(event.target.value);
@@ -15,9 +22,10 @@ export function ColorRAdioButton({ changeThemes, darkMode, toggleDarkMode }) {
   const handleDarkMode = () => {
     toggleDarkMode(true);
     changeThemes("");
+    localStorage.setItem('darkMode', true)
   };
 
-  const isDark = darkMode;
+  
 
   return (
     <div
@@ -32,7 +40,7 @@ export function ColorRAdioButton({ changeThemes, darkMode, toggleDarkMode }) {
           type="radio"
           name="inlineRadioOptions"
           value="theme-swiss"
-          defaultChecked={color === "theme-swiss"}
+          defaultChecked={(color === "theme-swiss") && !isDark}
         />
       </div>
 
