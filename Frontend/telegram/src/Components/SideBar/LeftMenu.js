@@ -17,14 +17,14 @@ export function LeftMenu({
   visibleSetting,
   currentChat,
   chats,
-  changeThemes
+  changeThemes,
 }) {
   const language = localStorage.getItem("language");
- const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [i18n,language]);
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
   const savedMessage = chats.find((chat) => chat.type === "Favorite");
 
   return (
@@ -61,10 +61,15 @@ export function LeftMenu({
         <SettingIcon />
         <p className="font-bold ml-2">{t("mainPage.setting")}</p>
       </li>
-      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center">
+      <li className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center ">
         <MoonIcon />
         <p className="font-bold ml-2 mr-4">{t("mainPage.nightMode")}</p>
-        <ThemeSwitch darkMode={darkMode} toggleDarkMode={toggleDarkMode} changeThemes={changeThemes}/>
+
+        <ThemeSwitch
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+          changeThemes={changeThemes}
+        />
       </li>
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"

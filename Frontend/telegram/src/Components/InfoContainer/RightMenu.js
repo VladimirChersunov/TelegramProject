@@ -77,8 +77,8 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
 
   return (
     <ul
-      className={`absolute mt-4  ml-[-180px] block  group-hover:block shadow-2xl  border border-skin-border-base
-       dark:border-skin-border-inverted rounded-lg text-lg  w-[200px] bg-skin-fill dark:bg-skin-fill-inverted z-50 `}
+      className={`absolute mt-4 right-0   block  group-hover:block shadow-2xl  border border-skin-border-base
+       dark:border-skin-border-inverted rounded-lg text-lg  w-max pr-2 bg-skin-fill dark:bg-skin-fill-inverted z-50 `}
     >
       {!mute && (
         <li
@@ -113,7 +113,7 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
       </li>
 
       <div className="w-[100%] flex justify-center">
-        <div className="w-[80%] h-[1px] bg-skin-fill mt-2 "></div>
+        <div className="w-[80%] h-[1px] bg-skin-fill-inverted dark:bg-skin-fill mt-2 "></div>
       </div>
 
       {channel && (
