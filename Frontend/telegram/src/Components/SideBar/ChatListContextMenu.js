@@ -28,6 +28,15 @@ export function ChatListContextMenu({
   const [posY, setPosY] = useState(null);
   const language = localStorage.getItem("language");
  const { t, i18n } = useTranslation();
+ const whoMuted = chat?.whoMuted
+ const [chatMuteStatus, setChatMuteStatus] = useState(false);
+ useEffect(() => {
+  if(whoMuted.includes(currentUser.id)){
+    setChatMuteStatus((prev)=>true)
+  }else{
+    setChatMuteStatus((prev)=>false)
+  }
+}, [chat?.whoMuted]);
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -136,7 +145,7 @@ export function ChatListContextMenu({
           <SelectAll />
           <p className="font-bold ml-2"> {t("mainPage.markRead")}</p>
         </li>
-        {!mute && (
+        {chatMuteStatus && (
           <li
             onClick={handleMuteChat}
             className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex
@@ -146,7 +155,7 @@ export function ChatListContextMenu({
             <p className="font-bold ml-2"> {t("mainPage.mute")}</p>
           </li>
         )}
-        {mute && (
+        {!chatMuteStatus && (
           <li
             onClick={handleMuteChat}
             className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex

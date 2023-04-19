@@ -19,7 +19,7 @@ export function MessageContainer({
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const language = localStorage.getItem("language");
  const { t, i18n } = useTranslation();
-
+//console.log(chat)
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [i18n,language]);

@@ -146,11 +146,11 @@ export const chatExist = async (opponentId) => {
   try {
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
-    const id = user?.id;
-    if (id && opponentId) {
+    const userId = user?.id;
+    if (userId && opponentId) {
       const response = await axiosCreate.post(
         "Chats/chatexists",
-        { id, opponentId },
+        { userId, opponentId },
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -170,10 +170,12 @@ export const chatExist = async (opponentId) => {
 export const chatNotifications = async (chatId) => {
   try {
     const token = localStorage.getItem("token");
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    const userId = currentUser?.id 
     if (token && chatId) {
-      const response = await axiosCreate.patch(
-        `Chats/notifications/${chatId}`,
-        {},
+      const response = await axiosCreate.post(
+        `Chats/mutechat`,
+        {chatId, userId},
         {
           headers: {
             Authorization: "Bearer " + token,

@@ -27,22 +27,18 @@ export const createMessaage = async (userId, chatId, data, text) => {
 };
 
 
-//Chats/openchat актуализация меседжей
-export const getAllMessaages = async (chatName, authorId, privateChat) => {
+//Chats/openpublicchat актуализация меседжей
+export const getOpenPublicChat = async (chatName, authorId) => {
   
-  let additionalChatName = null;
+
   const token = localStorage.getItem("token");
-  if (privateChat === "Private") {
-    additionalChatName = localStorage.getItem("username");
-  } else {
-    additionalChatName = null;
-  }
+ 
 
   if (token) {
     try {
       const response = await axiosCreate.post(
-        `Chats/openchat`,
-        { chatName, authorId, additionalChatName },
+        `Chats/openpublicchat`,
+        { chatName, authorId},
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -50,6 +46,35 @@ export const getAllMessaages = async (chatName, authorId, privateChat) => {
         }
       );
     
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return error.response;
+    }
+  } else {
+    console.log("missing token");
+  }
+};
+
+//Chats/openprivatechat актуализация меседжей
+export const getOpenPrivateChat = async (opponentId) => {
+  
+ 
+  const token = localStorage.getItem("token");
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUserId = currentUser?.id 
+  if (token) {
+    try {
+      const response = await axiosCreate.post(
+        `Chats/openprivatechat`,
+        { currentUserId, opponentId },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+    console.log(response.data)
       return response.data;
     } catch (error) {
       console.log(error.response);

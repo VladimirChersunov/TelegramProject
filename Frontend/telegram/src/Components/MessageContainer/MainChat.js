@@ -1,6 +1,6 @@
 import { InputPanel } from "./InputPanel";
 import { useState, useEffect, useRef } from "react";
-import { getAllMessaages, readMessaages } from "../../Services/messageServices";
+import { getOpenPrivateChat, getOpenPublicChat, readMessaages } from "../../Services/messageServices";
 import { Message } from "./Message";
 
 export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
@@ -23,12 +23,11 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
       try {
         let allMessaages = null;
         if (chat.type === "Private") {
-          allMessaages = await getAllMessaages(chat?.chatName, null, "Private");
+          allMessaages = await getOpenPrivateChat(chat?.authorId)
         } else {
-          allMessaages = await getAllMessaages(
+          allMessaages = await getOpenPublicChat(
             chat?.chatName,
-            chat.authorId,
-            chat?.type
+            chat.authorId,           
           );
         }
         setDataMessages(allMessaages);
@@ -53,12 +52,11 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
     try {
       let allMessaages = null;
       if (chat?.type === "Private") {
-        allMessaages = await getAllMessaages(chat?.chatName, null, chat?.type);
+        allMessaages = await getOpenPrivateChat(chat?.authorId)
       } else {
-        allMessaages = await getAllMessaages(
+        allMessaages = await getOpenPublicChat(
           chat?.chatName,
-          chat?.authorId,
-          chat?.type
+          chat.authorId,           
         );
       }
       setDataMessages(allMessaages);

@@ -17,6 +17,18 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
   const [channel, setChannel] = useState(false);
   const language = localStorage.getItem("language");
  const { t, i18n } = useTranslation();
+ const currentUser = JSON.parse(localStorage.getItem("user")); 
+ const whoMuted = chat?.whoMuted
+ const [chatMuteStatus, setChatMuteStatus] = useState(false);
+
+ useEffect(() => {
+ 
+  if(whoMuted.includes(currentUser?.id)){
+    setChatMuteStatus((prev)=>true)
+  }else{
+    setChatMuteStatus((prev)=>false)
+  }
+}, [chat?.whoMuted]);
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -40,15 +52,13 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
     }
   }, [chat.type]);
 
-  useEffect(() => {
-    setMute(chat.muteStatus);
-  }, [chat.muteStatus]);
+  
 
 
   const handleMuteChat = (event) => {
     const muteChat = async () => {
       const responce = await chatNotifications(chat?.id);
-      setMute((prev)=>!prev)
+      setChatMuteStatus((prev)=>!prev)
       console.log(responce.result);
     };
     event.stopPropagation();
@@ -80,22 +90,22 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
       className={`absolute mt-4 right-0   block  group-hover:block shadow-2xl  border border-skin-border-base
        dark:border-skin-border-inverted rounded-lg text-lg  w-max pr-2 bg-skin-fill dark:bg-skin-fill-inverted z-50 `}
     >
-      {!mute && (
-        <li
-          onClick={handleMuteChat}
-          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2 p-1 flex flex-row  items-center"
-        >
-          <VolumeOnIcon />
-         
-          <p className="font-bold ml-2">{t("mainPage.mute")}</p>
-        </li>
-      )}
-      {mute && (
+      {!chatMuteStatus && (
         <li
           onClick={handleMuteChat}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2 p-1 flex flex-row  items-center"
         >
            <VolumeMuteIcon />
+         
+          <p className="font-bold ml-2">{t("mainPage.mute")}</p>
+        </li>
+      )}
+      {chatMuteStatus && (
+        <li
+          onClick={handleMuteChat}
+          className=" hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg pl-2 p-1 flex flex-row  items-center"
+        ><VolumeOnIcon />
+          
           <p className="font-bold ml-2">{t("mainPage.unmute")}</p>
         </li>
       )}

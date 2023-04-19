@@ -19,7 +19,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [mainRiht, setMainRight] = useState(false);
   const [currChat, setCurrentChat] = useState({});
   const [centrVisible, setCentrVisible] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "");    
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "");
   const [chats, setChats] = useState([]);
   const [lastMessage, setLastMessage] = useState(null);
   const location = useLocation();
@@ -71,7 +71,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     const autor = await getUserById(latestChat?.shortMsg?.userId);
     const isCurrent = currentUser?.id === latestChat?.shortMsg?.userId;
 
-    if (latestChat?.muteStatus) {
+    if (latestChat?.whoMuted?.includes(currentUser?.id)) {
       if (!isCurrent) {
         // получаем короткое сообщение из последнего чата
         const latestMessage = latestChat?.shortMsg;
@@ -120,13 +120,11 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         }
 
         if (!contactEqual) {
-          console.log("contact " + contactEqual);
           setContacts(data.contacts);
         }
 
         if (!chatEqual) {
-          console.log("chat " + chatEqual);
-          setChats(data.chats);
+          setChats(data.chats);          
         }
 
         setCurrentUser(data.user);
@@ -158,6 +156,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     } else {
       setCentrVisible(false);
     }
+
   }, [currChat]);
 
   const clearMain = (props) => {
@@ -170,6 +169,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 
   const currentChat = (chat) => {
     setCurrentChat(chat);
+    console.log(chat)
   };
 
   const toggleRightColumn = (state) => {

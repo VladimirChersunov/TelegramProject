@@ -15,6 +15,9 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
   const MAX_LENGTH = 15;
   const language = localStorage.getItem("language");
  const { t, i18n } = useTranslation();
+ const whoMuted = chat?.whoMuted
+//console.log( whoMuted)
+
 
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -44,7 +47,13 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
       setSavedMessageState(false);
     }
 
-    setChatMuteStatus((prevStatus) => chat.muteStatus);
+    if(whoMuted.includes(currentUser.id)){
+      setChatMuteStatus((prev)=>true)
+    }else{
+      setChatMuteStatus((prev)=>false)
+    }
+
+    
 
     document.addEventListener("contextmenu", handleClickOutside, true);
     document.addEventListener("click", handleClickOutside, true);
@@ -53,11 +62,15 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
       document.removeEventListener("click", handleClickOutside, true);
       document.removeEventListener("contextmenu", handleClickOutside, true);
     };
-  }, [chat.type,chat.muteStatus]);
+  }, [chat?.type,chat?.whoMuted]);
 
   useEffect(() => {
-    setChatMuteStatus((prev)=>chat.muteStatus)
-  }, [chat.muteStatus]);
+    if(whoMuted.includes(currentUser.id)){
+      setChatMuteStatus((prev)=>true)
+    }else{
+      setChatMuteStatus((prev)=>false)
+    }
+  }, [chat?.whoMuted]);
 
   const handleClickOutside = (e) => {
     if (!contextRef?.current?.contains(e.target)) {

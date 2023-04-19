@@ -9,7 +9,7 @@ export function ColorRAdioButton({ changeThemes, darkMode, toggleDarkMode }) {
   }, [color]);
 
   function onChangeValue(event) {
-    console.log('click')
+   
     if (isDark) {
       toggleDarkMode(false);
       localStorage.setItem('darkMode', false)

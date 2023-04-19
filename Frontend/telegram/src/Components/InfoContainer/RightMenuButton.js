@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { RightMenu } from "./RightMenu";
 
 export function RightMenuButton({chat,clearMain,visibleModalReport}) {
+  //console.log(chat)
   const [open, setOpen] = useState(false);
   const refRightMenu = useRef(null);
 

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { chatExist, createPrivate } from "../../../Services/chatServices";
 import { ContactsContextMenu } from "./ContactsContextMenu";
 import { LastSeen } from "../LastSeen";
-import { getAllMessaages } from "../../../Services/messageServices";
+import { getAllMessaages, getOpenPrivateChat } from "../../../Services/messageServices";
 import { isContact } from "../../../Services/contactServices";
 
 export function ContactsCard({ contact, type, currentChat, contacts }) {
@@ -38,17 +38,17 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
   const handleContactClick = async () => {
     //проверяем существует ли уже чат с этим юзером
     const chatExisted = await chatExist(contact?.id);
-
+console.log(chatExisted)
     if (chatExisted.exists) {
       //если существует то открываем чат
-      const data = await getAllMessaages(contact?.userName, null, "Private");
+      const data = await getOpenPrivateChat(contact?.id);
       console.log("only enter");
       //передаем  в колбэкфункцию этот чат, чтобы актулизировать хедер мейна
       currentChat(data?.chat);
     } else {
       //если НЕ существует чат, то создаем чат, а потом уже открываем его
       await createPrivate(contact?.userName);
-      const data = await getAllMessaages(contact?.userName, null, "Private");
+      const data = await getOpenPrivateChat(contact?.id);
       console.log("create and enter");
       currentChat(data?.chat);
     }

@@ -2,13 +2,16 @@ import axiosCreate from "./axiosCreate";
 
 //Users/updateinfo апдейт всего, кроме меседжей
 export const updateInfo = async () => {
-  const login = localStorage.getItem("username");
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const id = currentUser?.id 
   const token = localStorage.getItem("token");
-  if (login && token) {
+  if (id && token) {
     try {
+     
       const response = await axiosCreate.post("Users/updateinfo", {
-        token,
-        login,
+                token,
+                id
+        
       });
       return response.data;
     } catch (error) {

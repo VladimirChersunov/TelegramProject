@@ -7,6 +7,7 @@ export function InfoBlock({ chat, toggleRightColumn }) {
   const [favorite, setFavorite] = useState(false);
   const language = localStorage.getItem("language");
  const { t, i18n } = useTranslation();
+ //console.log(chat)
 
   useEffect(() => {
     i18n.changeLanguage(language)
