@@ -70,7 +70,7 @@ export function MessageIn({ message, checkMessage }) {
 
         <div
           id="textPart"
-          className="w-[100%] text-skin-base bg-skin-fill-message dark:bg-[#170146] dark:text-skin-inverted rounded-r-xl rounded-t-xl "
+          className="w-[100%] text-skin-base bg-skin-fill-message dark:bg-[#170146] dark:text-skin-inverted rounded-r-xl rounded-t-xl z-10"
         >
           <div className="flex flex-row justify-between items-center w-[90%] ml-2 mt-1 mr-5 font-semibold text-lg">
             {author?.userName}
@@ -88,12 +88,12 @@ export function MessageIn({ message, checkMessage }) {
 
           {viewed ? (
             <div className="ml-2 opacity-50 text-xs">
-              {" "}
-              {t("mainPage.viewed")}{" "}
+             
+              {t("mainPage.viewed")}
             </div>
           ) : (
             <div className="ml-2 opacity-50 text-xs">
-              {t("mainPage.notViewed")}{" "}
+              {t("mainPage.notViewed")}
             </div>
           )}
         </div>

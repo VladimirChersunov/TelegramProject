@@ -4,16 +4,16 @@ export function MessageForToast({ message, user }) {
   
 
   return (
-    <div className="w-[270px] h-[100px] bg-skin-fill dark:bg-skin-fill-inverted flex items-center  rounded-lg">
+    <div className="w-[270px] h-[100px] bg-skin-fill dark:bg-skin-fill-inverted flex items-center text-skin-base dark:text-skin-inverted  rounded-lg">
        
         {user?.user.photo ? (
         <img
           src={user?.user.photo}
           alt="logo"
-          className="rounded-full  h-[80px] w-[80px] border absolute ml-2"
+          className="rounded-full  h-[80px] w-[80px] border absolute ml-2 border-skin-border-base dark:border-skin-border-inverted"
         />
       ) : (
-        <div className="rounded-full   h-[80px] w-[80px] absolute bg-purple-500 flex items-center justify-center select-none ml-2">
+        <div className="rounded-full   h-[80px] w-[80px] absolute bg-purple-500 flex items-center justify-center select-none ml-2 border border-skin-border-base">
           <p className="text-xl">
             {user?.user.userName &&
               user?.user.userName[0].toUpperCase() +

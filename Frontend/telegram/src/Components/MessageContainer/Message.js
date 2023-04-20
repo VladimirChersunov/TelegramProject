@@ -102,7 +102,7 @@ export function Message({
         />
       )}
       {isCurrentUser ? (
-        <MessageOut message={message} checkMessage={checkMessage} />
+        <MessageOut message={message} checkMessage={checkMessage} currentUser={currentUser}/>
       ) : (
         <MessageIn message={message} checkMessage={checkMessage} />
       )}

@@ -110,7 +110,7 @@ export function InputPanel({
   return (
     <div
       ref={parentRef}
-      className=" w-[80%] h-max min-h-[70px] flex flex-col  justify-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted "
+      className=" w-[80%] bg-skin-fill dark:bg-skin-fill-inverted z-10 h-max min-h-[70px] flex flex-col  justify-center  rounded-lg border border-skin-border-base dark:border-skin-border-inverted "
       
     >
       {showPicker && (

@@ -25,7 +25,8 @@ export function CollumnContainer({
   toggleDarkMode,
   currentChat,
   clearMain,
-  changeThemes
+  changeThemes,
+  changePatternBackground
 }) {
   const [aboutState, setAboutState] = useState(false);
   const [chatlistState, setChatlistState] = useState(true);
@@ -137,6 +138,7 @@ export function CollumnContainer({
           visibleEdit={visibleEdit}
           visibleLanguagePicker={visibleLanguagePicker}
           visibleThemesPicker={visibleThemesPicker}
+          
         />
       )}
 
@@ -163,7 +165,7 @@ export function CollumnContainer({
       )}
 
 {themesPickerState && (
-        <ThemesPicker visibleThemesPicker={visibleThemesPicker} darkMode={darkMode}   changeThemes={changeThemes} toggleDarkMode={toggleDarkMode}/>
+        <ThemesPicker visibleThemesPicker={visibleThemesPicker} changePatternBackground={changePatternBackground} darkMode={darkMode}   changeThemes={changeThemes} toggleDarkMode={toggleDarkMode}/>
       )}
 
 {languagePickerState && (

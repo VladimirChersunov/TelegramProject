@@ -21,6 +21,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "");
   const [chats, setChats] = useState([]);
+  const [patternIndex, setPatterIndex] = useState(15);
   const [lastMessage, setLastMessage] = useState(null);
   const location = useLocation();
   const currentLanguage =
@@ -124,7 +125,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         }
 
         if (!chatEqual) {
-          setChats(data.chats);          
+          setChats(data.chats);
         }
 
         setCurrentUser(data.user);
@@ -156,7 +157,6 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     } else {
       setCentrVisible(false);
     }
-
   }, [currChat]);
 
   const clearMain = (props) => {
@@ -169,11 +169,17 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 
   const currentChat = (chat) => {
     setCurrentChat(chat);
-    console.log(chat)
+    console.log(chat);
   };
 
   const toggleRightColumn = (state) => {
     setMainRight(state);
+  };
+
+  const changePatternBackground = (index) => {
+    
+      setPatterIndex(index);
+       
   };
 
   return (
@@ -183,6 +189,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     >
       <div className="w-[350px]">
         <CollumnContainer
+        changePatternBackground={changePatternBackground}
           currentUser={currentUser}
           chats={chats}
           currentChat={currentChat}
@@ -197,6 +204,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
       <div className="flex-grow w-full">
         {centrVisible && (
           <MessageContainer
+            patternIndex={patternIndex}
             clearMain={clearMain}
             currentChat={currentChat}
             chat={currChat}
@@ -206,7 +214,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
             currentUser={currentUser}
           />
         )}
-        {!centrVisible && <ClearContainer />}
+        {!centrVisible && <ClearContainer patternIndex={patternIndex} />}
       </div>
 
       <ToastContainer

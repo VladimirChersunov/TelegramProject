@@ -4,6 +4,8 @@ import Modal from "react-modal";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { MessageHeader } from "./MessageHeader";
 import { useTranslation } from "react-i18next";
+import images from "../../Services/imageService";
+
 
 export function MessageContainer({
   chat,
@@ -13,12 +15,17 @@ export function MessageContainer({
   currentUser,
   currentChat,
   clearMain,
-  chats
+  chats,
+  patternIndex
 }) {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const language = localStorage.getItem("language");
  const { t, i18n } = useTranslation();
+ 
+ 
+
+
 //console.log(chat)
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -42,8 +49,10 @@ export function MessageContainer({
 
   return (
     <div
-      className={`flex flex-col h-[${windowHeight} px]  overflow-hidden w-full`}
+      className={`flex relative flex-col h-[${windowHeight} px]  overflow-hidden w-full`}
     >
+
+<img className="absolute z-10 inset-0 h-full w-full object-cover opacity-30" src={images[patternIndex]} alt=""/>
       <MessageHeader
         visibleModalReport={visibleModalReport}
         clearMain={clearMain}

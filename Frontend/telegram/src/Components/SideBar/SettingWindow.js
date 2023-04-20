@@ -12,7 +12,7 @@ import { LanguageIcon } from "../Icons/LanguageIcon";
 
 
 
-export function SettingWindow({ currentUser, visibleSetting, visibleEdit,visibleLanguagePicker,visibleThemesPicker }) {
+export function SettingWindow({ currentUser, visibleSetting, visibleEdit,visibleLanguagePicker,visibleThemesPicker,changePatternBackground }) {
   const navigate = useNavigate();
   const MAX_LENGTH = 16;
   const language = localStorage.getItem("language");

@@ -2,6 +2,9 @@ import { InputPanel } from "./InputPanel";
 import { useState, useEffect, useRef } from "react";
 import { getOpenPrivateChat, getOpenPublicChat, readMessaages } from "../../Services/messageServices";
 import { Message } from "./Message";
+import patternImg from "../../patterns/Rectangle 18.png";
+
+
 
 export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
   //console.log(chats)
@@ -97,11 +100,13 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
     <div
       className={`flex flex-col h-[${windowHeight} px] max-w-full items-center w-full`}
     >
+     
       <div
         ref={myRef}
         id="message-container"
-        className=" mt-2 flex flex-col  w-full overflow-x-hidden text-skin-base overflow-y-scroll scrollbar "
+        className="mt-2 relative flex flex-col  w-full overflow-x-hidden text-skin-base overflow-y-scroll scrollbar z-10"       
       >
+        {/* <img class="absolute inset-0 h-full w-full object-cover opacity-30" src={patternImg} alt=""/> */}
         {dataMessages &&
           dataMessages?.messages?.map((message) => (
             <Message
