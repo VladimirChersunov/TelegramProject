@@ -24,6 +24,7 @@ export function ThemesPicker({
   const handleImageClick = (index) => {
    
     changePatternBackground(index);
+    localStorage.setItem('imageIndex', index)
   };
 
   return (

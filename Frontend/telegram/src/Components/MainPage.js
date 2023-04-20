@@ -21,7 +21,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "");
   const [chats, setChats] = useState([]);
-  const [patternIndex, setPatterIndex] = useState(15);
+  const [patternIndex, setPatterIndex] = useState(localStorage.getItem("imageIndex") || 15);
   const [lastMessage, setLastMessage] = useState(null);
   const location = useLocation();
   const currentLanguage =
