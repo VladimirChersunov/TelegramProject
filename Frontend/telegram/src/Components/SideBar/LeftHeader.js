@@ -4,7 +4,7 @@ import { SerchInputInActive } from "./SearchInputInActive";
 export function LeftHeader(props) {
  
   return (
-    <div className="h-[60px] flex flex-row max-w-full">
+    <div className="h-[60px] flex flex-row w-full sm:w-screen">
       <MenuButton
       changeThemes={props.changeThemes}
        currentChat={props.currentChat}

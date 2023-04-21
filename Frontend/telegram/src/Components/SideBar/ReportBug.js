@@ -51,7 +51,7 @@ export function ReportBug(props) {
   };
 
   return (
-    <div className="flex flex-col w-[350px] w-min-[350px] justify-center">
+    <div className="flex flex-col w-[350px] sm:w-screen justify-center">
       <div className="flex flex-row items-center mt-4">
       <button
         className="ml-4  rounded-full hover:bg-skin-button-accent-hover h-[40px] w-[40px] flex

@@ -26,7 +26,7 @@ export function MessageOut({ message,checkMessage,currentUser}) {
       checkMessage && 'border'
     }`}>
       <div className="w-max h-max flex flex-row mt-2 mr-10 ">
-        <div className="text-skin-base bg-skin-fill-message dark:bg-[#170146] dark:text-skin-inverted w-[100%] z-10 rounded-l-xl rounded-t-xl">
+        <div className="text-skin-base bg-skin-fill-message dark:bg-[#170146] dark:text-skin-inverted w-[100%] z-10 rou rounded-t-xl rounded-bl-xl">
           <div className="flex flex-row justify-end items-center w-[90%] ml-2  mt-1 font-semibold text-lg">
             <time className="text-xs opacity-50 mr-2">{sendTimeFormatted}</time>
           </div>
@@ -42,40 +42,13 @@ export function MessageOut({ message,checkMessage,currentUser}) {
           }
             <div className="flex w-full justify-end items-center">
             {deliveryStatus ? <p className=" opacity-50 text-xs mr-2">{t("mainPage.delivered")} </p>
-          : <div className=" opacity-50 text-xs text-skin-error">{t("mainPage.notDelivered")}</div>}
+          : <div className=" opacity-50 text-xs text-skin-error mr-2">{t("mainPage.notDelivered")}</div>}
             </div>
           
           </div>
         </div>
 
-        <div className="flex relative flex-col justify-end align-bottom">
-          <div
-           id="smallPart"
-           className=" bg-skin-fill-message dark:bg-[#170146]  w-[50px] h-[50px] relative  ">           
-          </div>
-          <div
-          id="bigPart"
-              className=" absolute bg-skin-fill  dark:bg-skin-fill-inverted w-[50px] h-[50px] bottom-0 left-0
-             rounded-bl-[100px] mt-3 "
-            >
-               {currentUser?.photo ? (
-                <img
-                  src={currentUser?.photo}
-                  alt="logo"
-                  className="rounded-full  h-[40px] w-[40px] border border-gray-500 absolute ml-2"
-                />
-              ) : (
-                <div className="rounded-full ml-2   h-[40px] w-[40px] absolute bg-purple-500 flex items-center justify-center select-none">
-                  <p className="text-xl">
-                    {currentUser?.userName &&
-                      currentUser?.userName[0].toUpperCase() +
-                      currentUser?.userName[1].toUpperCase()}
-                  </p>
-                </div>
-              )}
-            </div>
-          
-        </div>
+       
       </div>
     </div>
   );

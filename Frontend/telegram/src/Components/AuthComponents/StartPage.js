@@ -37,7 +37,7 @@ export function StartPage() {
             : "h-[30px] cursor-pointer  hover:bg-skin-button-accent-hover"
         } flex items-center justify-center text-[16px] 
          select-none
-       bg-skin-fill-inverted border border-skin-border-inverted absolute right-0 top-0 mt-[45px] mr-[65px] rounded-2xl text-skin-inverted`}
+       bg-skin-fill-inverted border border-skin-border-inverted absolute right-0 top-0 mt-[45px] sm:mt-5 sm:mr-5 mr-[65px] rounded-2xl text-skin-inverted`}
       >
         {!languageButtonState && (
           <button> {currentLanguage === "ukr" ? "UA" : "EN"}</button>
@@ -64,10 +64,10 @@ export function StartPage() {
       <div className="w-[384px]  h-[400px] flex flex-col ">
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
-        <div className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
+        <div className="text-[18px] sm:text-[14px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
           {t("startPage.part1")}
         </div>
-        <div className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
+        <div className="text-[18px] sm:text-[14px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
           {t("startPage.part2")}
         </div>
         <button
@@ -75,7 +75,7 @@ export function StartPage() {
             
             navigate("/signin ", { language: currentLanguage });
           }}
-          className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
+          className="rounded-3xl sm:w-[200px] hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
            w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
           {t("startPage.btn")}

@@ -51,11 +51,11 @@ export function EnterEmail({ recoveryData }) {
   };
 
   return (
-    <div className="bg-skin-fill-inverted w-[100%] h-screen flex justify-center font-montserrat content-center items-center">
-      <div className="w-[384px]  h-[400px] flex flex-col ">
+    <div className="bg-skin-fill-inverted w-screen h-screen flex justify-center font-montserrat content-center items-center">
+      <div className="w-[384px] sm:w-screen  h-[400px] flex flex-col items-center">
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
-        <label className="text-skin-inverted text-lg mb-10 text-center">
+        <label className="text-skin-inverted text-lg mb-10 text-center sm:text-[16px] sm:w-[90%]">
         {t("recoveryPage.part1")}
         </label>
 
@@ -71,6 +71,7 @@ export function EnterEmail({ recoveryData }) {
              text-skin-inverted  
              bg-skin-fill-inverted 
              pl-2 
+             sm:text-[16px] sm:w-[90%]
              pb-[10px]  
              w-full 
              focus:outline-none 
@@ -91,7 +92,7 @@ export function EnterEmail({ recoveryData }) {
           onClick={handleSubmit}
           disabled={buttonDisabled}
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
-           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
+           w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal sm:w-[200px]"
         >
            {t("recoveryPage.btnRecovery")}
         </button>

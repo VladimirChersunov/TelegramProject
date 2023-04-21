@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { chatExist, createPrivate } from "../../../Services/chatServices";
 import { ContactsContextMenu } from "./ContactsContextMenu";
 import { LastSeen } from "../LastSeen";
-import { getAllMessaages, getOpenPrivateChat } from "../../../Services/messageServices";
+import { getOpenPrivateChat } from "../../../Services/messageServices";
 import { isContact } from "../../../Services/contactServices";
 
 export function ContactsCard({ contact, type, currentChat, contacts }) {
@@ -38,7 +38,7 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
   const handleContactClick = async () => {
     //проверяем существует ли уже чат с этим юзером
     const chatExisted = await chatExist(contact?.id);
-console.log(chatExisted)
+
     if (chatExisted.exists) {
       //если существует то открываем чат
       const data = await getOpenPrivateChat(contact?.id);

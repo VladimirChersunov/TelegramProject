@@ -29,7 +29,7 @@ export function ColorRAdioButton({ changeThemes, darkMode, toggleDarkMode }) {
 
   return (
     <div
-      className="flex justify-center flex-wrap items-center mt-10"
+      className="flex justify-center flex-wrap items-center mt-10 "
       onChange={onChangeValue}
     >
       <div className="w-[50px] h-[100px] flex items-center justify-center border bg-[#ec63bc] mx-10 rounded-lg border-black shadow-2xl">
@@ -66,7 +66,7 @@ export function ColorRAdioButton({ changeThemes, darkMode, toggleDarkMode }) {
           defaultChecked={color === "theme-blue"}
         />
       </div>
-      <div className="w-[50px] h-[100px] flex items-center justify-center border bg-[#C6BDFF] mr-10 mt-5 rounded-lg border-black shadow-2xl">
+      <div className="w-[50px] h-[100px] flex items-center justify-center border bg-[#C6BDFF] mr-10 mt-5 sm:mt-0 rounded-lg border-black shadow-2xl">
         <input
           className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300
            bg-white checked:bg-skin-button-accent-hover  checked:border-white focus:outline-none transition duration-200 cursor-pointer
@@ -77,7 +77,7 @@ export function ColorRAdioButton({ changeThemes, darkMode, toggleDarkMode }) {
           defaultChecked={color === ""}
         />
       </div>
-      <div className="w-[50px] h-[100px] flex items-center justify-center border bg-[#0C0221] mt-5 rounded-lg border-white shadow-2xl">
+      <div className="w-[50px] h-[100px] flex items-center justify-center border bg-[#0C0221] mt-5 sm:mt-0 rounded-lg border-white shadow-2xl">
         <input
           className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300
            bg-white checked:bg-skin-button-accent-hover checked:border-white focus:outline-none transition duration-200 cursor-pointer

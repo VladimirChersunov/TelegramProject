@@ -85,8 +85,8 @@ export function SignUp(props) {
   };
 
   return (
-    <div className=" w-[100%] bg-skin-fill-inverted h-screen flex font-montserrat justify-center content-center items-center">
-      <div className="w-[384px]  h-[500px] flex flex-col ">
+    <div className=" w-[100%] bg-skin-fill-inverted  h-screen flex font-montserrat justify-center content-center items-center">
+      <div className="w-[384px] sm:w-screen  h-[500px] flex flex-col items-center">
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
 
         <input
@@ -98,7 +98,7 @@ export function SignUp(props) {
             setEmail((prevValue) => e.target.value);
           }}
           required
-          className={`bg-skin-fill-inverted text-[16px]  placeholder:text-skin-muted
+          className={`bg-skin-fill-inverted text-[16px] w-full sm:w-[90%]  placeholder:text-skin-muted
           border-b outline-none
           ${
             emailError
@@ -122,7 +122,7 @@ export function SignUp(props) {
           }}
           required
           maxLength="20"
-          className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted  
+          className={`bg-skin-fill-inverted text-[16px] w-full sm:w-[90%] placeholder:text-skin-muted  
           ${
             usernameError
               ? "text-skin-error border-skin-border-error"
@@ -146,7 +146,7 @@ export function SignUp(props) {
           }}
           required
           maxLength="20"
-          className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted 
+          className={`bg-skin-fill-inverted w-full sm:w-[90%] text-[16px] placeholder:text-skin-muted 
           ${
             passwordError
               ? "text-skin-error border-skin-border-error"
@@ -170,7 +170,7 @@ export function SignUp(props) {
           }}
           required
           maxLength="20"
-          className={`bg-skin-fill-inverted text-[16px] placeholder:text-skin-muted  
+          className={`bg-skin-fill-inverted w-full sm:w-[90%] text-[16px] placeholder:text-skin-muted  
           ${
             confirmPasswordError
               ? "text-skin-error border-skin-border-error"
@@ -197,7 +197,7 @@ export function SignUp(props) {
           onSubmit={handleSubmit}
           onClick={handleSubmit}
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
-          w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-[36px] tracking-normal"
+          w-[250px] sm:w-[200px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-[36px] tracking-normal"
         >
           {isLoading ? `${t("signinPage.btnLoading")}` : `${t("signinPage.btnNext")}`}
         </button>

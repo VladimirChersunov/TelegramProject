@@ -124,8 +124,8 @@ export function CollumnContainer({
 
   return (
     <div
-      className={`h-screen  flex flex-col border-r border-skin-border-base dark:border-skin-border-inverted items-center 
-       border-solid min-w-[350px] max-w-[400px]`}
+      className={`h-screen  flex flex-col border-r sm:border-none border-skin-border-base dark:border-skin-border-inverted  
+       border-solid min-w-[350px]    sm:w-screen`}
     >
       {aboutState && <About visibleAbout={visibleAbout} />}
 

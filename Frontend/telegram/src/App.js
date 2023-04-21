@@ -67,7 +67,7 @@ function App() {
   }, [token,location.state?.token]);
 
   return (
-    <div className={`h-full w-full ${darkMode ? "dark" : ""}  `}>
+    <div className={`h-screen w-screen not-supported:hidden ${darkMode ? "dark" : ""}  `}>
       <Routes>
         <Route
           path="/main"

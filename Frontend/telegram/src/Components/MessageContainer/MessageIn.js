@@ -22,9 +22,8 @@ export function MessageIn({ message, checkMessage }) {
     } else {
       setViewed(false);
     }
-  }, [message.whoViewed]);  
+  }, [message.whoViewed]);
 
- 
   // Форматирование времени
   const sendTimeFormatted = moment(sendTime).calendar(null, {
     sameDay: `[${t("mainPage.todayAt")}] HH:mm`,
@@ -41,36 +40,28 @@ export function MessageIn({ message, checkMessage }) {
         checkMessage && "border"
       }`}
     >
-      <div className="max-w-[600px] min-w-[100px] flex flex-row mt-2 ml-10">
-        <div className="flex flex-col justify-end align-bottom">
-          <div className="bg-skin-fill-message dark:bg-[#170146] w-[50px] h-[50px] relative">
-            <div
-              id="roundPart"
-              className="absolute  w-[55px] h-[50px] bg-skin-fill  dark:bg-skin-fill-inverted  bottom-0 right-0 
-             rounded-br-[200px] "
-            >
-              {author?.photo ? (
-                <img
-                  src={author?.photo}
-                  alt="logo"
-                  className="rounded-full  h-[40px] w-[40px] border border-gray-500 absolute"
-                />
-              ) : (
-                <div className="rounded-full   h-[40px] w-[40px] absolute bg-purple-500 flex items-center justify-center select-none">
-                  <p className="text-xl">
-                    {author?.userName &&
-                      author?.userName[0].toUpperCase() +
-                        author?.userName[1].toUpperCase()}
-                  </p>
-                </div>
-              )}
+      <div className="max-w-[600px] min-w-[100px] flex flex-row mt-2 ml-5">
+        <div className="flex h-full w-[60px] items-end ml-5 mr-2">
+          {author?.photo ? (
+            <img
+              src={author?.photo}
+              alt="logo"
+              className="rounded-full mr-2  h-[50px] w-[50px] border border-gray-500 absolute"
+            />
+          ) : (
+            <div className="rounded-full   h-[50px] w-[50px] absolute bg-purple-500 flex items-center justify-center select-none">
+              <p className="text-xl">
+                {author?.userName &&
+                  author?.userName[0].toUpperCase() +
+                    author?.userName[1].toUpperCase()}
+              </p>
             </div>
-          </div>
+          )}
         </div>
 
         <div
           id="textPart"
-          className="w-[100%] text-skin-base bg-skin-fill-message dark:bg-[#170146] dark:text-skin-inverted rounded-r-xl rounded-t-xl z-10"
+          className="w-[100%] text-skin-base bg-skin-fill-message dark:bg-[#170146] dark:text-skin-inverted rounded-t-xl rounded-br-xl  z-10"
         >
           <div className="flex flex-row justify-between items-center w-[90%] ml-2 mt-1 mr-5 font-semibold text-lg">
             {author?.userName}
@@ -88,7 +79,6 @@ export function MessageIn({ message, checkMessage }) {
 
           {viewed ? (
             <div className="ml-2 opacity-50 text-xs">
-             
               {t("mainPage.viewed")}
             </div>
           ) : (

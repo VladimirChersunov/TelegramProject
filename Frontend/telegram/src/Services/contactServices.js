@@ -58,6 +58,8 @@ export const deleteContacts = async (contactUserName) => {
 export const addContact = async (contactUserName) => {
   const token = localStorage.getItem("token");
   const currentUserLogin = localStorage.getItem("username");
+  console.log(currentUserLogin)
+  console.log(contactUserName)
   if (token) {
     try {
       const response = await axiosCreate.post(

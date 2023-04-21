@@ -141,14 +141,14 @@ export function EnterCode(props) {
     : `${t("entercodePage.btnResend")}`;
 
   return (
-    <div className="w-[100%] bg-skin-fill-inverted h-screen flex justify-center font-montserrat content-center items-center">
+    <div className="w-screen bg-skin-fill-inverted h-screen flex justify-center font-montserrat content-center items-center">
       <div className="w-[384px]  h-[500px] flex flex-col text-center">
         <img src={logo} className="h-[43px] mb-[35px]" alt="logo" />
-        <label className="text-[18px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
+        <label className="text-[18px] sm:text-[14px] text-skin-inverted text-center font-medium leading-[27px] tracking-normal">
           {t("entercodePage.part1")}
         </label>
 
-        <div className="flex flex-row mt-5 justify-around ">
+        <div className="flex flex-row mt-5 justify-around w-full sm:w-screen ">
           <input
             ref={firstInputRef}
             maxLength="1"
@@ -228,7 +228,7 @@ export function EnterCode(props) {
         <button
           onClick={handleRegister}
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
-          w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
+          w-[250px] sm:w-[200px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
         >
           {t("entercodePage.btnNext")}
         </button>
@@ -239,7 +239,7 @@ export function EnterCode(props) {
           onClick={handlerResend}
           disabled={buttonDisabled}
           className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-inverted text-[17px] font-medium
-          w-[250px] h-[50px] leading-[26px] bg-skin-fill-inverted mx-auto mt-14 tracking-normal border border-skin-border-inverted"
+          w-[250px] sm:w-[200px] h-[50px] leading-[26px] bg-skin-fill-inverted mx-auto mt-14 tracking-normal border border-skin-border-inverted"
         >
           {buttonText}
         </button>

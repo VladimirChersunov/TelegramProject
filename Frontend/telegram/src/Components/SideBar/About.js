@@ -13,7 +13,7 @@ export function About(props) {
     props.visibleAbout(false);
   };
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col  justify-center sm:w-screen w-full">
       <button
         className="ml-4 mt-4 rounded-full hover:bg-skin-button-accent-hover h-[50px] w-[50px] flex
          justify-center items-center"

@@ -4,6 +4,7 @@ import moment from "moment";
 import "moment/locale/ru";
 import { ChatListContextMenu } from "./ChatListContextMenu";
 import { useTranslation } from "react-i18next";
+import { useLongPress } from "../../CustomHooks.js/LongPress";
 
 export function RadioElement({ chat, currentChat, handleMuted,clearMain, currentUser,visibleModalReport }) {
   const contextRef = useRef();
@@ -16,6 +17,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
   const language = localStorage.getItem("language");
  const { t, i18n } = useTranslation();
  const whoMuted = chat?.whoMuted
+ //const isTouchDevice = 'ontouchstart' in window || navigator.msMaxTouchPoints > 0;
 //console.log( whoMuted)
 
 
@@ -52,8 +54,7 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
     }else{
       setChatMuteStatus((prev)=>false)
     }
-
-    
+   
 
     document.addEventListener("contextmenu", handleClickOutside, true);
     document.addEventListener("click", handleClickOutside, true);
@@ -62,21 +63,22 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
       document.removeEventListener("click", handleClickOutside, true);
       document.removeEventListener("contextmenu", handleClickOutside, true);
     };
-  }, [chat?.type,chat?.whoMuted]);
+  }, [chat?.type,chat?.whoMuted,currentUser.id,whoMuted]);
 
-  useEffect(() => {
-    if(whoMuted.includes(currentUser.id)){
-      setChatMuteStatus((prev)=>true)
-    }else{
-      setChatMuteStatus((prev)=>false)
-    }
-  }, [chat?.whoMuted]);
+ 
 
   const handleClickOutside = (e) => {
     if (!contextRef?.current?.contains(e.target)) {
       setShowContextMenu(false);
     }
   };
+
+  // const handleLongPress = (event) => {
+  //   event.preventDefault();
+  //   setShowContextMenu(true);
+  //   setContextMenuX(event.pageX);
+  //   setContextMenuY(event.pageY);
+  // }
 
   //форматирование имени чата
   const formattedChatName = (chat) => {
@@ -88,6 +90,16 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
     }
   };
 
+  // const handleLongPress = () => {
+
+  //   if (isTouchDevice) {
+  //     console.log('Button was long pressed!');
+  //   } else {
+  //     // обработка события для несенсорного экрана
+  //   }
+    
+  // };
+
   // Форматирование времени
   const publishTimeFormatted = moment(chat.publishTime).calendar(null, {
     sameDay: `[${t("mainPage.todayAt")}] HH:mm`,
@@ -97,13 +109,15 @@ export function RadioElement({ chat, currentChat, handleMuted,clearMain, current
   });
 
   const shortMessageText = chat?.shortMsg?.username+': ' + chat?.shortMsg?.message
-
+  //const longPressEvent = useLongPress(handleLongPress, 1000);
+  
   return (
-    <div className=" w-[330px] ml-2   ">
+    <div className=" w-[330px] sm:w-[95%] ml-2   ">
       <input type="radio" name="option" id={chat.id} className="peer hidden" />
       <label
         ref={contextRef}
         htmlFor={chat.id}
+            
         onContextMenu={handleContextMenu}
         onChange={handleOptionSelect}
         onClick={handleChatClick}

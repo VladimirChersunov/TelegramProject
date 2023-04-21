@@ -10,51 +10,55 @@ import { useEffect } from "react";
 import { ColorThemeIcon } from "../Icons/ColorThemeIcon";
 import { LanguageIcon } from "../Icons/LanguageIcon";
 
-
-
-export function SettingWindow({ currentUser, visibleSetting, visibleEdit,visibleLanguagePicker,visibleThemesPicker,changePatternBackground }) {
+export function SettingWindow({
+  currentUser,
+  visibleSetting,
+  visibleEdit,
+  visibleLanguagePicker,
+  visibleThemesPicker,
+  changePatternBackground,
+}) {
   const navigate = useNavigate();
   const MAX_LENGTH = 16;
   const language = localStorage.getItem("language");
- const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [i18n,language]);
-  
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
+
   const handleClickBack = () => {
     visibleSetting(false);
   };
 
-  const formatEmail =(email)=> {
+  const formatEmail = (email) => {
     if (currentUser.email.length <= MAX_LENGTH) {
       return currentUser.email;
     } else {
-      const truncatedEmail = currentUser.email.slice(0, MAX_LENGTH) + '...';
+      const truncatedEmail = currentUser.email.slice(0, MAX_LENGTH) + "...";
       return truncatedEmail;
     }
-  }
+  };
   const formattedEmail = formatEmail(currentUser.email);
-  const handleEdit = () =>{
-    visibleEdit(true)
-  }
+  const handleEdit = () => {
+    visibleEdit(true);
+  };
 
   const handleLogout = () => {
     localStorage.clear();
     navigate("/signin");
   };
 
-  const handleLanguagePickerVisible = ()=>{
-    visibleLanguagePicker(true)
-  }
+  const handleLanguagePickerVisible = () => {
+    visibleLanguagePicker(true);
+  };
 
-  const handleVisibleThemesPicker = ()=>{
-    visibleThemesPicker(true)
-  }
+  const handleVisibleThemesPicker = () => {
+    visibleThemesPicker(true);
+  };
 
   return (
-    <div className="flex flex-col w-[350px] w-min-[350px] overflow-auto">
-     
+    <div className="flex flex-col w-[350px] sm:w-screen overflow-auto">
       {/* header */}
       <div className="flex flex-row items-center">
         <button
@@ -65,28 +69,30 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit,visible
           <BackArrowIcon />
         </button>
 
-        <label className="text-2xl mt-4 ml-2 select-none">{t("mainPage.setting")}</label>
+        <label className="text-2xl mt-4 ml-2 select-none">
+          {t("mainPage.setting")}
+        </label>
       </div>
 
-      <div className="w-[350px] h-screen  flex flex-col items-center mt-5 overflow-y-scroll scrollbar">
+      <div className="w-full h-screen  flex flex-col items-center mt-5 overflow-y-scroll scrollbar">
         <div className="">
-        {currentUser.photo ? (
-          <img
-            src={currentUser.photo}
-            alt="logo"
-            className="h-[250px] w-[250px] select-none  rounded-full"
-          />
-        ) : (
-          <div className="rounded-full   h-[250px] w-[250px]  bg-purple-500 flex items-center justify-center select-none">
-            <p className="text-[50px]">
-              {currentUser.userName[0].toUpperCase() + currentUser.userName[1].toUpperCase()}
-            </p>
-          </div>
-        )}
+          {currentUser.photo ? (
+            <img
+              src={currentUser.photo}
+              alt="logo"
+              className="h-[250px] w-[250px] select-none  rounded-full"
+            />
+          ) : (
+            <div className="rounded-full   h-[250px] w-[250px]  bg-purple-500 flex items-center justify-center select-none">
+              <p className="text-[50px]">
+                {currentUser.userName[0].toUpperCase() +
+                  currentUser.userName[1].toUpperCase()}
+              </p>
+            </div>
+          )}
         </div>
-       
 
-        <div className="mt-10 text-xl  flex flex-row w-[90%] pl-2 ">
+        <div className="mt-10 text-xl  flex flex-row w-[90%] pl-2 justify-center">
           <InfoIcon />
           <p className="h-[100px] ml-3 mt-[-2px]">
             {currentUser.aboutUser
@@ -95,43 +101,49 @@ export function SettingWindow({ currentUser, visibleSetting, visibleEdit,visible
           </p>
         </div>
 
-        <div className="mt-2 text-xl  flex flex-row items-center  w-[90%]  pl-2 h-[40px]">
-          <MailIcon/>
+        <div className="mt-2 text-xl  flex flex-row items-center  w-[90%]  pl-2 h-[40px] ">
+          <MailIcon />
           <label className="ml-10">{formattedEmail}</label>
         </div>
+
         <div className="mt-2 text-xl  flex flex-row items-center  w-[90%]  pl-2 h-[40px]">
           <PeopleIcon />
           <label className="ml-10">{currentUser.userName}</label>
         </div>
 
         <div
-        onClick={handleEdit}
+          onClick={handleEdit}
           className="mt-2 text-xl  flex flex-row items-center   w-[90%] 
           cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px]"
         >
           <PenIcon />
           <p className="ml-10">{t("mainPage.editProfile")}</p>
         </div>
+
         <div
-        onClick={handleLanguagePickerVisible}
-        className="mt-2 text-xl ml-[-10px]  flex flex-row items-center  w-[90%] 
-        cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] ">
-        <LanguageIcon/>
-         <p className="ml-7">{t("mainPage.changeLanguage")}</p>
-       </div>
+          onClick={handleLanguagePickerVisible}
+          className="mt-2 text-xl ml-[-10px]  flex flex-row items-center  w-[90%] 
+        cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] "
+        >
+          <LanguageIcon />
+          <p className="ml-7">{t("mainPage.changeLanguage")}</p>
+        </div>
+
         <div
-        onClick={handleVisibleThemesPicker}
-         className="mt-2 text-xl ml-[-10px]  flex flex-row items-center  w-[90%] 
-         cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] ">
-          <ColorThemeIcon/>
+          onClick={handleVisibleThemesPicker}
+          className="mt-2 text-xl ml-[-10px]  flex flex-row items-center  w-[90%] 
+         cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] "
+        >
+          <ColorThemeIcon />
           <p className="ml-7">{t("mainPage.changeTheme")}</p>
         </div>
+
         <div
           onClick={handleLogout}
           className="mt-2 text-xl  flex flex-row items-center  w-[90%]  mb-[60px]
           cursor-pointer select-none hover:bg-skin-button-accent-hover rounded-lg pl-2 h-[40px] "
         >
-          <LogoutIcon/>
+          <LogoutIcon />
           <p className="ml-10">{t("mainPage.logout")}</p>
         </div>
       </div>

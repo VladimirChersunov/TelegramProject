@@ -28,7 +28,7 @@ export function ThemesPicker({
   };
 
   return (
-    <div className="flex flex-col w-[350px] w-min-[350px] overflow-auto">
+    <div className="flex flex-col w-[350px] sm:w-screen overflow-auto">
       {/* header */}
       <div className="flex flex-row items-center">
         <button

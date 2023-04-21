@@ -184,10 +184,10 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 
   return (
     <div
-      className={`${theme} dark:bg-skin-fill-inverted  min-h-screen dark:text-skin-inverted dark:border-skin-border-inverted
+      className={`${theme} sm:w-screen dark:bg-skin-fill-inverted  min-h-screen dark:text-skin-inverted dark:border-skin-border-inverted
       text-skin-base border-skin-border-base bg-skin-fill overflow-hidden font-montserrat flex`}
     >
-      <div className="w-[350px]">
+      <div className="w-[350px] sm:w-screen">
         <CollumnContainer
         changePatternBackground={changePatternBackground}
           currentUser={currentUser}
@@ -201,7 +201,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         />
       </div>
 
-      <div className="flex-grow w-full">
+      <div className="flex-grow w-full sm:hidden">
         {centrVisible && (
           <MessageContainer
             patternIndex={patternIndex}
@@ -233,7 +233,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
       />
 
       {mainRiht && (
-        <div className="w-[350px]">
+        <div className="w-[350px] sm:hidden">
           <InfoContainer
             toggleRightColumn={toggleRightColumn}
             chat={currChat}

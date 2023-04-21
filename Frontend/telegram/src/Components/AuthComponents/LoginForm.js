@@ -52,16 +52,16 @@ function LoginForm({setTokenCallback,language}) {
     <form
       onSubmit={handleSubmit}
       autoComplete="off"
-      className="flex justify-center flex-col select-none"
+      className="flex w-full  flex-col select-none items-center justify-center sm:w-screen"
     >
-      <div className="relative">
+      <div className="relative flex w-full flex-col sm:w-[90%]">
         <input
           type="text"
           placeholder={t("signinPage.placeholder1")}
           value={usernameOrEmail}
           autoComplete="off"
           onChange={handleUsernameInput}
-          className={`border-b  border-skin-border-inverted text-skin-inverted
+          className={`border-b  border-skin-border-inverted text-skin-inverted 
              bg-skin-fill-inverted pl-2 pb-[10px]  w-full focus:outline-none text-[16px] placeholder:text-skin-muted `}
           required
         />
@@ -103,7 +103,7 @@ function LoginForm({setTokenCallback,language}) {
         type="submit"
         onClick={handleSubmit}
         className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-base text-[17px] font-medium
-          w-[250px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
+          w-[250px] sm:w-[200px] h-[50px] leading-[26px] bg-skin-fill mx-auto mt-14 tracking-normal"
       >
         {isLoading ? `${t("signinPage.btnLoading")}` : `${t("signinPage.btnNext")}`}
       </button>
@@ -114,7 +114,7 @@ function LoginForm({setTokenCallback,language}) {
           navigate("/signup", { language: language });
         }}
         className="rounded-3xl hover:bg-skin-button-inverted-hover text-skin-inverted text-[17px] font-medium
-          w-[250px] h-[50px] leading-[26px] bg-skin-fill-inverted mx-auto mt-14 tracking-normal border border-skin-border-inverted"
+          w-[250px] sm:w-[200px] h-[50px] leading-[26px] bg-skin-fill-inverted mx-auto mt-14 tracking-normal border border-skin-border-inverted"
       >
          {t("signinPage.btnSignUp")}
       </button>

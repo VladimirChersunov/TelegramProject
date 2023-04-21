@@ -14,7 +14,7 @@ export function SerchInputInActive({ visibleSearchWindow }) {
   };
 
   return (
-    <div className="w-full pr-2 mt-3">
+    <div className="w-[90%] pr-2 mt-3">
       <div className=" flex flex-row items-center border border-skin-border-base dark:border-skin-border-inverted  rounded-3xl px-2 ">
         <SearchIcon />
 

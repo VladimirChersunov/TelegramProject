@@ -62,7 +62,7 @@ export function EditProfile({ visibleEdit, currentUser }) {
   };
 
   return (
-    <div className="flex flex-col w-[350px] w-min-[350px] overflow-auto">
+    <div className="flex flex-col w-[350px] sm:w-screen overflow-auto">
       <div className="flex flex-row items-center">
         <button
           className="ml-2 mt-4 rounded-full hover:bg-skin-button-accent-hover h-[50px] w-[50px] flex
@@ -72,7 +72,7 @@ export function EditProfile({ visibleEdit, currentUser }) {
           <BackArrowIcon />
         </button>
 
-        <label className="text-2xl mt-4 ml-2 select-none">{t("mainPage.editProfile")}</label>
+        <label className="text-2xl sm:text-xl mt-4 ml-2 select-none">{t("mainPage.editProfile")}</label>
       </div>
       {/* профиль */}
       <div className="overflow-y-scroll scrollbar">

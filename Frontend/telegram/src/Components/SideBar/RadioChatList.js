@@ -10,7 +10,7 @@ export function RadioChatList(props) {
  
   
   return (
-    <div className="flex max-h-screen w-full flex-col items-center  overflow-hidden ">
+    <div className="flex max-h-screen w-full flex-col items-center  overflow-hidden sm:w-screen">
       <div className="w-full h-screen overflow-auto overflow-y-scroll scrollbar" x-data="app">
     
         {props?.chats?.map((chat, index) => (
