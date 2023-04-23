@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.376db3e6.css",
+    "main.js": "/static/js/main.811894b7.js",
+    "static/media/Rectangle 6.png": "/static/media/Rectangle 6.6d79561a9288a110b2e7.png",
+    "static/media/Rectangle 8.png": "/static/media/Rectangle 8.b7173069a80a602d794d.png",
+    "static/media/Rectangle 3.png": "/static/media/Rectangle 3.185766f3b3e502a801ec.png",
+    "static/media/Rectangle 1.png": "/static/media/Rectangle 1.f10d1834e01a8b82287a.png",
+    "static/media/Rectangle 5.png": "/static/media/Rectangle 5.7b1b51bc86859c62411c.png",
+    "static/media/Rectangle 4.png": "/static/media/Rectangle 4.997e1fc6fde335d178f1.png",
+    "static/media/Rectangle 2.png": "/static/media/Rectangle 2.52b74453fac0d3cfd6d8.png",
+    "static/media/Rectangle 12.png": "/static/media/Rectangle 12.3f78d0217d3d6b9d8a85.png",
+    "static/media/Rectangle 9.png": "/static/media/Rectangle 9.64f4ce8401163d8a7340.png",
+    "static/media/Rectangle 14.png": "/static/media/Rectangle 14.d152defcc8fdf39a04ce.png",
+    "static/media/Rectangle 16.png": "/static/media/Rectangle 16.1b3e69c47cc602fce78d.png",
+    "static/media/Group 331 (2) 1.png": "/static/media/Group 331 (2) 1.a99e095cf12bfa3726f4.png",
+    "static/media/Bg1.png": "/static/media/Bg1.de624f43b4947286a375.png",
+    "static/media/Group 330 1.png": "/static/media/Group 330 1.3a0eae59abd5ea892688.png",
+    "static/media/Group 334 (1) 1.png": "/static/media/Group 334 (1) 1.e821674c9930ed65776f.png",
+    "static/media/Group 331 (1) 2.png": "/static/media/Group 331 (1) 2.4853f5bcf284266b89db.png",
+    "static/media/Rectangle 11.png": "/static/media/Rectangle 11.b5247febde154b49251e.png",
+    "static/media/Bg2.png": "/static/media/Bg2.16dbbc862f72edf2833b.png",
+    "static/media/Rectangle 13.png": "/static/media/Rectangle 13.c75546854a69476246d4.png",
+    "static/media/Rectangle 15.png": "/static/media/Rectangle 15.f64969b48e148a142b0b.png",
+    "static/media/Bg3.png": "/static/media/Bg3.174e1a0cea05ac3c30ff.png",
+    "static/media/Rectangle 19.png": "/static/media/Rectangle 19.3e3adb2e9b6f2dca0efc.png",
+    "static/media/Rectangle 20.png": "/static/media/Rectangle 20.cd1a12613bbf0a65e1d0.png",
+    "static/media/Rectangle 18.png": "/static/media/Rectangle 18.1557bbdd37fb806eb1da.png",
+    "static/media/Rectangle 17.png": "/static/media/Rectangle 17.e2e1a4d8fe20a6f886d0.png",
+    "static/media/Logo.svg": "/static/media/Logo.f68da14f7f75691666ec3b8b1dfcad47.svg",
+    "index.html": "/index.html",
+    "main.376db3e6.css.map": "/static/css/main.376db3e6.css.map",
+    "main.811894b7.js.map": "/static/js/main.811894b7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.376db3e6.css",
+    "static/js/main.811894b7.js"
+  ]
+}
