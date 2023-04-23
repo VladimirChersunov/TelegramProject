@@ -112,7 +112,7 @@ useEffect(() => {
 }, [chat?.shortMsg?.username, chat?.shortMsg?.message]);
 
 useEffect(() => {
-  console.log(closeContext)
+  //console.log(closeContext)
  setShowContextMenu(closeContext)
 }, [closeContext]);
   

@@ -10,7 +10,7 @@ export function RadioChatList(props) {
   const [closeContext, setCloseContext] = useState(false)
   
   const handleCloseContext = (event)=>{
-    console.log(event)
+    //console.log(event)
     setCloseContext(false)
   }
  //console.log(props?.chats)
