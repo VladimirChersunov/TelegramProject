@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { CreateMenu } from "./CreateMenu";
-import { PenIcon } from "../Icons/PenIcon";
-import { CloseIcon } from "../Icons/CloseIcon";
+import { CreateMenu } from "../ChatComponents/CreateMenu";
+import { PenIcon } from "../../Icons/PenIcon";
+import { CloseIcon } from "../../Icons/CloseIcon";
 
 export function ChatCreateButton(props) {
   const [open, setOpen] = useState(false);

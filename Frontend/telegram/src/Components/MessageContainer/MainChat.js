@@ -7,7 +7,6 @@ import {
 } from "../../Services/messageServices";
 import { Message } from "./Message";
 
-
 export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
   const messagesEndRef = useRef(null);
   const myRef = useRef(null);
@@ -19,9 +18,12 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
   const isChannel =
     !(chat?.type === "Channel") || (admin && chat?.type === "Channel" && admin);
 
-  useEffect(() => {
-    //console.log("chat change");
+  console.log();
 
+  const isMember = chat?.members?.includes(currentUser?.id);
+
+  //console.log("chat change");
+  useEffect(() => {
     const getData = async () => {
       try {
         let allMessaages = null;
@@ -99,7 +101,7 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
       <div
         ref={myRef}
         id="message-container"
-        className="mt-2 relative flex flex-col  w-full overflow-x-hidden text-skin-base overflow-y-scroll scrollbar z-10 sm:w-screen"
+        className="mt-2 relative flex flex-col  w-full overflow-hidden text-skin-base overflow-y-scroll scrollbar z-10 sm:w-screen"
       >
         {dataMessages &&
           dataMessages?.messages?.map((message) => (
@@ -115,17 +117,19 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
           ))}
       </div>
       <div ref={messagesEndRef} />
-      {isChannel && (
-        <InputPanel
-          replay={replay}
-          refreshInputHeeight={refreshInputHeeight}
-          darkMode={darkMode}
-          currentUser={currentUser}
-          chat={chat}
-          refreshMessage={refreshMessage}
-          setInputHeight={setInputHeight}
-          setWindowHeight={setWindowHeight}
-        />
+      {isChannel && isMember&&  (
+       
+         <InputPanel
+            replay={replay}
+            refreshInputHeeight={refreshInputHeeight}
+            darkMode={darkMode}
+            currentUser={currentUser}
+            chat={chat}
+            refreshMessage={refreshMessage}
+            setInputHeight={setInputHeight}
+            setWindowHeight={setWindowHeight}
+          />
+       
       )}
     </div>
   );

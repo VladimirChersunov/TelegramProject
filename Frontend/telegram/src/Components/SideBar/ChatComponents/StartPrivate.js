@@ -1,5 +1,5 @@
-import { ContactsCard } from "./ContactComponents/ContactsCard";
-import { BackArrowIcon } from "../Icons/BackArrowIcon";
+import { ContactsCard } from "../ContactComponents/ContactsCard";
+import { BackArrowIcon } from "../../Icons/BackArrowIcon";
 import { useState,useEffect } from "react";
 import { useTranslation } from "react-i18next";
 

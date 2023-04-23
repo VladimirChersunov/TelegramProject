@@ -1,9 +1,9 @@
-import { BackArrowIcon } from "../Icons/BackArrowIcon";
-import { SerchInput } from "./SerchInput";
+import { BackArrowIcon } from "../../Icons/BackArrowIcon";
+import { SerchInput } from "../SerchInput";
 import { useEffect, useState, useRef } from "react";
-import { getSearchResult } from "../../Services/searchServices";
-import { ContactsCard } from "./ContactComponents/ContactsCard";
-import { ChatsCard } from "./ChatComponents/ChatCard";
+import { getSearchResult } from "../../../Services/searchServices";
+import { ContactsCard } from "../ContactComponents/ContactsCard";
+import { ChatsCard } from "../ChatComponents/ChatCard";
 import { useTranslation } from "react-i18next";
 
 export function SearchWindow({ visibleSearchWindow, currentChat, contacts }) {

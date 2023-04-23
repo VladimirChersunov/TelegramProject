@@ -1,6 +1,6 @@
-import { PeopleIcon } from "../Icons/PeopleIcon";
-import { PeoplesIcon } from "../Icons/PeoplesIcon";
-import { SpeakerIcon } from "../Icons/SpeakerIcon";
+import { PeopleIcon } from "../../Icons/PeopleIcon";
+import { PeoplesIcon } from "../../Icons/PeoplesIcon";
+import { SpeakerIcon } from "../../Icons/SpeakerIcon";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 

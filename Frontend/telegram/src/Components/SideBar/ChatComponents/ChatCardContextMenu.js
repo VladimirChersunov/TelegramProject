@@ -5,14 +5,14 @@ import {
   isUserInChat,
   leavePublic,
 } from "../../../Services/chatServices";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 export function ChatCardContextMenu({ x, y, handleCloseContextMenu, chat }) {
   const [userInChat, setUserInChat] = useState(false);
   const language = localStorage.getItem("language");
   const { t, i18n } = useTranslation();
-
+  const menuRef = useRef(null);
   useEffect(() => {
     i18n.changeLanguage(language);
   }, [i18n, language]);
@@ -25,6 +25,34 @@ export function ChatCardContextMenu({ x, y, handleCloseContextMenu, chat }) {
 
     checkChat();
   }, [chat?.id]);
+
+  useEffect(() => {
+    const parentRect = menuRef.current.parentNode.getBoundingClientRect();
+    const menuRect = menuRef.current.getBoundingClientRect();
+
+    let correctedX = x;
+    let correctedY = y;
+
+    if (menuRect.right > parentRect.right) {
+      correctedX -= menuRect.right - parentRect.right;
+    }
+
+    if (menuRect.bottom > parentRect.bottom) {
+      correctedY -= menuRect.bottom - parentRect.bottom;
+    }
+
+    menuRef.current.style.left = `${correctedX}px`;
+
+    if (correctedY < 0) {
+      correctedY = 1;
+    }
+
+    if (window.innerHeight - correctedY < 250) {
+      correctedY = window.innerHeight - 250;
+    }
+
+    menuRef.current.style.top = `${correctedY}px`;
+  }, [x, y]);
 
   const handleEnterChat = (event) => {
     event.stopPropagation();
@@ -52,6 +80,7 @@ export function ChatCardContextMenu({ x, y, handleCloseContextMenu, chat }) {
   //console.log(chat)
   return (
     <div
+    ref={menuRef}
       className="w-[180px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
      text-lg  border border-skin-border-base dark:border-skin-border-inverted 
      rounded-lg z-50"

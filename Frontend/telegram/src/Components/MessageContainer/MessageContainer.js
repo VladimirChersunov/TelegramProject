@@ -68,12 +68,14 @@ export function MessageContainer({
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: "1000",
           },
           content: {
             top: "50%",           
             left: "50%",
             transform: "translate(-50%, -50%)",
-            backgroundColor: "#0c0221", // Добавьте это свойство
+            backgroundColor: "#0c0221", 
+           
           },
         }}
         appElement={document.getElementById("root")}

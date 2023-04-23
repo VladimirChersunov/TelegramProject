@@ -1,8 +1,8 @@
 import { ColorRAdioButton } from "./ColorRadioButton";
-import { BackArrowIcon } from "../Icons/BackArrowIcon";
+import { BackArrowIcon } from "../../Icons/BackArrowIcon";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import imagesArray from "../../Services/imageService";
+import { useEffect } from "react";
+import imagesArray from "../../../Services/imageService";
 
 export function ThemesPicker({
   visibleThemesPicker,

@@ -1,7 +1,7 @@
 import { useState, useRef,useEffect } from "react";
-import { BackArrowIcon } from "../Icons/BackArrowIcon";
-import { AddPicture } from "../Icons/AddPicture";
-import { editProfile } from "../../Services/userServices";
+import { BackArrowIcon } from "../../Icons/BackArrowIcon";
+import { AddPicture } from "../../Icons/AddPicture";
+import { editProfile } from "../../../Services/userServices";
 import { useTranslation } from "react-i18next";
 
 

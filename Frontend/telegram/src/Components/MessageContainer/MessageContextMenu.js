@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect,useRef } from "react";
 import { deleteMessage, pinnedMessaages } from "../../Services/messageServices";
 import { Copy } from "../Icons/Copy";
 import { FlagIcon } from "../Icons/FlagIcon";
@@ -22,6 +22,7 @@ export function MessageContextMenu({
   getReplay,
   currentChat,
 }) {
+  const menuRef = useRef(null);
   const admin = currentUser.id === chat.authorId;
   const owner = message.author.id === currentUser.id;  
   const [check, setCheck] = useState(false);
@@ -46,6 +47,34 @@ export function MessageContextMenu({
       refreshMessage();
     }
   };
+
+  useEffect(() => {
+    const parentRect = menuRef.current.parentNode.getBoundingClientRect();
+    const menuRect = menuRef.current.getBoundingClientRect();
+
+    let correctedX = x;
+    let correctedY = y;
+
+    if (menuRect.right > parentRect.right) {
+      correctedX -= menuRect.right - parentRect.right;
+    }
+
+    if (menuRect.bottom > parentRect.bottom) {
+      correctedY -= menuRect.bottom - parentRect.bottom;
+    }
+
+    menuRef.current.style.left = `${correctedX}px`;
+
+    if (correctedY < 0) {
+      correctedY = 1;
+    }
+
+    if (window.innerHeight - correctedY < 250) {
+      correctedY = window.innerHeight - 250;
+    }
+
+    menuRef.current.style.top = `${correctedY}px`;
+  }, [x, y]);
 
  
   
@@ -91,20 +120,21 @@ export function MessageContextMenu({
 
   return (
     <div
+    ref={menuRef}
       className="w-[180px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
        text-lg  border border-skin-border-base dark:border-skin-border-inverted 
        rounded-lg z-50 select-none"
       style={{ position: "absolute", top: y, left: x }}
     >
       <ul className="rounded-lg ">
-        <li
+        {/* <li
         onClick={handleReplay}
           className=" text-skin-base dark:text-skin-inverted rounded-t-lg pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2 select-none cursor-pointer hover:bg-skin-button-accent-hover"
         >
           <Reply />
           <p className="font-bold ml-2">{t("mainPage.reply")}</p>
-        </li>
+        </li> */}
 
         <li
           onClick={handleChcked}
@@ -124,7 +154,7 @@ export function MessageContextMenu({
           <p className="font-bold ml-2"> {t("mainPage.pinMessage")}</p>
         </li>
 
-        <li
+        {/* <li
           className=" text-skin-muted  pl-2  flex
            flex-row  items-center text-sm pt-2 pb-2 select-none"
         >
@@ -137,7 +167,7 @@ export function MessageContextMenu({
         >
           <Forward />
           <p className="font-bold ml-2">{t("mainPage.forward")}</p>
-        </li>
+        </li> */}
         <li
           onClick={handleCopy}
           className=" hover:cursor-pointer hover:bg-skin-button-accent-hover  pl-2  flex

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
+import { VolumeOnIcon } from "../../Icons/VolumeOnIcon";
 import moment from "moment";
 import "moment/locale/ru";
 import { ChatListContextMenu } from "./ChatListContextMenu";
@@ -15,11 +15,14 @@ export function RadioElement({
   visibleSide,
   visibleMain,
   isSmallWidth,
+  closeContext,
+  handleCloseContext
 }) {
+  
   const contextRef = useRef();
   const [savedMessageState, setSavedMessageState] = useState(false);
   const [chatMuteStatus, setChatMuteStatus] = useState(false);
-  const [showContextMenu, setShowContextMenu] = useState(false);
+  const [showContextMenu, setShowContextMenu] = useState(closeContext);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
   const [shortMessageText, setShortMessageText] = useState('');
@@ -38,6 +41,8 @@ export function RadioElement({
     setContextMenuX(event.pageX);
     setContextMenuY(event.pageY);
   };
+
+ 
 
   const handleOptionSelect = (event) => {
     setShowContextMenu(false);
@@ -106,10 +111,15 @@ useEffect(() => {
   }
 }, [chat?.shortMsg?.username, chat?.shortMsg?.message]);
 
-
+useEffect(() => {
+  console.log(closeContext)
+ setShowContextMenu(closeContext)
+}, [closeContext]);
   
   return (
-    <div className=" w-[330px] sm:w-[95%] ml-2   ">
+    <div
+    onScroll={handleCloseContext}
+    className=" w-[330px] sm:w-[95%] ml-2">
       <input type="radio" name="option" id={chat?.id} className="peer hidden" />
       <label
         ref={contextRef}
@@ -122,7 +132,7 @@ useEffect(() => {
            border-skin-border-base dark:border-skin-border-inverted "
       >
         {showContextMenu && (
-          <ChatListContextMenu
+          <ChatListContextMenu          
             visibleModalReport={visibleModalReport}
             x={contextMenuX}
             y={contextMenuY}

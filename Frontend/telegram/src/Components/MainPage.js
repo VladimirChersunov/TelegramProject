@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { MessageContainer } from "./MessageContainer/MessageContainer";
 import { ClearContainer } from "./MessageContainer/ClearContainer";
-import { CollumnContainer } from "./SideBar/CollumnContainer";
+import { CollumnContainer } from "./SideBar/SoloSideWindows/CollumnContainer";
 import { InfoContainer } from "./InfoContainer/InfoContainer";
 import { useNavigate } from "react-router-dom";
 import { getUserById, updateInfo } from "../Services/userServices";
@@ -48,40 +48,32 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 
     function handleResize() {
       setWidth(window.innerWidth);
-     
     }
 
-    window.addEventListener('resize', handleResize);
-
-  
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
-
-   
   }, []);
 
   useEffect(() => {
-    if(window.innerWidth<1016){
-      setIsSmallWidth(true)
-      if(isSide){       
-        setIsMain(false)
-      }else{
-        setIsMain(true)
+    if (window.innerWidth < 1016) {
+      setIsSmallWidth(true);
+      if (isSide) {
+        setIsMain(false);
+      } else {
+        setIsMain(true);
       }
-     
-     
+
       //console.log('SmallWidth')
-    }else{
-      setIsMain(true)
-      setIsSide(true)
-      setIsSmallWidth(false)
-     // console.log('BigWidth')
+    } else {
+      setIsMain(true);
+      setIsSide(true);
+      setIsSmallWidth(false);
+      // console.log('BigWidth')
     }
   }, [isSmallWidth, isMain, isSide, window.innerWidth]);
-
- 
 
   useEffect(() => {
     if (darkMode) {
@@ -169,7 +161,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         if (!chatEqual) {
           setChats(data.chats);
         }
-//console.log(data.chats)
+        //console.log(data.chats)
         setCurrentUser(data.user);
 
         // const endTime = performance.now();
@@ -224,14 +216,12 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 
   const visibleSide = (props) => {
     setIsSide(props);
-    console.log(props)
+    console.log(props);
   };
 
   const visibleMain = (props) => {
-    setIsMain(props)
+    setIsMain(props);
   };
-
-  
 
   return (
     <div

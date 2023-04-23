@@ -1,14 +1,14 @@
-import { BackArrowIcon } from "../Icons/BackArrowIcon";
+import { BackArrowIcon } from "../../Icons/BackArrowIcon";
 import { useNavigate } from "react-router-dom";
-import { PenIcon } from "../Icons/PenIcon";
-import { PeopleIcon } from "../Icons/PeopleIcon";
-import { InfoIcon } from "../Icons/InfoIcon";
-import { LogoutIcon } from "../Icons/LogoutIcon";
-import { MailIcon } from "../Icons/MailIcon";
+import { PenIcon } from "../../Icons/PenIcon";
+import { PeopleIcon } from "../../Icons/PeopleIcon";
+import { InfoIcon } from "../../Icons/InfoIcon";
+import { LogoutIcon } from "../../Icons/LogoutIcon";
+import { MailIcon } from "../../Icons/MailIcon";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import { ColorThemeIcon } from "../Icons/ColorThemeIcon";
-import { LanguageIcon } from "../Icons/LanguageIcon";
+import { ColorThemeIcon } from "../../Icons/ColorThemeIcon";
+import { LanguageIcon } from "../../Icons/LanguageIcon";
 
 export function SettingWindow({
   currentUser,

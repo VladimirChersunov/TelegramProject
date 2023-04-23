@@ -33,7 +33,8 @@ export function LeftMenu({
        border border-skin-border-base dark:border-skin-border-inverted rounded-lg  w-max select-none`}
     >
       <li
-        onClick={() => {
+        onClick={(event) => {
+          event.stopPropagation();
           currentChat(savedMessage);
         }}
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover rounded-t-lg h-8 p-1 flex flex-row items-center"
@@ -44,7 +45,8 @@ export function LeftMenu({
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1
        flex flex-row items-center"
-        onClick={() => {
+        onClick={(event) => {
+          event.stopPropagation();
           visibleContact(true);
         }}
       >
@@ -54,7 +56,8 @@ export function LeftMenu({
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row
        items-center"
-        onClick={() => {
+        onClick={(event) => {
+          event.stopPropagation();
           visibleSetting(true);
         }}
       >
@@ -73,7 +76,8 @@ export function LeftMenu({
       </li>
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
-        onClick={() => {
+        onClick={(event) => {
+          event.stopPropagation();
           visibleBugReport(true);
         }}
       >
@@ -82,7 +86,8 @@ export function LeftMenu({
       </li>
       <li
         className="hover:cursor-pointer hover:bg-skin-button-accent-hover  h-8 p-1 flex flex-row items-center"
-        onClick={() => {
+        onClick={(event) => {
+          event.stopPropagation();
           visibleAbout(true);
         }}
       >

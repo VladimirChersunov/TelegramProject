@@ -1,20 +1,20 @@
 import { About } from "./About";
-import { LeftHeader } from "./LeftHeader";
-import { RadioChatList } from "./RadioChatList";
+import { LeftHeader } from "../LeftHeader";
+import { RadioChatList } from "../ChatListComponents/RadioChatList";
 import { useState } from "react";
 import { ReportBug } from "./ReportBug";
-import { SettingWindow } from "./SettingWindow";
-import { ContactWindow } from "./ContactComponents/ContactWindow";
-import { AddMembers } from "./ChatComponents/AddMembers";
+import { SettingWindow } from "../SettingComponents/SettingWindow";
+import { ContactWindow } from "../ContactComponents/ContactWindow";
+import { AddMembers } from "../ChatComponents/AddMembers";
 
 import { SearchWindow } from "./SearchWindow";
-import { StartPrivate } from "./StartPrivate";
-import { EditProfile } from "./EditProfile";
+import { StartPrivate } from "../ChatComponents/StartPrivate";
+import { EditProfile } from "../SettingComponents/EditProfile";
 import Modal from "react-modal";
-import { CloseIcon } from "../Icons/CloseIcon";
-import { AddNewChat } from "./ChatComponents/AddNewChat";
-import { LanguagePicker } from "./LanguagePicker";
-import { ThemesPicker } from "./ThemesPicker";
+import { CloseIcon } from "../../Icons/CloseIcon";
+import { AddNewChat } from "../ChatComponents/AddNewChat";
+import { LanguagePicker } from "../SettingComponents/LanguagePicker";
+import { ThemesPicker } from "../SettingComponents/ThemesPicker";
 
 export function CollumnContainer({
   chats,

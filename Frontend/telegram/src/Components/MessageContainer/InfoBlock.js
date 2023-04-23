@@ -16,11 +16,11 @@ export function InfoBlock({
   const { t, i18n } = useTranslation();
   //console.log(chat)
 
-  useEffect(() => {
-    i18n.changeLanguage(language);
-  }, [i18n, language]);
+  
+
   //console.log(chat)
   useEffect(() => {
+    i18n.changeLanguage(language);
     if (chat?.type === "Channel") {
       setFavorite(false);
       setTypeChat(`${chat?.membersCount} ${t("mainPage.subscrybers")}`);
@@ -33,7 +33,7 @@ export function InfoBlock({
       setTypeChat(chat?.author);
       setFavorite(false);
     }
-  }, [chat]);
+  }, [chat,i18n, language]);
 
   const handleClickBack = () => {
     visibleSide(true);

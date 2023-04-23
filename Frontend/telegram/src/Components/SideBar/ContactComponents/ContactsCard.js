@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { chatExist, createPrivate } from "../../../Services/chatServices";
 import { ContactsContextMenu } from "./ContactsContextMenu";
-import { LastSeen } from "../LastSeen";
+import { LastSeen } from "../../../Services/LastSeen";
 import { getOpenPrivateChat } from "../../../Services/messageServices";
 import { isContact } from "../../../Services/contactServices";
 

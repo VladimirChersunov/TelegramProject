@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
-import { FlagIcon } from "../Icons/FlagIcon";
-import { NewTab } from "../Icons/NewTab";
-import { RecicleIcon } from "../Icons/RecicleIcon";
-import { VolumeMuteIcon } from "../Icons/VolumeMuteIcon";
-import { VolumeOnIcon } from "../Icons/VolumeOnIcon";
+import { useState, useEffect, useRef } from "react";
+import { FlagIcon } from "../../Icons/FlagIcon";
+import { NewTab } from "../../Icons/NewTab";
+import { RecicleIcon } from "../../Icons/RecicleIcon";
+import { VolumeMuteIcon } from "../../Icons/VolumeMuteIcon";
+import { VolumeOnIcon } from "../../Icons/VolumeOnIcon";
 import {
   chatNotifications,
   deleteChatById,
   leavePublic,
-} from "../../Services/chatServices";
-import { readMessaages } from "../../Services/messageServices";
-import { SelectAll } from "../Icons/SelectAll";
+} from "../../../Services/chatServices";
+import { readMessaages } from "../../../Services/messageServices";
+import { SelectAll } from "../../Icons/SelectAll";
 import { useTranslation } from "react-i18next";
 
 export function ChatListContextMenu({
@@ -21,28 +21,54 @@ export function ChatListContextMenu({
   currentUser,
   visibleModalReport,
 }) {
+  const menuRef = useRef(null);
   const [chats, setChat] = useState(false);
   const [group, setGroup] = useState(false);
-  const [channel, setChannel] = useState(false);
-  const [mute, setMute] = useState(chat.muteStatus);
-  const [posY, setPosY] = useState(null);
+  const [channel, setChannel] = useState(false);  
   const language = localStorage.getItem("language");
- const { t, i18n } = useTranslation();
- const whoMuted = chat?.whoMuted
- const [chatMuteStatus, setChatMuteStatus] = useState(false);
- useEffect(() => {
-  if(whoMuted.includes(currentUser.id)){
-    setChatMuteStatus((prev)=>true)
-  }else{
-    setChatMuteStatus((prev)=>false)
-  }
-}, [chat?.whoMuted]);
+  const { t, i18n } = useTranslation();
+  const whoMuted = chat?.whoMuted;
+  const [chatMuteStatus, setChatMuteStatus] = useState(false);
 
   useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [i18n,language]);
+    if (whoMuted.includes(currentUser.id)) {
+      setChatMuteStatus((prev) => true);
+    } else {
+      setChatMuteStatus((prev) => false);
+    }
+  }, [chat?.whoMuted]);
 
-  const screenHeight = window.innerHeight;
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
+
+  useEffect(() => {
+    const parentRect = menuRef.current.parentNode.getBoundingClientRect();
+    const menuRect = menuRef.current.getBoundingClientRect();
+
+    let correctedX = x;
+    let correctedY = y;
+
+    if (menuRect.right > parentRect.right) {
+      correctedX -= menuRect.right - parentRect.right;
+    }
+
+    if (menuRect.bottom > parentRect.bottom) {
+      correctedY -= menuRect.bottom - parentRect.bottom;
+    }
+
+    menuRef.current.style.left = `${correctedX}px`;
+
+    if (correctedY < 0) {
+      correctedY = 1;
+    }
+
+    if (window.innerHeight - correctedY < 200) {
+      correctedY = window.innerHeight - 200;
+    }
+
+    menuRef.current.style.top = `${correctedY}px`;
+  }, [x, y]);
 
   useEffect(() => {
     if (chat.type === "Private") {
@@ -62,17 +88,7 @@ export function ChatListContextMenu({
     }
   }, [chat.type]);
 
-  useEffect(() => {
-    setMute(chat.muteStatus);
-  }, [chat.muteStatus]);
-
-  useEffect(() => {
-    if (y > screenHeight - 225) {
-      setPosY(screenHeight - 230);
-    } else {
-      setPosY(y);
-    }
-  }, [y, screenHeight]);
+  
 
   const leaveChat = async () => {
     const responce = await leavePublic(chat?.chatName);
@@ -120,12 +136,16 @@ export function ChatListContextMenu({
     window.open(`http://localhost:3000/main`, "_blank");
   };
 
+  
+
   return (
     <div
-      className="w-[185px] h-[225px] text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
+   
+      ref={menuRef}
+      className="w-[185px] h-max text-skin-base dark:text-skin-inverted bg-skin-fill dark:bg-skin-fill-inverted
        text-lg  border border-skin-border-base dark:border-skin-border-inverted 
        rounded-lg z-50"
-      style={{ position: "absolute", top: posY, left: x }}
+      style={{ position: "absolute", top: y, left: x }}
     >
       <ul className="rounded-lg ">
         <li
@@ -184,7 +204,7 @@ export function ChatListContextMenu({
            flex-row text-skin-error  items-center text-sm pt-2 pb-2"
           >
             <RecicleIcon styles={"h-5 w-5 stroke-red-600    fill-none "} />
-            <p className="font-bold ml-2">  {t("mainPage.leaveChannel")}</p>
+            <p className="font-bold ml-2"> {t("mainPage.leaveChannel")}</p>
           </li>
         )}
         {group && (

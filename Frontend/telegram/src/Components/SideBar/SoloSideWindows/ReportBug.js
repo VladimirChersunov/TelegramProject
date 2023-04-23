@@ -1,6 +1,6 @@
-import { BackArrowIcon } from "../Icons/BackArrowIcon";
+import { BackArrowIcon } from "../../Icons/BackArrowIcon";
 import { useState,useEffect } from "react";
-import { bugReport } from "../../Services/bugReportService";
+import { bugReport } from "../../../Services/bugReportService";
 import { useTranslation } from "react-i18next";
 
 export function ReportBug(props) {
