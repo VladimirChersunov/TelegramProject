@@ -146,7 +146,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         if (logout) {
           navigate("/signin", { language: currentLanguage });
         }
-        // const startTime = performance.now();
+        const startTime = performance.now();
 
         const data = await updateInfo();
 
@@ -172,9 +172,9 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 //console.log(data.chats)
         setCurrentUser(data.user);
 
-        // const endTime = performance.now();
-        // const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
-        // console.log(`Response time: ${responseTime}ms`);
+        const endTime = performance.now();
+        const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
+        console.log(`Response time: ${responseTime}ms`);
       } catch (error) {
         console.log(error);
       }
