@@ -13,10 +13,16 @@ export const login = async (login, password) => {
     const sizeInKB = (blob.size / 1024).toFixed(2);
 
     console.log(`${sizeInKB} KB`);
-    return response.data;
+    if(response.data){
+      return response.data;
+    }
+    
   } catch (error) {    
-    console.log(error.message)   
-    throw new Error(error.response.data.message);    
+    console.log(error.message)  
+    if(error.response.data) {
+      throw new Error(error.response.data.message); 
+    }
+      
   }
 };
 

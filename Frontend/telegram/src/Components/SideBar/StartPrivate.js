@@ -11,7 +11,6 @@ export function StartPrivate({visibleStartPrivate,contacts,currentChat,currentUs
   };
   const language = localStorage.getItem("language");
  const { t, i18n } = useTranslation();
-
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [i18n,language]);

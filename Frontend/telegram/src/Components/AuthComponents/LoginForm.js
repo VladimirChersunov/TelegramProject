@@ -34,7 +34,10 @@ function LoginForm({setTokenCallback,language}) {
       }
     } catch (error) {
       console.log(error);
-      setError(error.message);
+      if(error){
+        setError(error.message);
+      }
+     
     } finally {
       setIsLoading(false);
     }
