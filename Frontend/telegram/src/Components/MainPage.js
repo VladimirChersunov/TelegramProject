@@ -21,9 +21,15 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "");
   const [chats, setChats] = useState([]);
-  const [patternIndex, setPatterIndex] = useState(localStorage.getItem("imageIndex") || 15);
+  const [patternIndex, setPatterIndex] = useState(
+    localStorage.getItem("imageIndex") || 15
+  );
   const [lastMessage, setLastMessage] = useState(null);
   const location = useLocation();
+  const [isSide, setIsSide] = useState(true);
+  const [isMain, setIsMain] = useState(true);
+  const [width, setWidth] = useState(window.innerWidth);
+  const [isSmallWidth, setIsSmallWidth] = useState(false);
   const currentLanguage =
     location.state?.language || localStorage.getItem("language");
 
@@ -39,7 +45,43 @@ export function MainPage({ darkMode, toggleDarkMode }) {
       navigate("/main", { language: currentLanguage });
     };
     window.addEventListener("popstate", handleBackButton);
+
+    function handleResize() {
+      setWidth(window.innerWidth);
+     
+    }
+
+    window.addEventListener('resize', handleResize);
+
+  
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+
+   
   }, []);
+
+  useEffect(() => {
+    if(window.innerWidth<1016){
+      setIsSmallWidth(true)
+      if(isSide){       
+        setIsMain(false)
+      }else{
+        setIsMain(true)
+      }
+     
+     
+      console.log('SmallWidth')
+    }else{
+      setIsMain(true)
+      setIsSide(true)
+      setIsSmallWidth(false)
+      console.log('BigWidth')
+    }
+  }, [isSmallWidth, isMain, isSide, window.innerWidth]);
+
+ 
 
   useEffect(() => {
     if (darkMode) {
@@ -127,7 +169,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         if (!chatEqual) {
           setChats(data.chats);
         }
-
+//console.log(data.chats)
         setCurrentUser(data.user);
 
         // const endTime = performance.now();
@@ -177,45 +219,64 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   };
 
   const changePatternBackground = (index) => {
-    
-      setPatterIndex(index);
-       
+    setPatterIndex(index);
   };
+
+  const visibleSide = (props) => {
+    setIsSide(props);
+    console.log(props)
+  };
+
+  const visibleMain = (props) => {
+    setIsMain(props)
+  };
+
+  
 
   return (
     <div
       className={`${theme} sm:w-screen dark:bg-skin-fill-inverted  min-h-screen dark:text-skin-inverted dark:border-skin-border-inverted
-      text-skin-base border-skin-border-base bg-skin-fill overflow-hidden font-montserrat flex`}
+      text-skin-base border-skin-border-base bg-skin-fill overflow-hidden font-montserrat flex md:relative sm:relative`}
     >
-      <div className="w-[350px] sm:w-screen">
-        <CollumnContainer
-        changePatternBackground={changePatternBackground}
-          currentUser={currentUser}
-          chats={chats}
-          currentChat={currentChat}
-          darkMode={darkMode}
-          toggleDarkMode={toggleDarkMode}
-          contacts={contacts}
-          clearMain={clearMain}
-          changeThemes={changeThemes}
-        />
-      </div>
-
-      <div className="flex-grow w-full sm:hidden">
-        {centrVisible && (
-          <MessageContainer
-            patternIndex={patternIndex}
-            clearMain={clearMain}
-            currentChat={currentChat}
-            chat={currChat}
-            chats={chats}
-            toggleRightColumn={toggleRightColumn}
-            darkMode={darkMode}
+      {isSide && (
+        <div className="w-[350px] sm:w-screen">
+          <CollumnContainer
+            changePatternBackground={changePatternBackground}
             currentUser={currentUser}
+            chats={chats}
+            currentChat={currentChat}
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
+            contacts={contacts}
+            clearMain={clearMain}
+            changeThemes={changeThemes}
+            visibleSide={visibleSide}
+            visibleMain={visibleMain}
+            isSmallWidth={isSmallWidth}
           />
-        )}
-        {!centrVisible && <ClearContainer patternIndex={patternIndex} />}
-      </div>
+        </div>
+      )}
+
+      {isMain && (
+        <div className="flex-grow w-full sm:w-screen">
+          {centrVisible && (
+            <MessageContainer
+              patternIndex={patternIndex}
+              clearMain={clearMain}
+              currentChat={currentChat}
+              chat={currChat}
+              chats={chats}
+              toggleRightColumn={toggleRightColumn}
+              darkMode={darkMode}
+              currentUser={currentUser}
+              visibleSide={visibleSide}
+              visibleMain={visibleMain}
+              isSmallWidth={isSmallWidth}
+            />
+          )}
+          {!centrVisible && <ClearContainer patternIndex={patternIndex} />}
+        </div>
+      )}
 
       <ToastContainer
         position="bottom-right"
@@ -233,7 +294,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
       />
 
       {mainRiht && (
-        <div className="w-[350px] sm:hidden">
+        <div className="w-[350px] sm:w-[280px] sm:right-0  md:absolute sm:absolute z-50 bg-skin-fill dark:bg-skin-fill-inverted">
           <InfoContainer
             toggleRightColumn={toggleRightColumn}
             chat={currChat}

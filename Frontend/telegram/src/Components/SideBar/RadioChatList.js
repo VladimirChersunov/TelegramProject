@@ -7,7 +7,7 @@ import { ChatCreateButton } from "./ChatCreateButton";
 export function RadioChatList(props) {
 
   
- 
+ //console.log(props?.chats)
   
   return (
     <div className="flex max-h-screen w-full flex-col items-center  overflow-hidden sm:w-screen">
@@ -22,6 +22,9 @@ export function RadioChatList(props) {
             clearMain={props?.clearMain}         
             currentChat={props?.currentChat}
             handleMuted={props?.handleMuted}
+            visibleSide={props.visibleSide}
+            visibleMain={props.visibleMain}
+            isSmallWidth={props.isSmallWidth}
           /> 
            </div>
          

@@ -3,26 +3,26 @@ import { BackArrowIcon } from "../../Icons/BackArrowIcon";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-
-export function ContactWindow({contacts, visibleContact,currentChat}) {
+export function ContactWindow({
+  contacts,
+  visibleContact,
+  currentChat,
+  visibleSide,
+  visibleMain,
+  isSmallWidth,
+}) {
   const language = localStorage.getItem("language");
- const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [i18n,language]);
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
 
   const handleClickBack = () => {
     visibleContact(false);
   };
 
-  const typeWindow = "contacts"
-
- useEffect(() => {
- 
- }, [contacts]);
-
-  
+  const typeWindow = "contacts";
 
   return (
     <div className="flex flex-col w-full ">
@@ -39,10 +39,18 @@ export function ContactWindow({contacts, visibleContact,currentChat}) {
 
       <div className="w-full  text-center mt-10 flex justify-center items-center  ">
         <div className="w-full h-[85%]">
-          <div className=" w-full flex flex-col items-center justify-center ">           
+          <div className=" w-full flex flex-col items-center justify-center ">
             {contacts.map((contact, index) => (
               <div key={index}>
-               <ContactsCard contact={contact} type={typeWindow} currentChat={currentChat} contacts={contacts}/> 
+                <ContactsCard
+                  contact={contact}
+                  type={typeWindow}
+                  currentChat={currentChat}
+                  contacts={contacts}
+                  visibleSide={visibleSide}
+                  visibleMain={visibleMain}
+                  isSmallWidth={isSmallWidth}
+                />
               </div>
             ))}
           </div>

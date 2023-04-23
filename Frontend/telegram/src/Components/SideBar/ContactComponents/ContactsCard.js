@@ -5,7 +5,15 @@ import { LastSeen } from "../LastSeen";
 import { getOpenPrivateChat } from "../../../Services/messageServices";
 import { isContact } from "../../../Services/contactServices";
 
-export function ContactsCard({ contact, type, currentChat, contacts }) {
+export function ContactsCard({
+  contact,
+  type,
+  currentChat,
+  contacts,
+  visibleSide,
+  visibleMain,
+  isSmallWidth,
+}) {
   const contextRef = useRef();
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
@@ -23,7 +31,6 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
   useEffect(() => {
     const contactCheck = async () => {
       const data = await isContact(contact?.id);
-
       setContactExists(data.result);
     };
     contactCheck();
@@ -38,6 +45,7 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
   const handleContactClick = async () => {
     //проверяем существует ли уже чат с этим юзером
     const chatExisted = await chatExist(contact?.id);
+   
 
     if (chatExisted.exists) {
       //если существует то открываем чат
@@ -45,12 +53,20 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
       console.log("only enter");
       //передаем  в колбэкфункцию этот чат, чтобы актулизировать хедер мейна
       currentChat(data?.chat);
+      if (isSmallWidth) {
+        visibleSide(false);
+        visibleMain(true);
+      }
     } else {
       //если НЕ существует чат, то создаем чат, а потом уже открываем его
       await createPrivate(contact?.userName);
       const data = await getOpenPrivateChat(contact?.id);
       console.log("create and enter");
       currentChat(data?.chat);
+      if (isSmallWidth) {
+        visibleSide(false);
+        visibleMain(true);
+      }
     }
   };
 
@@ -88,11 +104,11 @@ export function ContactsCard({ contact, type, currentChat, contacts }) {
         {contact.photo ? (
           <img
             src={contact.photo}
-            alt="logo"
+            alt="contact photo"
             className="rounded-full  h-[50px] w-[50px]"
           />
         ) : (
-          <div className="rounded-full   h-[40px] w-[40px] bg-purple-500 flex items-center justify-center select-none">
+          <div className="rounded-full h-[40px] w-[40px] bg-purple-500 flex items-center justify-center select-none">
             <p className="text-xl">
               {contact.userName[0].toUpperCase() +
                 contact.userName[1].toUpperCase()}

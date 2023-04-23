@@ -47,9 +47,9 @@ export function PinnedMessage({ pinned, chat, currentChat,pinnedClose }) {
   return (
     <div
       
-      className=" w-max min-w-[200px] max-w-[300px] flex flex-row justify-between border-l border-skin-border-base dark:border-skin-border-inverted cursor-pointer"
+      className=" w-max sm:w-screen  sm:mr-6 min-w-[200px] max-w-[300px] flex flex-row justify-between sm:border-none  border-l border-skin-border-base dark:border-skin-border-inverted cursor-pointer"
     >
-      <div className="flex flex-row items-center  h-[100%] w-[100%]  ">
+      <div className="flex flex-row items-center  h-[100%] w-[100%]  sm:ml-3">
         {user?.photo ? (
           <img
             src={user?.photo}
@@ -66,9 +66,9 @@ export function PinnedMessage({ pinned, chat, currentChat,pinnedClose }) {
           </div>
         )}
 
-        <div className="flex flex-row items-center justify-center ml-2">
-          <div className="flex flex-col">
-            <p className="mr-2 text-base select-none">{t("mainPage.pinnedMessage")}</p>
+        <div className="flex  flex-row  items-center justify-center ml-2 ">
+          <div className="flex flex-col ">
+            <p className="mr-2 sm:mr-0 text-base select-none">{t("mainPage.pinnedMessage")}</p>
             <p className="text-xs">{message?.text.slice(0, 60)}</p>
           </div>
           <div className="flex items-center justify-center">

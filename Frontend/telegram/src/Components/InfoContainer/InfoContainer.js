@@ -31,10 +31,11 @@ export function InfoContainer({ toggleRightColumn, chat }) {
   }, [chat.type]);
 
   return (
-    <div className={`w-[350px] block h-screen`}>
+    <div className={`w-[350px] z-50 sm:w-[280px]  h-screen flex flex-col `}>
+
       <div
         name="rightHeader"
-        className="h-[59px] w-[100%] flex flex-row justify-between border-l border-skin-border-base
+        className="h-[59px] w-[100%] z-50  flex flex-row border-l border-skin-border-base
          dark:border-skin-border-inverted px-2 items-center "
       >
         <button

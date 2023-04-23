@@ -6,7 +6,6 @@ import { MessageHeader } from "./MessageHeader";
 import { useTranslation } from "react-i18next";
 import images from "../../Services/imageService";
 
-
 export function MessageContainer({
   chat,
   toggleRightColumn,
@@ -16,20 +15,19 @@ export function MessageContainer({
   currentChat,
   clearMain,
   chats,
-  patternIndex
+  patternIndex,
+  visibleSide,
+  visibleMain,
+  isSmallWidth,
 }) {
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const language = localStorage.getItem("language");
- const { t, i18n } = useTranslation();
- 
- 
+  const { t, i18n } = useTranslation();
 
-
-//console.log(chat)
+  //console.log(chat)
   useEffect(() => {
-    i18n.changeLanguage(language)
-  }, [i18n,language]);
+    i18n.changeLanguage(language);
+  }, [i18n, language]);
 
   const handleModalClose = () => {
     setModalIsOpen(false);
@@ -39,26 +37,22 @@ export function MessageContainer({
     setModalIsOpen(props);
   };
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowHeight(window.innerHeight);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
-    <div
-      className={`flex relative flex-col h-[${windowHeight} px]  overflow-hidden w-full`}
-    >
-
-<img className="absolute z-10 inset-0 h-full w-full object-cover opacity-30" src={images[patternIndex]} alt=""/>
+    <div className={`flex relative flex-col h-screen  overflow-hidden w-full`}>
+      <img
+        className="absolute z-10 inset-0 h-full w-full object-cover opacity-30"
+        src={images[patternIndex]}
+        alt=""
+      />
       <MessageHeader
         visibleModalReport={visibleModalReport}
         clearMain={clearMain}
         chat={chat}
         toggleRightColumn={toggleRightColumn}
         currentChat={currentChat}
+        visibleSide={visibleSide}
+        visibleMain={visibleMain}
+        isSmallWidth={isSmallWidth}
       />
       <MainChat
         chat={chat}
@@ -76,18 +70,18 @@ export function MessageContainer({
             backgroundColor: "rgba(0, 0, 0, 0.5)",
           },
           content: {
-            top: "50%",
+            top: "50%",           
             left: "50%",
             transform: "translate(-50%, -50%)",
             backgroundColor: "#0c0221", // Добавьте это свойство
           },
         }}
         appElement={document.getElementById("root")}
-        className="w-[250px] h-[150px] absolute  border border-skin-border-inverted bg-skin-fill-base rounded-lg"
+        className="w-[250px] h-[150px] absolute  border border-skin-border-inverted bg-skin-fill-base rounded-lg z-50"
         overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0, 0, 0, 0.5)]  flex items-center justify-center "
         shouldCloseOnOverlayClick={false}
       >
-        <div className="flex flex-col w-full h-full ">
+        <div className="flex flex-col w-full h-full z-50">
           <div className="flex w-full justify-end">
             <button
               onClick={handleModalClose}
@@ -95,17 +89,17 @@ export function MessageContainer({
             >
               <CloseIcon
                 styles={
-                  "h-5 w-5 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base"
+                  "h-5 w-5 stroke-skin-stroke-inverted   fill-none dark:stroke-skin-stroke-base z-50"
                 }
               />
             </button>
           </div>
 
           <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base tracking-wider">
-          {t("mainPage.report")}
+            {t("mainPage.report")}
           </span>
           <span className="text-xl text-center my-2 text-skin-inverted dark:text-skin-base">
-          {t("mainPage.sentSuccessfully")}
+            {t("mainPage.sentSuccessfully")}
           </span>
         </div>
       </Modal>

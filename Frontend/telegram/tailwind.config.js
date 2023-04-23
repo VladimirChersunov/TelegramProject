@@ -7,10 +7,10 @@ module.exports = {
 
         'not-supported': {'min': '0px', 'max': '279px'},
 
-        'sm': {'min': '280px', 'max': '1015px'},
+        'sm': {'min': '280px', 'max': '1016px'},
       // => @media (min-width: 640px and max-width: 767px) { ... }
 
-      'md': {'min': '1016px', 'max': '1023px'},
+      'md': {'min': '1016px', 'max': '1320px'},
       // => @media (min-width: 768px and max-width: 1023px) { ... }
 
       'lg': {'min': '1059px', 'max': '1279px'},

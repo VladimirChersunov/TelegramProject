@@ -28,7 +28,7 @@ export function RightMenuButton({chat,clearMain,visibleModalReport}) {
   return (
     <div
       ref={refRightMenu}
-      className="inline-block  relative hover:cursor-pointer my-auto select-none"
+      className="inline-block sm:absolute sm:right-2  sm:top-3  relative hover:cursor-pointer my-auto select-none"
     >
       <div onClick={toggleVisibleRightMenu} className="">
         &#x22EE;

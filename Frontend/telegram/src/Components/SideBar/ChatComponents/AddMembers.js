@@ -46,7 +46,7 @@ export function AddMembers({
     console.log("click");
   };
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center relative sm:w-screen h-screen">
       <div className="flex flex-row items-center m-2 ">
         <button
           className="ml-4 mt-4 rounded-full hover:bg-skin-button-accent-hover h-[50px] w-[50px] flex
@@ -55,7 +55,7 @@ export function AddMembers({
         >
           <BackArrowIcon />
         </button>
-        <div className="text-2xl mt-3 ml-2">{t("mainPage.addMembers")}</div>
+        <div className="text-2xl sm:text-xl mt-3 ml-2">{t("mainPage.addMembers")}</div>
       </div>
 
       <div className="flex justify-center    h-10">
@@ -64,7 +64,7 @@ export function AddMembers({
           onChange={handleInputChange}
           placeholder={t("mainPage.wouldYouLike")}
           className="text-lg w-[80%] outline-none bg-skin-fill dark:bg-skin-fill-inverted text-skin-base dark:text-skin-inverted
-           border-b border-skin-border-base dark:border-skin-border-inverted pl-5"
+           border-b border-skin-border-base dark:border-skin-border-inverted pl-5 placeholder:text-center"
         />
       </div>
       <div className="m-3  h-[100%]">
@@ -89,15 +89,15 @@ export function AddMembers({
         </div>
       </div>
 
-      <div className="h-[15%] ">
+      
         <button
           onClick={handleNext}
-          className="h-[50px] w-[50px]  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted
-         dark:bg-skin-fill hover:bg-skin-button-inverted-hover dark:hover:bg-skin-button-inverted-hover"
+          className="h-[50px] w-[50px] absolute bottom-0 right-0 mr-5  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted
+         dark:bg-skin-fill hover:bg-skin-button-inverted-hover dark:hover:bg-skin-button-inverted-hover mb-5"
         >
           <EnterIcon styles="w-9 h-9 stroke-skin-stroke-inverted dark:stroke-skin-stroke-base fill-none" />
         </button>
-      </div>
+     
     </div>
   );
 }

@@ -8,7 +8,10 @@ export function MessageHeader({
   toggleRightColumn,
   currentChat,
   clearMain,
-  visibleModalReport
+  visibleModalReport,
+  visibleSide,
+  visibleMain,
+  isSmallWidth,
 }) {
   const [pinnedMessage, setPinnedMessage] = useState(false);
 
@@ -17,18 +20,23 @@ export function MessageHeader({
   };
 
   useEffect(() => {
-   
     if (chat?.pinnedMessageId > 0) {
       setPinnedMessage(true);
-    }else{
+    } else {
       setPinnedMessage(false);
     }
   }, [chat?.pinnedMessageId]);
 
   return (
-    <div className="h-[60px] flex flex-row max-w-full border-b bg-skin-fill dark:bg-skin-fill-inverted z-10 border-b-skin-border-base dark:border-b-skin-border-inverted text-2xl justify-between">
-      <InfoBlock chat={chat} toggleRightColumn={toggleRightColumn} />
-      <div className="flex flex-row">
+    <div className="h-[60px] relative  items-center sm:h-max flex flex-row sm:flex-wrap max-w-full border-b bg-skin-fill dark:bg-skin-fill-inverted z-50 border-b-skin-border-base dark:border-b-skin-border-inverted text-2xl justify-between">
+      <InfoBlock
+        chat={chat}
+        toggleRightColumn={toggleRightColumn}
+        visibleSide={visibleSide}
+        visibleMain={visibleMain}
+        isSmallWidth={isSmallWidth}
+      />
+      <div className="flex flex-row sm:flex-col">
         {pinnedMessage && (
           <PinnedMessage
             pinned={chat?.pinnedMessageId}
@@ -37,7 +45,11 @@ export function MessageHeader({
             pinnedClose={pinnedClose}
           />
         )}
-        <MessageTools chat={chat} clearMain={clearMain} visibleModalReport={visibleModalReport}/>
+        <MessageTools
+          chat={chat}
+          clearMain={clearMain}
+          visibleModalReport={visibleModalReport}
+        />
       </div>
     </div>
   );

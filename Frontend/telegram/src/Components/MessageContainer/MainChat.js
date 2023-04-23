@@ -1,38 +1,38 @@
 import { InputPanel } from "./InputPanel";
 import { useState, useEffect, useRef } from "react";
-import { getOpenPrivateChat, getOpenPublicChat, readMessaages } from "../../Services/messageServices";
+import {
+  getOpenPrivateChat,
+  getOpenPublicChat,
+  readMessaages,
+} from "../../Services/messageServices";
 import { Message } from "./Message";
-import patternImg from "../../patterns/Rectangle 18.png";
-
 
 
 export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
-  //console.log(chats)
   const messagesEndRef = useRef(null);
   const myRef = useRef(null);
   const [dataMessages, setDataMessages] = useState(null);
-
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-
   const [inputHeight, setInputHeight] = useState(0);
-
   const [replay, setReplay] = useState(null);
-
   const admin = chat?.authorId === currentUser?.id;
+  const isChannel =
+    !(chat?.type === "Channel") || (admin && chat?.type === "Channel" && admin);
 
   useEffect(() => {
-    console.log('chat change')
+    console.log("chat change");
+
     const getData = async () => {
       try {
         let allMessaages = null;
         if (chat.type === "Private") {
-          allMessaages = await getOpenPrivateChat(chat?.authorId)
+          const opponentId = chat?.members?.find((n) => n !== currentUser?.id);
+          console.log(chat)
+          allMessaages = await getOpenPrivateChat(opponentId);
         } else {
-          allMessaages = await getOpenPublicChat(
-            chat?.chatName,
-            chat.authorId,           
-          );
+          allMessaages = await getOpenPublicChat(chat?.chatName, chat.authorId);
         }
+        console.log(allMessaages);
         setDataMessages(allMessaages);
       } catch (error) {
         console.log(error);
@@ -40,7 +40,7 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
     };
     getData();
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat?.type, chat?.chatName, chat?.authorId,chats]);
+  }, [chat?.type, chat?.chatName, chat?.authorId, chats]);
 
   useEffect(() => {
     const markRead = async () => {
@@ -55,12 +55,10 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
     try {
       let allMessaages = null;
       if (chat?.type === "Private") {
-        allMessaages = await getOpenPrivateChat(chat?.authorId)
+        const opponentId = chat?.members?.find((n) => n !== currentUser?.id);
+        allMessaages = await getOpenPrivateChat(opponentId);
       } else {
-        allMessaages = await getOpenPublicChat(
-          chat?.chatName,
-          chat.authorId,           
-        );
+        allMessaages = await getOpenPublicChat(chat?.chatName, chat.authorId);
       }
       setDataMessages(allMessaages);
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -69,17 +67,15 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
     }
   };
 
-  const getReplay = (props)=>{   
-    setReplay(props)
-  }
+  const getReplay = (props) => {
+    setReplay(props);
+  };
 
   const refreshInputHeeight = (props) => {
     if (props >= 56) {
       setInputHeight(props - 56);
-     console.log(props)
     } else {
       setInputHeight(0);
-      
     }
   };
 
@@ -98,19 +94,17 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
 
   return (
     <div
-      className={`flex flex-col h-[${windowHeight} px] max-w-full items-center w-full`}
+      className={`flex  relative flex-col h-screen max-w-full items-center w-full`}
     >
-     
       <div
         ref={myRef}
         id="message-container"
-        className="mt-2 relative flex flex-col  w-full overflow-x-hidden text-skin-base overflow-y-scroll scrollbar z-10"       
+        className="mt-2 relative flex flex-col  w-full overflow-x-hidden text-skin-base overflow-y-scroll scrollbar z-10 sm:w-screen"
       >
-        {/* <img class="absolute inset-0 h-full w-full object-cover opacity-30" src={patternImg} alt=""/> */}
         {dataMessages &&
           dataMessages?.messages?.map((message) => (
             <Message
-            getReplay={getReplay}
+              getReplay={getReplay}
               message={message}
               key={message?.id}
               currentUser={currentUser}
@@ -121,10 +115,9 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
           ))}
       </div>
       <div ref={messagesEndRef} />
-      {(!(chat?.type === "Channel") ||
-        (admin && chat?.type === "Channel" && admin)) && (
+      {isChannel && (
         <InputPanel
-        replay={replay}
+          replay={replay}
           refreshInputHeeight={refreshInputHeeight}
           darkMode={darkMode}
           currentUser={currentUser}

@@ -11,7 +11,6 @@ import {
 import { useTranslation } from "react-i18next";
 
 export function RightMenu({ chat, clearMain, visibleModalReport }) {
-  const [mute, setMute] = useState(chat.muteStatus);
   const [chats, setChat] = useState(false);
   const [group, setGroup] = useState(false);
   const [channel, setChannel] = useState(false);
@@ -23,7 +22,7 @@ export function RightMenu({ chat, clearMain, visibleModalReport }) {
 
  useEffect(() => {
  
-  if(whoMuted.includes(currentUser?.id)){
+  if(whoMuted?.includes(currentUser?.id)){
     setChatMuteStatus((prev)=>true)
   }else{
     setChatMuteStatus((prev)=>false)

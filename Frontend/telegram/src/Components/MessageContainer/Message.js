@@ -85,7 +85,7 @@ export function Message({
     <div
       ref={contextRef}
       onContextMenu={handleContextMenu}
-      className="w-[100%] "
+      className="w-[100%] sm:w-screen"
     >
       {coordinatesChecked && showContextMenu  && (posX>0 && posY>0) && (
         <MessageContextMenu

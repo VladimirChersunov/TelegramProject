@@ -26,7 +26,10 @@ export function CollumnContainer({
   currentChat,
   clearMain,
   changeThemes,
-  changePatternBackground
+  changePatternBackground,
+  visibleSide,
+  visibleMain,
+  isSmallWidth
 }) {
   const [aboutState, setAboutState] = useState(false);
   const [chatlistState, setChatlistState] = useState(true);
@@ -127,9 +130,13 @@ export function CollumnContainer({
       className={`h-screen  flex flex-col border-r sm:border-none border-skin-border-base dark:border-skin-border-inverted  
        border-solid min-w-[350px]    sm:w-screen`}
     >
-      {aboutState && <About visibleAbout={visibleAbout} />}
+      {aboutState &&
+       <About
+        visibleAbout={visibleAbout} />}
 
-      {bugReportState && <ReportBug visibleBugReport={visibleBugReport} />}
+      {bugReportState &&
+       <ReportBug 
+       visibleBugReport={visibleBugReport} />}
 
       {settingState && (
         <SettingWindow
@@ -138,7 +145,6 @@ export function CollumnContainer({
           visibleEdit={visibleEdit}
           visibleLanguagePicker={visibleLanguagePicker}
           visibleThemesPicker={visibleThemesPicker}
-          
         />
       )}
 
@@ -147,6 +153,9 @@ export function CollumnContainer({
           visibleContact={visibleContact}
           contacts={contacts}
           currentChat={currentChat}
+          visibleSide={visibleSide}
+          visibleMain={visibleMain}
+          isSmallWidth={isSmallWidth}
         />
       )}
 
@@ -157,6 +166,8 @@ export function CollumnContainer({
           chatType={chatType}
           currentChat={currentChat}
           currentUser={currentUser}
+          visibleSide={visibleSide}
+          visibleMain={visibleMain}
         />
       )}
 
@@ -164,12 +175,18 @@ export function CollumnContainer({
         <EditProfile visibleEdit={visibleEdit} currentUser={currentUser} />
       )}
 
-{themesPickerState && (
-        <ThemesPicker visibleThemesPicker={visibleThemesPicker} changePatternBackground={changePatternBackground} darkMode={darkMode}   changeThemes={changeThemes} toggleDarkMode={toggleDarkMode}/>
+      {themesPickerState && (
+        <ThemesPicker
+          visibleThemesPicker={visibleThemesPicker}
+          changePatternBackground={changePatternBackground}
+          darkMode={darkMode}
+          changeThemes={changeThemes}
+          toggleDarkMode={toggleDarkMode}
+        />
       )}
 
-{languagePickerState && (
-        <LanguagePicker visibleLanguagePicker={visibleLanguagePicker}  />
+      {languagePickerState && (
+        <LanguagePicker visibleLanguagePicker={visibleLanguagePicker} />
       )}
 
       {addMembersState && (
@@ -203,7 +220,7 @@ export function CollumnContainer({
       {chatlistState && (
         <div className="flex flex-col min-w-[350px] max-w-[400px] h-screen">
           <LeftHeader
-          changeThemes={changeThemes}
+            changeThemes={changeThemes}
             currentChat={currentChat}
             chats={chats}
             darkMode={darkMode}
@@ -213,6 +230,8 @@ export function CollumnContainer({
             visibleSetting={visibleSetting}
             visibleContact={visibleContact}
             visibleSearchWindow={visibleSearchWindow}
+            visibleSide={visibleSide}
+            visibleMain={visibleMain}
           />
           <RadioChatList
             visibleModalReport={visibleModalReport}
@@ -225,6 +244,9 @@ export function CollumnContainer({
             chatTypeCallback={chatTypeCallback}
             visibleAddmembers={visibleAddmembers}
             visibleStartPrivate={visibleStartPrivate}
+            visibleSide={visibleSide}
+            visibleMain={visibleMain}
+            isSmallWidth={isSmallWidth}
           />
         </div>
       )}

@@ -81,7 +81,7 @@ export function AddNewChat({
   };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col  sm:w-screen h-screen relative">
       <div className="flex flex-row items-center">
         <button
           className="ml-4 mt-4 rounded-full hover:bg-skin-button-accent-hover h-[50px] w-[50px] flex
@@ -152,15 +152,15 @@ export function AddNewChat({
         </div>
       </div>
 
-      <div className="h-[15%] ">
+     
         <button
           onClick={handleCreateChat}
-          className="h-[50px] w-[50px]  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted
-         dark:bg-skin-fill hover:bg-skin-button-inverted-hover dark:hover:bg-skin-button-inverted-hover"
+          className="h-[50px] w-[50px]  flex items-center justify-center rounded-full  ml-[80%] bg-skin-fill-inverted select-none
+         dark:bg-skin-fill hover:bg-skin-button-inverted-hover dark:hover:bg-skin-button-inverted-hover absolute bottom-0 right-0 mr-5 mb-5"
         >
           <EnterIcon styles="w-9 h-9 stroke-skin-stroke-inverted dark:stroke-skin-stroke-base fill-none" />
         </button>
-      </div>
+      
     </div>
   );
 }
