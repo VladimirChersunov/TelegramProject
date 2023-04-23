@@ -22,6 +22,7 @@ export function RadioElement({
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
+  const [shortMessageText, setShortMessageText] = useState('');
   const MAX_LENGTH = 15;
   const language = localStorage.getItem("language");
   const { t, i18n } = useTranslation();
@@ -97,9 +98,16 @@ export function RadioElement({
     sameElse: "DD.MM.YYYY",
   });
 //console.log(chat)
-  const shortMessageText =
-    chat?.shortMsg?.username + ": " + chat?.shortMsg?.message;
+useEffect(() => {
+  if(chat?.shortMsg?.username){
+    setShortMessageText(chat?.shortMsg?.username + ": " + chat?.shortMsg?.message) 
+  }else{
+    setShortMessageText(chat?.shortMsg?.message) 
+  }
+}, [chat?.shortMsg?.username, chat?.shortMsg?.message]);
 
+
+  
   return (
     <div className=" w-[330px] sm:w-[95%] ml-2   ">
       <input type="radio" name="option" id={chat?.id} className="peer hidden" />

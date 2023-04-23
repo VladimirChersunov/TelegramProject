@@ -20,19 +20,19 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
     !(chat?.type === "Channel") || (admin && chat?.type === "Channel" && admin);
 
   useEffect(() => {
-    console.log("chat change");
+    //console.log("chat change");
 
     const getData = async () => {
       try {
         let allMessaages = null;
         if (chat.type === "Private") {
           const opponentId = chat?.members?.find((n) => n !== currentUser?.id);
-          console.log(chat)
+          //console.log(chat)
           allMessaages = await getOpenPrivateChat(opponentId);
         } else {
           allMessaages = await getOpenPublicChat(chat?.chatName, chat.authorId);
         }
-        console.log(allMessaages);
+        //console.log(allMessaages);
         setDataMessages(allMessaages);
       } catch (error) {
         console.log(error);

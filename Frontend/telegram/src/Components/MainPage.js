@@ -72,12 +72,12 @@ export function MainPage({ darkMode, toggleDarkMode }) {
       }
      
      
-      console.log('SmallWidth')
+      //console.log('SmallWidth')
     }else{
       setIsMain(true)
       setIsSide(true)
       setIsSmallWidth(false)
-      console.log('BigWidth')
+     // console.log('BigWidth')
     }
   }, [isSmallWidth, isMain, isSide, window.innerWidth]);
 
@@ -146,7 +146,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         if (logout) {
           navigate("/signin", { language: currentLanguage });
         }
-        const startTime = performance.now();
+        // const startTime = performance.now();
 
         const data = await updateInfo();
 
@@ -172,9 +172,9 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 //console.log(data.chats)
         setCurrentUser(data.user);
 
-        const endTime = performance.now();
-        const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
-        console.log(`Response time: ${responseTime}ms`);
+        // const endTime = performance.now();
+        // const responseTime = Math.floor(endTime - startTime); // вычисляем время ответа сервера в миллисекундах
+        // console.log(`Response time: ${responseTime}ms`);
       } catch (error) {
         console.log(error);
       }
@@ -211,7 +211,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
 
   const currentChat = (chat) => {
     setCurrentChat(chat);
-    console.log(chat);
+    //console.log(chat);
   };
 
   const toggleRightColumn = (state) => {

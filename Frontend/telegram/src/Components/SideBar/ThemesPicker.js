@@ -1,7 +1,7 @@
-import { ColorRAdioButton } from "../ColorRadioButton";
+import { ColorRAdioButton } from "./ColorRadioButton";
 import { BackArrowIcon } from "../Icons/BackArrowIcon";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import imagesArray from "../../Services/imageService";
 
 export function ThemesPicker({
@@ -13,6 +13,7 @@ export function ThemesPicker({
 }) {
   const language = localStorage.getItem("language");
   const { t, i18n } = useTranslation();
+  //const [selectedImageIndex, setSelectedImageIndex] = useState(-1);
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -59,7 +60,7 @@ export function ThemesPicker({
             key={index}
             src={image}
             alt={`theme-${index}`}
-            className="w-[130px] h-[150px] cursor-pointer m-2 border border-skin-border-base "
+            className="w-[130px] h-[150px] cursor-pointer m-2 border border-skin-border-base hover:bg-skin-button-accent-hover checked:bg-skin-button-accent-hover"
             onClick={() => handleImageClick(index)}
           />
         ))}

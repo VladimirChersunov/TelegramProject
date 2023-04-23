@@ -33,7 +33,7 @@ export const getOpenPublicChat = async (chatName, authorId) => {
 
   const token = localStorage.getItem("token");
  
-console.log( `Chats/openpublicchat`)
+//console.log( `Chats/openpublicchat`)
   if (token) {
     try {
       const response = await axiosCreate.post(
@@ -63,12 +63,12 @@ export const getOpenPrivateChat = async (opponentId) => {
   const token = localStorage.getItem("token");
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const currentUserId = currentUser?.id 
-  console.log( `Chats/openprivatechat`)
+  
   if (token && opponentId && currentUserId) {
     
     try {
-      console.log(currentUserId)
-      console.log(opponentId)
+      // console.log(currentUserId)
+      // console.log(opponentId)
       const response = await axiosCreate.post(
         `Chats/openprivatechat`,
         { currentUserId, opponentId },
@@ -78,7 +78,7 @@ export const getOpenPrivateChat = async (opponentId) => {
           },
         }
       );
-      console.log(response.data)
+      //console.log(response.data)
       return response.data;
     } catch (error) {
       console.log(error.response);
