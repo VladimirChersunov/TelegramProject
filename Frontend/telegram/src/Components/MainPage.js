@@ -112,10 +112,15 @@ export function MainPage({ darkMode, toggleDarkMode }) {
         const latestMessage = latestChat?.shortMsg;
 
         if (latestMessage?.message !== lastMessage?.message) {
-          console.log(latestMessage?.message);
-          console.log(lastMessage);
+          const audio = new Audio();
+          // console.log(latestMessage?.message);
+          // console.log(lastMessage);
           setLastMessage((prev) => latestMessage);
           toast(<MessageForToast message={latestMessage} user={autor} />, {
+            // onOpen: () => {
+            //   audio.src = 'path/to/sound/file'; // указываем путь к звуковому файлу (опционально)
+            //   audio.play(); // воспроизводим звук
+            // },
             position: "bottom-right",
             autoClose: 2000,
             hideProgressBar: true,

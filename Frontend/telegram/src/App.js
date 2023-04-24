@@ -1,6 +1,6 @@
 import { StartPage } from "./Components/AuthComponents/StartPage";
 import { MainPage } from "./Components/MainPage";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { SignIn } from "./Components/AuthComponents/SignIn";
 import { SignUp } from "./Components/AuthComponents/SignUp";
 import { EnterCode } from "./Components/AuthComponents/EnterCode";
@@ -18,6 +18,13 @@ function App() {
   const [userData, setUserData] = useState({});
   const location = useLocation();
   const [token, setToken] = useState(location.state?.token || "");
+  const navigate = useNavigate();
+  const tokenExist = localStorage.getItem('token')
+
+  // if(token){
+  //   navigate('/main')
+  // }
+
 
 
   const toggleDarkMode = (props) => {
