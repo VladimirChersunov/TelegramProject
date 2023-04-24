@@ -62,16 +62,21 @@ export function InputPanel({
   };
 
   const addNewMessage = async () => {
-    try {
-      await createMessaage(currentUser.id, chat.id, data, messageText);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setData(null);
-      setMessageText("");
-      setModalIsOpen(false);
-      refreshMessage();
+
+    if( messageText || data){
+      try {
+        await createMessaage(currentUser.id, chat.id, data, messageText);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setData(null);
+        setMessageText("");
+        setModalIsOpen(false);
+        refreshMessage();
+      }
     }
+
+  
   };
 
   const handleLinkIconClick = () => {
@@ -175,6 +180,7 @@ export function InputPanel({
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 1000
           },
           content: {
             top: "50%",
