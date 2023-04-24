@@ -18,6 +18,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
   const [contacts, setContacts] = useState([]);
   const [mainRiht, setMainRight] = useState(false);
   const [currChat, setCurrentChat] = useState({});
+  //console.log(currChat);
   const [centrVisible, setCentrVisible] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "");
   const [chats, setChats] = useState([]);
@@ -135,6 +136,11 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     }
   };
 
+  const currentChat = (chat) => {
+    setCurrentChat(chat);
+    //console.log(chat);
+  };
+
   //обновление данных
   useEffect(() => {
     const getData = async () => {
@@ -196,7 +202,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     } else {
       setCentrVisible(false);
     }
-  }, [currChat]);
+  }, [currChat,currentChat]);
 
   const clearMain = (props) => {
     setCentrVisible(props);
@@ -206,10 +212,7 @@ export function MainPage({ darkMode, toggleDarkMode }) {
     setTheme(props);
   };
 
-  const currentChat = (chat) => {
-    setCurrentChat(chat);
-    //console.log(chat);
-  };
+  
 
   const toggleRightColumn = (state) => {
     setMainRight(state);

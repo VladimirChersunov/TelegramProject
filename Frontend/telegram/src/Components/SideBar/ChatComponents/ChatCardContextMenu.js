@@ -17,6 +17,7 @@ export function ChatCardContextMenu({ x, y, handleCloseContextMenu, chat }) {
     i18n.changeLanguage(language);
   }, [i18n, language]);
 
+  //проверка есть ли юзер в чате
   useEffect(() => {
     const checkChat = async () => {
       const userInChatExist = await isUserInChat(chat?.id);

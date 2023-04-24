@@ -2,7 +2,7 @@ import { RightMenuButton } from "../InfoContainer/RightMenuButton";
 
 // import { SearchIcon } from "../Icons/SearchIcon";
 
-export function MessageTools({ clearMain, chat, visibleModalReport }) {
+export function MessageTools({ clearMain, chat, visibleModalReport, currentChat }) {
   return (
     <div className="flex flex-row justify-end pr-5 min-w-[80px] z-50">
       {/* <button className="mx-4">
@@ -16,6 +16,7 @@ export function MessageTools({ clearMain, chat, visibleModalReport }) {
         chat={chat}
         clearMain={clearMain}
         visibleModalReport={visibleModalReport}
+        currentChat={currentChat}
       />
     </div>
   );

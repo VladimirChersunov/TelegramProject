@@ -32,7 +32,7 @@ export function SettingWindow({
   };
 
   const formatEmail = (email) => {
-    if (currentUser.email.length <= MAX_LENGTH) {
+    if (currentUser?.email?.length <= MAX_LENGTH) {
       return currentUser.email;
     } else {
       const truncatedEmail = currentUser.email.slice(0, MAX_LENGTH) + "...";

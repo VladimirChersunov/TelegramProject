@@ -19,6 +19,7 @@ export function ContactsCard({
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
   const [contactExists, setContactExists] = useState(null);
+  
 
   //открытие меню
   const handleContextMenu = (event) => {
@@ -27,6 +28,16 @@ export function ContactsCard({
     setContextMenuX(event.pageX);
     setContextMenuY(event.pageY);
   };
+
+  useEffect(() => {
+    if (window.innerWidth < 1016) {
+     
+
+     
+    } else {
+     
+    }
+  }, [isSmallWidth,  window.innerWidth]);
 
   useEffect(() => {
     const contactCheck = async () => {
@@ -53,6 +64,7 @@ export function ContactsCard({
       console.log("only enter");
       //передаем  в колбэкфункцию этот чат, чтобы актулизировать хедер мейна
       currentChat(data?.chat);
+      console.log(isSmallWidth)
       if (isSmallWidth) {
         visibleSide(false);
         visibleMain(true);
@@ -63,6 +75,7 @@ export function ContactsCard({
       const data = await getOpenPrivateChat(contact?.id);
       console.log("create and enter");
       currentChat(data?.chat);
+      console.log(isSmallWidth)
       if (isSmallWidth) {
         visibleSide(false);
         visibleMain(true);

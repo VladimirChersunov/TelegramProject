@@ -18,12 +18,17 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
   const isChannel =
     !(chat?.type === "Channel") || (admin && chat?.type === "Channel" && admin);
 
-  console.log();
+  console.log(chat);
 
-  const isMember = chat?.members?.includes(currentUser?.id);
+  const [isMember, setIsMember] = useState(chat?.members?.includes(currentUser?.id));
+
+  
 
   //console.log("chat change");
   useEffect(() => {
+
+    setIsMember(chat?.members?.includes(currentUser?.id))
+    console.log(isMember)
     const getData = async () => {
       try {
         let allMessaages = null;
@@ -42,7 +47,7 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
     };
     getData();
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat?.type, chat?.chatName, chat?.authorId, chats]);
+  }, [chat?.type, chat?.chatName, chat?.authorId, chats, chat.membersCount]);
 
   useEffect(() => {
     const markRead = async () => {

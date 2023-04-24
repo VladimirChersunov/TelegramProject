@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { RightMenu } from "./RightMenu";
 
-export function RightMenuButton({chat,clearMain,visibleModalReport}) {
+export function RightMenuButton({chat,clearMain,visibleModalReport, currentChat}) {
   //console.log(chat)
   const [open, setOpen] = useState(false);
   const refRightMenu = useRef(null);
@@ -34,7 +34,7 @@ export function RightMenuButton({chat,clearMain,visibleModalReport}) {
         &#x22EE;
       </div>
 
-      {open && <RightMenu chat={chat} clearMain={clearMain} visibleModalReport={visibleModalReport}/>}
+      {open && <RightMenu chat={chat} clearMain={clearMain} visibleModalReport={visibleModalReport}  currentChat={currentChat}/>}
     </div>
   );
 }

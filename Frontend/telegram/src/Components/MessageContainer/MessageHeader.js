@@ -13,11 +13,17 @@ export function MessageHeader({
   visibleMain,
   isSmallWidth,
 }) {
+
+ //console.log(chat)
   const [pinnedMessage, setPinnedMessage] = useState(false);
 
   const pinnedClose = (props) => {
     setPinnedMessage(props);
   };
+
+  useEffect(() => {
+   console.log('change')
+  }, [chat]);
 
   useEffect(() => {
     if (chat?.pinnedMessageId > 0) {
@@ -49,6 +55,7 @@ export function MessageHeader({
           chat={chat}
           clearMain={clearMain}
           visibleModalReport={visibleModalReport}
+          currentChat={currentChat}
         />
       </div>
     </div>

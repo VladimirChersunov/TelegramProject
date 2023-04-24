@@ -20,6 +20,7 @@ export function MessageContainer({
   visibleMain,
   isSmallWidth,
 }) {
+  //console.log(chat)
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const language = localStorage.getItem("language");
   const { t, i18n } = useTranslation();

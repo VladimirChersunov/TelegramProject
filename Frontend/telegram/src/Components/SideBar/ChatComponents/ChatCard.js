@@ -1,8 +1,13 @@
-import { useState,useRef,useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChatCardContextMenu } from "./ChatCardContextMenu";
 
-
-export function ChatsCard({ chat, currentChat }) {
+export function ChatsCard({
+  chat,
+  currentChat,
+  visibleSide,
+  visibleMain,
+  isSmallWidth,
+}) {
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuX, setContextMenuX] = useState(0);
   const [contextMenuY, setContextMenuY] = useState(0);
@@ -15,9 +20,14 @@ export function ChatsCard({ chat, currentChat }) {
     setContextMenuY(event.pageY);
   };
 
-  //клик по контакту
+  //клик по чату
   const handleChatClick = async () => {
+    //console.log(chat)
     currentChat(chat);
+    if(isSmallWidth){
+      visibleMain(true)
+      visibleSide(false)
+    }
   };
 
   //закрытие меню
@@ -25,8 +35,8 @@ export function ChatsCard({ chat, currentChat }) {
     setShowContextMenu(false);
   };
 
-   //метод для обработчика событий для отслеживания кликов снаружи
-   const handleClickOutsideChat = (e) => {
+  //метод для обработчика событий для отслеживания кликов снаружи
+  const handleClickOutsideChat = (e) => {
     if (!contextChatRef?.current?.contains(e.target)) {
       setShowContextMenu(false);
       document.removeEventListener("click", handleClickOutsideChat, true);
@@ -34,9 +44,9 @@ export function ChatsCard({ chat, currentChat }) {
     }
   };
 
-   //обработчик событий для отслеживания кликов снаружи
-   useEffect(() => {
-    if(showContextMenu){
+  //обработчик событий для отслеживания кликов снаружи
+  useEffect(() => {
+    if (showContextMenu) {
       document.addEventListener("contextmenu", handleClickOutsideChat, true);
       document.addEventListener("click", handleClickOutsideChat, true);
     }
@@ -49,7 +59,7 @@ export function ChatsCard({ chat, currentChat }) {
 
   return (
     <div
-    ref={contextChatRef}
+      ref={contextChatRef}
       onContextMenu={handleContextMenu}
       onClick={handleChatClick}
       className=" w-[300px] h-[60px] m-auto  flex flex-row items-center  cursor-pointer hover:bg-skin-button-accent-hover pl-2 rounded-[4px] border-b border-skin-border-base dark:border-skin-border-inverted"
@@ -68,7 +78,12 @@ export function ChatsCard({ chat, currentChat }) {
         </div>
       )}
       {showContextMenu && (
-        <ChatCardContextMenu x={contextMenuX} y={contextMenuY}  chat={chat} handleCloseContextMenu={handleCloseContextMenu} />
+        <ChatCardContextMenu
+          x={contextMenuX}
+          y={contextMenuY}
+          chat={chat}
+          handleCloseContextMenu={handleCloseContextMenu}
+        />
       )}
 
       <div className="flex flex-col">

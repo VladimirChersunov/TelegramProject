@@ -7,7 +7,7 @@ import { SettingWindow } from "../SettingComponents/SettingWindow";
 import { ContactWindow } from "../ContactComponents/ContactWindow";
 import { AddMembers } from "../ChatComponents/AddMembers";
 
-import { SearchWindow } from "./SearchWindow";
+import { SearchWindow } from "../SearchWindow";
 import { StartPrivate } from "../ChatComponents/StartPrivate";
 import { EditProfile } from "../SettingComponents/EditProfile";
 import Modal from "react-modal";
@@ -214,6 +214,9 @@ export function CollumnContainer({
           visibleSearchWindow={visibleSearchWindow}
           currentChat={currentChat}
           contacts={contacts}
+          visibleSide={visibleSide}
+          visibleMain={visibleMain}
+          isSmallWidth={isSmallWidth}
         />
       )}
 
