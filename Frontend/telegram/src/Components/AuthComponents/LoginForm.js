@@ -60,6 +60,7 @@ function LoginForm({setTokenCallback,language}) {
       <div className="relative flex w-full flex-col sm:w-[90%]">
         <input
           type="text"
+          tabIndex='1'
           placeholder={t("signinPage.placeholder1")}
           value={usernameOrEmail}
           autoComplete="off"
@@ -73,6 +74,7 @@ function LoginForm({setTokenCallback,language}) {
           placeholder={t("signinPage.placeholder2")}
           type={showPassword ? "text" : "password"}
           value={password}
+          tabIndex='2'
           autoComplete="off"
           onChange={(e) => setPassword((prevValue) => e.target.value)}
           className={`border-b border-skin-border-inverted text-skin-inverted text-[16px]
@@ -92,6 +94,7 @@ function LoginForm({setTokenCallback,language}) {
       )}
       <div className="flex items-center justify-center">
         <button
+        tabIndex='5'
           onClick={() => {
             navigate("/recovery", { language: language });
           }}
@@ -102,6 +105,7 @@ function LoginForm({setTokenCallback,language}) {
       </div>
 
       <button
+      tabIndex='3'
         disabled={isLoading}
         type="submit"
         onClick={handleSubmit}
@@ -113,6 +117,7 @@ function LoginForm({setTokenCallback,language}) {
 
       <button
         type="submit"
+        tabIndex='4'
         onClick={() => {
           navigate("/signup", { language: language });
         }}
