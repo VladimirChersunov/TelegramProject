@@ -83,6 +83,15 @@ export function ContactsCard({
     }
   };
 
+   //метод для обработчика событий для отслеживания кликов снаружи
+   const handleClickOutside = (e) => {
+    if (!contextRef?.current?.contains(e.target)) {
+      setShowContextMenu(false);
+      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("contextmenu", handleClickOutside, true);
+    }
+  };
+
   //обработчик событий для отслеживания кликов снаружи
   useEffect(() => {
     if (showContextMenu) {
@@ -96,14 +105,7 @@ export function ContactsCard({
     };
   }, [showContextMenu]);
 
-  //метод для обработчика событий для отслеживания кликов снаружи
-  const handleClickOutside = (e) => {
-    if (!contextRef?.current?.contains(e.target)) {
-      setShowContextMenu(false);
-      document.removeEventListener("click", handleClickOutside, true);
-      document.removeEventListener("contextmenu", handleClickOutside, true);
-    }
-  };
+ 
 
   return (
     <div
@@ -117,7 +119,7 @@ export function ContactsCard({
         {contact.photo ? (
           <img
             src={contact.photo}
-            alt="contact photo"
+            alt="contact"
             className="rounded-full  h-[50px] w-[50px]"
           />
         ) : (

@@ -15,7 +15,7 @@ export function ThemeSwitch({darkMode,toggleDarkMode,changeThemes}) {
       localStorage.setItem('darkMode', false)
     }
     
-  }, [toggle]);
+  }, [toggle,changeThemes,darkMode,toggleDarkMode]);
   
 
   const handelClick = () => {

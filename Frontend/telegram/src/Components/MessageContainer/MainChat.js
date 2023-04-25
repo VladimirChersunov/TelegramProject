@@ -18,7 +18,7 @@ export function MainChat({ chat, darkMode, currentUser, currentChat, chats }) {
   const isChannel =
     !(chat?.type === "Channel") || (admin && chat?.type === "Channel" && admin);
 
-  console.log(chat);
+  //console.log(chat);
 
   const [isMember, setIsMember] = useState(chat?.members?.includes(currentUser?.id));
 

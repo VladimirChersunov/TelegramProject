@@ -22,7 +22,7 @@ export  const  SerchInput = forwardRef(({ visibleSearchWindow, searchInputData }
     }
 
    searchInputData(value)
-  }, [value]);
+  }, [value,searchInputData]);
 
   const handleSerchWindow = () => {
     visibleSearchWindow(true);

@@ -45,8 +45,8 @@ export function RightMenu({ chat, clearMain, visibleModalReport, currentChat }) 
         const data = await enterPublic(chat?.chatName);
         console.log(data);
         const newChat = await getChatById(chat?.id)
-        //console.log(newChat.chat)
-        currentChat(newChat.chat)
+        console.log(newChat.chat)
+        //currentChat(newChat.chat)
       }
     };
     enterChat();
@@ -87,9 +87,17 @@ export function RightMenu({ chat, clearMain, visibleModalReport, currentChat }) 
     };
 
     checkChat();
+
   }, [chat.type,handleEnterChat,handleLeaveChat]);
 
- 
+ useEffect(() => {
+   const refreshChat = async()=>{
+    const newChat = await getChatById(chat?.id)
+    //console.log(newChat.chat)
+    currentChat(newChat.chat)
+   }
+   refreshChat()
+  }, [handleEnterChat]);
 
   const handleMuteChat = (event) => {
     const muteChat = async () => {
