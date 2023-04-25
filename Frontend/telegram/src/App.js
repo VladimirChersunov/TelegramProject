@@ -10,6 +10,7 @@ import { SetNewPassword } from "./Components/AuthComponents/SetNewPassword";
 import { SignUpFinish } from "./Components/AuthComponents/SignUpFinish";
 import { initializeApp } from "firebase/app";
   import { getAnalytics } from "firebase/analytics";
+import { Page404 } from "./Components/ErrorComponents/Page404";
 
 function App() {
   const [darkMode, setDarkMode] = useState(
@@ -138,6 +139,13 @@ function App() {
               code={code}
               mainUserData={mainUserData}
             />
+          }
+        />
+         <Route
+         path="*"
+          element={
+            
+          <Page404/>
           }
         />
       </Routes>

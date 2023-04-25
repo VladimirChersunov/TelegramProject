@@ -36,6 +36,9 @@ function LoginForm({setTokenCallback,language}) {
       console.log(error);
       if(error){
         setError(error.message);
+        if(error.message==='Network Error'){
+          navigate('/error')
+        }
       }
      
     } finally {

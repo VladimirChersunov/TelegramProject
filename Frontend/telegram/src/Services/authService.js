@@ -2,6 +2,7 @@ import axiosCreate from "./axiosCreate";
 
 //Users/login setLocaleStorage
 export const login = async (login, password) => {
+  
   try {
     const response = await axiosCreate.post("Users/login", { login, password });
     localStorage.setItem("token", response.data.jwtToken);
@@ -19,8 +20,10 @@ export const login = async (login, password) => {
     
   } catch (error) {    
     console.log(error.message)  
-    if(error.response.data) {
+    if(error.message !== 'Network Error') {
       throw new Error(error.response.data.message); 
+    }else{
+      throw new Error(error.message); 
     }
       
   }
