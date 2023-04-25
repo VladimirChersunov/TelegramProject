@@ -8,9 +8,13 @@ import { useState, useEffect } from "react";
 import { EnterEmail } from "./Components/AuthComponents/EnterEmail";
 import { SetNewPassword } from "./Components/AuthComponents/SetNewPassword";
 import { SignUpFinish } from "./Components/AuthComponents/SignUpFinish";
+import { initializeApp } from "firebase/app";
+  import { getAnalytics } from "firebase/analytics";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('darkMode')) ?? true );
+  const [darkMode, setDarkMode] = useState(
+    JSON.parse(localStorage.getItem("darkMode")) ?? true
+  );
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -19,13 +23,26 @@ function App() {
   const location = useLocation();
   const [token, setToken] = useState(location.state?.token || "");
   const navigate = useNavigate();
-  const tokenExist = localStorage.getItem('token')
+  const tokenExist = localStorage.getItem("token");
+  
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBKTPLzKQelmwsotF0Y4XxE1gAI2niChR0",
+    authDomain: "cryptic-36pr31.firebaseapp.com",
+    projectId: "cryptic-36pr31",
+    storageBucket: "cryptic-36pr31.appspot.com",
+    messagingSenderId: "964504093447",
+    appId: "1:964504093447:web:75006a6771aaa26712bba2",
+    measurementId: "G-CZ567ZWYJK"
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 
   // if(token){
   //   navigate('/main')
   // }
-
-
 
   const toggleDarkMode = (props) => {
     setDarkMode((prevDarkMode) => props);
@@ -49,11 +66,9 @@ function App() {
     setUserData((prev) => props);
   };
 
-  const setTokenCallback = (props) =>{
-    setToken(props)
-  }
- 
- 
+  const setTokenCallback = (props) => {
+    setToken(props);
+  };
 
   useEffect(() => {
     document.title = "Cryptic";
@@ -61,7 +76,6 @@ function App() {
     if (storedToken) {
       setToken(storedToken);
     }
-   
   }, []);
 
   useEffect(() => {
@@ -71,10 +85,14 @@ function App() {
     } else if (storedToken) {
       setToken(storedToken);
     }
-  }, [token,location.state?.token]);
+  }, [token, location.state?.token]);
 
   return (
-    <div className={`h-screen w-screen not-supported:hidden ${darkMode ? "dark" : ""}  `}>
+    <div
+      className={`h-screen w-screen not-supported:hidden ${
+        darkMode ? "dark" : ""
+      }  `}
+    >
       <Routes>
         <Route
           path="/main"
@@ -95,7 +113,10 @@ function App() {
           path="/setnewpassword"
           element={<SetNewPassword email={email} />}
         />
-        <Route path="/signin" element={<SignIn setTokenCallback={setTokenCallback}/>} />
+        <Route
+          path="/signin"
+          element={<SignIn setTokenCallback={setTokenCallback} />}
+        />
         <Route
           path="/recovery"
           element={<EnterEmail recoveryData={recoveryData} />}

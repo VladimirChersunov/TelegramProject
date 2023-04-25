@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "cryptic-36pr31",
     "public": "build",
     "ignore": [
       "firebase.json",

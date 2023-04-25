@@ -93,15 +93,15 @@ function LoginForm({setTokenCallback,language}) {
         <p className="m-0 text-skin-error mt-2 text-center text-xs">{error}</p>
       )}
       <div className="flex items-center justify-center">
-        <button
+        <div
         tabIndex='5'
           onClick={() => {
             navigate("/recovery", { language: language });
           }}
-          className="text-skin-inverted mt-5 text-[16px ml-2 border-b hover:text-slate-200 border-skin-border-inverted"
+          className="text-skin-inverted mt-5 text-[16px ml-2 border-b hover:text-slate-200 border-skin-border-inverted cursor-pointer"
         >
           {t("signinPage.recaveryLink")}
-        </button>
+        </div>
       </div>
 
       <button

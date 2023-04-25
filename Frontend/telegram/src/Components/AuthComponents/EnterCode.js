@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 export function EnterCode(props) {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(props?.username);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [one, setOne] = useState("");
@@ -107,14 +107,17 @@ export function EnterCode(props) {
   const handleRegister = async () => {
     if (code) {
       if (inCode === code) {
-        if (username) {
+        console.log(username)
+        if (true) {
+          
+          console.log('+')
           if (isRecovery) {
             console.log('isRecovery')
             setError((prev) => null);
             navigate("/setnewpassword", { language: language });
           }
 
-          if (username.length >= 4) {
+          if (username?.length >= 4) {
             try {
               const data = await register(username, email, password);
               setError((prev) => null);
